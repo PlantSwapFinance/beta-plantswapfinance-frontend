@@ -31,16 +31,6 @@ const config: MenuEntry[] = [
     href: '/pools',
   },
   {
-    label: 'Lottery',
-    icon: 'TicketIcon',
-    href: '/lottery',
-  },
-  {
-    label: 'Collectibles',
-    icon: 'NftIcon',
-    href: '/collectibles',
-  },
-  {
     label: 'Teams & Profile',
     icon: 'GroupsIcon',
     calloutClass: 'rainbow',
@@ -82,29 +72,12 @@ const config: MenuEntry[] = [
     ],
   },
   {
-    label: 'IFO',
-    icon: 'IfoIcon',
-    href: '/ifo',
-  },
-  {
     label: 'More',
     icon: 'MoreIcon',
     items: [
       {
-        label: 'Voting',
-        href: 'https://voting.pancakeswap.finance',
-      },
-      {
         label: 'Github',
-        href: 'https://github.com/pancakeswap',
-      },
-      {
-        label: 'Docs',
-        href: 'https://docs.pancakeswap.finance',
-      },
-      {
-        label: 'Blog',
-        href: 'https://pancakeswap.medium.com',
+        href: 'https://github.com/plantswapfinance',
       },
     ],
   },
