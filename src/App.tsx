@@ -21,6 +21,7 @@ const Farms = lazy(() => import('./views/Farms'))
 const NotFound = lazy(() => import('./views/NotFound'))
 const Teams = lazy(() => import('./views/Teams'))
 const Team = lazy(() => import('./views/Teams/Team'))
+const Roadmap = lazy(() => import('./views/Roadmap'))
 const Profile = lazy(() => import('./views/Profile'))
 
 // This config is required for number formating
@@ -60,6 +61,9 @@ const App: React.FC = () => {
             </Route>
             <Route exact path="/teams">
               <Teams />
+            </Route>
+            <Route exact path="/roadmap">
+              <Roadmap />
             </Route>
             <Route path="/teams/:id">
               <Team />

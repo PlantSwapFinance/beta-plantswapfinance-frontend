@@ -26,28 +26,14 @@ const config: MenuEntry[] = [
     href: '/farms',
   },
   {
-    label: 'Pools',
+    label: 'Garden',
     icon: 'PoolIcon',
     href: '/pools',
   },
   {
-    label: 'Teams & Profile',
-    icon: 'GroupsIcon',
-    calloutClass: 'rainbow',
-    items: [
-      {
-        label: 'Leaderboard',
-        href: '/teams',
-      },
-      {
-        label: 'Task Center',
-        href: '/profile/tasks',
-      },
-      {
-        label: 'Your Profile',
-        href: '/profile',
-      },
-    ],
+    label: 'Roadmap',
+    icon: 'PoolIcon',
+    href: '/roadmap',
   },
   {
     label: 'Info',
@@ -58,16 +44,8 @@ const config: MenuEntry[] = [
         href: 'https://pancakeswap.info',
       },
       {
-        label: 'Tokens',
+        label: 'Roadmap',
         href: 'https://pancakeswap.info/tokens',
-      },
-      {
-        label: 'Pairs',
-        href: 'https://pancakeswap.info/pairs',
-      },
-      {
-        label: 'Accounts',
-        href: 'https://pancakeswap.info/accounts',
       },
     ],
   },
