@@ -1,7 +1,7 @@
 # Contributing to the PlantSwap ecosystem 🌱
 
 Thanks for taking the time to contribute !
-You can start by reading our [Contribution guidelines](https://docs.pancakeswap.finance/code/contributing) first.
+You can start by reading our [Contribution guidelines](https://docs.plantswap.finance/code/contributing) first.
 
 ## Setup
 

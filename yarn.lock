@@ -1993,9 +1993,9 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
-"@pancakeswap-libs/eslint-config-pancake@1.0.0":
+"@plantswap-libs/eslint-config-pancake@1.0.0":
   version "1.0.0"
-  resolved "https://registry.npmjs.org/@pancakeswap-libs/eslint-config-pancake/-/eslint-config-pancake-1.0.0.tgz"
+  resolved "https://registry.npmjs.org/@plantswap-libs/eslint-config-pancake/-/eslint-config-pancake-1.0.0.tgz"
   integrity sha512-/rE1jQsgDV+jUvYIJKzIlLGFSYwku8K67nprRMmsbhdG+FHdBJnclIyIbVY1NnVtuwGaP+uBQiS/tn6Zhiyx8w==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^4.7.0"
@@ -2007,9 +2007,9 @@
     eslint-plugin-react "^7.21.5"
     eslint-plugin-react-hooks "^4.0.0"
 
-"@pancakeswap-libs/uikit@^0.14.1":
+"@plantswap-libs/uikit@^0.14.1":
   version "0.14.1"
-  resolved "https://registry.npmjs.org/@pancakeswap-libs/uikit/-/uikit-0.14.1.tgz"
+  resolved "https://registry.npmjs.org/@plantswap-libs/uikit/-/uikit-0.14.1.tgz"
   integrity sha512-PknRl6qIXSCPPCTseTCEnzaXuW8dowAGUbus500IEZMOtl+hZu+D0g8s0tG6DRcwEIWF1RLmYIWJjuJHiKv8IQ==
   dependencies:
     "@types/lodash" "^4.14.162"

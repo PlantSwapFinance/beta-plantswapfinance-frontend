@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, Heading } from '@pancakeswap-libs/uikit'
+import { Flex, Heading } from '@plantswap-libs/uikit'
 import Page from 'components/layout/Page'
 import useI18n from 'hooks/useI18n'
 

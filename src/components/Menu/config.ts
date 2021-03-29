@@ -1,4 +1,4 @@
-import { MenuEntry } from '@pancakeswap-libs/uikit'
+import { MenuEntry } from '@plantswap-libs/uikit'
 
 const config: MenuEntry[] = [
   {
@@ -12,11 +12,11 @@ const config: MenuEntry[] = [
     items: [
       {
         label: 'Exchange',
-        href: 'https://exchange.pancakeswap.finance',
+        href: 'https://exchange.plantswap.finance',
       },
       {
         label: 'Liquidity',
-        href: 'https://exchange.pancakeswap.finance/#/pool',
+        href: 'https://exchange.plantswap.finance/#/pool',
       },
     ],
   },
@@ -32,22 +32,13 @@ const config: MenuEntry[] = [
   },
   {
     label: 'Roadmap',
-    icon: 'PoolIcon',
+    icon: 'RoadmapIcon',
     href: '/roadmap',
   },
   {
     label: 'Info',
     icon: 'InfoIcon',
-    items: [
-      {
-        label: 'Overview',
-        href: 'https://pancakeswap.info',
-      },
-      {
-        label: 'Roadmap',
-        href: 'https://pancakeswap.info/tokens',
-      },
-    ],
+        href: 'https://plantswap.finance',
   },
   {
     label: 'More',

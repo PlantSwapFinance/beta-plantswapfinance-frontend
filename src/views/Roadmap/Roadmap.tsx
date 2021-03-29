@@ -1,7 +1,7 @@
 import React from 'react'
 import Page from 'components/layout/Page'
 import { Link, Redirect, useParams } from 'react-router-dom'
-import { ChevronLeftIcon, Flex, Text } from '@pancakeswap-libs/uikit'
+import { ChevronLeftIcon, Flex, Text } from '@plantswap-libs/uikit'
 import PageLoader from 'components/PageLoader'
 import useI18n from 'hooks/useI18n'
 

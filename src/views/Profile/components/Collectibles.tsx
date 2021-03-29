@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Text, Flex, ChevronRightIcon } from '@pancakeswap-libs/uikit'
+import { Heading, Text, Flex, ChevronRightIcon } from '@plantswap-libs/uikit'
 import { Link } from 'react-router-dom'
 import useI18n from 'hooks/useI18n'
 import nfts from 'config/constants/nfts'
@@ -42,7 +42,7 @@ const Collectibles = () => {
       <Text as="p">
         {TranslateString(
           999,
-          'Pancake Collectibles are special ERC-721 NFTs that can be used on the PancakeSwap platform.',
+          'Pancake Collectibles are special ERC-721 NFTs that can be used on the PlantSwap platform.',
         )}
       </Text>
       <Text as="p">
