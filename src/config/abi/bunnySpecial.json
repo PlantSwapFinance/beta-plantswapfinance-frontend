@@ -12,8 +12,8 @@
         "type": "address"
       },
       {
-        "internalType": "contract IPancakeProfile",
-        "name": "_pancakeProfile",
+        "internalType": "contract IPlantProfile",
+        "name": "_plantProfile",
         "type": "address"
       },
       {
@@ -370,10 +370,10 @@
   },
   {
     "inputs": [],
-    "name": "pancakeProfile",
+    "name": "plantProfile",
     "outputs": [
       {
-        "internalType": "contract IPancakeProfile",
+        "internalType": "contract IPlantProfile",
         "name": "",
         "type": "address"
       }

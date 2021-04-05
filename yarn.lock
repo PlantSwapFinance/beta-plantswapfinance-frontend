@@ -1993,9 +1993,9 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
-"@plantswap-libs/eslint-config-pancake@1.0.0":
+"@plantswap-libs/eslint-config-plantswap@1.0.0":
   version "1.0.0"
-  resolved "https://registry.npmjs.org/@plantswap-libs/eslint-config-pancake/-/eslint-config-pancake-1.0.0.tgz"
+  resolved "https://registry.npmjs.org/@plantswap-libs/eslint-config-plantswap/-/eslint-config-plantswap-1.0.0.tgz"
   integrity sha512-/rE1jQsgDV+jUvYIJKzIlLGFSYwku8K67nprRMmsbhdG+FHdBJnclIyIbVY1NnVtuwGaP+uBQiS/tn6Zhiyx8w==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^4.7.0"

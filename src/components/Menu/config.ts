@@ -12,11 +12,11 @@ const config: MenuEntry[] = [
     items: [
       {
         label: 'Exchange',
-        href: 'https://exchange.plantswap.finance',
+        href: 'http://localhost:3000',
       },
       {
         label: 'Liquidity',
-        href: 'https://exchange.plantswap.finance/#/pool',
+        href: 'http://localhost:3000/#/pool',
       },
     ],
   },
@@ -28,17 +28,12 @@ const config: MenuEntry[] = [
   {
     label: 'Garden',
     icon: 'PoolIcon',
-    href: '/pools',
+    href: '/gardens',
   },
   {
     label: 'Roadmap',
     icon: 'RoadmapIcon',
     href: '/roadmap',
-  },
-  {
-    label: 'Info',
-    icon: 'InfoIcon',
-        href: 'https://plantswap.finance',
   },
   {
     label: 'More',

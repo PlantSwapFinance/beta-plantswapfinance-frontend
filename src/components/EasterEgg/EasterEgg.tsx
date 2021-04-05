@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react'
-import { FallingBunnies, FallingBunniesProps, useKonamiCheatCode } from '@plantswap-libs/uikit'
+import { FallingPlants, FallingPlantsProps, useKonamiCheatCode } from '@plantswap-libs/uikit'
 
-const EasterEgg: React.FC<FallingBunniesProps> = (props) => {
+const EasterEgg: React.FC<FallingPlantsProps> = (props) => {
   const [show, setShow] = useState(false)
   const startFalling = useCallback(() => setShow(true), [setShow])
   useKonamiCheatCode(startFalling)
@@ -9,7 +9,7 @@ const EasterEgg: React.FC<FallingBunniesProps> = (props) => {
   if (show) {
     return (
       <div onAnimationEnd={() => setShow(false)}>
-        <FallingBunnies {...props} />
+        <FallingPlants {...props} />
       </div>
     )
   }

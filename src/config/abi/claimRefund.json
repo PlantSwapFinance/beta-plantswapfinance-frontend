@@ -8,7 +8,7 @@
       },
       {
         "internalType": "address",
-        "name": "_pancakeProfileAddress",
+        "name": "_plantProfileAddress",
         "type": "address"
       },
       {

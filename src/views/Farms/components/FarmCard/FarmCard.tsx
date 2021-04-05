@@ -98,14 +98,14 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, account }
 
   const isCommunityFarm = communityFarms.includes(farm.token.symbol)
   // We assume the token name is coin pair + lp e.g. CAKE-BNB LP, LINK-BNB LP,
-  // NAR-CAKE LP. The images should be cake-bnb.svg, link-bnb.svg, nar-cake.svg
+  // NAR-CAKE LP. The images should be cake-bnb.svg, link-bnb.svg, nar-plant.svg
   const farmImage = farm.lpSymbol.split(' ')[0].toLocaleLowerCase()
 
   const totalValueFormated = farm.liquidity
     ? `$${farm.liquidity.toNumber().toLocaleString(undefined, { maximumFractionDigits: 0 })}`
     : '-'
 
-  const lpLabel = farm.lpSymbol && farm.lpSymbol.toUpperCase().replace('PANCAKE', '')
+  const lpLabel = farm.lpSymbol && farm.lpSymbol.toUpperCase().replace('PLANT', '')
   const earnLabel = farm.dual ? farm.dual.earnLabel : 'CAKE'
 
   const farmAPY = farm.apy && farm.apy.toLocaleString('en-US', { maximumFractionDigits: 2 })

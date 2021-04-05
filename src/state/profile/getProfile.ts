@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie'
-import { getProfileContract, getPancakeRabbitContract } from 'utils/contractHelpers'
+import { getProfileContract, getPlantRabbitContract } from 'utils/contractHelpers'
 import { Nft } from 'config/constants/types'
 import { Profile } from 'state/types'
 import { getTeam } from 'state/teams/helpers'
@@ -7,7 +7,7 @@ import nfts from 'config/constants/nfts'
 import { transformProfileResponse } from './helpers'
 
 const profileContract = getProfileContract()
-const rabbitContract = getPancakeRabbitContract()
+const rabbitContract = getPlantRabbitContract()
 const profileApi = process.env.REACT_APP_API_PROFILE
 
 export interface GetProfileResponse {

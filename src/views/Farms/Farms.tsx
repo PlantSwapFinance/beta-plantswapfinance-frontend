@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import BigNumber from 'bignumber.js'
 import { useWeb3React } from '@web3-react/core'
 import { Image, Heading, RowType, Toggle, Text } from '@plantswap-libs/uikit'
-import styled from 'styled-components'
+import styled  from 'styled-components'
 import FlexLayout from 'components/layout/Flex'
 import Page from 'components/layout/Page'
 import { useFarms, usePriceCakeBusd, useGetApiPrices } from 'state/hooks'
@@ -15,6 +15,7 @@ import useI18n from 'hooks/useI18n'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { getFarmApy } from 'utils/apy'
 import { orderBy } from 'lodash'
+import Divider from './components/Divider'
 
 import FarmCard, { FarmWithStakedValue } from './components/FarmCard/FarmCard'
 import Table from './components/FarmTable/FarmTable'
@@ -94,19 +95,6 @@ const StyledImage = styled(Image)`
   margin-left: auto;
   margin-right: auto;
   margin-top: 58px;
-`
-
-const Header = styled.div`
-  padding: 32px 0px;
-  background: ${({ theme }) => theme.colors.gradients.bubblegum};
-
-  padding-left: 16px;
-  padding-right: 16px;
-
-  ${({ theme }) => theme.mediaQueries.sm} {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
 `
 
 const Farms: React.FC = () => {
@@ -190,7 +178,7 @@ const Farms: React.FC = () => {
   const handleChangeQuery = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value)
   }
-
+  
   let farmsStaked = []
   if (isActive) {
     farmsStaked = stackedOnly ? farmsList(stackedOnlyFarms) : farmsList(activeFarms)
@@ -204,7 +192,7 @@ const Farms: React.FC = () => {
     const { token, quoteToken } = farm
     const tokenAddress = token.address
     const quoteTokenAddress = quoteToken.address
-    const lpLabel = farm.lpSymbol && farm.lpSymbol.split(' ')[0].toUpperCase().replace('PANCAKE', '')
+    const lpLabel = farm.lpSymbol && farm.lpSymbol.split(' ')[0].toUpperCase().replace('PLANT', '')
 
     const row: RowProps = {
       apr: {
@@ -289,17 +277,23 @@ const Farms: React.FC = () => {
     setSortOption(option.value)
   }
 
+
   return (
     <>
-      <Header>
-        <Heading as="h1" size="xxl" color="secondary" mb="24px">
-          {TranslateString(999, 'Farms')}
-        </Heading>
-        <Heading size="lg" color="text">
-          {TranslateString(999, 'Stake Liquidity Pool (LP) tokens to earn.')}
-        </Heading>
-      </Header>
-      <Page>
+    <Page>
+      <Hero>
+        <div>
+          <Heading as="h1" size="xxl" mb="16px">
+            {TranslateString(738, 'Farm')}
+          </Heading>
+          <ul>
+            <li>{TranslateString(580, 'Stake PLANT LP\'s token to earn new tokens.')}</li>
+            <li>{TranslateString(486, 'You can unstake at any time.')}</li>
+            <li>{TranslateString(406, 'Rewards are calculated per block.')}</li>
+          </ul>
+        </div>
+        <img src="/images/farms.svg" alt="Farms" width={400} height={210} />
+      </Hero>
         <ControlContainer>
           <ViewControls>
             <ToggleView viewMode={viewMode} onToggle={(mode: ViewMode) => setViewMode(mode)} />
@@ -344,11 +338,43 @@ const Farms: React.FC = () => {
             </LabelWrapper>
           </FilterContainer>
         </ControlContainer>
+      <Divider />
         {renderContent()}
-        <StyledImage src="/images/3dpan.png" alt="Pancake illustration" width={120} height={103} />
+      <Divider />
+        <StyledImage src="/images/endPage.svg" alt="PlantSwap Finance" width={680} height={155} />
       </Page>
     </>
   )
 }
+
+const Hero = styled.div`
+  align-items: center;
+  color: ${({ theme }) => theme.colors.primary};
+  display: grid;
+  grid-gap: 32px;
+  grid-template-columns: 1fr;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 250px;
+  padding: 48px 0;
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    font-size: 16px;
+    li {
+      margin-bottom: 4px;
+    }
+  }
+  img {
+    height: auto;
+    max-width: 100%;
+  }
+  @media (min-width: 576px) {
+    grid-template-columns: 1fr 1fr;
+    margin: 0;
+    max-width: none;
+  }
+`
 
 export default Farms

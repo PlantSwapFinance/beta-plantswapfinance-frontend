@@ -1,12 +1,12 @@
 import React, { ImgHTMLAttributes } from 'react'
 import styled from 'styled-components'
-import { BunnyPlaceholderIcon } from '@plantswap-libs/uikit'
+import { PlantPlaceholderIcon } from '@plantswap-libs/uikit'
 
 interface AchievementAvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
   badge?: string
 }
 
-const NoBadgePlaceholder = styled(BunnyPlaceholderIcon)`
+const NoBadgePlaceholder = styled(PlantPlaceholderIcon)`
   height: 48px;
   width: 48px;
 

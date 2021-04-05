@@ -1,10 +1,10 @@
 import { createGlobalStyle } from 'styled-components'
 // eslint-disable-next-line import/no-unresolved
-import { PlantTheme } from '@plantswap-libs/uikit/dist/theme'
+import { PlantSwapTheme } from '@plantswap-libs/uikit/dist/theme'
 
 declare module 'styled-components' {
   /* eslint-disable @typescript-eslint/no-empty-interface */
-  export interface DefaultTheme extends PlantTheme {}
+  export interface DefaultTheme extends PlantSwapTheme {}
 }
 
 const GlobalStyle = createGlobalStyle`

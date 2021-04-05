@@ -7,8 +7,8 @@ import { PoolCategory } from 'config/constants/types'
 // Addresses
 import {
   getAddress,
-  getPancakeProfileAddress,
-  getPancakeRabbitsAddress,
+  getPlantProfileAddress,
+  getPlantRabbitsAddress,
   getBunnyFactoryAddress,
   getBunnySpecialAddress,
   getCakeAddress,
@@ -20,8 +20,8 @@ import {
 } from 'utils/addressHelpers'
 
 // ABI
-import profileABI from 'config/abi/pancakeProfile.json'
-import pancakeRabbitsAbi from 'config/abi/pancakeRabbits.json'
+import profileABI from 'config/abi/plantProfile.json'
+import plantRabbitsAbi from 'config/abi/plantRabbits.json'
 import bunnyFactoryAbi from 'config/abi/bunnyFactory.json'
 import bunnySpecialAbi from 'config/abi/bunnySpecial.json'
 import bep20Abi from 'config/abi/erc20.json'
@@ -62,10 +62,10 @@ export const getCakeContract = (web3?: Web3) => {
   return getContract(cakeAbi, getCakeAddress(), web3)
 }
 export const getProfileContract = (web3?: Web3) => {
-  return getContract(profileABI, getPancakeProfileAddress(), web3)
+  return getContract(profileABI, getPlantProfileAddress(), web3)
 }
-export const getPancakeRabbitContract = (web3?: Web3) => {
-  return getContract(pancakeRabbitsAbi, getPancakeRabbitsAddress(), web3)
+export const getPlantRabbitContract = (web3?: Web3) => {
+  return getContract(plantRabbitsAbi, getPlantRabbitsAddress(), web3)
 }
 export const getBunnyFactoryContract = (web3?: Web3) => {
   return getContract(bunnyFactoryAbi, getBunnyFactoryAddress(), web3)
