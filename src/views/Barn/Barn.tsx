@@ -26,10 +26,10 @@ const Barn = () => {
             <li>{TranslateString(486, ' World')}</li>
           </ul>
         </div>
-        <img src="/images/roadmap.svg" alt="Beta1" width={400} height={210} />
+        <img src="/images/roadmap.svg" alt="Barn" width={400} height={210} />
       </Hero>
       <Divider />
-        <Heading as="h2" size="xl" mb="14px">{TranslateString(738, '1. Hello world')}</Heading>
+        <Heading as="h2" size="xl" mb="14px">{TranslateString(738, 'Manage all your farming')}</Heading>
           <br />
           <Text>{TranslateString(738, '1.1')}</Text>
         <br /><br />

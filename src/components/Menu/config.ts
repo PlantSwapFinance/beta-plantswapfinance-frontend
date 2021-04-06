@@ -32,7 +32,7 @@ const config: MenuEntry[] = [
   },
   {
     label: 'Barn (soon)',
-    icon: 'BarnIcon',
+    icon: 'PoolIcon',
     href: '/Barn',
   },
   {
