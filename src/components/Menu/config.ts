@@ -12,11 +12,11 @@ const config: MenuEntry[] = [
     items: [
       {
         label: 'Exchange',
-        href: '#',
+        href: 'https://beta-plantswapfinance-swap.netlify.app/#/swap',
       },
       {
         label: 'Liquidity',
-        href: '#',
+        href: 'https://beta-plantswapfinance-swap.netlify.app/#/pool',
       },
     ],
   },
