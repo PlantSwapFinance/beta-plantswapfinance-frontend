@@ -1993,31 +1993,6 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
-"@plantswap-libs/eslint-config-plantswap@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@plantswap-libs/eslint-config-plantswap/-/eslint-config-plantswap-1.0.0.tgz"
-  integrity sha512-/rE1jQsgDV+jUvYIJKzIlLGFSYwku8K67nprRMmsbhdG+FHdBJnclIyIbVY1NnVtuwGaP+uBQiS/tn6Zhiyx8w==
-  dependencies:
-    "@typescript-eslint/eslint-plugin" "^4.7.0"
-    "@typescript-eslint/parser" "^4.7.0"
-    eslint-config-airbnb "^18.2.1"
-    eslint-config-prettier "^6.15.0"
-    eslint-plugin-import "^2.22.1"
-    eslint-plugin-jsx-a11y "^6.4.1"
-    eslint-plugin-react "^7.21.5"
-    eslint-plugin-react-hooks "^4.0.0"
-
-"@plantswap-libs/uikit@^0.14.1":
-  version "0.14.1"
-  resolved "https://registry.npmjs.org/@plantswap-libs/uikit/-/uikit-0.14.1.tgz"
-  integrity sha512-PknRl6qIXSCPPCTseTCEnzaXuW8dowAGUbus500IEZMOtl+hZu+D0g8s0tG6DRcwEIWF1RLmYIWJjuJHiKv8IQ==
-  dependencies:
-    "@types/lodash" "^4.14.162"
-    "@types/styled-system" "^5.1.10"
-    lodash "^4.17.20"
-    react-transition-group "^4.4.1"
-    styled-system "^5.1.5"
-
 "@pedrouid/iso-crypto@^1.0.0":
   version "1.1.0"
   resolved "https://registry.npmjs.org/@pedrouid/iso-crypto/-/iso-crypto-1.1.0.tgz"
@@ -2035,6 +2010,31 @@
   dependencies:
     enc-utils "^3.0.0"
     randombytes "^2.1.0"
+
+"@plantswap-libs/eslint-config-plantswap@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.npmjs.org/@plantswap-libs/eslint-config-plantswap/-/eslint-config-plantswap-0.0.1.tgz"
+  integrity sha512-sCW8JKfW9eNf58OEL78vydpHTeSZ+Vqg3Y2eaMt8viNTYRMxi4wRbDaedIW1ze52yTN/YJPqMQ5gg0+3hf8TAA==
+  dependencies:
+    "@typescript-eslint/eslint-plugin" "^4.7.0"
+    "@typescript-eslint/parser" "^4.7.0"
+    eslint-config-airbnb "^18.2.1"
+    eslint-config-prettier "^6.15.0"
+    eslint-plugin-import "^2.22.1"
+    eslint-plugin-jsx-a11y "^6.4.1"
+    eslint-plugin-react "^7.21.5"
+    eslint-plugin-react-hooks "^4.0.0"
+
+"@plantswap-libs/uikit@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@plantswap-libs/uikit/-/uikit-0.0.1.tgz#b170b27d47b4c738dfe13b46fcbc8914593c1a66"
+  integrity sha512-roGAxypSAW18UteN068sgRrWumhLF0irTYirn8qa+feHVufDfER90Pfm5TbOsNxp8gToCji5vQtfz41/wjvvfQ==
+  dependencies:
+    "@types/lodash" "^4.14.162"
+    "@types/styled-system" "^5.1.10"
+    lodash "^4.17.20"
+    react-transition-group "^4.4.1"
+    styled-system "^5.1.5"
 
 "@pmmmwh/react-refresh-webpack-plugin@0.4.3":
   version "0.4.3"

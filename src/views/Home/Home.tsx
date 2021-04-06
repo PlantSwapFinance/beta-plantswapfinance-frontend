@@ -3,10 +3,8 @@ import styled from 'styled-components'
 import { Image, Heading, Text, BaseLayout } from '@plantswap-libs/uikit'
 import useI18n from 'hooks/useI18n'
 import Page from 'components/layout/Page'
-import FarmStakingCard from 'views/Home/components/FarmStakingCard'
+import QuickDescriptionCard from 'views/Home/components/QuickDescriptionCard'
 import NewsCard from 'views/Home/components/NewsCard'
-import PlantStats from 'views/Home/components/PlantStats'
-import TotalValueLockedCard from 'views/Home/components/TotalValueLockedCard'
 import Divider from './components/Divider'
 
 const Hero = styled.div`
@@ -73,12 +71,8 @@ const Home: React.FC = () => {
       </Hero>
       <div>
         <Cards>
-          <FarmStakingCard />
+          <QuickDescriptionCard />
           <NewsCard />
-        </Cards>
-        <Cards>
-          <PlantStats />
-          <TotalValueLockedCard />
         </Cards>
       </div>
       <Divider />

@@ -16,7 +16,7 @@ const Block = styled.div`
 
 const Label = styled.div`
   color: ${({ theme }) => theme.colors.textSubtle};
-  font-size: 14px;
+  font-size: 16px;
 `
 
 const NewsCard = () => {
@@ -29,10 +29,7 @@ const NewsCard = () => {
           {TranslateString(542, 'News & Announcement')}
         </Heading>
         <Block>
-          <Label>{TranslateString(544, 'News1')}:</Label>
-        </Block>
-        <Block>
-          <Label>{TranslateString(546, 'News2')}:</Label>
+          <Label>The website is live!</Label>
         </Block>
       </CardBody>
     </StyledNewsCard>

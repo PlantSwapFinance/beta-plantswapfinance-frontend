@@ -7,28 +7,28 @@ const config: MenuEntry[] = [
     href: '/',
   },
   {
-    label: 'Trade',
+    label: 'Trade (soon)',
     icon: 'TradeIcon',
     items: [
       {
         label: 'Exchange',
-        href: 'http://localhost:3000',
+        href: '#',
       },
       {
         label: 'Liquidity',
-        href: 'http://localhost:3000/#/pool',
+        href: '#',
       },
     ],
   },
   {
-    label: 'Farms',
+    label: 'Farms (soon)',
     icon: 'FarmIcon',
-    href: '/farms',
+    href: '#',
   },
   {
-    label: 'Garden',
+    label: 'Garden (soon)',
     icon: 'PoolIcon',
-    href: '/gardens',
+    href: '#',
   },
   {
     label: 'Roadmap',
