@@ -36,6 +36,11 @@ const config: MenuEntry[] = [
     href: '/barn',
   },
   {
+    label: "Project",
+    icon: "ProjectIcon",
+    href: "/project",
+  },
+  {
     label: 'Roadmap',
     icon: 'RoadmapIcon',
     href: '/roadmap',
@@ -47,6 +52,10 @@ const config: MenuEntry[] = [
       {
         label: 'Github',
         href: 'https://github.com/plantswapfinance',
+      },
+      {
+        label: "Blog",
+        href: "https://plantswapfinance.medium.com",
       },
     ],
   },

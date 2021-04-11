@@ -6,8 +6,8 @@ const tokens = {
   plant: {
     symbol: 'PLANT',
     address: {
-      56: '0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82',
-      97: '0xE537e95691ABb35A5141a30f35d364BF03941711',
+      56: '0x58BA5Bd8872ec18BD360a9592149daed2fC57c69',
+      97: '0xFe5Ab583d91fa90549aC61666CF1C4e2CeA5187e',
     },
     decimals: 18,
     projectLink: 'https://plantswap.finance/',
