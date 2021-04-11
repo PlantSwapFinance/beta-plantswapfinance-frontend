@@ -57,6 +57,10 @@ const config: MenuEntry[] = [
         label: "Blog",
         href: "https://plantswapfinance.medium.com",
       },
+      {
+        label: "PlantSwap Token",
+        href: "https://bscscan.com/token/0x58BA5Bd8872ec18BD360a9592149daed2fC57c69",
+      },
     ],
   },
 ]
