@@ -27,36 +27,23 @@ const Roadmap = () => {
         <img src="/images/roadmap.svg" alt="Roadmap" width={400} height={210} />
       </Hero>
       <Divider />
-        <Heading as="h2" size="xl" mb="14px">1. Finish the basic</Heading>
+        <Heading as="h2" size="xl" mb="14px">Short-term Roadmap</Heading>
           <br />
-          <Text>1.1 Finish User Interface (UI)</Text>
-          <Text>1.2 Finish tokenomic</Text>
-          <Text>1.3 Finish the exchange and liquidity</Text>
-          <Text>1.4 Finish the farms and garden</Text>
+          <Text>Announce of the Presale details (10 April 2021)</Text>
+          <Text>Fair Presale of the $PLANT token on Bounce (12 to 19 April 2021)</Text>
+          <Text>Add initial liquidity for PLANT/BNB (75% of Presale BNB profits) (21 April 2021)</Text>
+          <Text>Launch the initial PLANT/BNB and PLANT/BUSD farm and the PLANT garden (21 April 2021)</Text>
           <br />
-        <Heading as="h2" size="xl" mb="14px">2. Testing phase</Heading>
+        <Heading as="h2" size="xl" mb="14px">Long-term Roadmap</Heading>
           <br />
-          <Text>2.1 Deploy Smart Contract in test local-network</Text>
-          <Text>2.2 Test website and smart-contract interaction localy  <u>&lt;- We are here</u></Text>
-          <Text>2.3 Deploy Smart Contract in test-network</Text>
-          <Text>2.4 Test all page and function</Text>
-          <br />
-        <Heading as="h2" size="xl" mb="14px">3. Let&apos;s go live!</Heading>
-          <br />
-          <Text>3.1 Deploy website and Smart Contract on BSC main net</Text>
-          <Text>3.2 Organize token distribution</Text>
-          <Text>3.3 Deploy some liquidity</Text>
-          <Text>3.4 Attract investors</Text>
-          <br />
-        <Heading as="h2" size="xl" mb="14px">4. Get serious</Heading>
-          <br />
-          <Text>4.1 Get listed on CMC and CoinGecko</Text>
-          <Text>4.2 Find other farms parteners</Text>
-          <Text>4.3 Get listed on other exchanges</Text>
-        <br /><br />
-        <Heading as="h2" size="xl" mb="14px">Others project</Heading>
-          <br />
-          <Text> + Release of the Barn, a great tool to manage your farming at large.</Text>
+          <Text>Development of the barn to see all your farming across multiple DeFi platform (Q2 2021)</Text>
+          <Text>Adding control and emergency tools to the barn to control, remove your spending approval and emergency withdraw from other smart contracts (Q2 2021)</Text>
+          <Text>Partnering with other project for multiple cross-project pool and garden (Q2 2021)</Text>
+          <Text>Addition of multiple liquidity pool with stable coin and other wrapped token</Text>
+          <Text>Creation and distribution of a governance token</Text>
+          <Text>Smart Contract Audit (Q3 2021)</Text>
+          <Text>Cross-chain compatibility (Q3 2021)</Text>
+          <Text>Much more</Text>
         <br /><br />
       <Divider />
       <StyledImage src="/images/endPage.svg" alt="PlantSwap Finance" width={680} height={155} />
