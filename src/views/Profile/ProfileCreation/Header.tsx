@@ -10,13 +10,6 @@ const Wrapper = styled.div`
   padding-bottom: 24px;
 `
 
-const steps = [
-  { translationId: 776, label: 'Get Starter Collectible' },
-  { translationId: 778, label: 'Set Profile Picture' },
-  { translationId: 780, label: 'Join Team' },
-  { translationId: 782, label: 'Set Name' },
-]
-
 const Header: React.FC = () => {
   const TranslateString = useI18n()
   const { currentStep } = useContext(ProfileCreationContext)
@@ -30,17 +23,11 @@ const Header: React.FC = () => {
         {TranslateString(772, 'Show off your stats and collectibles with your unique profile')}
       </Heading>
       <Text color="textSubtle" mb="24px">
-        {TranslateString(999, 'Total cost: 1.5 CAKE')}
+        {TranslateString(999, 'Total cost: 0.15 PLANT')}
       </Text>
-      <Breadcrumbs>
-        {steps.map(({ translationId, label }, index) => {
-          return (
-            <Text key={label} color={index <= currentStep ? 'text' : 'textDisabled'}>
-              {TranslateString(translationId, label)}
-            </Text>
-          )
-        })}
-      </Breadcrumbs>
+      <Heading as="h1" size="xxl" color="secondary" mb="8px">
+          In progress...
+      </Heading>
     </Wrapper>
   )
 }

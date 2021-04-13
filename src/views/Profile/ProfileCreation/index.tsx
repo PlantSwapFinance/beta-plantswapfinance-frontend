@@ -8,7 +8,6 @@ const ProfileCreation = () => (
   <ProfileCreationProvider>
     <Page>
       <Header />
-      <Steps />
     </Page>
   </ProfileCreationProvider>
 )
