@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { Heading, Text } from '@plantswap-libs/uikit'
 import useI18n from 'hooks/useI18n'
