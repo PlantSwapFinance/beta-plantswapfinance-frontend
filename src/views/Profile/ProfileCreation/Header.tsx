@@ -1,8 +1,7 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
-import { Breadcrumbs, Heading, Text } from '@plantswap-libs/uikit'
+import { Heading, Text } from '@plantswap-libs/uikit'
 import useI18n from 'hooks/useI18n'
-import { ProfileCreationContext } from './contexts/ProfileCreationProvider'
 
 const Wrapper = styled.div`
   border-bottom: 2px solid ${({ theme }) => theme.colors.textSubtle};
@@ -12,7 +11,6 @@ const Wrapper = styled.div`
 
 const Header: React.FC = () => {
   const TranslateString = useI18n()
-  const { currentStep } = useContext(ProfileCreationContext)
 
   return (
     <Wrapper>
