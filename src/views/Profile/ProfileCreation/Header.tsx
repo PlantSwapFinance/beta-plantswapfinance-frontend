@@ -18,11 +18,8 @@ const Header: React.FC = () => {
         {TranslateString(770, 'Profile Setup')}
       </Heading>
       <Heading as="h2" size="lg" mb="8px">
-        {TranslateString(772, 'Show off your stats and collectibles with your unique profile')}
+        {TranslateString(772, 'Build yourself a unique profile')}
       </Heading>
-      <Text color="textSubtle" mb="24px">
-        {TranslateString(999, 'Total cost: 0.15 PLANT')}
-      </Text>
       <Heading as="h1" size="xxl" color="secondary" mb="8px">
           In progress...
       </Heading>
