@@ -26,6 +26,7 @@ export interface Ifo {
 export enum PoolCategory {
   'COMMUNITY' = 'Community',
   'CORE' = 'Core',
+  'PANCAKE' = 'PancakeSwap',
   'BINANCE' = 'Binance', // Pools using native BNB behave differently than pools using a token
 }
 
