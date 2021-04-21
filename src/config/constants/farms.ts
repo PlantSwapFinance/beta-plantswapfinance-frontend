@@ -7,8 +7,8 @@ const farms: FarmConfig[] = [
     pid: 3,
     lpSymbol: 'PLANT-BNB LP',
     lpAddresses: {
-      97: '0xcba2850439ccb4228906b886d45f96063b7e26f3',
-      56: '0x1b96b92314c44b159149f7e0303511fb2fc4774f',
+      97: '0xd0dc9cc35ed1584f4858e5194bd9b153b70b8a83',
+      56: '0xd0dc9cc35ed1584f4858e5194bd9b153b70b8a83',
     },
     token: tokens.plant,
     quoteToken: tokens.wbnb,
