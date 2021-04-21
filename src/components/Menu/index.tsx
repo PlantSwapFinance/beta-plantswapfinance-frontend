@@ -13,7 +13,7 @@ const Menu = (props) => {
   const { login, logout } = useAuth()
   const { selectedLanguage, setSelectedLanguage } = useContext(LanguageContext)
   const { isDark, toggleTheme } = useTheme()
-  const cakePriceUsd = usePriceCakeBusd()
+  const plantPriceUsd = usePriceCakeBusd()
   const { profile } = useProfile()
 
   return (
@@ -26,7 +26,7 @@ const Menu = (props) => {
       currentLang={selectedLanguage && selectedLanguage.code}
       langs={allLanguages}
       setLang={setSelectedLanguage}
-          cakePriceUsd={cakePriceUsd.toNumber()}
+          plantPriceUsd={plantPriceUsd.toNumber()}
       links={config}
       profile={{
         username: profile?.username,

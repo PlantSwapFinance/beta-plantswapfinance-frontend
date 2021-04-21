@@ -25,7 +25,7 @@ const EarnAPYCard = () => {
   const TranslateString = useI18n()
   const farmsLP = useFarms()
   const prices = useGetApiPrices()
-  const cakePrice = usePriceCakeBusd()
+  const plantPrice = usePriceCakeBusd()
 
   const highestApy = useMemo(() => {
     const apys = farmsLP
@@ -35,14 +35,14 @@ const EarnAPYCard = () => {
         if (farm.lpTotalInQuoteToken && prices) {
           const quoteTokenPriceUsd = prices[farm.quoteToken.symbol.toLowerCase()]
           const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(quoteTokenPriceUsd)
-          return getFarmApy(farm.poolWeight, cakePrice, totalLiquidity)
+          return getFarmApy(farm.poolWeight, plantPrice, totalLiquidity)
         }
         return null
       })
 
     const maxApy = max(apys)
     return maxApy?.toLocaleString('en-US', { maximumFractionDigits: 2 })
-  }, [cakePrice, farmsLP, prices])
+  }, [plantPrice, farmsLP, prices])
 
   return (
     <StyledFarmStakingCard>

@@ -24,13 +24,13 @@ export const getPoolApy = (
 /**
  * Get farm APY value in %
  * @param poolWeight allocationPoint / totalAllocationPoint
- * @param cakePriceUsd Cake price in USD
+ * @param plantPriceUsd Cake price in USD
  * @param poolLiquidityUsd Total pool liquidity in USD
  * @returns
  */
-export const getFarmApy = (poolWeight: BigNumber, cakePriceUsd: BigNumber, poolLiquidityUsd: BigNumber): number => {
+export const getFarmApy = (poolWeight: BigNumber, plantPriceUsd: BigNumber, poolLiquidityUsd: BigNumber): number => {
   const yearlyCakeRewardAllocation = CAKE_PER_BLOCK.times(BLOCKS_PER_YEAR).times(poolWeight)
-  const apy = yearlyCakeRewardAllocation.times(cakePriceUsd).div(poolLiquidityUsd).times(100)
+  const apy = yearlyCakeRewardAllocation.times(plantPriceUsd).div(poolLiquidityUsd).times(100)
   return apy.isNaN() || !apy.isFinite() ? null : apy.toNumber()
 }
 
