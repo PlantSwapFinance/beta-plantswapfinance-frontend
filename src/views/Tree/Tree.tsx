@@ -24,7 +24,7 @@ const Tree = () => {
             <li>PlantSwap Development Fund</li>
           </ul>
         </div>
-        <img src="/images/tree.svg" alt="Tree" width={250} height={250} />
+        <img src="/images/tree.svg" alt="TreeToken" width={250} height={250} />
       </Hero>
       <Divider />
         <Heading as="h2" size="xl" mb="14px">Why holding the Tree token?</Heading>

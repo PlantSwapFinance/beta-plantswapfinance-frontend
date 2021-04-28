@@ -33,7 +33,7 @@ const config: MenuEntry[] = [
   {
     label: 'Barn (soon)',
     icon: 'BarnIcon',
-    href: '/',
+    href: '/barns',
   },
   {
     label: 'Development Fund',

@@ -292,7 +292,7 @@ const Farms: React.FC = () => {
             <li>{TranslateString(406, 'Rewards are calculated per block.')}</li>
           </ul>
         </div>
-        <img src="/images/farms.svg" alt="Farms" width={400} height={210} />
+        <img src="/images/farms.svg" alt="Farms" width={600} height={315} />
       </Hero>
         <ControlContainer>
           <ViewControls>

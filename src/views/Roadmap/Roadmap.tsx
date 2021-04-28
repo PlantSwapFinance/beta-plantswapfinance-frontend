@@ -24,7 +24,7 @@ const Roadmap = () => {
             <li>for the future of PlantSwap.finance and the PLANT token!</li>
           </ul>
         </div>
-        <img src="/images/roadmap.svg" alt="Roadmap" width={400} height={210} />
+        <img src="/images/roadmap.svg" alt="Roadmap" width={600} height={315} />
       </Hero>
       <Divider />
         <Heading as="h2" size="xl" mb="14px">Short-term Roadmap</Heading>

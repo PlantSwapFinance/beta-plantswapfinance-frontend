@@ -24,7 +24,7 @@ const Project = () => {
             <li>The PlantSwap Development Fund</li>
           </ul>
         </div>
-        <img src="/images/roadmap.svg" alt="Roadmap" width={400} height={210} />
+        <img src="/images/project.svg" alt="Project" width={600} height={315} />
       </Hero>
       <Divider />
         <Heading as="h2" size="xl" mb="14px">Are you farming on Binance Smart Chain yet?</Heading>

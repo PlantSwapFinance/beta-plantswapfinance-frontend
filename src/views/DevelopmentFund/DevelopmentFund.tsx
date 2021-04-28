@@ -24,7 +24,7 @@ const DevelopmentFund = () => {
             <li>The contribution to non-profits and proof of burn</li>
           </ul>
         </div>
-        <img src="/images/treePlanting.svg" alt="Roadmap" width={400} height={210} />
+        <img src="/images/developmentFund.svg" alt="DevelopmentFund" width={400} height={210} />
       </Hero>
       <Divider />
         <Heading as="h2" size="xl" mb="14px">Current non-profits selected by the Development Fund</Heading>

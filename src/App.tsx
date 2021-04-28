@@ -12,6 +12,7 @@ import ToastListener from './components/ToastListener'
 import PageLoader from './components/PageLoader'
 import EasterEgg from './components/EasterEgg'
 import Garden from './views/Garden'
+import Barns from './views/Barns'
 import Tree from './views/Tree'
 import DevelopmentFund from './views/DevelopmentFund'
 import history from './routerHistory'
@@ -66,6 +67,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/gardens">
               <Garden />
+            </Route>
+            <Route path="/barns">
+              <Barns />
             </Route>
             <Route path="/tree">
               <Tree />
