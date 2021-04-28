@@ -10,7 +10,27 @@ const farms: FarmConfig[] = [
       97: '0xFe5Ab583d91fa90549aC61666CF1C4e2CeA5187e',
       56: '0x58BA5Bd8872ec18BD360a9592149daed2fC57c69',
     },
-    token: tokens.syrup,
+    token: tokens.plant,
+    quoteToken: tokens.wbnb,
+  },
+  {
+    pid: 11,
+    lpSymbol: 'BNB',
+    lpAddresses: {
+      97: '0xae13d989dac2f0debff460ac112a837c89baa7cd',
+      56: '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c',
+    },
+    token: tokens.plant,
+    quoteToken: tokens.wbnb,
+  },
+  {
+    pid: 12,
+    lpSymbol: 'BUSD',
+    lpAddresses: {
+      97: '',
+      56: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
+    },
+    token: tokens.plant,
     quoteToken: tokens.wbnb,
   },
   // New V2
