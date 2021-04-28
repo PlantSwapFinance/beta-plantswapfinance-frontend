@@ -29,8 +29,8 @@ const DevelopmentFund = () => {
       <Divider />
         <Heading as="h2" size="xl" mb="14px">Current non-profits selected by the Development Fund</Heading>
           <br />
-          <Text>The Rainforest foundation</Text>
-          <Text>#TeamTrees</Text>
+          <Heading as="h1" size="xxl" mb="16px">The Rainforest foundation</Heading>
+          <Text>The Rainforest Foundation Fund is a charitable foundation founded in 1987 and dedicated to drawing attention to rainforests and defending the rights of indigenous peoples living there.</Text>
           <br />
           <br />
         <Heading as="h2" size="xl" mb="14px">The frequency of the donnation and blockchain proof</Heading>
