@@ -26,7 +26,7 @@ const CardImage = styled.img`
 
 const Label = styled.div`
   color: ${({ theme }) => theme.colors.textSubtle};
-  font-size: 14px;
+  font-size: 16px;
 `
 
 const Actions = styled.div`

@@ -26,9 +26,24 @@ const config: MenuEntry[] = [
     href: '/farms',
   },
   {
-    label: 'Gardens (soon)',
+    label: 'Gardens',
     icon: 'PoolIcon',
     href: '/gardens',
+  },
+  {
+    label: 'Barn (soon)',
+    icon: 'BarnIcon',
+    href: '/',
+  },
+  {
+    label: 'Development Fund',
+    icon: 'TreePlantingIcon',
+    href: '/developmentFund',
+  },
+  {
+    label: 'Tree (soon)',
+    icon: 'TreeIcon',
+    href: '/tree',
   },
   {
     label: "Project",

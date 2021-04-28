@@ -2,7 +2,17 @@ import tokens from './tokens'
 import { FarmConfig } from './types'
 
 const farms: FarmConfig[] = [
-
+  
+  {
+    pid: 0,
+    lpSymbol: 'PLANT',
+    lpAddresses: {
+      97: '0xFe5Ab583d91fa90549aC61666CF1C4e2CeA5187e',
+      56: '0x58BA5Bd8872ec18BD360a9592149daed2fC57c69',
+    },
+    token: tokens.syrup,
+    quoteToken: tokens.wbnb,
+  },
   // New V2
   {
     pid: 4,

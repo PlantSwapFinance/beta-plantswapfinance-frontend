@@ -2,6 +2,7 @@ import React from 'react'
 import { Card, CardBody, Heading, Text } from '@plantswap-libs/uikit'
 import styled from 'styled-components'
 import { getBalanceNumber } from 'utils/formatBalance'
+import { usePricePlantBusd } from 'state/hooks'
 import { useTotalSupply, useBurnedBalance } from 'hooks/useTokenBalance'
 import useI18n from 'hooks/useI18n'
 import { getPlantAddress } from 'utils/addressHelpers'
@@ -11,11 +12,14 @@ const StyledPlantStats = styled(Card)`
   margin-left: auto;
   margin-right: auto;
 `
+const CardImage = styled.img`
+  margin-bottom: 16px;
+`
 
 const Row = styled.div`
   align-items: center;
   display: flex;
-  font-size: 14px;
+  font-size: 16px;
   justify-content: space-between;
   margin-bottom: 8px;
 `
@@ -25,6 +29,9 @@ const PlantStats = () => {
   const totalSupply = useTotalSupply()
   const burnedBalance = getBalanceNumber(useBurnedBalance(getPlantAddress()))
   const plantSupply = totalSupply ? getBalanceNumber(totalSupply) - burnedBalance : 0
+  const plantPrice = usePricePlantBusd().toNumber()
+  const mathMarketCap = ((getBalanceNumber(totalSupply) - burnedBalance) * plantPrice)
+  const totalMarketCap = totalSupply ? mathMarketCap  : 0
 
   return (
     <StyledPlantStats>
@@ -33,16 +40,30 @@ const PlantStats = () => {
           {TranslateString(534, 'PLANT Stats')}
         </Heading>
         <Row>
-          <Text fontSize="14px">{TranslateString(536, 'Total PLANT Supply')}</Text>
-          {plantSupply && <CardValue fontSize="14px" value={plantSupply} />}
+          <Text fontSize="16px">{TranslateString(536, 'Total PLANT Supply')}</Text>
+          {plantSupply && <CardValue fontSize="16px" value={plantSupply} />}🌱
         </Row>
         <Row>
-          <Text fontSize="14px">{TranslateString(538, 'Total PLANT Burned')}</Text>
-          <CardValue fontSize="14px" decimals={3} value={burnedBalance} />
+          <Text fontSize="16px">{TranslateString(538, 'Total PLANT Burned')}</Text>
+          <CardValue fontSize="16px" decimals={3} value={burnedBalance} />🔥
         </Row>
         <Row>
-          <Text fontSize="14px">{TranslateString(540, 'New PLANT/block')}</Text>
-          <CardValue fontSize="14px" decimals={3} value={0.02} />
+          <Text fontSize="16px">{TranslateString(540, 'New PLANT/block')}</Text>
+          <CardValue fontSize="16px" decimals={3} value={0.02} />⛏🧱
+        </Row>
+        <Row>
+          <CardImage src="/images/plant.svg" alt="plant logo" width={64} height={64} />
+        </Row>
+        <Heading size="xl" mb="24px">
+          {TranslateString(534, 'Market cap. & Price')}
+        </Heading>
+        <Row>
+          <Text fontSize="16px">{TranslateString(536, 'Current Market Cap.')}</Text>
+          {totalMarketCap && <CardValue fontSize="16px" value={totalMarketCap} />}$
+        </Row>
+        <Row>
+          <Text fontSize="16px">{TranslateString(538, 'PLANT price in BUSD')}</Text>
+          <CardValue fontSize="16px" decimals={2} value={plantPrice} />$
         </Row>
       </CardBody>
     </StyledPlantStats>

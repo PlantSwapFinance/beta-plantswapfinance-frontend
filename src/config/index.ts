@@ -8,9 +8,10 @@ BigNumber.config({
 export const BSC_BLOCK_TIME = 3
 export const PLANT_PER_BLOCK = new BigNumber(0.02)
 export const BLOCKS_PER_YEAR = new BigNumber((60 / BSC_BLOCK_TIME) * 60 * 24 * 365) // 10512000
-export const BASE_URL = 'https://plantswap.finance'
+export const BASE_URL = 'https://beta.plantswap.finance'
 export const BASE_EXCHANGE_URL = 'https://exchange.pancakeswap.finance'
 export const BASE_ADD_LIQUIDITY_URL = `${BASE_EXCHANGE_URL}/#/add`
 export const BASE_LIQUIDITY_POOL_URL = `${BASE_EXCHANGE_URL}/#/pool`
 export const LOTTERY_MAX_NUMBER_OF_TICKETS = 50
 export const LOTTERY_TICKET_PRICE = 1
+export const DEFAULT_TOKEN_DECIMAL = new BigNumber(10).pow(18)

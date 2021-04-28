@@ -4,9 +4,9 @@ import { Image, Heading, Text, BaseLayout } from '@plantswap-libs/uikit'
 import useI18n from 'hooks/useI18n'
 import Page from 'components/layout/Page'
 import PlantStats from 'views/Home/components/PlantStats'
-import MarketCap from 'views/Home/components/MarketCap'
 import QuickDescriptionCard from 'views/Home/components/QuickDescriptionCard'
 import NewsCard from 'views/Home/components/NewsCard'
+import FarmStakingCard from 'views/Home/components/FarmStakingCard'
 import Divider from './components/Divider'
 
 const Hero = styled.div`
@@ -34,18 +34,15 @@ const Cards = styled(BaseLayout)`
   align-items: stretch;
   justify-content: stretch;
   margin-bottom: 32px;
-
   & > div {
     grid-column: span 6;
     width: 100%;
   }
-
   ${({ theme }) => theme.mediaQueries.sm} {
     & > div {
       grid-column: span 8;
     }
   }
-
   ${({ theme }) => theme.mediaQueries.lg} {
     & > div {
       grid-column: span 6;
@@ -62,6 +59,12 @@ const StyledImage = styled(Image)`
 const Home: React.FC = () => {
   const TranslateString = useI18n()
 
+  /*  To finish and add
+  
+        <BuyBtn>
+          <BuySellButton width="100%" />
+        </BuyBtn>
+  */
   return (
     <Page>
       <Hero>
@@ -72,23 +75,22 @@ const Home: React.FC = () => {
         <Text>{TranslateString(578, 'with our smart contracts on Binance Smart Chain.')}</Text>
         <br />
         <Text>Fees from these transactions will be used to</Text>
-        <Text>plant trees and support environmental causes.</Text>
+        <Text>plant trees and support environmental causes.</Text
+        >
       </Hero>
+      
       <div>
         <Cards>
-          <QuickDescriptionCard />
+          <FarmStakingCard />
           <NewsCard />
         </Cards>
-      </div>
-      <Divider />
-      <div>
         <Cards>
+          <QuickDescriptionCard />
           <PlantStats />
-          <MarketCap />
         </Cards>
       </div>
       <Divider />
-      <Heading as="h2" size="xl" mb="14px">🌲The PlantSwap Development Fund will help plant trees and other environmental causes</Heading>
+      <Heading as="h2" size="xl" mb="16px">🌲The PlantSwap Development Fund will help plant trees and other environmental causes</Heading>
           <br />
           <Text>Some pools will have deposit fees as well as some of the transaction with the Master Gardener smart contract result in PLANT been send to the Development Fund address. What will we do with the fund?</Text>
           <br />

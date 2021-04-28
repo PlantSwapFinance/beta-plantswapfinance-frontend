@@ -3,17 +3,18 @@ import { Text } from '@plantswap-libs/uikit'
 import { useWeb3React } from '@web3-react/core'
 import useTokenBalance from 'hooks/useTokenBalance'
 import useI18n from 'hooks/useI18n'
-import { getCakeAddress } from 'utils/addressHelpers'
+import { getPlantAddress } from 'utils/addressHelpers'
 import { getBalanceNumber } from 'utils/formatBalance'
-import { usePriceCakeBusd } from 'state/hooks'
+import { usePricePlantBusd } from 'state/hooks'
 import { BigNumber } from 'bignumber.js'
 import CardValue from './CardValue'
 import CardBusdValue from './CardBusdValue'
 
 const PlantWalletBalance = () => {
   const TranslateString = useI18n()
-  const cakeBalance = useTokenBalance(getCakeAddress())
-  const busdBalance = new BigNumber(getBalanceNumber(cakeBalance)).multipliedBy(usePriceCakeBusd()).toNumber()
+  const plantBalance = useTokenBalance(getPlantAddress())
+  const plantPriceBusd = usePricePlantBusd()
+  const busdBalance = new BigNumber(getBalanceNumber(plantBalance)).multipliedBy(plantPriceBusd).toNumber()
   const { account } = useWeb3React()
 
   if (!account) {
@@ -26,8 +27,8 @@ const PlantWalletBalance = () => {
 
   return (
     <>
-      <CardValue value={getBalanceNumber(cakeBalance)} decimals={4} fontSize="24px" lineHeight="36px" />
-      <CardBusdValue value={busdBalance} />
+      <CardValue value={getBalanceNumber(plantBalance)} decimals={4} fontSize="24px" lineHeight="36px" />
+      {!plantPriceBusd.eq(0) ? <CardBusdValue value={busdBalance} /> : <br />}
     </>
   )
 }
