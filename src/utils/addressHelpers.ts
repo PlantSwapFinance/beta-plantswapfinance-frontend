@@ -11,8 +11,14 @@ export const getAddress = (address: Address): string => {
 export const getCakeAddress = () => {
   return getAddress(tokens.cake.address)
 }
+export const getPlantAddress = () => {
+  return getAddress(tokens.plant.address)
+}
 export const getMasterChefAddress = () => {
   return getAddress(addresses.masterChef)
+}
+export const getMasterChefPancakeSwapAddress = () => {
+  return getAddress(addresses.masterChefPancakeSwap)
 }
 export const getMulticallAddress = () => {
   return getAddress(addresses.mulltiCall)

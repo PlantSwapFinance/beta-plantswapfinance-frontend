@@ -5,10 +5,10 @@ import { useWeb3React } from '@web3-react/core'
 import { Button, Flex, Text, InjectedModalProps } from '@plantswap-libs/uikit'
 import { getFullDisplayBalance } from 'utils/formatBalance'
 import { getPlantProfileAddress } from 'utils/addressHelpers'
-import { useCake } from 'hooks/useContract'
+import { usePlant } from 'hooks/useContract'
 import useI18n from 'hooks/useI18n'
 import useGetProfileCosts from 'hooks/useGetProfileCosts'
-import useHasCakeBalance from 'hooks/useHasCakeBalance'
+import useHasPlantBalance from 'hooks/useHasPlantBalance'
 import { useProfile } from 'state/hooks'
 import { UseEditProfileResponse } from './reducer'
 import ProfileAvatar from '../ProfileAvatar'
@@ -44,10 +44,10 @@ const StartPage: React.FC<StartPageProps> = ({ goToApprove, goToChange, goToRemo
   const [needsApproval, setNeedsApproval] = useState(null)
   const { profile } = useProfile()
   const { numberCakeToUpdate, numberCakeToReactivate } = useGetProfileCosts()
-  const hasMinimumCakeRequired = useHasCakeBalance(profile.isActive ? numberCakeToUpdate : numberCakeToReactivate)
+  const hasMinimumCakeRequired = useHasPlantBalance(profile.isActive ? numberCakeToUpdate : numberCakeToReactivate)
   const TranslateString = useI18n()
   const { account } = useWeb3React()
-  const cakeContract = useCake()
+  const cakeContract = usePlant()
   const cost = profile.isActive ? numberCakeToUpdate : numberCakeToReactivate
 
   /**

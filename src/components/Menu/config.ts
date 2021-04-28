@@ -7,33 +7,28 @@ const config: MenuEntry[] = [
     href: '/',
   },
   {
-    label: 'Trade (soon)',
+    label: 'Trade (PancakeSwap)',
     icon: 'TradeIcon',
     items: [
       {
         label: 'Exchange',
-        href: 'https://beta-plantswapfinance-swap.netlify.app/#/swap',
+        href: 'https://exchange.pancakeswap.finance/#/swap?inputCurrency=BNB&outputCurrency=0x58BA5Bd8872ec18BD360a9592149daed2fC57c69',
       },
       {
         label: 'Liquidity',
-        href: 'https://beta-plantswapfinance-swap.netlify.app/#/pool',
+        href: 'https://exchange.pancakeswap.finance/#/add/BNB/0x58BA5Bd8872ec18BD360a9592149daed2fC57c69',
       },
     ],
   },
   {
-    label: 'Farms (soon)',
+    label: 'Farms',
     icon: 'FarmIcon',
     href: '/farms',
   },
   {
-    label: 'Garden (soon)',
+    label: 'Gardens (soon)',
     icon: 'PoolIcon',
     href: '/gardens',
-  },
-  {
-    label: 'Barn (soon)',
-    icon: 'PoolIcon',
-    href: '/barn',
   },
   {
     label: "Project",

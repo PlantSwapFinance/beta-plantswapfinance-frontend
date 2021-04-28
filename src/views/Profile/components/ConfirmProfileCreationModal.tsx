@@ -3,7 +3,7 @@ import { Modal, Flex, Text } from '@plantswap-libs/uikit'
 import { useDispatch } from 'react-redux'
 import BigNumber from 'bignumber.js'
 import useI18n from 'hooks/useI18n'
-import { useCake, usePlantRabbits, useProfile } from 'hooks/useContract'
+import { usePlant, usePlantRabbits, useProfile } from 'hooks/useContract'
 import useApproveConfirmTransaction from 'hooks/useApproveConfirmTransaction'
 import { fetchProfile } from 'state/profile'
 import { useToast } from 'state/hooks'
@@ -33,7 +33,7 @@ const ConfirmProfileCreationModal: React.FC<Props> = ({
   const plantRabbitsContract = usePlantRabbits()
   const dispatch = useDispatch()
   const { toastSuccess } = useToast()
-  const cakeContract = useCake()
+  const cakeContract = usePlant()
 
   const {
     isApproving,

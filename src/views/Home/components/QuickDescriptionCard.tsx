@@ -42,7 +42,7 @@ const QuickDescriptionCard = () => {
           {TranslateString(542, 'What is PlantSwap Finance?')}
         </Heading>
         <Block>
-          <Label>{TranslateString(544, '- A decentralize open-source financial platform to')}</Label>
+          <Label>{TranslateString(544, '- A decentralized open-source financial platform to')}</Label>
           <OtherLine>{TranslateString(544, 'exchange your crypto;')}</OtherLine>
         </Block>
         <Block>
@@ -52,11 +52,11 @@ const QuickDescriptionCard = () => {
           <Label>{TranslateString(546, '- Have a glance at your impermanent profits/lost;')}</Label>
         </Block>
         <Block>
-          <Label>{TranslateString(546, '- Interact with various smart contract and more.')}</Label>
+          <Label>{TranslateString(546, '- Interact with various smart contracts and more.')}</Label>
         </Block>
         <br /><br />
         <Block>
-          <Label>{TranslateString(546, 'If this is something that interest you,')}</Label>
+          <Label>{TranslateString(546, 'If this is something that interests you,')}</Label>
         </Block>
         <Block>
             <LabelTelegram><a href="https://t.me/plantswapfinance">Contact us on our Telegram!</a></LabelTelegram>

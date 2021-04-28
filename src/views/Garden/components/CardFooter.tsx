@@ -32,7 +32,7 @@ interface Props {
 }
 
 const StyledFooter = styled.div<{ isFinished: boolean }>`
-  border-top: 1px solid ${({ theme }) => (theme.isDark ? '#524B63' : '#E9EAEB')};
+  border-top: 1px solid ${({ theme }) => (theme.isDark ? '#399349' : '#E9EAEB')};
   color: ${({ isFinished, theme }) => theme.colors[isFinished ? 'textDisabled2' : 'primary2']};
   padding: 24px;
 `
@@ -121,7 +121,7 @@ const CardFooter: React.FC<Props> = ({
             <FlexFull>
               <Label>
                 <span role="img" aria-label="syrup">
-                  🥞{' '}
+                🌱{' '}
                 </span>
                 {TranslateString(408, 'Total')}
               </Label>

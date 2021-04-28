@@ -1,4 +1,4 @@
-import { calculateCakeEarnedPerThousandDollars, apyModalRoi } from 'utils/compoundApyHelpers'
+import { calculatePlantEarnedPerThousandDollars, apyModalRoi } from 'utils/compoundApyHelpers'
 
 it.each([
   [{ numberOfDays: 1, farmApy: 365, plantPrice: 1 }, 10],
@@ -8,7 +8,7 @@ it.each([
   [{ numberOfDays: 365, farmApy: 100, plantPrice: 0.2 }, 8572.84],
   [{ numberOfDays: 365, farmApy: 20, plantPrice: 1 }, 221.34],
 ])('calculate cake earned with values %o', ({ numberOfDays, farmApy, plantPrice }, expected) => {
-  expect(calculateCakeEarnedPerThousandDollars({ numberOfDays, farmApy, plantPrice })).toEqual(expected)
+  expect(calculatePlantEarnedPerThousandDollars({ numberOfDays, farmApy, plantPrice })).toEqual(expected)
 })
 
 it.each([

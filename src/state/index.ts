@@ -7,6 +7,7 @@ import profileReducer from './profile'
 import teamsReducer from './teams'
 import achievementsReducer from './achievements'
 import blockReducer from './block'
+import pancakeSwapFarmsReducer from './pancakeSwapFarms'
 
 export default configureStore({
   devTools: process.env.NODE_ENV !== 'production',
@@ -19,5 +20,6 @@ export default configureStore({
     teams: teamsReducer,
     achievements: achievementsReducer,
     block: blockReducer,
+    pancakeSwapFarms: pancakeSwapFarmsReducer,
   },
 })

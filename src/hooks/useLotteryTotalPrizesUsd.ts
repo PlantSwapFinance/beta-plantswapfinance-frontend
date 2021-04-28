@@ -1,13 +1,13 @@
-import { usePriceCakeBusd } from 'state/hooks'
+import { usePricePlantBusd } from 'state/hooks'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { useTotalRewards } from './useTickets'
 
 const useLotteryTotalPrizesUsd = () => {
   const totalRewards = useTotalRewards()
-  const totalCake = getBalanceNumber(totalRewards)
-  const plantPriceBusd = usePriceCakeBusd()
+  const totalPlant = getBalanceNumber(totalRewards)
+  const plantPriceBusd = usePricePlantBusd()
 
-  return totalCake * plantPriceBusd.toNumber()
+  return totalPlant * plantPriceBusd.toNumber()
 }
 
 export default useLotteryTotalPrizesUsd

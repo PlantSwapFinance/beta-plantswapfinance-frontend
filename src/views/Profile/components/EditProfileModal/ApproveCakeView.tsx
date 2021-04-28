@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useWeb3React } from '@web3-react/core'
 import { AutoRenewIcon, Button, Flex, InjectedModalProps, Text } from '@plantswap-libs/uikit'
 import useI18n from 'hooks/useI18n'
-import { useCake } from 'hooks/useContract'
+import { usePlant } from 'hooks/useContract'
 import { useProfile, useToast } from 'state/hooks'
 import { getPlantProfileAddress } from 'utils/addressHelpers'
 import { getFullDisplayBalance } from 'utils/formatBalance'
@@ -19,7 +19,7 @@ const ApproveCakePage: React.FC<ApproveCakePageProps> = ({ goToChange, onDismiss
   const TranslateString = useI18n()
   const { account } = useWeb3React()
   const { numberCakeToUpdate, numberCakeToReactivate } = useGetProfileCosts()
-  const cakeContract = useCake()
+  const cakeContract = usePlant()
   const { toastError } = useToast()
   const cost = profile.isActive ? numberCakeToUpdate : numberCakeToReactivate
 

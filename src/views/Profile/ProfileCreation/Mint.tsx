@@ -4,8 +4,8 @@ import { Card, CardBody, Heading, Text } from '@plantswap-libs/uikit'
 import { useWeb3React } from '@web3-react/core'
 import useI18n from 'hooks/useI18n'
 import useApproveConfirmTransaction from 'hooks/useApproveConfirmTransaction'
-import { useCake, useBunnyFactory } from 'hooks/useContract'
-import useHasCakeBalance from 'hooks/useHasCakeBalance'
+import { usePlant, useBunnyFactory } from 'hooks/useContract'
+import useHasPlantBalance from 'hooks/useHasPlantBalance'
 import nftList from 'config/constants/nfts'
 import SelectionCard from '../components/SelectionCard'
 import NextStepButton from '../components/NextStepButton'
@@ -21,10 +21,10 @@ const Mint: React.FC = () => {
   const { actions, minimumCakeRequired, allowance } = useProfileCreation()
 
   const { account } = useWeb3React()
-  const cakeContract = useCake()
+  const cakeContract = usePlant()
   const bunnyFactoryContract = useBunnyFactory()
   const TranslateString = useI18n()
-  const hasMinimumCakeRequired = useHasCakeBalance(minimumCakeBalanceToMint)
+  const hasMinimumCakeRequired = useHasPlantBalance(minimumCakeBalanceToMint)
   const {
     isApproving,
     isApproved,

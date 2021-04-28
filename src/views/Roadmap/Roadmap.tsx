@@ -20,7 +20,7 @@ const Roadmap = () => {
             Roadmap
           </Heading>
           <ul>
-            <li>Read our roudmap to discovert what is next</li>
+            <li>Read our roadmap to discover what is next</li>
             <li>for the future of PlantSwap.finance and the PLANT token!</li>
           </ul>
         </div>

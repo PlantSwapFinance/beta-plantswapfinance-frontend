@@ -3,7 +3,7 @@ import BigNumber from 'bignumber.js'
 import styled from 'styled-components'
 import { Modal, Text, LinkExternal, Flex } from '@plantswap-libs/uikit'
 import useI18n from 'hooks/useI18n'
-import { calculateCakeEarnedPerThousandDollars, apyModalRoi } from 'utils/compoundApyHelpers'
+import { calculatePlantEarnedPerThousandDollars, apyModalRoi } from 'utils/compoundApyHelpers'
 
 interface ApyCalculatorModalProps {
   onDismiss?: () => void
@@ -37,12 +37,12 @@ const ApyCalculatorModal: React.FC<ApyCalculatorModalProps> = ({
   addLiquidityUrl,
 }) => {
   const TranslateString = useI18n()
-  const oneThousandDollarsWorthOfCake = 1000 / plantPrice.toNumber()
+  const oneThousandDollarsWorthOfPlant = 1000 / plantPrice.toNumber()
 
-  const cakeEarnedPerThousand1D = calculateCakeEarnedPerThousandDollars({ numberOfDays: 1, farmApy: apy, plantPrice })
-  const cakeEarnedPerThousand7D = calculateCakeEarnedPerThousandDollars({ numberOfDays: 7, farmApy: apy, plantPrice })
-  const cakeEarnedPerThousand30D = calculateCakeEarnedPerThousandDollars({ numberOfDays: 30, farmApy: apy, plantPrice })
-  const cakeEarnedPerThousand365D = calculateCakeEarnedPerThousandDollars({
+  const plantEarnedPerThousand1D = calculatePlantEarnedPerThousandDollars({ numberOfDays: 1, farmApy: apy, plantPrice })
+  const plantEarnedPerThousand7D = calculatePlantEarnedPerThousandDollars({ numberOfDays: 7, farmApy: apy, plantPrice })
+  const plantEarnedPerThousand30D = calculatePlantEarnedPerThousandDollars({ numberOfDays: 30, farmApy: apy, plantPrice })
+  const plantEarnedPerThousand365D = calculatePlantEarnedPerThousandDollars({
     numberOfDays: 365,
     farmApy: apy,
     plantPrice,
@@ -63,7 +63,7 @@ const ApyCalculatorModal: React.FC<ApyCalculatorModalProps> = ({
         </GridItem>
         <GridItem>
           <Text fontSize="12px" bold color="textSubtle" textTransform="uppercase" mb="20px">
-            {TranslateString(864, 'CAKE per $1000')}
+            {TranslateString(864, 'PLANT per $1000')}
           </Text>
         </GridItem>
         {/* 1 day row */}
@@ -72,11 +72,11 @@ const ApyCalculatorModal: React.FC<ApyCalculatorModalProps> = ({
         </GridItem>
         <GridItem>
           <Text>
-            {apyModalRoi({ amountEarned: cakeEarnedPerThousand1D, amountInvested: oneThousandDollarsWorthOfCake })}%
+            {apyModalRoi({ amountEarned: plantEarnedPerThousand1D, amountInvested: oneThousandDollarsWorthOfPlant })}%
           </Text>
         </GridItem>
         <GridItem>
-          <Text>{cakeEarnedPerThousand1D}</Text>
+          <Text>{plantEarnedPerThousand1D}</Text>
         </GridItem>
         {/* 7 day row */}
         <GridItem>
@@ -84,11 +84,11 @@ const ApyCalculatorModal: React.FC<ApyCalculatorModalProps> = ({
         </GridItem>
         <GridItem>
           <Text>
-            {apyModalRoi({ amountEarned: cakeEarnedPerThousand7D, amountInvested: oneThousandDollarsWorthOfCake })}%
+            {apyModalRoi({ amountEarned: plantEarnedPerThousand7D, amountInvested: oneThousandDollarsWorthOfPlant })}%
           </Text>
         </GridItem>
         <GridItem>
-          <Text>{cakeEarnedPerThousand7D}</Text>
+          <Text>{plantEarnedPerThousand7D}</Text>
         </GridItem>
         {/* 30 day row */}
         <GridItem>
@@ -96,11 +96,11 @@ const ApyCalculatorModal: React.FC<ApyCalculatorModalProps> = ({
         </GridItem>
         <GridItem>
           <Text>
-            {apyModalRoi({ amountEarned: cakeEarnedPerThousand30D, amountInvested: oneThousandDollarsWorthOfCake })}%
+            {apyModalRoi({ amountEarned: plantEarnedPerThousand30D, amountInvested: oneThousandDollarsWorthOfPlant })}%
           </Text>
         </GridItem>
         <GridItem>
-          <Text>{cakeEarnedPerThousand30D}</Text>
+          <Text>{plantEarnedPerThousand30D}</Text>
         </GridItem>
         {/* 365 day / APY row */}
         <GridItem>
@@ -108,11 +108,11 @@ const ApyCalculatorModal: React.FC<ApyCalculatorModalProps> = ({
         </GridItem>
         <GridItem>
           <Text>
-            {apyModalRoi({ amountEarned: cakeEarnedPerThousand365D, amountInvested: oneThousandDollarsWorthOfCake })}%
+            {apyModalRoi({ amountEarned: plantEarnedPerThousand365D, amountInvested: oneThousandDollarsWorthOfPlant })}%
           </Text>
         </GridItem>
         <GridItem>
-          <Text>{cakeEarnedPerThousand365D}</Text>
+          <Text>{plantEarnedPerThousand365D}</Text>
         </GridItem>
       </Grid>
       <Description fontSize="12px" color="textSubtle">

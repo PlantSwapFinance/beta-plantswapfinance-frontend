@@ -1,6 +1,6 @@
 import { SettingsObject, SettingsType } from './types'
 
-const BASE_URL = 'https://plantswap-info-api.vercel.app/'
+const BASE_URL = 'https://plantswapfinance.vercel.app'
 const settings: SettingsObject[] = [
   {
     name: 'ifos',

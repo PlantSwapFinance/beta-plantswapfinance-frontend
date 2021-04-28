@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
-import { usePriceCakeBusd } from 'state/hooks'
+import { usePricePlantBusd } from 'state/hooks'
 
 const useGetDocumentTitlePrice = () => {
-  const plantPriceUsd = usePriceCakeBusd()
+  const plantPriceUsd = usePricePlantBusd()
 
   const plantPriceUsdString = plantPriceUsd.eq(0)
     ? ''

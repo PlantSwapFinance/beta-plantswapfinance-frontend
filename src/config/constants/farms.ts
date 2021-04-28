@@ -3,6 +3,28 @@ import { FarmConfig } from './types'
 
 const farms: FarmConfig[] = [
 
+  // New V2
+  {
+    pid: 4,
+    lpSymbol: 'PLANT-BNB LP V2',
+    lpAddresses: {
+      97: '',
+      56: '0x79268898de0f8c67ad73d9e33534d9874411aaaa',
+    },
+    token: tokens.plant,
+    quoteToken: tokens.wbnb,
+  },
+  {
+    pid: 5,
+    lpSymbol: 'PLANT-BUSD LP V2',
+    lpAddresses: {
+      97: '',
+      56: '0xdf638da5adff2c7fdb2ce0fbbfa15813fa113aaa',
+    },
+    token: tokens.plant,
+    quoteToken: tokens.busd,
+  },
+  // V1 (Not to use anymore)
   {
     pid: 1,
     lpSymbol: 'PLANT-BNB LP',
@@ -22,17 +44,6 @@ const farms: FarmConfig[] = [
     },
     token: tokens.plant,
     quoteToken: tokens.busd,
-  },
-  {
-    pid: 2,
-    lpSymbol: 'BUSD-BNB LP',
-    lpAddresses: {
-      97: '0x2f7682b64b88149ba3250aee32db712964de5fa9',
-      56: '0x1b96b92314c44b159149f7e0303511fb2fc4774f',
-    },
-    token: tokens.busd,
-    quoteToken: tokens.wbnb,
-    isCommunity: true,
   },
 ]
 

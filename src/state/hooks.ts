@@ -11,12 +11,13 @@ import {
   fetchFarmsPublicDataAsync,
   fetchPoolsPublicDataAsync,
   fetchPoolsUserDataAsync,
+  fetchPancakeSwapFarmsPublicDataAsync,
   push as pushToast,
   remove as removeToast,
   clear as clearToast,
   setBlock,
 } from './actions'
-import { State, Farm, Pool, ProfileState, TeamsState, AchievementState, PriceState } from './types'
+import { State, Farm, PancakeSwapFarm, Pool, ProfileState, TeamsState, AchievementState, PriceState } from './types'
 import { fetchProfile } from './profile'
 import { fetchTeam, fetchTeams } from './teams'
 import { fetchAchievements } from './achievements'
@@ -27,6 +28,25 @@ export const useFetchPublicData = () => {
   const { slowRefresh } = useRefresh()
   useEffect(() => {
     dispatch(fetchFarmsPublicDataAsync())
+    dispatch(fetchPoolsPublicDataAsync())
+  }, [dispatch, slowRefresh])
+
+  useEffect(() => {
+    const web3 = getWeb3NoAccount()
+    const interval = setInterval(async () => {
+      const blockNumber = await web3.eth.getBlockNumber()
+      dispatch(setBlock(blockNumber))
+    }, 6000)
+
+    return () => clearInterval(interval)
+  }, [dispatch])
+}
+
+export const useFetchPancakeSwapPublicData = () => {
+  const dispatch = useDispatch()
+  const { slowRefresh } = useRefresh()
+  useEffect(() => {
+    dispatch(fetchPancakeSwapFarmsPublicDataAsync())
     dispatch(fetchPoolsPublicDataAsync())
   }, [dispatch, slowRefresh])
 
@@ -67,6 +87,24 @@ export const useFarmUser = (pid) => {
     stakedBalance: farm.userData ? new BigNumber(farm.userData.stakedBalance) : new BigNumber(0),
     earnings: farm.userData ? new BigNumber(farm.userData.earnings) : new BigNumber(0),
   }
+}
+
+
+// External Farms
+
+export const usePancakeSwapFarms = (): PancakeSwapFarm[] => {
+  const pancakeSwapFarms = useSelector((state: State) => state.pancakeSwapFarms.data)
+  return pancakeSwapFarms
+}
+
+export const usePancakeSwapFarmFromPid = (pid): PancakeSwapFarm => {
+  const pancakeSwapFarm = useSelector((state: State) => state.pancakeSwapFarms.data.find((f) => f.pid === pid))
+  return pancakeSwapFarm
+}
+
+export const usePancakeSwapFarmFromSymbol = (lpSymbol: string): Farm => {
+  const pancakeSwapFarm = useSelector((state: State) => state.pancakeSwapFarms.data.find((f) => f.lpSymbol === lpSymbol))
+  return pancakeSwapFarm
 }
 
 // Pools
@@ -200,15 +238,17 @@ export const useGetApiPrice = (token: string) => {
   return prices[token.toLowerCase()]
 }
 
-export const usePriceCakeBusd = (): BigNumber => {
+export const usePricePlantBusd = (): BigNumber => {
   const ZERO = new BigNumber(0)
-  const cakeBnbFarm = useFarmFromPid(1)
-  const bnbBusdFarm = useFarmFromPid(2)
 
-  const bnbBusdPrice = bnbBusdFarm.tokenPriceVsQuote ? new BigNumber(1).div(bnbBusdFarm.tokenPriceVsQuote) : ZERO
-  const cakeBusdPrice = cakeBnbFarm.tokenPriceVsQuote ? bnbBusdPrice.times(cakeBnbFarm.tokenPriceVsQuote) : ZERO
+  const plantBnbFarm = useFarmFromPid(4)
+  
+  const bnbBusdPancakeSwapFarm = usePancakeSwapFarmFromPid(2)
+  
+  const bnbBusdPrice = bnbBusdPancakeSwapFarm.tokenPriceVsQuote ? new BigNumber(1).div(bnbBusdPancakeSwapFarm.tokenPriceVsQuote) : ZERO
+  const plantBusdPrice = plantBnbFarm.tokenPriceVsQuote ? bnbBusdPrice.times(plantBnbFarm.tokenPriceVsQuote) : ZERO
 
-  return cakeBusdPrice
+  return plantBusdPrice
 }
 
 // Block

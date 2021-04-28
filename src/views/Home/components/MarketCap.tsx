@@ -3,11 +3,12 @@ import { Card, CardBody, Heading, Text } from '@plantswap-libs/uikit'
 import styled from 'styled-components'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { useTotalSupply, useBurnedBalance } from 'hooks/useTokenBalance'
+import { usePricePlantBusd } from 'state/hooks'
 import useI18n from 'hooks/useI18n'
 import { getPlantAddress } from 'utils/addressHelpers'
 import CardValue from './CardValue'
 
-const StyledPlantStats = styled(Card)`
+const StyledMarketCap = styled(Card)`
   margin-left: auto;
   margin-right: auto;
 `
@@ -20,33 +21,31 @@ const Row = styled.div`
   margin-bottom: 8px;
 `
 
-const PlantStats = () => {
+const MarketCap = () => {
   const TranslateString = useI18n()
+  const plantPrice = usePricePlantBusd().toNumber()
   const totalSupply = useTotalSupply()
   const burnedBalance = getBalanceNumber(useBurnedBalance(getPlantAddress()))
-  const plantSupply = totalSupply ? getBalanceNumber(totalSupply) - burnedBalance : 0
+  const mathMarketCap = ((getBalanceNumber(totalSupply) - burnedBalance) * plantPrice)
+  const totalMarketCap = totalSupply ? mathMarketCap  : 0
 
   return (
-    <StyledPlantStats>
+    <StyledMarketCap>
       <CardBody>
         <Heading size="xl" mb="24px">
-          {TranslateString(534, 'PLANT Stats')}
+          {TranslateString(534, 'Market cap. & Price')}
         </Heading>
         <Row>
-          <Text fontSize="14px">{TranslateString(536, 'Total PLANT Supply')}</Text>
-          {plantSupply && <CardValue fontSize="14px" value={plantSupply} />}
+          <Text fontSize="14px">{TranslateString(536, 'Current Market Cap.')}</Text>
+          {totalMarketCap && <CardValue fontSize="14px" value={totalMarketCap} />}$
         </Row>
         <Row>
-          <Text fontSize="14px">{TranslateString(538, 'Total PLANT Burned')}</Text>
-          <CardValue fontSize="14px" decimals={3} value={burnedBalance} />
-        </Row>
-        <Row>
-          <Text fontSize="14px">{TranslateString(540, 'New PLANT/block')}</Text>
-          <CardValue fontSize="14px" decimals={3} value={0.02} />
+          <Text fontSize="14px">{TranslateString(538, 'PLANT price in BUSD')}</Text>
+          <CardValue fontSize="14px" decimals={2} value={plantPrice} />$
         </Row>
       </CardBody>
-    </StyledPlantStats>
+    </StyledMarketCap>
   )
 }
 
-export default PlantStats
+export default MarketCap
