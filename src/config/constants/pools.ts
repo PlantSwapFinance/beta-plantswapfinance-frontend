@@ -17,7 +17,7 @@ const pools: PoolConfig[] = [
   },
   {
     sousId: 1,
-    stakingToken: tokens.wbnb,
+    stakingToken: tokens.bnb,
     earningToken: tokens.plant,
     contractAddress: {
       56: '0x6A69dDFd464427BfBf464ef270850aCCeCE25591',
