@@ -36,10 +36,10 @@ const Roadmap = () => {
           <br />
         <Heading as="h2" size="xl" mb="14px">Long-term Roadmap</Heading>
           <br />
-          <Text>Development of the barn to see all your farming across multiple DeFi platform (Q2 2021)</Text>
+          <Text>Development of the barn to see all of your farming across multiple DeFi platform (Q2 2021)</Text>
           <Text>Adding control and emergency tools to the barn to control, remove your spending approval and emergency withdraw from other smart contracts (Q2 2021)</Text>
-          <Text>Partnering with other project for multiple cross-project pool and garden (Q2 2021)</Text>
-          <Text>Addition of multiple liquidity pool with stable coin and other wrapped token</Text>
+          <Text>Partnering with other projects for multiple cross-project pools and gardens (Q2 2021)</Text>
+          <Text>Addition of multiple liquidity pools with stable coins and other wrapped tokens</Text>
           <Text>Creation and distribution of a governance token</Text>
           <Text>Smart Contract Audit (Q3 2021)</Text>
           <Text>Cross-chain compatibility (Q3 2021)</Text>
