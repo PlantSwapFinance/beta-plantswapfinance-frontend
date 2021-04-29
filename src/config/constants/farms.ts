@@ -14,7 +14,7 @@ const farms: FarmConfig[] = [
     quoteToken: tokens.bnb,
   },
   {
-    pid: 11,
+    pid: 6,
     lpSymbol: 'BNB',
     lpAddresses: {
       97: '0xae13d989dac2f0debff460ac112a837c89baa7cd',
@@ -24,7 +24,7 @@ const farms: FarmConfig[] = [
     quoteToken: tokens.bnb,
   },
   {
-    pid: 12,
+    pid: 7,
     lpSymbol: 'BUSD',
     lpAddresses: {
       97: '',
