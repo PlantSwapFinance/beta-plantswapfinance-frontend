@@ -3,7 +3,7 @@ import { PoolConfig, PoolCategory } from './types'
 
 const pools: PoolConfig[] = [
   {
-    sousId: 0,
+    sousId: 1,
     stakingToken: tokens.plant,
     earningToken: tokens.plant,
     contractAddress: {
@@ -25,7 +25,7 @@ const pools: PoolConfig[] = [
     },
     poolCategory: PoolCategory.CORE,
     harvest: true,
-    sortOrder: 3,
+    sortOrder: 2,
     tokenPerBlock: '0.002',
   },
   {
