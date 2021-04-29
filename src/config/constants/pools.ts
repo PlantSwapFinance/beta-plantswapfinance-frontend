@@ -16,7 +16,7 @@ const pools: PoolConfig[] = [
     tokenPerBlock: '0.004',
   },
   {
-    sousId: 11,
+    sousId: 6,
     stakingToken: tokens.wbnb,
     earningToken: tokens.plant,
     contractAddress: {
@@ -29,7 +29,7 @@ const pools: PoolConfig[] = [
     tokenPerBlock: '0.002285',
   },
   {
-    sousId: 12,
+    sousId: 7,
     stakingToken: tokens.busd,
     earningToken: tokens.plant,
     contractAddress: {

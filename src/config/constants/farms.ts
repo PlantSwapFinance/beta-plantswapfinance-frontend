@@ -11,7 +11,7 @@ const farms: FarmConfig[] = [
       56: '0x58BA5Bd8872ec18BD360a9592149daed2fC57c69',
     },
     token: tokens.plant,
-    quoteToken: tokens.bnb,
+    quoteToken: tokens.wbnb,
   },
   {
     pid: 6,
@@ -21,7 +21,7 @@ const farms: FarmConfig[] = [
       56: '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c',
     },
     token: tokens.wbnb,
-    quoteToken: tokens.bnb,
+    quoteToken: tokens.wbnb,
   },
   {
     pid: 7,
