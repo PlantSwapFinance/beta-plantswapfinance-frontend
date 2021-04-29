@@ -11,12 +11,12 @@ const pools: PoolConfig[] = [
       97: '0xd6756c4876ACD3c0162AF74Ba25b6b78F951836b',
     },
     poolCategory: PoolCategory.CORE,
-    harvest: true,
+    harvest: false,
     sortOrder: 1,
-    tokenPerBlock: '0.004',
+    tokenPerBlock: '0.003',
   },
   {
-    sousId: 6,
+    sousId: 1,
     stakingToken: tokens.wbnb,
     earningToken: tokens.plant,
     contractAddress: {
@@ -25,11 +25,11 @@ const pools: PoolConfig[] = [
     },
     poolCategory: PoolCategory.CORE,
     harvest: true,
-    sortOrder: 1,
-    tokenPerBlock: '0.002285',
+    sortOrder: 2,
+    tokenPerBlock: '0.002',
   },
   {
-    sousId: 7,
+    sousId: 2,
     stakingToken: tokens.busd,
     earningToken: tokens.plant,
     contractAddress: {
@@ -38,8 +38,8 @@ const pools: PoolConfig[] = [
     },
     poolCategory: PoolCategory.CORE,
     harvest: true,
-    sortOrder: 1,
-    tokenPerBlock: '0.002285',
+    sortOrder: 3,
+    tokenPerBlock: '0.002',
   },
 ]
 
