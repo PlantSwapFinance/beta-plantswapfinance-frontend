@@ -9,7 +9,7 @@ export default {
   },
   sousChef: {
     97: '0xd3af5fe61dbaf8f73149bfcfa9fb653ff096029a',
-    56: '0x6ab8463a4185b80905e05a9ff80a2d6b714b9e95',
+    56: '0xEe60b364586B91945a7521C025c09a5E72832f4f',
   },
   garden: {
     97: '',
