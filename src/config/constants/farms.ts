@@ -13,26 +13,6 @@ const farms: FarmConfig[] = [
     token: tokens.plant,
     quoteToken: tokens.wbnb,
   },
-  {
-    pid: 6,
-    lpSymbol: 'BNB',
-    lpAddresses: {
-      97: '0xae13d989dac2f0debff460ac112a837c89baa7cd',
-      56: '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c',
-    },
-    token: tokens.wbnb,
-    quoteToken: tokens.wbnb,
-  },
-  {
-    pid: 7,
-    lpSymbol: 'BUSD',
-    lpAddresses: {
-      97: '',
-      56: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
-    },
-    token: tokens.busd,
-    quoteToken: tokens.busd,
-  },
   // New V2
   {
     pid: 4,

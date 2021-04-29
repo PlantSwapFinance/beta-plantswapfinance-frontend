@@ -1,7 +1,7 @@
 export default {
   masterChef: {
     97: '0xd6756c4876ACD3c0162AF74Ba25b6b78F951836b',
-    56: '0x350c56f201f5BcB23F019748123a02e53F8039C4',
+    56: '0x350c56f201f5BcB23F019748123a02e53F8039C4', // MasterGardenerV2
   },
   masterChefPancakeSwap: {
     97: '0x1d32c2945C8FDCBc7156c553B7cEa4325a17f4f9',
@@ -11,6 +11,11 @@ export default {
     97: '0xd3af5fe61dbaf8f73149bfcfa9fb653ff096029a',
     56: '0x6ab8463a4185b80905e05a9ff80a2d6b714b9e95',
   },
+  garden: {
+    97: '',
+    56: '0xC7E64DDe11EA91aaA1b7c0486D4c92dA992123C5', // Garden is use to feed the garden flowers
+  },
+  // Not use
   lottery: {
     97: '0x99c2EcD51d52c036B00130d882Bc65f20Fdecf9f',
     56: '0x3C3f2049cc17C136a604bE23cF7E42745edf3b91',

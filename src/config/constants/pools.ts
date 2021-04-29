@@ -7,7 +7,7 @@ const pools: PoolConfig[] = [
     stakingToken: tokens.plant,
     earningToken: tokens.plant,
     contractAddress: {
-      56: '0x58BA5Bd8872ec18BD360a9592149daed2fC57c69',
+      56: '0xEe60b364586B91945a7521C025c09a5E72832f4f',
       97: '0xd6756c4876ACD3c0162AF74Ba25b6b78F951836b',
     },
     poolCategory: PoolCategory.CORE,
@@ -20,7 +20,7 @@ const pools: PoolConfig[] = [
     stakingToken: tokens.wbnb,
     earningToken: tokens.plant,
     contractAddress: {
-      56: '0x58BA5Bd8872ec18BD360a9592149daed2fC57c69',
+      56: '0x6A69dDFd464427BfBf464ef270850aCCeCE25591',
       97: '0xd6756c4876ACD3c0162AF74Ba25b6b78F951836b',
     },
     poolCategory: PoolCategory.CORE,
@@ -33,7 +33,7 @@ const pools: PoolConfig[] = [
     stakingToken: tokens.busd,
     earningToken: tokens.plant,
     contractAddress: {
-      56: '0x58BA5Bd8872ec18BD360a9592149daed2fC57c69',
+      56: '0x6E93982FFBfD12Fa029Ededa13D96d02DB5eB130',
       97: '0xd6756c4876ACD3c0162AF74Ba25b6b78F951836b',
     },
     poolCategory: PoolCategory.CORE,
