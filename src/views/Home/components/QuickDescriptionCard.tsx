@@ -49,7 +49,7 @@ const QuickDescriptionCard = () => {
           <Label>{TranslateString(546, '- Manage your yield farming operations;')}</Label>
         </Block>
         <Block>
-          <Label>{TranslateString(546, '- Have a glance at your impermanent profits/lost;')}</Label>
+          <Label>{TranslateString(546, '- Have a glance at your impermanent profits/losses;')}</Label>
         </Block>
         <Block>
           <Label>{TranslateString(546, '- Interact with various smart contracts and more.')}</Label>
