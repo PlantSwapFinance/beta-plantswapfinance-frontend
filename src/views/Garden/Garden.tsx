@@ -26,7 +26,7 @@ const StyledImage = styled(Image)`
 
 const Farm: React.FC = () => {
   const { path } = useRouteMatch()
-  const [hasAcceptedRisk, setHasAcceptedRisk] = usePersistState(false, 'pancake_predictions_accepted_risk')
+  const [hasAcceptedRisk, setHasAcceptedRisk] = usePersistState(false, 'plantswap_garden_accepted_risk')
   const TranslateString = useI18n()
   const { account } = useWeb3React()
   const pools = usePools(account)

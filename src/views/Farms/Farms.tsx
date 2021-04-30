@@ -102,7 +102,7 @@ const StyledImage = styled(Image)`
 const Farms: React.FC = () => {
   const { path } = useRouteMatch()
   const { pathname } = useLocation()
-  const [hasAcceptedRisk, setHasAcceptedRisk] = usePersistState(false, 'pancake_predictions_accepted_risk')
+  const [hasAcceptedRisk, setHasAcceptedRisk] = usePersistState(false, 'plantswap_farm_accepted_risk')
   const TranslateString = useI18n()
   const farmsLP = useFarms()
   const plantPrice = usePricePlantBusd()
