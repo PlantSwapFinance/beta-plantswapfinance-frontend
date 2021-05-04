@@ -44,12 +44,14 @@ export interface Token {
 
 export interface FarmConfig {
   pid: number
+  risk: number
   lpSymbol: string
   lpAddresses: Address
   token: Token
   quoteToken: Token
   multiplier?: string
   isCommunity?: boolean
+  isTokenOnly?: boolean
   dual?: {
     rewardPerBlock: number
     earnLabel: string

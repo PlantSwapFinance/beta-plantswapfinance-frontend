@@ -5,17 +5,20 @@ const farms: FarmConfig[] = [
   
   {
     pid: 0,
+    risk: 5,
     lpSymbol: 'PLANT',
     lpAddresses: {
       97: '0xFe5Ab583d91fa90549aC61666CF1C4e2CeA5187e',
       56: '0x58BA5Bd8872ec18BD360a9592149daed2fC57c69',
     },
+    isTokenOnly: true,
     token: tokens.plant,
     quoteToken: tokens.wbnb,
   },
   // New V2
   {
     pid: 4,
+    risk: 5,
     lpSymbol: 'PLANT-BNB LP V2',
     lpAddresses: {
       97: '',
@@ -26,6 +29,7 @@ const farms: FarmConfig[] = [
   },
   {
     pid: 5,
+    risk: 5,
     lpSymbol: 'PLANT-BUSD LP V2',
     lpAddresses: {
       97: '',
@@ -37,6 +41,7 @@ const farms: FarmConfig[] = [
   // V1 (Not to use anymore)
   {
     pid: 1,
+    risk: 5,
     lpSymbol: 'PLANT-BNB LP',
     lpAddresses: {
       97: '',
@@ -47,6 +52,7 @@ const farms: FarmConfig[] = [
   },
   {
     pid: 3,
+    risk: 5,
     lpSymbol: 'PLANT-BUSD LP',
     lpAddresses: {
       97: '',
@@ -54,6 +60,24 @@ const farms: FarmConfig[] = [
     },
     token: tokens.plant,
     quoteToken: tokens.busd,
+  },
+  {
+    pid: 6,
+    risk: 2,
+    lpSymbol: 'BUSD',
+    lpAddresses: tokens.busd.address,
+    isTokenOnly: true,
+    token: tokens.busd,
+    quoteToken: tokens.busd,
+  },
+  {
+    pid: 7,
+    risk: 3,
+    lpSymbol: 'CAKE',
+    lpAddresses: tokens.cake.address,
+    isTokenOnly: true,
+    token: tokens.cake,
+    quoteToken: tokens.cake,
   },
 ]
 

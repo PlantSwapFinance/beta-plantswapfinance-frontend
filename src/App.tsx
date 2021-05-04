@@ -11,7 +11,7 @@ import SuspenseWithChunkError from './components/SuspenseWithChunkError'
 import ToastListener from './components/ToastListener'
 import PageLoader from './components/PageLoader'
 import EasterEgg from './components/EasterEgg'
-import Garden from './views/Garden'
+import GardenV1 from './views/GardenV1'
 import Barns from './views/Barns'
 import Tree from './views/Tree'
 import DevelopmentFund from './views/DevelopmentFund'
@@ -21,6 +21,7 @@ import history from './routerHistory'
 // Only pool is included in the main bundle because of it's the most visited page
 const Home = lazy(() => import('./views/Home'))
 const Farms = lazy(() => import('./views/Farms'))
+const Gardens = lazy(() => import('./views/Gardens'))
 const NotFound = lazy(() => import('./views/NotFound'))
 const Teams = lazy(() => import('./views/Teams'))
 const Team = lazy(() => import('./views/Teams/Team'))
@@ -66,7 +67,10 @@ const App: React.FC = () => {
               <Farms />
             </Route>
             <Route path="/gardens">
-              <Garden />
+              <Gardens tokenMode/>
+            </Route>
+            <Route path="/gardensv1">
+              <GardenV1 />
             </Route>
             <Route path="/barns">
               <Barns />

@@ -24,7 +24,7 @@ const StyledImage = styled(Image)`
   margin-top: 58px;
 `
 
-const Farm: React.FC = () => {
+const GardenV1: React.FC = () => {
   const { path } = useRouteMatch()
   const [hasAcceptedRisk, setHasAcceptedRisk] = usePersistState(false, 'plantswap_garden_accepted_risk')
   const TranslateString = useI18n()
@@ -122,4 +122,4 @@ const Hero = styled.div`
   }
 `
 
-export default Farm
+export default GardenV1
