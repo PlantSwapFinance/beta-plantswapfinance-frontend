@@ -52,6 +52,10 @@ const PlantStats = () => {
           <CardValue fontSize="16px" decimals={3} value={0.02} />⛏🧱
         </Row>
         <Row>
+          <Text fontSize="16px">{TranslateString(538, 'Contribution to nonprofits')}</Text>
+          <CardValue fontSize="16px" decimals={2} value={6050} />$
+        </Row>
+        <Row>
           <CardImage src="/images/plant.svg" alt="plant logo" width={64} height={64} />
         </Row>
         <Heading size="xl" mb="24px">
