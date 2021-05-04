@@ -312,7 +312,6 @@ const Gardens: React.FC<FarmsProps> = (farmsProps) => {
             </ul>
           </div>
           <img src="/images/garden.svg" alt="Gardens" width={600} height={315} />
-      <Divider />
         <br />
         <Text>This new garden will be activated at 11:30 PM GMT/UTC (May 4th, 2021)!</Text>
         </Hero>

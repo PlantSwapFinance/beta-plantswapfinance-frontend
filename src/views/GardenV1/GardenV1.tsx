@@ -68,7 +68,6 @@ const GardenV1: React.FC = () => {
           </ul>
         </div>
         <img src="/images/garden.svg" alt="Gardens" width={600} height={315} />
-      <Divider />
         <br />
         <Text>We will take a final snapshot of the Gardens at 11 PM GMT/UTC (May 4th, 2021) and we will invite you to migrate your tokens to the Garden v2! Thank you</Text>
       </Hero>
