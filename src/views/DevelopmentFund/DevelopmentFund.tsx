@@ -52,6 +52,7 @@ const DevelopmentFund = () => {
             <li>6000$ - Raingorest Foundation (https://etherscan.io/tx/0xd40c9d84e75c3169aeb5cb6831782ed4438216932e172720a54804fbf0f73f9b)</li>
             <li>50$ - Raingorest Foundation (https://etherscan.io/tx/0x967c5ad8c523406f0515dc7a98faaf942946008531c3a066ca9aec6146b3d56f)</li>
           </ul>
+          <br />
           <Text>Thank you for your support!</Text>
       </Donation>
       <Divider />
