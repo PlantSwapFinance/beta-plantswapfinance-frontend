@@ -46,12 +46,14 @@ const DevelopmentFund = () => {
           <br />
       <Divider />
       <Heading as="h2" size="xl" mb="14px">Last donations</Heading>
+      <Donation>
           <br />
           <ul>
             <li>6000$ - Raingorest Foundation (https://etherscan.io/tx/0xd40c9d84e75c3169aeb5cb6831782ed4438216932e172720a54804fbf0f73f9b)</li>
             <li>50$ - Raingorest Foundation (https://etherscan.io/tx/0x967c5ad8c523406f0515dc7a98faaf942946008531c3a066ca9aec6146b3d56f)</li>
           </ul>
           <Text>Thank you for your support!</Text>
+      </Donation>
       <Divider />
       <StyledImage src="/images/endPage.svg" alt="PlantSwap Finance" width={680} height={155} />
     </Page>
@@ -86,6 +88,20 @@ const Hero = styled.div`
     grid-template-columns: 1fr 1fr;
     margin: 0;
     max-width: none;
+  }
+`
+
+const Donation = styled.div`
+  align-items: center;
+  color: ${({ theme }) => theme.colors.primary};
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    font-size: 16px;
+    li {
+      margin-bottom: 4px;
+    }
   }
 `
 
