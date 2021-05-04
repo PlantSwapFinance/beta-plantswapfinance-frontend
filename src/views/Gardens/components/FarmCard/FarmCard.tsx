@@ -101,9 +101,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, plantPrice, account 
   // NAR-PLANT LP. The images should be plant-bnb.svg, link-bnb.svg, nar-plant.svg
   const farmImage = farm.lpSymbol.split(' ')[0].toLocaleLowerCase()
 
-  const totalValueFormated = farm.liquidity
-    ? `$${farm.liquidity.toNumber().toLocaleString(undefined, { maximumFractionDigits: 0 })}`
-    : '-'
+  const totalValueFormated = "Not available"
 
   const lpLabel = farm.lpSymbol && farm.lpSymbol.toUpperCase().replace('PLANT', 'PLANT')
   const earnLabel = farm.dual ? farm.dual.earnLabel : 'PLANT'
