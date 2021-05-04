@@ -34,7 +34,7 @@ const RiskDisclaimer: React.FC<RiskDisclaimerProps> = ({ onSuccess, onDismiss })
   }
 
   return (
-    <Modal title={TranslateString(999, 'Welcome to the Farm!')} minWidth="320px">
+    <Modal title={TranslateString(999, 'Welcome to the Garden!')} minWidth="320px">
           <Heading size="lg">{TranslateString(556, "Let's start with a disclaimer")}
           <br /></Heading>
         <Box maxHeight="300px" overflowY="auto">
