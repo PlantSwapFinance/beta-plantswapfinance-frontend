@@ -47,7 +47,11 @@ const DevelopmentFund = () => {
       <Divider />
       <Heading as="h2" size="xl" mb="14px">Last donations</Heading>
           <br />
-          <Text>6050$ to Rainforest Foundation (https://etherscan.io/tx/0xd40c9d84e75c3169aeb5cb6831782ed4438216932e172720a54804fbf0f73f9b and https://etherscan.io/tx/0x967c5ad8c523406f0515dc7a98faaf942946008531c3a066ca9aec6146b3d56f)</Text>
+          <ul>
+            <li>6000$ -> Raingorest Foundation (https://etherscan.io/tx/0xd40c9d84e75c3169aeb5cb6831782ed4438216932e172720a54804fbf0f73f9b)</li>
+            <li>50$ -> Raingorest Foundation (https://etherscan.io/tx/0x967c5ad8c523406f0515dc7a98faaf942946008531c3a066ca9aec6146b3d56f)</li>
+          </ul>
+          <Text>Thank you for your support!</Text>
       <Divider />
       <StyledImage src="/images/endPage.svg" alt="PlantSwap Finance" width={680} height={155} />
     </Page>
