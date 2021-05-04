@@ -315,6 +315,9 @@ const Gardens: React.FC<FarmsProps> = (farmsProps) => {
         <br />
         <Text>This new garden will be activated at 11:30 PM GMT/UTC (May 4th, 2021)!</Text>
         </Hero>
+        <Heading as="h1" size="xxl" mb="16px">
+              {TranslateString(738, 'Are you looking for the Garden V1?')} <a href="/gardensv1"> here</a>
+            </Heading>
         <ControlContainer>
           <ViewControls>
             <ToggleView viewMode={viewMode} onToggle={(mode: ViewMode) => setViewMode(mode)} />
