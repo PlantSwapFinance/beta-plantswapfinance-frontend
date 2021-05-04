@@ -62,15 +62,6 @@ const farms: FarmConfig[] = [
     quoteToken: tokens.busd,
   },
   {
-    pid: 6,
-    risk: 2,
-    lpSymbol: 'BUSD',
-    lpAddresses: tokens.busd.address,
-    isTokenOnly: true,
-    token: tokens.busd,
-    quoteToken: tokens.busd,
-  },
-  {
     pid: 7,
     risk: 3,
     lpSymbol: 'CAKE',
@@ -78,6 +69,15 @@ const farms: FarmConfig[] = [
     isTokenOnly: true,
     token: tokens.cake,
     quoteToken: tokens.busd,
+  },
+  {
+    pid: 9,
+    risk: 2,
+    lpSymbol: 'USDC',
+    lpAddresses: tokens.usdc.address,
+    isTokenOnly: true,
+    token: tokens.usdc,
+    quoteToken: tokens.usdc,
   },
 ]
 
