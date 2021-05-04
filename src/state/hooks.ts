@@ -102,7 +102,7 @@ export const usePancakeSwapFarmFromPid = (pid): PancakeSwapFarm => {
   return pancakeSwapFarm
 }
 
-export const usePancakeSwapFarmFromSymbol = (lpSymbol: string): Farm => {
+export const usePancakeSwapFarmFromSymbol = (lpSymbol: string): PancakeSwapFarm => {
   const pancakeSwapFarm = useSelector((state: State) => state.pancakeSwapFarms.data.find((f) => f.lpSymbol === lpSymbol))
   return pancakeSwapFarm
 }
