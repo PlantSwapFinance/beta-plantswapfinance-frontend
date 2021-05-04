@@ -29,6 +29,8 @@ const NewsCard = () => {
           {TranslateString(542, 'News & Announcements')}
         </Heading>
         <Block>
+          <Label><a href="https://plantswapfinance.medium.com/its-time-for-gardenv2-91c3241fd226">It’s time for GardenV2</a></Label>
+          <br />
           <Label><a href="https://plantswapfinance.medium.com/opening-of-the-garden-new-plant-look-and-more-b8b9ff554e16">Opening of the Garden, new PLANT look, and more!</a></Label>
           <br />
           <Label><a href="https://plantswapfinance.medium.com/are-you-farming-plant-7e6f2dd8a7f5">Are you farming 🚜 $PLANT 🌱</a></Label>

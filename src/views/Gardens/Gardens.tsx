@@ -317,7 +317,7 @@ const Gardens: React.FC<FarmsProps> = (farmsProps) => {
         </Hero>
         <Heading as="h2" size="xl" mb="14px">
               {TranslateString(738, 'Are you looking for the Garden V1?')} <a href="/gardensv1">click here</a>
-            </Heading>
+        </Heading>
         <ControlContainer>
           <ViewControls>
             <ToggleView viewMode={viewMode} onToggle={(mode: ViewMode) => setViewMode(mode)} />
