@@ -13,7 +13,7 @@ const farms: FarmConfig[] = [
     },
     isTokenOnly: true,
     token: tokens.plant,
-    quoteToken: tokens.wbnb,
+    quoteToken: tokens.busd,
   },
   // New V2
   {
@@ -77,7 +77,7 @@ const farms: FarmConfig[] = [
     lpAddresses: tokens.cake.address,
     isTokenOnly: true,
     token: tokens.cake,
-    quoteToken: tokens.cake,
+    quoteToken: tokens.busd,
   },
 ]
 
