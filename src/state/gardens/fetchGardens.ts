@@ -28,11 +28,6 @@ const fetchGardens = async () => {
           name: 'balanceOf',
           params: [getMasterChefAddress()],
         },
-        // Total supply of LP tokens
-        {
-          address: lpAddress,
-          name: 'totalSupply',
-        },
         // Token decimals
         {
           address: getAddress(farmConfig.token.address),
@@ -49,7 +44,6 @@ const fetchGardens = async () => {
         tokenBalanceLP,
         quoteTokenBlanceLP,
         lpTokenBalanceMC,
-        lpTotalSupply,
         tokenDecimals,
         quoteTokenDecimals,
       ] = await multicall(erc20, calls)
