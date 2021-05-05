@@ -9,7 +9,7 @@ import { getBalanceNumber } from 'utils/formatBalance'
 import DepositModal from '../DepositModal'
 import WithdrawModal from '../WithdrawModal'
 
-interface FarmCardActionsProps {
+interface GardenCardActionsProps {
   stakedBalance?: BigNumber
   tokenBalance?: BigNumber
   tokenName?: string
@@ -24,7 +24,7 @@ const IconButtonWrapper = styled.div`
   }
 `
 
-const StakeAction: React.FC<FarmCardActionsProps> = ({
+const StakeAction: React.FC<GardenCardActionsProps> = ({
   stakedBalance,
   tokenBalance,
   tokenName,

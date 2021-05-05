@@ -26,6 +26,20 @@ export interface Farm extends FarmConfig {
   }
 }
 
+export interface Garden extends FarmConfig {
+  tokenAmount?: BigNumber
+  quoteTokenAmount?: BigNumber
+  lpTotalInQuoteToken?: BigNumber
+  tokenPriceVsQuote?: BigNumber
+  poolWeight?: BigNumber
+  userData?: {
+    allowance: BigNumber
+    tokenBalance: BigNumber
+    stakedBalance: BigNumber
+    earnings: BigNumber
+  }
+}
+
 export interface Pool extends PoolConfig {
   totalStaked?: BigNumber
   startBlock?: number
@@ -74,6 +88,10 @@ export interface ToastsState {
 
 export interface FarmsState {
   data: Farm[]
+}
+
+export interface GardensState {
+  data: Garden[]
 }
 
 export interface PoolsState {
@@ -151,6 +169,7 @@ export interface BlockState {
 
 export interface State {
   farms: FarmsState
+  gardens: GardensState
   toasts: ToastsState
   prices: PriceState
   pools: PoolsState

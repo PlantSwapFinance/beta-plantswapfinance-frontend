@@ -7,13 +7,10 @@ const farms: FarmConfig[] = [
     pid: 0,
     risk: 5,
     lpSymbol: 'PLANT',
-    lpAddresses: {
-      97: '0xFe5Ab583d91fa90549aC61666CF1C4e2CeA5187e',
-      56: '0x58BA5Bd8872ec18BD360a9592149daed2fC57c69',
-    },
+    lpAddresses: tokens.plant.address,
     isTokenOnly: true,
     token: tokens.plant,
-    quoteToken: tokens.busd,
+    quoteToken: tokens.plant,
   },
   // New V2
   {
@@ -64,10 +61,10 @@ const farms: FarmConfig[] = [
   {
     pid: 7,
     risk: 3,
-    lpSymbol: 'CAKE',
-    lpAddresses: tokens.cake.address,
+    lpSymbol: 'BUSD',
+    lpAddresses: tokens.busd.address,
     isTokenOnly: true,
-    token: tokens.cake,
+    token: tokens.busd,
     quoteToken: tokens.busd,
   },
   {
@@ -78,6 +75,15 @@ const farms: FarmConfig[] = [
     isTokenOnly: true,
     token: tokens.usdc,
     quoteToken: tokens.usdc,
+  },
+  {
+    pid: 10,
+    risk: 3,
+    lpSymbol: 'CAKE',
+    lpAddresses: tokens.cake.address,
+    isTokenOnly: true,
+    token: tokens.cake,
+    quoteToken: tokens.cake,
   },
 ]
 

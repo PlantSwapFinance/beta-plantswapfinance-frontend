@@ -6,12 +6,12 @@ import { useHarvest } from 'hooks/useHarvest'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { useWeb3React } from '@web3-react/core'
 
-interface FarmCardActionsProps {
+interface GardenCardActionsProps {
   earnings?: BigNumber
   pid?: number
 }
 
-const HarvestAction: React.FC<FarmCardActionsProps> = ({ earnings, pid }) => {
+const HarvestAction: React.FC<GardenCardActionsProps> = ({ earnings, pid }) => {
   const { account } = useWeb3React()
   const TranslateString = useI18n()
   const [pendingTx, setPendingTx] = useState(false)

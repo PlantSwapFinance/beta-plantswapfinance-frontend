@@ -5,7 +5,7 @@ import { getAddress } from 'utils/addressHelpers'
 import { getBep20Contract } from 'utils/contractHelpers'
 import { Button, Flex, Text } from '@plantswap-libs/uikit'
 import { Farm } from 'state/types'
-import { useFarmFromSymbol, useFarmUser } from 'state/hooks'
+import { useGardenFromSymbol, useGardenUser } from 'state/hooks'
 import useI18n from 'hooks/useI18n'
 import useWeb3 from 'hooks/useWeb3'
 import { useApprove } from 'hooks/useApprove'
@@ -20,18 +20,18 @@ export interface FarmWithStakedValue extends Farm {
   apy?: number
 }
 
-interface FarmCardActionsProps {
+interface GardenCardActionsProps {
   farm: FarmWithStakedValue
   provider?: ProviderType
   account?: string
   addLiquidityUrl?: string
 }
 
-const CardActions: React.FC<FarmCardActionsProps> = ({ farm, account, addLiquidityUrl }) => {
+const CardActions: React.FC<GardenCardActionsProps> = ({ farm, account, addLiquidityUrl }) => {
   const TranslateString = useI18n()
   const [requestedApproval, setRequestedApproval] = useState(false)
-  const { pid, lpAddresses } = useFarmFromSymbol(farm.lpSymbol)
-  const { allowance, tokenBalance, stakedBalance, earnings } = useFarmUser(pid)
+  const { pid, lpAddresses } = useGardenFromSymbol(farm.lpSymbol)
+  const { allowance, tokenBalance, stakedBalance, earnings } = useGardenUser(pid)
   const lpAddress = getAddress(lpAddresses)
   const lpName = farm.lpSymbol.toUpperCase()
   const isApproved = account && allowance && allowance.isGreaterThan(0)
@@ -71,7 +71,7 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, account, addLiquidi
     <Action>
       <Flex>
         <Text bold textTransform="uppercase" color="secondary" fontSize="12px" pr="3px">
-          {/* TODO: Is there a way to get a dynamic value here from useFarmFromSymbol? */}
+          {/* TODO: Is there a way to get a dynamic value here from useGardenFromSymbol? */}
           PLANT
         </Text>
         <Text bold textTransform="uppercase" color="textSubtle" fontSize="12px">

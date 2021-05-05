@@ -34,4 +34,17 @@ export const getFarmApy = (poolWeight: BigNumber, plantPriceUsd: BigNumber, pool
   return apy.isNaN() || !apy.isFinite() ? null : apy.toNumber()
 }
 
+/**
+ * Get farm APY value in %
+ * @param poolWeight allocationPoint / totalAllocationPoint
+ * @param plantPriceUsd Plant price in USD
+ * @param poolLiquidityUsd Total pool liquidity in USD
+ * @returns
+ */
+ export const getGardenApy = (poolWeight: BigNumber, plantPriceUsd: BigNumber, poolLiquidityUsd: BigNumber): number => {
+  const yearlyPlantRewardAllocation = PLANT_PER_BLOCK.times(BLOCKS_PER_YEAR).times(poolWeight)
+  const apy = yearlyPlantRewardAllocation.times(plantPriceUsd).div(poolLiquidityUsd).times(100)
+  return apy.isNaN() || !apy.isFinite() ? null : apy.toNumber()
+}
+
 export default null

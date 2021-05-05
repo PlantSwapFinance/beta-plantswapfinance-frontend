@@ -8,22 +8,22 @@ import styled  from 'styled-components'
 import FlexLayout from 'components/layout/Flex'
 import Page from 'components/layout/Page'
 import usePersistState from 'hooks/usePersistState'
-import { useFarms, usePricePlantBusd, useGetApiPrices } from 'state/hooks'
+import { useGardens, usePricePlantBusd, useGetApiPrices } from 'state/hooks'
 import useRefresh from 'hooks/useRefresh'
-import { fetchFarmUserDataAsync } from 'state/actions'
+import { fetchGardenUserDataAsync } from 'state/actions'
 import { Farm } from 'state/types'
 import useI18n from 'hooks/useI18n'
 import { getBalanceNumber } from 'utils/formatBalance'
-import { getFarmApy } from 'utils/apy'
+import { getGardenApy } from 'utils/apy'
 import { orderBy } from 'lodash'
 import Divider from './components/Divider'
 import RiskDisclaimer from './components/RiskDisclaimer'
 
-import FarmCard, { FarmWithStakedValue } from './components/FarmCard/FarmCard'
-import Table from './components/FarmTable/FarmTable'
-import FarmTabButtons from './components/FarmTabButtons'
+import GardenCard, { FarmWithStakedValue } from './components/GardenCard/GardenCard'
+import Table from './components/GardenTable/GardenTable'
+import GardenTabButtons from './components/GardenTabButtons'
 import SearchInput from './components/SearchInput'
-import { RowProps } from './components/FarmTable/Row'
+import { RowProps } from './components/GardenTable/Row'
 import ToggleView from './components/ToggleView/ToggleView'
 import { DesktopColumnSchema, ViewMode } from './components/types'
 import Select, { OptionProps } from './components/Select/Select'
@@ -108,7 +108,7 @@ const Gardens: React.FC<FarmsProps> = (farmsProps) => {
   const { pathname } = useLocation()
   const [hasAcceptedRisk, setHasAcceptedRisk] = usePersistState(false, 'plantswap_farm_accepted_risk')
   const TranslateString = useI18n()
-  const farmsLP = useFarms()
+  const farmsLP = useGardens()
   const plantPrice = usePricePlantBusd()
   const [query, setQuery] = useState('')
   const [viewMode, setViewMode] = useState(ViewMode.TABLE)
@@ -132,7 +132,7 @@ const Gardens: React.FC<FarmsProps> = (farmsProps) => {
   const { fastRefresh } = useRefresh()
   useEffect(() => {
     if (account) {
-      dispatch(fetchFarmUserDataAsync(account))
+      dispatch(fetchGardenUserDataAsync(account))
     }
   }, [account, dispatch, fastRefresh])
 
@@ -177,8 +177,10 @@ const Gardens: React.FC<FarmsProps> = (farmsProps) => {
         }
 
         const quoteTokenPriceUsd = prices[farm.quoteToken.symbol.toLowerCase()]
-        const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(quoteTokenPriceUsd)
-        const apy = isActive ? getFarmApy(farm.poolWeight, plantPrice, totalLiquidity) : 0
+     //   const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(quoteTokenPriceUsd)
+     const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(quoteTokenPriceUsd)
+     
+        const apy = isActive ? getGardenApy(farm.poolWeight, plantPrice, totalLiquidity) : 0
 
         return { ...farm, apy, liquidity: totalLiquidity }
       })
@@ -279,12 +281,12 @@ const Gardens: React.FC<FarmsProps> = (farmsProps) => {
         <FlexLayout>
           <Route exact path={`${path}`}>
             {farmsStaked.map((farm) => (
-              <FarmCard key={farm.pid} farm={farm} plantPrice={plantPrice} account={account} removed={false} />
+              <GardenCard key={farm.pid} farm={farm} plantPrice={plantPrice} account={account} removed={false} />
             ))}
           </Route>
           <Route exact path={`${path}/history`}>
             {farmsStaked.map((farm) => (
-              <FarmCard key={farm.pid} farm={farm} plantPrice={plantPrice} account={account} removed />
+              <GardenCard key={farm.pid} farm={farm} plantPrice={plantPrice} account={account} removed />
             ))}
           </Route>
         </FlexLayout>
@@ -312,12 +314,7 @@ const Gardens: React.FC<FarmsProps> = (farmsProps) => {
             </ul>
           </div>
           <img src="/images/garden.svg" alt="Gardens" width={600} height={315} />
-        <br />
-        <Text>This new garden will be activated at 11:30 PM GMT/UTC (May 4th, 2021)!</Text>
         </Hero>
-        <Heading as="h2" size="xl" mb="14px">
-              {TranslateString(738, 'Are you looking for the Garden V1?')} <a href="/gardensv1">click here</a>
-        </Heading>
         <ControlContainer>
           <ViewControls>
             <ToggleView viewMode={viewMode} onToggle={(mode: ViewMode) => setViewMode(mode)} />
@@ -325,7 +322,7 @@ const Gardens: React.FC<FarmsProps> = (farmsProps) => {
               <Toggle checked={stackedOnly} onChange={() => setStackedOnly(!stackedOnly)} scale="sm" />
               <Text> {TranslateString(1116, 'Staked only')}</Text>
             </ToggleWrapper>
-            <FarmTabButtons />
+            <GardenTabButtons />
           </ViewControls>
           <FilterContainer>
             <LabelWrapper>

@@ -9,6 +9,7 @@ import { getWeb3NoAccount } from 'utils/web3'
 import useRefresh from 'hooks/useRefresh'
 import {
   fetchFarmsPublicDataAsync,
+  fetchGardensPublicDataAsync,
   fetchPoolsPublicDataAsync,
   fetchPoolsUserDataAsync,
   fetchPancakeSwapFarmsPublicDataAsync,
@@ -28,6 +29,7 @@ export const useFetchPublicData = () => {
   const { slowRefresh } = useRefresh()
   useEffect(() => {
     dispatch(fetchFarmsPublicDataAsync())
+    dispatch(fetchGardensPublicDataAsync())
     dispatch(fetchPoolsPublicDataAsync())
   }, [dispatch, slowRefresh])
 
@@ -89,6 +91,33 @@ export const useFarmUser = (pid) => {
   }
 }
 
+// Gardens
+
+export const useGardens = (): Farm[] => {
+  const gardens = useSelector((state: State) => state.gardens.data)
+  return gardens
+}
+
+export const useGardenFromPid = (pid): Farm => {
+  const garden = useSelector((state: State) => state.gardens.data.find((f) => f.pid === pid))
+  return garden
+}
+
+export const useGardenFromSymbol = (lpSymbol: string): Farm => {
+  const garden = useSelector((state: State) => state.gardens.data.find((f) => f.lpSymbol === lpSymbol))
+  return garden
+}
+
+export const useGardenUser = (pid) => {
+  const garden = useGardenFromPid(pid)
+
+  return {
+    allowance: garden.userData ? new BigNumber(garden.userData.allowance) : new BigNumber(0),
+    tokenBalance: garden.userData ? new BigNumber(garden.userData.tokenBalance) : new BigNumber(0),
+    stakedBalance: garden.userData ? new BigNumber(garden.userData.stakedBalance) : new BigNumber(0),
+    earnings: garden.userData ? new BigNumber(garden.userData.earnings) : new BigNumber(0),
+  }
+}
 
 // External Farms
 

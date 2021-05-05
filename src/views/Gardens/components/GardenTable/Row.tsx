@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { FarmWithStakedValue } from 'views/Farms/components/FarmCard/FarmCard'
+import { FarmWithStakedValue } from 'views/Gardens/components/GardenCard/GardenCard'
 import { useMatchBreakpoints } from '@plantswap-libs/uikit'
 import useI18n from 'hooks/useI18n'
 
