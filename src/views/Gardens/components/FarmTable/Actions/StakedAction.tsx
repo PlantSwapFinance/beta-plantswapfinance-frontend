@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import { Button, useModal, IconButton, AddIcon, MinusIcon } from '@plantswap-libs/uikit'
 import UnlockButton from 'components/UnlockButton'
 import { useWeb3React } from '@web3-react/core'
-import { useGardenUser } from 'state/hooks'
-import { FarmWithStakedValue } from 'views/Gardens/components/GardenCard/GardenCard'
+import { useFarmUser } from 'state/hooks'
+import { FarmWithStakedValue } from 'views/Farms/components/FarmCard/FarmCard'
 import useI18n from 'hooks/useI18n'
 import { useApprove } from 'hooks/useApprove'
 import { getBep20Contract } from 'utils/contractHelpers'
@@ -27,7 +27,7 @@ const Staked: React.FunctionComponent<FarmWithStakedValue> = ({ pid, lpSymbol, l
   const TranslateString = useI18n()
   const { account } = useWeb3React()
   const [requestedApproval, setRequestedApproval] = useState(false)
-  const { allowance, tokenBalance, stakedBalance } = useGardenUser(pid)
+  const { allowance, tokenBalance, stakedBalance } = useFarmUser(pid)
   const { onStake } = useStake(pid)
   const { onUnstake } = useUnstake(pid)
   const web3 = useWeb3()

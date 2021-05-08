@@ -57,7 +57,7 @@ const ScrollButtonContainer = styled.div`
   padding-bottom: 5px;
 `
 
-const GardenTable: React.FC<ITableProps> = (props) => {
+const FarmTable: React.FC<ITableProps> = (props) => {
   const tableWrapperEl = useRef<HTMLDivElement>(null)
   const TranslateString = useI18n()
   const { data, columns } = props
@@ -93,4 +93,4 @@ const GardenTable: React.FC<ITableProps> = (props) => {
   )
 }
 
-export default GardenTable
+export default FarmTable

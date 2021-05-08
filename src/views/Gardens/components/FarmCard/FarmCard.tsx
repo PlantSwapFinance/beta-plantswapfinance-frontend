@@ -83,7 +83,7 @@ const ExpandingWrapper = styled.div<{ expanded: boolean }>`
   overflow: hidden;
 `
 
-interface GardenCardProps {
+interface FarmCardProps {
   farm: FarmWithStakedValue
   removed: boolean
   plantPrice?: BigNumber
@@ -91,7 +91,7 @@ interface GardenCardProps {
   account?: string
 }
 
-const GardenCard: React.FC<GardenCardProps> = ({ farm, removed, plantPrice, account }) => {
+const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, plantPrice, account }) => {
   const TranslateString = useI18n()
 
   const [showExpandableSection, setShowExpandableSection] = useState(false)
@@ -164,4 +164,4 @@ const GardenCard: React.FC<GardenCardProps> = ({ farm, removed, plantPrice, acco
   )
 }
 
-export default GardenCard
+export default FarmCard

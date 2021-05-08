@@ -4,7 +4,7 @@ import { useRouteMatch, Link } from 'react-router-dom'
 import { ButtonMenu, ButtonMenuItem } from '@plantswap-libs/uikit'
 import useI18n from 'hooks/useI18n'
 
-const GardenTabButtons = () => {
+const FarmTabButtons = () => {
   const { url, isExact } = useRouteMatch()
   const TranslateString = useI18n()
 
@@ -22,7 +22,7 @@ const GardenTabButtons = () => {
   )
 }
 
-export default GardenTabButtons
+export default FarmTabButtons
 
 const Wrapper = styled.div`
   display: flex;

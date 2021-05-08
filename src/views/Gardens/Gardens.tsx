@@ -8,22 +8,22 @@ import styled  from 'styled-components'
 import FlexLayout from 'components/layout/Flex'
 import Page from 'components/layout/Page'
 import usePersistState from 'hooks/usePersistState'
-import { useGardens, usePricePlantBusd, useGetApiPrices } from 'state/hooks'
+import { useFarms, usePricePlantBusd, useGetApiPrices } from 'state/hooks'
 import useRefresh from 'hooks/useRefresh'
-import { fetchGardenUserDataAsync } from 'state/actions'
+import { fetchFarmUserDataAsync } from 'state/actions'
 import { Farm } from 'state/types'
 import useI18n from 'hooks/useI18n'
 import { getBalanceNumber } from 'utils/formatBalance'
-import { getGardenApy } from 'utils/apy'
+import { getFarmApy } from 'utils/apy'
 import { orderBy } from 'lodash'
 import Divider from './components/Divider'
 import RiskDisclaimer from './components/RiskDisclaimer'
 
-import GardenCard, { FarmWithStakedValue } from './components/GardenCard/GardenCard'
-import Table from './components/GardenTable/GardenTable'
-import GardenTabButtons from './components/GardenTabButtons'
+import FarmCard, { FarmWithStakedValue } from './components/FarmCard/FarmCard'
+import Table from './components/FarmTable/FarmTable'
+import FarmTabButtons from './components/FarmTabButtons'
 import SearchInput from './components/SearchInput'
-import { RowProps } from './components/GardenTable/Row'
+import { RowProps } from './components/FarmTable/Row'
 import ToggleView from './components/ToggleView/ToggleView'
 import { DesktopColumnSchema, ViewMode } from './components/types'
 import Select, { OptionProps } from './components/Select/Select'
@@ -108,7 +108,7 @@ const Gardens: React.FC<FarmsProps> = (farmsProps) => {
   const { pathname } = useLocation()
   const [hasAcceptedRisk, setHasAcceptedRisk] = usePersistState(false, 'plantswap_farm_accepted_risk')
   const TranslateString = useI18n()
-  const farmsLP = useGardens()
+  const farmsLP = useFarms()
   const plantPrice = usePricePlantBusd()
   const [query, setQuery] = useState('')
   const [viewMode, setViewMode] = useState(ViewMode.TABLE)
@@ -132,7 +132,7 @@ const Gardens: React.FC<FarmsProps> = (farmsProps) => {
   const { fastRefresh } = useRefresh()
   useEffect(() => {
     if (account) {
-      dispatch(fetchGardenUserDataAsync(account))
+      dispatch(fetchFarmUserDataAsync(account))
     }
   }, [account, dispatch, fastRefresh])
 
@@ -177,10 +177,8 @@ const Gardens: React.FC<FarmsProps> = (farmsProps) => {
         }
 
         const quoteTokenPriceUsd = prices[farm.quoteToken.symbol.toLowerCase()]
-     //   const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(quoteTokenPriceUsd)
-     const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(quoteTokenPriceUsd)
-     
-        const apy = isActive ? getGardenApy(farm.poolWeight, plantPrice, totalLiquidity) : 0
+        const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(quoteTokenPriceUsd)
+        const apy = isActive ? getFarmApy(farm.poolWeight, plantPrice, totalLiquidity) : 0
 
         return { ...farm, apy, liquidity: totalLiquidity }
       })
@@ -281,12 +279,12 @@ const Gardens: React.FC<FarmsProps> = (farmsProps) => {
         <FlexLayout>
           <Route exact path={`${path}`}>
             {farmsStaked.map((farm) => (
-              <GardenCard key={farm.pid} farm={farm} plantPrice={plantPrice} account={account} removed={false} />
+              <FarmCard key={farm.pid} farm={farm} plantPrice={plantPrice} account={account} removed={false} />
             ))}
           </Route>
           <Route exact path={`${path}/history`}>
             {farmsStaked.map((farm) => (
-              <GardenCard key={farm.pid} farm={farm} plantPrice={plantPrice} account={account} removed />
+              <FarmCard key={farm.pid} farm={farm} plantPrice={plantPrice} account={account} removed />
             ))}
           </Route>
         </FlexLayout>
@@ -322,7 +320,7 @@ const Gardens: React.FC<FarmsProps> = (farmsProps) => {
               <Toggle checked={stackedOnly} onChange={() => setStackedOnly(!stackedOnly)} scale="sm" />
               <Text> {TranslateString(1116, 'Staked only')}</Text>
             </ToggleWrapper>
-            <GardenTabButtons />
+            <FarmTabButtons />
           </ViewControls>
           <FilterContainer>
             <LabelWrapper>
