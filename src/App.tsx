@@ -15,6 +15,7 @@ import GardenV1 from './views/GardenV1'
 import Barns from './views/Barns'
 import Tree from './views/Tree'
 import DevelopmentFund from './views/DevelopmentFund'
+import GlobalCheckBullHiccupClaimStatus from './views/Collectibles/components/GlobalCheckBullHiccupClaimStatus'
 import history from './routerHistory'
 
 // Route-based code splitting
@@ -22,7 +23,13 @@ import history from './routerHistory'
 const Home = lazy(() => import('./views/Home'))
 const Farms = lazy(() => import('./views/Farms'))
 const Gardens = lazy(() => import('./views/Gardens'))
+const BarnsBeta = lazy(() => import('./views/BarnsBeta'))
+const BarnPlantswap = lazy(() => import('./views/BarnPlantswap'))
+const BarnPancakeswap = lazy(() => import('./views/BarnPancakeswap'))
+const BarnGoose = lazy(() => import('./views/BarnGoose'))
+const BarnCafeswap = lazy(() => import('./views/BarnCafeswap'))
 const NotFound = lazy(() => import('./views/NotFound'))
+const Collectibles = lazy(() => import('./views/Collectibles'))
 const Teams = lazy(() => import('./views/Teams'))
 const Team = lazy(() => import('./views/Teams/Team'))
 const Roadmap = lazy(() => import('./views/Roadmap'))
@@ -75,11 +82,29 @@ const App: React.FC = () => {
             <Route path="/barns">
               <Barns />
             </Route>
+            <Route path="/barnsBeta">
+              <BarnsBeta />
+            </Route>
+            <Route path="/barnPlantswap">
+              <BarnPlantswap />
+            </Route>
+            <Route path="/barnPancakeswap">
+              <BarnPancakeswap />
+            </Route>
+            <Route path="/barnGoose">
+              <BarnGoose />
+            </Route>
+            <Route path="/barnCafeswap">
+              <BarnCafeswap />
+            </Route>
             <Route path="/tree">
               <Tree />
             </Route>
             <Route path="/developmentFund">
               <DevelopmentFund />
+            </Route>
+            <Route path="/collectibles">
+              <Collectibles />
             </Route>
             <Route exact path="/teams">
               <Teams />
@@ -114,6 +139,9 @@ const App: React.FC = () => {
             <Route path="/pools">
               <Redirect to="/gardens" />
             </Route>
+            <Route path="/nft">
+              <Redirect to="/collectibles" />
+            </Route>
             {/* 404 */}
             <Route component={NotFound} />
           </Switch>
@@ -121,6 +149,7 @@ const App: React.FC = () => {
       </Menu>
       <EasterEgg iterations={2} />
       <ToastListener />
+      <GlobalCheckBullHiccupClaimStatus />
     </Router>
   )
 }
