@@ -2,14 +2,14 @@ import BigNumber from 'bignumber.js'
 import erc20ABI from 'config/abi/erc20.json'
 import masterchefABI from 'config/abi/masterchef.json'
 import multicall from 'utils/multicall'
-import farmsConfig from 'config/constants/farms'
-import { getAddress, getMasterChefAddress } from 'utils/addressHelpers'
+import barnsBetaConfig from 'config/constants/barnsBeta'
+import { getAddress } from 'utils/addressHelpers'
 
-export const fetchGardenUserAllowances = async (account: string) => {
-  const masterChefAdress = getMasterChefAddress()
+export const fetchBarnBetaUserAllowances = async (account: string) => {
 
-  const calls = farmsConfig.map((farm) => {
-    const lpContractAddress = getAddress(farm.lpAddresses)
+  const calls = barnsBetaConfig.map((barnBeta) => {
+    const masterChefAdress = getAddress(barnBeta.chefAddess)
+    const lpContractAddress = getAddress(barnBeta.lpAddresses)
     return { address: lpContractAddress, name: 'allowance', params: [account, masterChefAdress] }
   })
 
@@ -20,9 +20,9 @@ export const fetchGardenUserAllowances = async (account: string) => {
   return parsedLpAllowances
 }
 
-export const fetchGardenUserTokenBalances = async (account: string) => {
-  const calls = farmsConfig.map((farm) => {
-    const lpContractAddress = getAddress(farm.lpAddresses)
+export const fetchBarnBetaUserTokenBalances = async (account: string) => {
+  const calls = barnsBetaConfig.map((barnBeta) => {
+    const lpContractAddress = getAddress(barnBeta.lpAddresses)
     return {
       address: lpContractAddress,
       name: 'balanceOf',
@@ -37,14 +37,13 @@ export const fetchGardenUserTokenBalances = async (account: string) => {
   return parsedTokenBalances
 }
 
-export const fetchGardenUserStakedBalances = async (account: string) => {
-  const masterChefAdress = getMasterChefAddress()
-
-  const calls = farmsConfig.map((farm) => {
+export const fetchBarnBetaUserStakedBalances = async (account: string) => {
+  const calls = barnsBetaConfig.map((barnBeta) => {
+    const masterChefAdress = getAddress(barnBeta.chefAddess)
     return {
       address: masterChefAdress,
       name: 'userInfo',
-      params: [farm.pid, account],
+      params: [barnBeta.pid, account],
     }
   })
 
@@ -55,14 +54,14 @@ export const fetchGardenUserStakedBalances = async (account: string) => {
   return parsedStakedBalances
 }
 
-export const fetchGardenUserEarnings = async (account: string) => {
-  const masterChefAdress = getMasterChefAddress()
+export const fetchBarnBetaUserEarnings = async (account: string) => {
 
-  const calls = farmsConfig.map((farm) => {
+  const calls = barnsBetaConfig.map((barnBeta) => {
+    const masterChefAdress = getAddress(barnBeta.chefAddess)
     return {
       address: masterChefAdress,
       name: 'pendingPlant',
-      params: [farm.pid, account],
+      params: [barnBeta.pid, account],
     }
   })
 

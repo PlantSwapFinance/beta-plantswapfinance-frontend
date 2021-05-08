@@ -6,9 +6,9 @@ import { useToast } from 'state/hooks'
 
 const useGetProfileCosts = () => {
   const [costs, setCosts] = useState({
-    numberCakeToReactivate: new BigNumber(0),
-    numberCakeToRegister: new BigNumber(0),
-    numberCakeToUpdate: new BigNumber(0),
+    numberPlantToReactivate: new BigNumber(0),
+    numberPlantToRegister: new BigNumber(0),
+    numberPlantToUpdate: new BigNumber(0),
   })
   const { toastError } = useToast()
 
@@ -16,16 +16,16 @@ const useGetProfileCosts = () => {
     const fetchCosts = async () => {
       try {
         const profileContract = getProfileContract()
-        const [numberCakeToReactivate, numberCakeToRegister, numberCakeToUpdate] = await makeBatchRequest([
-          profileContract.methods.numberCakeToReactivate().call,
-          profileContract.methods.numberCakeToRegister().call,
-          profileContract.methods.numberCakeToUpdate().call,
+        const [numberPlantToReactivate, numberPlantToRegister, numberPlantToUpdate] = await makeBatchRequest([
+          profileContract.methods.numberPlantToReactivate().call,
+          profileContract.methods.numberPlantToRegister().call,
+          profileContract.methods.numberPlantToUpdate().call,
         ])
 
         setCosts({
-          numberCakeToReactivate: new BigNumber(numberCakeToReactivate as string),
-          numberCakeToRegister: new BigNumber(numberCakeToRegister as string),
-          numberCakeToUpdate: new BigNumber(numberCakeToUpdate as string),
+          numberPlantToReactivate: new BigNumber(numberPlantToReactivate as string),
+          numberPlantToRegister: new BigNumber(numberPlantToRegister as string),
+          numberPlantToUpdate: new BigNumber(numberPlantToUpdate as string),
         })
       } catch (error) {
         toastError('Error', 'Could not retrieve PLANT costs for profile')

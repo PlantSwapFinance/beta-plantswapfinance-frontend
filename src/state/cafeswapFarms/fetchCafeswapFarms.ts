@@ -1,24 +1,24 @@
 import BigNumber from 'bignumber.js'
 import erc20 from 'config/abi/erc20.json'
-import masterchefABI from 'config/abi/masterchef.json'
+import masterchefCafeswapABI from 'config/abi/masterchefCafeswap.json'
 import multicall from 'utils/multicall'
-import { getAddress, getMasterChefAddress } from 'utils/addressHelpers'
-import farmsConfig from 'config/constants/farms'
+import { getAddress, getMasterChefCafeswapAddress } from 'utils/addressHelpers'
+import cafeswapFarmsConfig from 'config/constants/cafeswapFarms'
 
-const fetchGardens = async () => {
+const fetchCafeswapFarms = async () => {
   const data = await Promise.all(
-    farmsConfig.map(async (farmConfig) => {
-      const lpAddress = getAddress(farmConfig.lpAddresses)
+    cafeswapFarmsConfig.map(async (cafeswapFarmConfig) => {
+      const lpAddress = getAddress(cafeswapFarmConfig.lpAddresses)
       const calls = [
         // Balance of token in the LP contract
         {
-          address: getAddress(farmConfig.token.address),
+          address: getAddress(cafeswapFarmConfig.token.address),
           name: 'balanceOf',
           params: [lpAddress],
         },
         // Balance of quote token on LP contract
         {
-          address: getAddress(farmConfig.quoteToken.address),
+          address: getAddress(cafeswapFarmConfig.quoteToken.address),
           name: 'balanceOf',
           params: [lpAddress],
         },
@@ -26,16 +26,21 @@ const fetchGardens = async () => {
         {
           address: lpAddress,
           name: 'balanceOf',
-          params: [getMasterChefAddress()],
+          params: [getMasterChefCafeswapAddress()],
+        },
+        // Total supply of LP tokens
+        {
+          address: lpAddress,
+          name: 'totalSupply',
         },
         // Token decimals
         {
-          address: getAddress(farmConfig.token.address),
+          address: getAddress(cafeswapFarmConfig.token.address),
           name: 'decimals',
         },
         // Quote token decimals
         {
-          address: getAddress(farmConfig.quoteToken.address),
+          address: getAddress(cafeswapFarmConfig.quoteToken.address),
           name: 'decimals',
         },
       ]
@@ -44,21 +49,19 @@ const fetchGardens = async () => {
         tokenBalanceLP,
         quoteTokenBlanceLP,
         lpTokenBalanceMC,
+        lpTotalSupply,
         tokenDecimals,
         quoteTokenDecimals,
       ] = await multicall(erc20, calls)
 
       // Ratio in % a LP tokens that are in staking, vs the total number in circulation
-      const lpTokenRatio = new BigNumber(lpTokenBalanceMC).div(new BigNumber(10).pow(18))
+      const lpTokenRatio = new BigNumber(lpTokenBalanceMC).div(new BigNumber(lpTotalSupply))
 
       // Total value in staking in quote token value
-      const lpTotalInQuoteToken = new BigNumber(lpTokenRatio)
-
-   /*   const lpTotalInQuoteToken = new BigNumber(quoteTokenBlanceLP)
+      const lpTotalInQuoteToken = new BigNumber(quoteTokenBlanceLP)
         .div(new BigNumber(10).pow(18))
         .times(new BigNumber(2))
         .times(lpTokenRatio)
-      */
 
       // Amount of token in the LP that are considered staking (i.e amount of token * lp ratio)
       const tokenAmount = new BigNumber(tokenBalanceLP).div(new BigNumber(10).pow(tokenDecimals)).times(lpTokenRatio)
@@ -66,14 +69,14 @@ const fetchGardens = async () => {
         .div(new BigNumber(10).pow(quoteTokenDecimals))
         .times(lpTokenRatio)
 
-      const [info, totalAllocPoint] = await multicall(masterchefABI, [
+      const [info, totalAllocPoint] = await multicall(masterchefCafeswapABI, [
         {
-          address: getMasterChefAddress(),
+          address: getMasterChefCafeswapAddress(),
           name: 'poolInfo',
-          params: [farmConfig.pid],
+          params: [cafeswapFarmConfig.pid],
         },
         {
-          address: getMasterChefAddress(),
+          address: getMasterChefCafeswapAddress(),
           name: 'totalAllocPoint',
         },
       ])
@@ -82,7 +85,7 @@ const fetchGardens = async () => {
       const poolWeight = allocPoint.div(new BigNumber(totalAllocPoint))
 
       return {
-        ...farmConfig,
+        ...cafeswapFarmConfig,
         tokenAmount: tokenAmount.toJSON(),
         quoteTokenAmount: quoteTokenAmount.toJSON(),
         lpTotalInQuoteToken: lpTotalInQuoteToken.toJSON(),
@@ -95,4 +98,4 @@ const fetchGardens = async () => {
   return data
 }
 
-export default fetchGardens
+export default fetchCafeswapFarms

@@ -1,6 +1,6 @@
 import { Toast } from '@plantswap-libs/uikit'
 import BigNumber from 'bignumber.js'
-import { CampaignType, FarmConfig, Nft, PoolConfig, PancakeSwapFarmConfig, Team } from 'config/constants/types'
+import { CampaignType, FarmConfig, BarnBetaConfig, Nft, PoolConfig, PancakeSwapFarmConfig, GooseFarmConfig, CafeswapFarmConfig, Team } from 'config/constants/types'
 
 export type TranslatableText =
   | string
@@ -26,7 +26,7 @@ export interface Farm extends FarmConfig {
   }
 }
 
-export interface Garden extends FarmConfig {
+export interface BarnBeta extends BarnBetaConfig {
   tokenAmount?: BigNumber
   quoteTokenAmount?: BigNumber
   lpTotalInQuoteToken?: BigNumber
@@ -67,6 +67,36 @@ export interface PancakeSwapFarm extends PancakeSwapFarmConfig {
   }
 }
 
+
+export interface GooseFarm extends GooseFarmConfig {
+  tokenAmount?: BigNumber
+  quoteTokenAmount?: BigNumber
+  lpTotalInQuoteToken?: BigNumber
+  tokenPriceVsQuote?: BigNumber
+  poolWeight?: BigNumber
+  userData?: {
+    allowance: BigNumber
+    tokenBalance: BigNumber
+    stakedBalance: BigNumber
+    earnings: BigNumber
+  }
+}
+
+export interface CafeswapFarm extends CafeswapFarmConfig {
+  tokenAmount?: BigNumber
+  quoteTokenAmount?: BigNumber
+  lpTotalInQuoteToken?: BigNumber
+  tokenPriceVsQuote?: BigNumber
+  poolWeight?: BigNumber
+  userData?: {
+    allowance: BigNumber
+    tokenBalance: BigNumber
+    stakedBalance: BigNumber
+    earnings: BigNumber
+  }
+}
+
+
 export interface Profile {
   userId: number
   points: number
@@ -89,9 +119,8 @@ export interface ToastsState {
 export interface FarmsState {
   data: Farm[]
 }
-
-export interface GardensState {
-  data: Garden[]
+export interface BarnsBetaState {
+  data: BarnBeta[]
 }
 
 export interface PoolsState {
@@ -100,6 +129,14 @@ export interface PoolsState {
 
 export interface PancakeSwapFarmsState {
   data: PancakeSwapFarm[]
+}
+
+export interface GooseFarmsState {
+  data: GooseFarm[]
+}
+
+export interface CafeswapFarmsState {
+  data: CafeswapFarm[]
 }
 
 export interface ProfileState {
@@ -169,7 +206,7 @@ export interface BlockState {
 
 export interface State {
   farms: FarmsState
-  gardens: GardensState
+  barnsBeta: BarnsBetaState
   toasts: ToastsState
   prices: PriceState
   pools: PoolsState
@@ -178,4 +215,6 @@ export interface State {
   achievements: AchievementState
   block: BlockState
   pancakeSwapFarms: PancakeSwapFarmsState
+  gooseFarms: GooseFarmsState
+  cafeswapFarms: CafeswapFarmsState
 }

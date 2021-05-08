@@ -27,6 +27,7 @@ export enum PoolCategory {
   'COMMUNITY' = 'Community',
   'CORE' = 'Core',
   'PANCAKE' = 'PancakeSwap',
+  'GOOSE' = 'GooseFinance',
   'BINANCE' = 'Binance', // Pools using native BNB behave differently than pools using a token
 }
 
@@ -59,6 +60,26 @@ export interface FarmConfig {
   }
 }
 
+export interface BarnBetaConfig {
+  chefTag: string
+  chefAddess: Address
+  chefAbi: string
+  pid: number
+  risk: number
+  lpSymbol: string
+  lpAddresses: Address
+  token: Token
+  quoteToken: Token
+  multiplier?: string
+  isCommunity?: boolean
+  isTokenOnly?: boolean
+  dual?: {
+    rewardPerBlock: number
+    earnLabel: string
+    endBlock: number
+  }
+}
+
 export interface PoolConfig {
   sousId: number
   earningToken: Token
@@ -71,19 +92,66 @@ export interface PoolConfig {
   harvest?: boolean
   isFinished?: boolean
 }
+
 export interface PancakeSwapFarmConfig {
+  chefTag?: string
+  chefAddess?: Address
+  chefAbi?: string
   pid: number
+  risk?: number
   lpSymbol: string
   lpAddresses: Address
   token: Token
   quoteToken: Token
   multiplier?: string
   isCommunity?: boolean
+  isTokenOnly?: boolean
   dual?: {
     rewardPerBlock: number
     earnLabel: string
     endBlock: number
   }
+}
+
+export interface GooseFarmConfig {
+  chefTag?: string
+  chefAddess?: Address
+  chefAbi?: string
+  pid: number
+  risk?: number
+  lpSymbol: string
+  lpAddresses: Address
+  token: Token
+  quoteToken: Token
+  multiplier?: string
+  isCommunity?: boolean
+  isTokenOnly?: boolean
+  dual?: {
+    rewardPerBlock: number
+    earnLabel: string
+    endBlock: number
+  }
+}
+
+export interface CafeswapFarmConfig {
+  chefTag?: string
+  chefAddess?: Address
+  chefAbi?: string
+  pid: number
+  risk?: number
+  lpSymbol: string
+  lpAddresses: Address
+  token: Token
+  quoteToken: Token
+  multiplier?: string
+  isCommunity?: boolean
+  isTokenOnly?: boolean
+  dual?: {
+    rewardPerBlock: number
+    earnLabel: string
+    endBlock: number
+  }
+  lp?: string
 }
 
 export type Images = {
@@ -107,7 +175,7 @@ export type Nft = {
   description: string
   images: NftImages
   sortOrder: number
-  bunnyId: number
+  farmerId: number
   video?: NftVideo
 }
 

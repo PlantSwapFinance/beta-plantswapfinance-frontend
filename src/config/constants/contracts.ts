@@ -7,6 +7,14 @@ export default {
     97: '0x1d32c2945C8FDCBc7156c553B7cEa4325a17f4f9',
     56: '0x73feaa1eE314F8c655E354234017bE2193C9E24E',
   },
+  masterChefGoose: {
+    97: '',
+    56: '0xe70E9185F5ea7Ba3C5d63705784D8563017f2E57',
+  },
+  masterChefCafeswap: {
+    97: '',
+    56: '0xc772955c33088a97d56d0bbf473d05267bc4febb',
+  },
   sousChef: {
     97: '0xd3af5fe61dbaf8f73149bfcfa9fb653ff096029a',
     56: '0xEe60b364586B91945a7521C025c09a5E72832f4f',
@@ -32,13 +40,13 @@ export default {
     56: '0xDf4dBf6536201370F95e06A0F8a7a70fE40E388a',
     97: '0x4B683C7E13B6d5D7fd1FeA9530F451954c1A7c8A',
   },
-  plantRabbits: {
+  plantswapFarmers: {
     56: '0xDf7952B35f24aCF7fC0487D01c8d5690a60DBa07',
     97: '0x60935F36e4631F73f0f407e68642144e07aC7f5E',
   },
-  bunnyFactory: {
+  farmersSchool: {
     56: '0xfa249Caa1D16f75fa159F7DFBAc0cC5EaB48CeFf',
-    97: '0x707CBF373175fdB601D34eeBF2Cf665d08f01148',
+    97: '0x96F587B4DE2de85e07dEC5E45e4457Db4b0Dc496',
   },
   claimRefund: {
     56: '0xE7e53A7e9E3Cf6b840f167eF69519175c497e149',
@@ -48,8 +56,8 @@ export default {
     56: '0x3C6919b132462C1FEc572c6300E83191f4F0012a',
     97: '0xd2Ac1B1728Bb1C11ae02AB6e75B76Ae41A2997e3',
   },
-  bunnySpecial: {
+  farmerSpecial: {
     56: '0xFee8A195570a18461146F401d6033f5ab3380849',
-    97: '0x7b7b1583De1DeB32Ce6605F6deEbF24A0671c17C',
+    97: '0x8AE6dEd6A08E434079E8b0880D976246555d3610',
   },
 }

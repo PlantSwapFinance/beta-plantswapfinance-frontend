@@ -20,6 +20,12 @@ export const getMasterChefAddress = () => {
 export const getMasterChefPancakeSwapAddress = () => {
   return getAddress(addresses.masterChefPancakeSwap)
 }
+export const getMasterChefGooseAddress = () => {
+  return getAddress(addresses.masterChefGoose)
+}
+export const getMasterChefCafeswapAddress = () => {
+  return getAddress(addresses.masterChefCafeswap)
+}
 export const getMulticallAddress = () => {
   return getAddress(addresses.mulltiCall)
 }
@@ -35,11 +41,11 @@ export const getLotteryTicketAddress = () => {
 export const getPlantProfileAddress = () => {
   return getAddress(addresses.plantProfile)
 }
-export const getPlantRabbitsAddress = () => {
-  return getAddress(addresses.plantRabbits)
+export const getPlantswapFarmersAddress = () => {
+  return getAddress(addresses.plantswapFarmers)
 }
-export const getBunnyFactoryAddress = () => {
-  return getAddress(addresses.bunnyFactory)
+export const getFarmersSchoolAddress = () => {
+  return getAddress(addresses.farmersSchool)
 }
 export const getClaimRefundAddress = () => {
   return getAddress(addresses.claimRefund)
@@ -47,6 +53,6 @@ export const getClaimRefundAddress = () => {
 export const getPointCenterIfoAddress = () => {
   return getAddress(addresses.pointCenterIfo)
 }
-export const getBunnySpecialAddress = () => {
-  return getAddress(addresses.bunnySpecial)
+export const getFarmerSpecialAddress = () => {
+  return getAddress(addresses.farmerSpecial)
 }

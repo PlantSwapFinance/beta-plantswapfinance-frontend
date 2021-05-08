@@ -3,8 +3,8 @@ import useWeb3 from 'hooks/useWeb3'
 import {
   getBep20Contract,
   getPlantContract,
-  getBunnyFactoryContract,
-  getBunnySpecialContract,
+  getFarmersSchoolContract,
+  getFarmerSpecialContract,
   getPlantRabbitContract,
   getProfileContract,
   getIfoContract,
@@ -12,6 +12,8 @@ import {
   getLotteryTicketContract,
   getMasterchefContract,
   getMasterchefPancakeSwapContract,
+  getMasterchefGooseContract,
+  getMasterchefCafeswapContract,
   getPointCenterIfoContract,
   getSouschefContract,
   getClaimRefundContract,
@@ -36,12 +38,12 @@ export const usePlant = () => {
   return useMemo(() => getPlantContract(web3), [web3])
 }
 
-export const useBunnyFactory = () => {
+export const useFarmersSchool = () => {
   const web3 = useWeb3()
-  return useMemo(() => getBunnyFactoryContract(web3), [web3])
+  return useMemo(() => getFarmersSchoolContract(web3), [web3])
 }
 
-export const usePlantRabbits = () => {
+export const usePlantswapFarmers = () => {
   const web3 = useWeb3()
   return useMemo(() => getPlantRabbitContract(web3), [web3])
 }
@@ -71,6 +73,16 @@ export const useMasterchefPancakeSwap = () => {
   return useMemo(() => getMasterchefPancakeSwapContract(web3), [web3])
 }
 
+export const useMasterchefGoose = () => {
+  const web3 = useWeb3()
+  return useMemo(() => getMasterchefGooseContract(web3), [web3])
+}
+
+export const useMasterchefCafeswap = () => {
+  const web3 = useWeb3()
+  return useMemo(() => getMasterchefCafeswapContract(web3), [web3])
+}
+
 export const useSousChef = (id) => {
   const web3 = useWeb3()
   return useMemo(() => getSouschefContract(id, web3), [id, web3])
@@ -81,9 +93,9 @@ export const usePointCenterIfoContract = () => {
   return useMemo(() => getPointCenterIfoContract(web3), [web3])
 }
 
-export const useBunnySpecialContract = () => {
+export const useFarmerSpecialContract = () => {
   const web3 = useWeb3()
-  return useMemo(() => getBunnySpecialContract(web3), [web3])
+  return useMemo(() => getFarmerSpecialContract(web3), [web3])
 }
 
 export const useClaimRefundContract = () => {

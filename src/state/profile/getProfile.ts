@@ -48,8 +48,8 @@ const getProfile = async (address: string): Promise<GetProfileResponse> => {
     // so only fetch the nft data if active
     let nft: Nft
     if (isActive) {
-      const bunnyId = await rabbitContract.methods.getBunnyId(tokenId).call()
-      nft = nfts.find((nftItem) => nftItem.bunnyId === Number(bunnyId))
+      const farmerId = await rabbitContract.methods.getFarmerId(tokenId).call()
+      nft = nfts.find((nftItem) => nftItem.farmerId === Number(farmerId))
 
       // Save the preview image in a cookie so it can be used on the exchange
       Cookies.set(

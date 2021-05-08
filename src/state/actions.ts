@@ -1,5 +1,4 @@
 export { fetchFarmsPublicDataAsync, fetchFarmUserDataAsync } from './farms'
-export { fetchGardensPublicDataAsync, fetchGardenUserDataAsync } from './gardens'
 export { clear, remove, push } from './toasts'
 export {
   fetchPoolsPublicDataAsync,
@@ -12,4 +11,10 @@ export {
 export { profileFetchStart, profileFetchSucceeded, profileFetchFailed } from './profile'
 export { fetchStart, teamFetchSucceeded, fetchFailed, teamsFetchSucceeded } from './teams'
 export { setBlock } from './block'
-export { fetchPancakeSwapFarmsPublicDataAsync } from './pancakeSwapFarms'
+export { fetchPancakeSwapFarmsPublicDataAsync, fetchPancakeSwapFarmUserDataAsync } from './pancakeSwapFarms'
+export { fetchGooseFarmsPublicDataAsync, fetchGooseFarmUserDataAsync } from './gooseFarms'
+export { fetchCafeswapFarmsPublicDataAsync, fetchCafeswapFarmUserDataAsync } from './cafeswapFarms'
+
+// Barn Beta
+
+export { fetchBarnsBetaPublicDataAsync, fetchBarnBetaUserDataAsync } from './barnsBeta'

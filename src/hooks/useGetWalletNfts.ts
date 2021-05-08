@@ -3,7 +3,7 @@ import { useEffect, useReducer } from 'react'
 import { getPlantRabbitContract } from 'utils/contractHelpers'
 import makeBatchRequest from 'utils/makeBatchRequest'
 
-const plantRabbitsContract = getPlantRabbitContract()
+const plantswapFarmersContract = getPlantRabbitContract()
 
 export type NftMap = {
   [key: number]: {
@@ -57,18 +57,18 @@ const useGetWalletNfts = () => {
   useEffect(() => {
     const fetchNfts = async () => {
       try {
-        const balanceOf = await plantRabbitsContract.methods.balanceOf(account).call()
+        const balanceOf = await plantswapFarmersContract.methods.balanceOf(account).call()
 
         if (balanceOf > 0) {
           let nfts: NftMap = {}
 
-          const getTokenIdAndBunnyId = async (index: number) => {
+          const getTokenIdAndFarmerId = async (index: number) => {
             try {
-              const { tokenOfOwnerByIndex, getBunnyId, tokenURI } = plantRabbitsContract.methods
+              const { tokenOfOwnerByIndex, getFarmerId, tokenURI } = plantswapFarmersContract.methods
               const tokenId = await tokenOfOwnerByIndex(account, index).call()
-              const [bunnyId, tokenUri] = await makeBatchRequest([getBunnyId(tokenId).call, tokenURI(tokenId).call])
+              const [farmerId, tokenUri] = await makeBatchRequest([getFarmerId(tokenId).call, tokenURI(tokenId).call])
 
-              return [Number(bunnyId), Number(tokenId), tokenUri]
+              return [Number(farmerId), Number(tokenId), tokenUri]
             } catch (error) {
               return null
             }
@@ -77,7 +77,7 @@ const useGetWalletNfts = () => {
           const tokenIdPromises = []
 
           for (let i = 0; i < balanceOf; i++) {
-            tokenIdPromises.push(getTokenIdAndBunnyId(i))
+            tokenIdPromises.push(getTokenIdAndFarmerId(i))
           }
 
           const tokenIdsOwnedByWallet = await Promise.all(tokenIdPromises)
@@ -87,13 +87,13 @@ const useGetWalletNfts = () => {
               return accum
             }
 
-            const [bunnyId, tokenId, tokenUri] = association
+            const [farmerId, tokenId, tokenUri] = association
 
             return {
               ...accum,
-              [bunnyId]: {
+              [farmerId]: {
                 tokenUri,
-                tokenIds: accum[bunnyId] ? [...accum[bunnyId].tokenIds, tokenId] : [tokenId],
+                tokenIds: accum[farmerId] ? [...accum[farmerId].tokenIds, tokenId] : [tokenId],
               },
             }
           }, {})
