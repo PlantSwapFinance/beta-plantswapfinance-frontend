@@ -15,7 +15,7 @@ const PauseProfilePage: React.FC<PauseProfilePageProps> = ({ onDismiss }) => {
   const [isAcknowledged, setIsAcknowledged] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const { profile } = useProfile()
-  const { numberCakeToReactivate } = useGetProfileCosts()
+  const { numberPlantToReactivate } = useGetProfileCosts()
   const TranslateString = useI18n()
   const plantProfileContract = useProfileContract()
   const { account } = useWeb3React()
@@ -60,7 +60,7 @@ const PauseProfilePage: React.FC<PauseProfilePageProps> = ({ onDismiss }) => {
         )}
       </Text>
       <Text as="p" color="textSubtle" mb="24px">
-        {TranslateString(999, `Cost to reactivate in future: ${getBalanceNumber(numberCakeToReactivate)} CAKE`)}
+        {TranslateString(999, `Cost to reactivate in future: ${getBalanceNumber(numberPlantToReactivate)} PLANT`)}
       </Text>
       <label htmlFor="acknowledgement" style={{ cursor: 'pointer', display: 'block', marginBottom: '24px' }}>
         <Flex alignItems="center">

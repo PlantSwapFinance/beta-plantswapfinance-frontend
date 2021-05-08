@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useMemo, useReducer } from 'react'
 import BigNumber from 'bignumber.js'
 import { useWeb3React } from '@web3-react/core'
-import { getBunnyFactoryContract } from 'utils/contractHelpers'
+import { getFarmersSchoolContract } from 'utils/contractHelpers'
 import { MINT_COST, REGISTER_COST, ALLOWANCE_MULTIPLIER } from '../config'
 import { Actions, State, ContextType } from './types'
 
@@ -14,7 +14,7 @@ const initialState: State = {
   teamId: null,
   tokenId: null,
   userName: '',
-  minimumCakeRequired: new BigNumber(totalCost).multipliedBy(new BigNumber(10).pow(18)),
+  minimumPlantRequired: new BigNumber(totalCost).multipliedBy(new BigNumber(10).pow(18)),
   allowance: new BigNumber(allowance).multipliedBy(new BigNumber(10).pow(18)),
 }
 
@@ -62,8 +62,8 @@ const ProfileCreationProvider: React.FC = ({ children }) => {
     let isSubscribed = true
 
     const fetchData = async () => {
-      const bunnyFactoryContract = getBunnyFactoryContract()
-      const canMint = await bunnyFactoryContract.methods.canMint(account).call()
+      const farmersSchoolContract = getFarmersSchoolContract()
+      const canMint = await farmersSchoolContract.methods.canMint(account).call()
       dispatch({ type: 'initialize', step: canMint ? 0 : 1 })
 
       // When changing wallets quickly unmounting before the hasClaim finished causes a React error

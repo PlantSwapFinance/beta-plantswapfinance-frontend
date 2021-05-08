@@ -34,7 +34,7 @@ enum ExistingUserState {
 }
 
 const profileApiUrl = process.env.REACT_APP_API_PROFILE
-const minimumCakeToRegister = new BigNumber(REGISTER_COST).multipliedBy(new BigNumber(10).pow(18))
+const minimumPlantToRegister = new BigNumber(REGISTER_COST).multipliedBy(new BigNumber(10).pow(18))
 
 const InputWrap = styled.div`
   position: relative;
@@ -58,7 +58,7 @@ const Indicator = styled(Flex)`
 
 const UserName: React.FC = () => {
   const [isAcknowledged, setIsAcknoledged] = useState(false)
-  const { teamId, tokenId, userName, actions, minimumCakeRequired, allowance } = useProfileCreation()
+  const { teamId, tokenId, userName, actions, minimumPlantRequired, allowance } = useProfileCreation()
   const TranslateString = useI18n()
   const { account, library } = useWeb3React()
   const { toastError } = useToast()
@@ -67,14 +67,14 @@ const UserName: React.FC = () => {
   const [isValid, setIsValid] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState('')
-  const hasMinimumCakeRequired = useHasPlantBalance(minimumCakeToRegister)
+  const hasMinimumPlantRequired = useHasPlantBalance(minimumPlantToRegister)
   const [onPresentConfirmProfileCreation] = useModal(
     <ConfirmProfileCreationModal
       userName={userName}
       tokenId={tokenId}
       account={account}
       teamId={teamId}
-      minimumCakeRequired={minimumCakeRequired}
+      minimumPlantRequired={minimumPlantRequired}
       allowance={allowance}
     />,
     false,
@@ -240,9 +240,9 @@ const UserName: React.FC = () => {
       <Button onClick={onPresentConfirmProfileCreation} disabled={!isValid || !isUserCreated}>
         {TranslateString(842, 'Complete Profile')}
       </Button>
-      {!hasMinimumCakeRequired && (
+      {!hasMinimumPlantRequired && (
         <Text color="failure" mt="16px">
-          {TranslateString(1098, `A minimum of ${REGISTER_COST} CAKE is required`, { num: REGISTER_COST })}
+          {TranslateString(1098, `A minimum of ${REGISTER_COST} PLANT is required`, { num: REGISTER_COST })}
         </Text>
       )}
     </>

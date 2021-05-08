@@ -2,14 +2,14 @@ import React from 'react'
 import { Button, Flex, Heading, useModal, Won } from '@plantswap-libs/uikit'
 import { useProfile } from 'state/hooks'
 import useI18n from 'hooks/useI18n'
-import ClaimNftAndCakeModal, { useCanClaim } from './ClaimGiftModal'
+import ClaimNftAndPlantModal, { useCanClaim } from './ClaimGiftModal'
 import HeaderWrapper from './HeaderWrapper'
 import EditProfileModal from './EditProfileModal'
 
 const ProfileHeader = () => {
   const TranslateString = useI18n()
   const { canClaim, checkClaimStatus } = useCanClaim()
-  const [onPresentClaimGiftModal] = useModal(<ClaimNftAndCakeModal onSuccess={checkClaimStatus} />)
+  const [onPresentClaimGiftModal] = useModal(<ClaimNftAndPlantModal onSuccess={checkClaimStatus} />)
   const [onEditProfileModal] = useModal(<EditProfileModal />, false)
   const { hasProfile } = useProfile()
 

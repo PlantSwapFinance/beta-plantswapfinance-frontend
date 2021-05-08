@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
-import { Heading } from '@plantswap-libs/uikit'
+import { Breadcrumbs, Heading, Text } from '@plantswap-libs/uikit'
 import useI18n from 'hooks/useI18n'
+import { ProfileCreationContext } from './contexts/ProfileCreationProvider'
 
 const Wrapper = styled.div`
   border-bottom: 2px solid ${({ theme }) => theme.colors.textSubtle};
@@ -9,8 +10,17 @@ const Wrapper = styled.div`
   padding-bottom: 24px;
 `
 
+
+const steps = [
+  { translationId: 776, label: 'Get Starter Collectible' },
+  { translationId: 778, label: 'Set Profile Picture' },
+  { translationId: 780, label: 'Join Team' },
+  { translationId: 782, label: 'Set Name' },
+]
+
 const Header: React.FC = () => {
   const TranslateString = useI18n()
+  const { currentStep } = useContext(ProfileCreationContext)
 
   return (
     <Wrapper>
@@ -20,9 +30,18 @@ const Header: React.FC = () => {
       <Heading as="h2" size="lg" mb="8px">
         {TranslateString(772, 'Build yourself a unique profile')}
       </Heading>
-      <Heading as="h1" size="xxl" color="secondary" mb="8px">
-          In progress...
-      </Heading>
+      <Text color="textSubtle" mb="24px">
+        {TranslateString(999, 'Total cost: 1 PLANT')}
+      </Text>
+      <Breadcrumbs>
+        {steps.map(({ translationId, label }, index) => {
+          return (
+            <Text key={label} color={index <= currentStep ? 'text' : 'textDisabled'}>
+              {TranslateString(translationId, label)}
+            </Text>
+          )
+        })}
+      </Breadcrumbs>
     </Wrapper>
   )
 }

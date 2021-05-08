@@ -4,27 +4,27 @@ import { Card, CardBody, Heading, Text } from '@plantswap-libs/uikit'
 import { useWeb3React } from '@web3-react/core'
 import useI18n from 'hooks/useI18n'
 import useApproveConfirmTransaction from 'hooks/useApproveConfirmTransaction'
-import { usePlant, useBunnyFactory } from 'hooks/useContract'
+import { usePlant, useFarmersSchool } from 'hooks/useContract'
 import useHasPlantBalance from 'hooks/useHasPlantBalance'
 import nftList from 'config/constants/nfts'
 import SelectionCard from '../components/SelectionCard'
 import NextStepButton from '../components/NextStepButton'
 import ApproveConfirmButtons from '../components/ApproveConfirmButtons'
 import useProfileCreation from './contexts/hook'
-import { MINT_COST, STARTER_BUNNY_IDS } from './config'
+import { MINT_COST, STARTER_FARMERS_IDS } from './config'
 
-const nfts = nftList.filter((nft) => STARTER_BUNNY_IDS.includes(nft.bunnyId))
-const minimumCakeBalanceToMint = new BigNumber(MINT_COST).multipliedBy(new BigNumber(10).pow(18))
+const nfts = nftList.filter((nft) => STARTER_FARMERS_IDS.includes(nft.farmerId))
+const minimumPlantBalanceToMint = new BigNumber(MINT_COST).multipliedBy(new BigNumber(10).pow(18))
 
 const Mint: React.FC = () => {
-  const [bunnyId, setBunnyId] = useState(null)
-  const { actions, minimumCakeRequired, allowance } = useProfileCreation()
+  const [farmerId, setFarmersId] = useState(null)
+  const { actions, minimumPlantRequired, allowance } = useProfileCreation()
 
   const { account } = useWeb3React()
-  const cakeContract = usePlant()
-  const bunnyFactoryContract = useBunnyFactory()
+  const plantContract = usePlant()
+  const farmersSchoolContract = useFarmersSchool()
   const TranslateString = useI18n()
-  const hasMinimumCakeRequired = useHasPlantBalance(minimumCakeBalanceToMint)
+  const hasMinimumPlantRequired = useHasPlantBalance(minimumPlantBalanceToMint)
   const {
     isApproving,
     isApproved,
@@ -36,20 +36,20 @@ const Mint: React.FC = () => {
     onRequiresApproval: async () => {
       // TODO: Move this to a helper, this check will be probably be used many times
       try {
-        const response = await cakeContract.methods.allowance(account, bunnyFactoryContract.options.address).call()
+        const response = await plantContract.methods.allowance(account, farmersSchoolContract.options.address).call()
         const currentAllowance = new BigNumber(response)
-        return currentAllowance.gte(minimumCakeRequired)
+        return currentAllowance.gte(minimumPlantRequired)
       } catch (error) {
         return false
       }
     },
     onApprove: () => {
-      return cakeContract.methods
-        .approve(bunnyFactoryContract.options.address, allowance.toJSON())
+      return plantContract.methods
+        .approve(farmersSchoolContract.options.address, allowance.toJSON())
         .send({ from: account })
     },
     onConfirm: () => {
-      return bunnyFactoryContract.methods.mintNFT(bunnyId).send({ from: account })
+      return farmersSchoolContract.methods.mintNFT(farmerId).send({ from: account })
     },
     onSuccess: () => actions.nextStep(),
   })
@@ -76,34 +76,34 @@ const Mint: React.FC = () => {
             {TranslateString(794, 'Choose wisely: you can only ever make one starter collectible!')}
           </Text>
           <Text as="p" mb="24px" color="textSubtle">
-            {TranslateString(999, `Cost: ${MINT_COST} CAKE`, { num: MINT_COST })}
+            {TranslateString(999, `Cost: ${MINT_COST} PLANT`, { num: MINT_COST })}
           </Text>
           {nfts.map((nft) => {
-            const handleChange = (value: string) => setBunnyId(parseInt(value, 10))
+            const handleChange = (value: string) => setFarmersId(parseInt(value, 10))
 
             return (
               <SelectionCard
-                key={nft.bunnyId}
+                key={nft.farmerId}
                 name="mintStarter"
-                value={nft.bunnyId}
+                value={nft.farmerId}
                 image={`/images/nfts/${nft.images.md}`}
-                isChecked={bunnyId === nft.bunnyId}
+                isChecked={farmerId === nft.farmerId}
                 onChange={handleChange}
-                disabled={isApproving || isConfirming || isConfirmed || !hasMinimumCakeRequired}
+                disabled={isApproving || isConfirming || isConfirmed || !hasMinimumPlantRequired}
               >
                 <Text bold>{nft.name}</Text>
               </SelectionCard>
             )
           })}
-          {!hasMinimumCakeRequired && (
+          {!hasMinimumPlantRequired && (
             <Text color="failure" mb="16px">
-              {TranslateString(1098, `A minimum of ${MINT_COST} CAKE is required`)}
+              {TranslateString(1098, `A minimum of ${MINT_COST} PLANT is required`)}
             </Text>
           )}
           <ApproveConfirmButtons
-            isApproveDisabled={bunnyId === null || isConfirmed || isConfirming || isApproved}
+            isApproveDisabled={farmerId === null || isConfirmed || isConfirming || isApproved}
             isApproving={isApproving}
-            isConfirmDisabled={!isApproved || isConfirmed || !hasMinimumCakeRequired}
+            isConfirmDisabled={!isApproved || isConfirmed || !hasMinimumPlantRequired}
             isConfirming={isConfirming}
             onApprove={handleApprove}
             onConfirm={handleConfirm}

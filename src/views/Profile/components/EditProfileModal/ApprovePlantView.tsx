@@ -9,22 +9,22 @@ import { getFullDisplayBalance } from 'utils/formatBalance'
 import useGetProfileCosts from 'hooks/useGetProfileCosts'
 import { UseEditProfileResponse } from './reducer'
 
-interface ApproveCakePageProps extends InjectedModalProps {
+interface ApprovePlantPageProps extends InjectedModalProps {
   goToChange: UseEditProfileResponse['goToChange']
 }
 
-const ApproveCakePage: React.FC<ApproveCakePageProps> = ({ goToChange, onDismiss }) => {
+const ApprovePlantPage: React.FC<ApprovePlantPageProps> = ({ goToChange, onDismiss }) => {
   const [isApproving, setIsApproving] = useState(false)
   const { profile } = useProfile()
   const TranslateString = useI18n()
   const { account } = useWeb3React()
-  const { numberCakeToUpdate, numberCakeToReactivate } = useGetProfileCosts()
-  const cakeContract = usePlant()
+  const { numberPlantToUpdate, numberPlantToReactivate } = useGetProfileCosts()
+  const plantContract = usePlant()
   const { toastError } = useToast()
-  const cost = profile.isActive ? numberCakeToUpdate : numberCakeToReactivate
+  const cost = profile.isActive ? numberPlantToUpdate : numberPlantToReactivate
 
   const handleApprove = () => {
-    cakeContract.methods
+    plantContract.methods
       .approve(getPlantProfileAddress(), cost.times(2).toJSON())
       .send({ from: account })
       .on('sending', () => {
@@ -49,7 +49,7 @@ const ApproveCakePage: React.FC<ApproveCakePageProps> = ({ goToChange, onDismiss
         <Text>
           {profile.isActive ? TranslateString(999, 'Cost to update:') : TranslateString(999, 'Cost to reactivate:')}
         </Text>
-        <Text>{TranslateString(999, `${getFullDisplayBalance(cost)} CAKE`)}</Text>
+        <Text>{TranslateString(999, `${getFullDisplayBalance(cost)} PLANT`)}</Text>
       </Flex>
       <Button
         disabled={isApproving}
@@ -68,4 +68,4 @@ const ApproveCakePage: React.FC<ApproveCakePageProps> = ({ goToChange, onDismiss
   )
 }
 
-export default ApproveCakePage
+export default ApprovePlantPage

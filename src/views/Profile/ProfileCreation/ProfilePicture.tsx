@@ -7,7 +7,7 @@ import nftList from 'config/constants/nfts'
 import useI18n from 'hooks/useI18n'
 import { useToast } from 'state/hooks'
 import { getPlantProfileAddress } from 'utils/addressHelpers'
-import { usePlantRabbits } from 'hooks/useContract'
+import { usePlantswapFarmers } from 'hooks/useContract'
 import useGetWalletNfts from 'hooks/useGetWalletNfts'
 import SelectionCard from '../components/SelectionCard'
 import NextStepButton from '../components/NextStepButton'
@@ -27,14 +27,14 @@ const ProfilePicture: React.FC = () => {
   const { tokenId, actions } = useContext(ProfileCreationContext)
   const TranslateString = useI18n()
   const { isLoading, nfts: nftsInWallet } = useGetWalletNfts()
-  const plantRabbitsContract = usePlantRabbits()
+  const plantswapFarmersContract = usePlantswapFarmers()
   const { account } = useWeb3React()
   const { toastError } = useToast()
-  const bunnyIds = Object.keys(nftsInWallet).map((nftWalletItem) => Number(nftWalletItem))
-  const walletNfts = nftList.filter((nft) => bunnyIds.includes(nft.bunnyId))
+  const farmerIds = Object.keys(nftsInWallet).map((nftWalletItem) => Number(nftWalletItem))
+  const walletNfts = nftList.filter((nft) => farmerIds.includes(nft.farmerId))
 
   const handleApprove = () => {
-    plantRabbitsContract.methods
+    plantswapFarmersContract.methods
       .approve(getPlantProfileAddress(), tokenId)
       .send({ from: account })
       .on('sending', () => {
@@ -99,12 +99,12 @@ const ProfilePicture: React.FC = () => {
               <Skeleton height="80px" mb="16px" />
             ) : (
               walletNfts.map((walletNft) => {
-                const [firstTokenId] = nftsInWallet[walletNft.bunnyId].tokenIds
+                const [firstTokenId] = nftsInWallet[walletNft.farmerId].tokenIds
 
                 return (
                   <SelectionCard
                     name="profilePicture"
-                    key={walletNft.bunnyId}
+                    key={walletNft.farmerId}
                     value={firstTokenId}
                     image={`/images/nfts/${walletNft.images.md}`}
                     isChecked={firstTokenId === tokenId}

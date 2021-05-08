@@ -43,20 +43,20 @@ const AvatarWrapper = styled.div`
 const StartPage: React.FC<StartPageProps> = ({ goToApprove, goToChange, goToRemove, onDismiss }) => {
   const [needsApproval, setNeedsApproval] = useState(null)
   const { profile } = useProfile()
-  const { numberCakeToUpdate, numberCakeToReactivate } = useGetProfileCosts()
-  const hasMinimumCakeRequired = useHasPlantBalance(profile.isActive ? numberCakeToUpdate : numberCakeToReactivate)
+  const { numberPlantToUpdate, numberPlantToReactivate } = useGetProfileCosts()
+  const hasMinimumPlantRequired = useHasPlantBalance(profile.isActive ? numberPlantToUpdate : numberPlantToReactivate)
   const TranslateString = useI18n()
   const { account } = useWeb3React()
-  const cakeContract = usePlant()
-  const cost = profile.isActive ? numberCakeToUpdate : numberCakeToReactivate
+  const plantContract = usePlant()
+  const cost = profile.isActive ? numberPlantToUpdate : numberPlantToReactivate
 
   /**
-   * Check if the wallet has the required CAKE allowance to change their profile pic or reactivate
+   * Check if the wallet has the required PLANT allowance to change their profile pic or reactivate
    * If they don't, we send them to the approval screen first
    */
   useEffect(() => {
     const checkApprovalStatus = async () => {
-      const response = await cakeContract.methods.allowance(account, getPlantProfileAddress()).call()
+      const response = await plantContract.methods.allowance(account, getPlantProfileAddress()).call()
       const currentAllowance = new BigNumber(response)
       setNeedsApproval(currentAllowance.lt(cost))
     }
@@ -64,7 +64,7 @@ const StartPage: React.FC<StartPageProps> = ({ goToApprove, goToChange, goToRemo
     if (account) {
       checkApprovalStatus()
     }
-  }, [account, cost, setNeedsApproval, cakeContract])
+  }, [account, cost, setNeedsApproval, plantContract])
 
   if (!profile) {
     return null
@@ -77,8 +77,8 @@ const StartPage: React.FC<StartPageProps> = ({ goToApprove, goToChange, goToRemo
       </AvatarWrapper>
       <Flex alignItems="center" style={{ height: '48px' }} justifyContent="center">
         <Text as="p" color="failure">
-          {!hasMinimumCakeRequired &&
-            TranslateString(999, `${getFullDisplayBalance(numberCakeToUpdate)} CAKE required to change profile pic`)}
+          {!hasMinimumPlantRequired &&
+            TranslateString(999, `${getFullDisplayBalance(numberPlantToUpdate)} PLANT required to change profile pic`)}
         </Text>
       </Flex>
       {profile.isActive ? (
@@ -87,7 +87,7 @@ const StartPage: React.FC<StartPageProps> = ({ goToApprove, goToChange, goToRemo
             width="100%"
             mb="8px"
             onClick={needsApproval === true ? goToApprove : goToChange}
-            disabled={!hasMinimumCakeRequired || needsApproval === null}
+            disabled={!hasMinimumPlantRequired || needsApproval === null}
           >
             {TranslateString(999, 'Change Profile Pic')}
           </Button>
@@ -100,7 +100,7 @@ const StartPage: React.FC<StartPageProps> = ({ goToApprove, goToChange, goToRemo
           width="100%"
           mb="8px"
           onClick={needsApproval === true ? goToApprove : goToChange}
-          disabled={!hasMinimumCakeRequired || needsApproval === null}
+          disabled={!hasMinimumPlantRequired || needsApproval === null}
         >
           {TranslateString(999, 'Reactivate Profile')}
         </Button>
