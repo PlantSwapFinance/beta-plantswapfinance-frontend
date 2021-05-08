@@ -2,13 +2,13 @@
   {
     "inputs": [
       {
-        "internalType": "contract BunnyFactoryV2",
-        "name": "_bunnyFactoryV2",
+        "internalType": "contract FarmersSchoolV2",
+        "name": "_farmersSchoolV2",
         "type": "address"
       },
       {
-        "internalType": "contract BunnyMintingStation",
-        "name": "_bunnyMintingStation",
+        "internalType": "contract FarmersMintingStation",
+        "name": "_farmersMintingStation",
         "type": "address"
       },
       {
@@ -53,11 +53,11 @@
       {
         "indexed": true,
         "internalType": "uint8",
-        "name": "bunnyId",
+        "name": "farmerId",
         "type": "uint8"
       }
     ],
-    "name": "BunnyMint",
+    "name": "FarmerMint",
     "type": "event"
   },
   {
@@ -81,10 +81,10 @@
   },
   {
     "inputs": [],
-    "name": "bunnyFactoryV2",
+    "name": "farmersSchoolV2",
     "outputs": [
       {
-        "internalType": "contract BunnyFactoryV2",
+        "internalType": "contract FarmersSchoolV2",
         "name": "",
         "type": "address"
       }
@@ -94,10 +94,10 @@
   },
   {
     "inputs": [],
-    "name": "bunnyMintingStation",
+    "name": "farmersMintingStation",
     "outputs": [
       {
-        "internalType": "contract BunnyMintingStation",
+        "internalType": "contract FarmersMintingStation",
         "name": "",
         "type": "address"
       }
@@ -173,7 +173,7 @@
     "inputs": [
       {
         "internalType": "uint8",
-        "name": "_bunnyId",
+        "name": "_farmerId",
         "type": "uint8"
       }
     ],
@@ -206,31 +206,31 @@
     "inputs": [
       {
         "internalType": "string",
-        "name": "_bunnyId5Json",
+        "name": "_farmerId5Json",
         "type": "string"
       },
       {
         "internalType": "string",
-        "name": "_bunnyId6Json",
+        "name": "_farmerId6Json",
         "type": "string"
       },
       {
         "internalType": "string",
-        "name": "_bunnyId7Json",
+        "name": "_farmerId7Json",
         "type": "string"
       },
       {
         "internalType": "string",
-        "name": "_bunnyId8Json",
+        "name": "_farmerId8Json",
         "type": "string"
       },
       {
         "internalType": "string",
-        "name": "_bunnyId9Json",
+        "name": "_farmerId9Json",
         "type": "string"
       }
     ],
-    "name": "setBunnyJson",
+    "name": "setFarmerJson",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

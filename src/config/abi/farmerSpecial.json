@@ -2,8 +2,8 @@
   {
     "inputs": [
       {
-        "internalType": "contract BunnyMintingStation",
-        "name": "_bunnyMintingStation",
+        "internalType": "contract FarmersMintingStation",
+        "name": "_farmersMintingStation",
         "type": "address"
       },
       {
@@ -31,7 +31,7 @@
       {
         "indexed": true,
         "internalType": "uint8",
-        "name": "bunnyId",
+        "name": "farmerId",
         "type": "uint8"
       },
       {
@@ -47,7 +47,7 @@
         "type": "uint256"
       }
     ],
-    "name": "BunnyAdd",
+    "name": "FarmerAdd",
     "type": "event"
   },
   {
@@ -56,7 +56,7 @@
       {
         "indexed": true,
         "internalType": "uint8",
-        "name": "bunnyId",
+        "name": "farmerId",
         "type": "uint8"
       },
       {
@@ -78,7 +78,7 @@
         "type": "bool"
       }
     ],
-    "name": "BunnyChange",
+    "name": "FarmerChange",
     "type": "event"
   },
   {
@@ -99,11 +99,11 @@
       {
         "indexed": true,
         "internalType": "uint8",
-        "name": "bunnyId",
+        "name": "farmerId",
         "type": "uint8"
       }
     ],
-    "name": "BunnyMint",
+    "name": "FarmerMint",
     "type": "event"
   },
   {
@@ -129,7 +129,7 @@
     "inputs": [
       {
         "internalType": "uint8",
-        "name": "_bunnyId",
+        "name": "_farmerId",
         "type": "uint8"
       },
       {
@@ -148,7 +148,7 @@
         "type": "uint256"
       }
     ],
-    "name": "addBunny",
+    "name": "addFarmer",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -161,7 +161,7 @@
         "type": "uint8"
       }
     ],
-    "name": "bunnyCharacteristics",
+    "name": "farmerCharacteristics",
     "outputs": [
       {
         "internalType": "string",
@@ -194,10 +194,10 @@
   },
   {
     "inputs": [],
-    "name": "bunnyMintingStation",
+    "name": "farmersMintingStation",
     "outputs": [
       {
-        "internalType": "contract BunnyMintingStation",
+        "internalType": "contract FarmersMintingStation",
         "name": "",
         "type": "address"
       }
@@ -240,7 +240,7 @@
       },
       {
         "internalType": "uint8[]",
-        "name": "_bunnyIds",
+        "name": "_farmerIds",
         "type": "uint8[]"
       }
     ],
@@ -264,7 +264,7 @@
       },
       {
         "internalType": "uint8",
-        "name": "_bunnyId",
+        "name": "_farmerId",
         "type": "uint8"
       }
     ],
@@ -333,7 +333,7 @@
     "inputs": [
       {
         "internalType": "uint8",
-        "name": "_bunnyId",
+        "name": "_farmerId",
         "type": "uint8"
       }
     ],
@@ -405,7 +405,7 @@
     "inputs": [
       {
         "internalType": "uint8",
-        "name": "_bunnyId",
+        "name": "_farmerId",
         "type": "uint8"
       },
       {
@@ -424,7 +424,7 @@
         "type": "bool"
       }
     ],
-    "name": "updateBunny",
+    "name": "updateFarmer",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
