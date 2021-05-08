@@ -19,10 +19,28 @@ const BinanceTag = (props) => (
   </Tag>
 )
 
+const PancakeSwapTag = (props) => (
+  <Tag variant="binance" outline startIcon={<BinanceIcon color="secondary" />} {...props}>
+    PancakeSwa
+  </Tag>
+)
+
+const GooseFinanceTag = (props) => (
+  <Tag variant="binance" outline startIcon={<BinanceIcon color="secondary" />} {...props}>
+    ĜooseFinance
+  </Tag>
+)
+
+const CafeswapTag = (props) => (
+  <Tag variant="binance" outline startIcon={<BinanceIcon color="secondary" />} {...props}>
+    CafeSwap
+  </Tag>
+)
+
 const DualTag = (props) => (
   <Tag variant="textSubtle" outline {...props}>
     Dual
   </Tag>
 )
 
-export { CoreTag, CommunityTag, BinanceTag, DualTag }
+export { CoreTag, CommunityTag, BinanceTag, PancakeSwapTag, GooseFinanceTag, CafeswapTag, DualTag }
