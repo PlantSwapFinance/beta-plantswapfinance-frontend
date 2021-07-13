@@ -1,6 +1,6 @@
 import { Toast } from '@plantswap-libs/uikit'
 import BigNumber from 'bignumber.js'
-import { CampaignType, FarmConfig, BarnBetaConfig, Nft, PoolConfig, PancakeSwapFarmConfig, GooseFarmConfig, CafeswapFarmConfig, Team } from 'config/constants/types'
+import { CampaignType, FarmConfig, VerticalGardenConfig, BarnBetaConfig, Nft, PoolConfig, PancakeSwapFarmConfig, GooseFarmConfig, CafeswapFarmConfig, Team } from 'config/constants/types'
 
 export type TranslatableText =
   | string
@@ -40,6 +40,21 @@ export interface Garden extends FarmConfig {
     tokenBalance: BigNumber
     stakedBalance: BigNumber
     earnings: BigNumber
+  }
+}
+
+export interface VerticalGarden extends VerticalGardenConfig {
+  totalStaked?: BigNumber
+  startBlock?: number
+  endBlock?: number
+  userData?: {
+    allowance: BigNumber
+    allowanceReward: BigNumber
+    allowancePlant: BigNumber
+    stakingTokenBalance: BigNumber
+    stakedBalance: BigNumber
+    pendingReward: BigNumber
+    pendingPlantReward: BigNumber
   }
 }
 
@@ -168,6 +183,10 @@ export interface GardensState {
   data: Garden[]
 }
 
+export interface VerticalGardensState {
+  data: VerticalGarden[]
+}
+
 export interface BarnsBetaState {
   data: BarnBeta[]
 }
@@ -260,6 +279,7 @@ export interface BlockState {
 export interface State {
   farms: FarmsState
   gardens: GardensState
+  verticalGardens: VerticalGardensState
   barnsBeta: BarnsBetaState
   toasts: ToastsState
   prices: PriceState

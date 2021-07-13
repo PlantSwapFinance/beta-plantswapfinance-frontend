@@ -31,6 +31,14 @@ export enum PoolCategory {
   'BINANCE' = 'Binance', // Pools using native BNB behave differently than pools using a token
 }
 
+export enum VerticalGardenCategory {
+  'COMMUNITY' = 'Community',
+  'CORE' = 'Core',
+  'PANCAKE' = 'PancakeSwap',
+  'GOOSE' = 'GooseFinance',
+  'BINANCE' = 'Binance', // Pools using native BNB behave differently than pools using a token
+}
+
 export interface Address {
   97?: string
   56: string
@@ -58,6 +66,24 @@ export interface FarmConfig {
     earnLabel: string
     endBlock: number
   }
+}
+
+export interface VerticalGardenConfig {
+  vgId: number
+  stakingToken: Token
+  stakingRewardToken: Token
+  verticalEarningToken: Token
+  verticalGardenContractAddress: Address
+  verticalGardenMasterGardenerPId?: number
+  verticalGardenCategory?: VerticalGardenCategory
+  harvest?: boolean
+  sortOrder?: number
+  isFinished?: boolean
+  stakingLimit?: number
+  depositFee?: number
+  rewardCut?: number
+  rewardCutSplitDevelopmentFund?: number
+  rewardCutSplitBuyPlantAndBurn?: number
 }
 
 export interface BarnBetaConfig {

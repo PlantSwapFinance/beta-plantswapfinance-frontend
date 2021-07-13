@@ -7,8 +7,8 @@ import {
   updateUserBalance,
   updateUserPendingReward,
 } from 'state/actions'
-import { unstake, sousUnstake, sousEmegencyUnstake } from 'utils/callHelpers'
-import { useMasterchef, useSousChef } from './useContract'
+import { unstake, verticalWithdraw, sousUnstake, sousEmegencyUnstake } from 'utils/callHelpers'
+import { useMasterchef, useVerticalGarden, useSousChef } from './useContract'
 
 const useUnstake = (pid: number) => {
   const dispatch = useDispatch()
@@ -22,6 +22,26 @@ const useUnstake = (pid: number) => {
       console.info(txHash)
     },
     [account, dispatch, masterChefContract, pid],
+  )
+
+  return { onUnstake: handleUnstake }
+}
+
+export const useVerticalGardensUnstake = (vgId) => {
+  const dispatch = useDispatch()
+  const { account } = useWeb3React()
+  const verticalGardenContract = useVerticalGarden(vgId)
+
+  const handleUnstake = useCallback(
+    async (amount: string) => {
+      const txHash = await verticalWithdraw(verticalGardenContract, amount, account)
+      console.info(txHash)
+
+      dispatch(updateUserStakedBalance(vgId, account))
+      dispatch(updateUserBalance(vgId, account))
+      dispatch(updateUserPendingReward(vgId, account))
+    },
+    [account, dispatch, verticalGardenContract, vgId],
   )
 
   return { onUnstake: handleUnstake }

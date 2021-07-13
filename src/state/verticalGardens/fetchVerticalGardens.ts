@@ -1,0 +1,155 @@
+import verticalGardensConfig from 'config/constants/verticalGardens'
+import verticalGardenABI from 'config/abi/verticalGardens.json'
+import plantABI from 'config/abi/plant.json'
+import wbnbABI from 'config/abi/weth.json'
+import multicall from 'utils/multicall'
+import { getAddress, getWbnbAddress } from 'utils/addressHelpers'
+import BigNumber from 'bignumber.js'
+
+export const fetchVerticalGardenTotalStaked = async () => { // NEW
+  const verticalGardensTotalStaked = verticalGardensConfig.filter((p) => p.vgId !== 0)
+  const callsTotalStaked = verticalGardensTotalStaked.map((verticalGardenConfig) => {
+    return {
+      address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
+      name: 'totalStakedToken',
+    }
+  })
+  const callsTotalStakedEachBlock = verticalGardensTotalStaked.map((verticalGardenConfig) => {
+    return {
+      address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
+      name: 'totalStakedTokenEachBlock',
+    }
+  })
+  const callsTotalPendingStakedRewardToSplit = verticalGardensTotalStaked.map((verticalGardenConfig) => {
+    return {
+      address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
+      name: 'totalPendingRewardTokenRewardToSplit', // totalPendingCakeRewardToSplit
+    }
+  })
+  const callsTotalPendingPlantRewardToSplit = verticalGardensTotalStaked.map((verticalGardenConfig) => {
+    return {
+      address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
+      name: 'totalPendingPlantRewardToSplit',
+    }
+  })
+  const callsPendingStakedInStakedMasterChef = verticalGardensTotalStaked.map((verticalGardenConfig) => {
+    return {
+      address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
+      name: 'pendingStakedTokenInStakedTokenMasterChef', // pendingCakeInCakeMasterChef
+    }
+  })
+  const callsPendingPlantInPlantMasterGardener = verticalGardensTotalStaked.map((verticalGardenConfig) => {
+    return {
+      address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
+      name: 'pendingPlantInPlantMasterGardener',
+    }
+  })
+
+  const totalStakeds = await multicall(verticalGardenABI, callsTotalStaked)
+  const totalStakedEachBlocks = await multicall(verticalGardenABI, callsTotalStakedEachBlock)
+  const totalPendingStakedRewardToSplits = await multicall(verticalGardenABI, callsTotalPendingStakedRewardToSplit)
+  const totalPendingPlantRewardToSplits = await multicall(verticalGardenABI, callsTotalPendingPlantRewardToSplit)
+  const pendingStakedInStakedMasterChefs = await multicall(verticalGardenABI, callsPendingStakedInStakedMasterChef)
+  const pendingPlantInPlantMasterGardeners = await multicall(verticalGardenABI, callsPendingPlantInPlantMasterGardener)
+
+
+  return verticalGardensTotalStaked.map((plantVerticalGardenConfig, index) => {
+    const totalStaked = totalStakeds[index]
+    const totalStakedEachBlock = totalStakedEachBlocks[index]
+    const totalPendingStakedRewardToSplit = totalPendingStakedRewardToSplits[index]
+    const totalPendingPlantRewardToSplit = totalPendingPlantRewardToSplits[index]
+    const pendingStakedInStakedMasterChef = pendingStakedInStakedMasterChefs[index]
+    const pendingPlantInPlantMasterGardener = pendingPlantInPlantMasterGardeners[index]
+    return {
+      vgId: plantVerticalGardenConfig.vgId,
+      totalStaked: new BigNumber(totalStaked).toJSON(),
+      totalStakedEachBlock: new BigNumber(totalStakedEachBlock).toJSON(),
+      totalPendingStakedRewardToSplit: new BigNumber(totalPendingStakedRewardToSplit).toJSON(),
+      totalPendingPlantRewardToSplit: new BigNumber(totalPendingPlantRewardToSplit).toJSON(),
+      pendingStakedInStakedMasterChef: new BigNumber(pendingStakedInStakedMasterChef).toJSON(),
+      pendingPlantInPlantMasterGardener: new BigNumber(pendingPlantInPlantMasterGardener).toJSON(),
+    }
+  })
+}
+
+export const fetchVerticalGardenInfo = async () => { // NEW
+  const verticalGardensInfo = verticalGardensConfig.filter((p) => p.vgId !== 0)
+  const callsDepositActive = verticalGardensInfo.map((verticalGardenConfig) => {
+    return {
+      address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
+      name: 'depositActive',
+    }
+  })
+  const callsFreezeContract = verticalGardensInfo.map((verticalGardenConfig) => {
+    return {
+      address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
+      name: 'freezeContract',
+    }
+  })
+  const callsFreezeContractTillBlocks = verticalGardensInfo.map((verticalGardenConfig) => {
+    return {
+      address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
+      name: 'freezeContractTillBlock',
+    }
+  })
+  const callsLastRewardUpdateBlock = verticalGardensInfo.map((verticalGardenConfig) => {
+    return {
+      address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
+      name: 'lastRewardUpdateBlock',
+    }
+  })
+
+  const depositActives = await multicall(verticalGardenABI, callsDepositActive)
+  const freezeContracts = await multicall(verticalGardenABI, callsFreezeContract)
+  const freezeContractTillBlocks = await multicall(verticalGardenABI, callsFreezeContractTillBlocks)
+  const lastRewardUpdateBlocks = await multicall(verticalGardenABI, callsLastRewardUpdateBlock)
+
+  return verticalGardensInfo.map((plantVerticalGardenConfig, index) => {
+    const depositActive = depositActives[index]
+    const freezeContract = freezeContracts[index]
+    const freezeContractTillBlock = freezeContractTillBlocks[index]
+    const lastRewardUpdateBlock = lastRewardUpdateBlocks[index]
+    return {
+      vgId: plantVerticalGardenConfig.vgId,
+      depositActive: depositActive.toJSON(),
+      freezeContract: freezeContract.toJSON(),
+      freezeContractTillBlock: new BigNumber(freezeContractTillBlock).toJSON(),
+      lastRewardUpdateBlock: new BigNumber(lastRewardUpdateBlock).toJSON(),
+    }
+  })
+}
+
+export const fetchVerticalGardensTotalStatking = async () => { // OLD
+  const nonBnbVerticalGardens = verticalGardensConfig.filter((p) => p.stakingToken.symbol !== 'BNB')
+  const bnbVerticalGarden = verticalGardensConfig.filter((p) => p.stakingToken.symbol === 'BNB')
+
+  const callsNonBnbVerticalGardens = nonBnbVerticalGardens.map((verticalGardenConfig) => {
+    return {
+      address: getAddress(verticalGardenConfig.stakingToken.address),
+      name: 'balanceOf',
+      params: [getAddress(verticalGardenConfig.verticalGardenContractAddress)],
+    }
+  })
+
+  const callsBnbVerticalGardens = bnbVerticalGarden.map((verticalGardenConfig) => {
+    return {
+      address: getWbnbAddress(),
+      name: 'balanceOf',
+      params: [getAddress(verticalGardenConfig.verticalGardenContractAddress)],
+    }
+  })
+
+  const nonBnbVerticalGardensTotalStaked = await multicall(plantABI, callsNonBnbVerticalGardens)
+  const bnbVerticalGardensTotalStaked = await multicall(wbnbABI, callsBnbVerticalGardens)
+
+  return [
+    ...nonBnbVerticalGardens.map((p, index) => ({
+      vgId: p.vgId,
+      totalStaked: new BigNumber(nonBnbVerticalGardensTotalStaked[index]).toJSON(),
+    })),
+    ...bnbVerticalGarden.map((p, index) => ({
+      vgId: p.vgId,
+      totalStaked: new BigNumber(bnbVerticalGardensTotalStaked[index]).toJSON(),
+    })),
+  ]
+}

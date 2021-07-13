@@ -8,6 +8,7 @@ const communityFarms = farmsConfig.filter((farm) => farm.isCommunity).map((farm)
 const communityBarnsBeta = barnsBetaConfig.filter((barnBeta) => barnBeta.isCommunity).map((barnBeta) => barnBeta.token.symbol)
 
 export { farmsConfig, communityFarms }
+export { default as verticalGardensConfig } from './verticalGardens'
 export { barnsBetaConfig, communityBarnsBeta }
 export { default as poolsConfig } from './pools'
 export { default as ifosConfig } from './ifo'

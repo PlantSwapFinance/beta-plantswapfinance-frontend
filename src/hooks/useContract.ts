@@ -16,6 +16,7 @@ import {
   getLotteryContract,
   getLotteryTicketContract,
   getMasterchefContract,
+  getVerticalGardenContract,
   getMasterchefPancakeSwapContract,
   getMasterchefGooseContract,
   getMasterchefCafeswapContract,
@@ -86,6 +87,11 @@ export const useLotteryTicket = () => {
 export const useMasterchef = () => {
   const web3 = useWeb3()
   return useMemo(() => getMasterchefContract(web3), [web3])
+}
+
+export const useVerticalGarden = (id) => {
+  const web3 = useWeb3()
+  return useMemo(() => getVerticalGardenContract(id, web3), [id, web3])
 }
 
 export const useMasterchefPancakeSwap = () => {

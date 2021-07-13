@@ -23,6 +23,10 @@ export default {
     97: '',
     56: '0xC7E64DDe11EA91aaA1b7c0486D4c92dA992123C5', // Garden is use to feed the garden flowers
   },
+  verticalGarden: {
+    97: '',
+    56: '0xD42c7619f1eb403eDbe13Fc3D8F7a95deC9C49B3', // Cake Vertical Garden v1.2
+  },
   // Not use
   lottery: {
     97: '0x99c2EcD51d52c036B00130d882Bc65f20Fdecf9f',

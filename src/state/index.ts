@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import farmsReducer from './farms'
 import gardensReducer from './gardens'
+import verticalGardensReducer from './verticalGardens'
 import barnsBetaReducer from './barnsBeta'
 import toastsReducer from './toasts'
 import poolsReducer from './pools'
@@ -19,6 +20,7 @@ export default configureStore({
   reducer: {
     farms: farmsReducer,
     gardens: gardensReducer,
+    verticalGardens: verticalGardensReducer,
     barnsBeta: barnsBetaReducer,
     toasts: toastsReducer,
     pools: poolsReducer,

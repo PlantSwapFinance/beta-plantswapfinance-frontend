@@ -9,6 +9,15 @@ export {
   updateUserPendingReward,
   updateUserStakedBalance,
 } from './pools'
+export {
+  fetchVerticalGardensPublicDataAsync,
+  fetchVerticalGardensUserDataAsync,
+  vgupdateUserAllowance,
+  vgupdateUserBalance,
+  vgupdateUserPendingReward,
+  vgupdateUserPendingPlantReward,
+//  vgupdateUserStakedBalance,
+} from './verticalGardens'
 export { profileFetchStart, profileFetchSucceeded, profileFetchFailed } from './profile'
 export { fetchStart, teamFetchSucceeded, fetchFailed, teamsFetchSucceeded } from './teams'
 export { setBlock } from './block'

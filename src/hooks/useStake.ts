@@ -2,8 +2,8 @@ import { useCallback } from 'react'
 import { useWeb3React } from '@web3-react/core'
 import { useDispatch } from 'react-redux'
 import { fetchFarmUserDataAsync, updateUserStakedBalance, updateUserBalance } from 'state/actions'
-import { stake, sousStake, sousStakeBnb } from 'utils/callHelpers'
-import { useMasterchef, useSousChef } from './useContract'
+import { stake, verticalDeposit, sousStake, sousStakeBnb } from 'utils/callHelpers'
+import { useMasterchef, useVerticalGarden, useSousChef } from './useContract'
 
 const useStake = (pid: number) => {
   const dispatch = useDispatch()
@@ -17,6 +17,24 @@ const useStake = (pid: number) => {
       console.info(txHash)
     },
     [account, dispatch, masterChefContract, pid],
+  )
+
+  return { onStake: handleStake }
+}
+
+export const useVerticalGardenStake = (vgId) => {
+  const dispatch = useDispatch()
+  const { account } = useWeb3React()
+  const verticalGardenContract = useVerticalGarden(vgId)
+
+  const handleStake = useCallback(
+    async (amount: string) => {
+      verticalDeposit(verticalGardenContract, amount, account)
+
+      dispatch(updateUserStakedBalance(vgId, account))
+      dispatch(updateUserBalance(vgId, account))
+    },
+    [account, dispatch, verticalGardenContract, vgId],
   )
 
   return { onStake: handleStake }

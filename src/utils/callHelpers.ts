@@ -16,6 +16,15 @@ export const stake = async (masterChefContract, pid, amount, account) => {
     })
 }
 
+export const verticalDeposit = async (verticalGardenContract, amount, account) => {
+  return verticalGardenContract.methods
+    .deposit(new BigNumber(amount).times(new BigNumber(10).pow(18)).toString())
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
 export const sousStake = async (sousChefContract, amount, decimals = 18, account) => {
   return sousChefContract.methods
     .deposit(new BigNumber(amount).times(new BigNumber(10).pow(decimals)).toString())
@@ -38,6 +47,15 @@ export const unstake = async (masterChefContract, pid, amount, account) => {
   return masterChefContract.methods
     .withdraw(pid, new BigNumber(amount).times(new BigNumber(10).pow(18)).toString())
     .send({ from: account, gas: 200000 })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const verticalWithdraw = async (verticalGardenContract, amount, account) => {
+  return verticalGardenContract.methods
+    .withdraw(new BigNumber(amount).times(new BigNumber(10).pow(18)).toString())
+    .send({ from: account })
     .on('transactionHash', (tx) => {
       return tx.transactionHash
     })
@@ -91,6 +109,24 @@ export const harvest = async (masterChefContract, pid, account) => {
   return masterChefContract.methods
     .deposit(pid, '0')
     .send({ from: account, gas: 200000 })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const verticalHarvest = async (verticalGardenContract, account) => {
+  return verticalGardenContract.methods
+    .harvestGarden()
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const verticalCompound = async (verticalGardenContract, account) => {
+  return verticalGardenContract.methods
+    .compoundGarden()
+    .send({ from: account })
     .on('transactionHash', (tx) => {
       return tx.transactionHash
     })

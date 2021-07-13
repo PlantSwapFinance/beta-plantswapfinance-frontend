@@ -5,7 +5,7 @@ import { ethers } from 'ethers'
 import { useDispatch } from 'react-redux'
 import { updateUserAllowance, fetchFarmUserDataAsync } from 'state/actions'
 import { approve } from 'utils/callHelpers'
-import { useMasterchef, usePlant, useSousChef, useLottery } from './useContract'
+import { useMasterchef, usePlant, useVerticalGarden, useSousChef, useLottery } from './useContract'
 
 // Approve a Farm
 export const useApprove = (lpContract: Contract) => {
@@ -24,6 +24,62 @@ export const useApprove = (lpContract: Contract) => {
   }, [account, dispatch, lpContract, masterChefContract])
 
   return { onApprove: handleApprove }
+}
+
+
+// Approve a Vertical Garden
+export const useVerticalGardenApprove = (verticalGardenContractAddress: Contract, vgId) => {
+  const dispatch = useDispatch()
+  const { account } = useWeb3React()
+  const verticalGardenContract = useVerticalGarden(vgId)
+
+  const handleApprove = useCallback(async () => {
+    try {
+      const tx = await approve(verticalGardenContractAddress, verticalGardenContract, account)
+      dispatch(updateUserAllowance(vgId, account))
+      return tx
+    } catch (e) {
+      return false
+    }
+  }, [account, dispatch, verticalGardenContractAddress, verticalGardenContract, vgId])
+
+  return { onApprove: handleApprove }
+}
+// Approve a Vertical Garden
+export const useVerticalGardenApproveReward = (verticalGardenContractAddress: Contract, vgId) => {
+  const dispatch = useDispatch()
+  const { account } = useWeb3React()
+  const verticalGardenContract = useVerticalGarden(vgId)
+
+  const handleApprove = useCallback(async () => {
+    try {
+      const tx = await approve(verticalGardenContractAddress, verticalGardenContract, account)
+      dispatch(updateUserAllowance(vgId, account))
+      return tx
+    } catch (e) {
+      return false
+    }
+  }, [account, dispatch, verticalGardenContractAddress, verticalGardenContract, vgId])
+
+  return { onApproveReward: handleApprove }
+}
+// Approve a Vertical Garden
+export const useVerticalGardenApprovePlantReward = (verticalGardenContractAddress: Contract, vgId) => {
+  const dispatch = useDispatch()
+  const { account } = useWeb3React()
+  const verticalGardenContract = useVerticalGarden(vgId)
+
+  const handleApprove = useCallback(async () => {
+    try {
+      const tx = await approve(verticalGardenContractAddress, verticalGardenContract, account)
+      dispatch(updateUserAllowance(vgId, account))
+      return tx
+    } catch (e) {
+      return false
+    }
+  }, [account, dispatch, verticalGardenContractAddress, verticalGardenContract, vgId])
+
+  return { onApprovePlantReward: handleApprove }
 }
 
 // Approve a Pool

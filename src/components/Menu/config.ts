@@ -28,7 +28,16 @@ const config: MenuEntry[] = [
   {
     label: 'Gardens',
     icon: 'PoolIcon',
-    href: '/gardens',
+    items: [
+      {
+        label: 'Garden',
+        href: '/gardens',
+      },
+      {
+        label: 'Vertical Garden',
+        href: '/verticalGarden',
+      },
+    ],
   },
   {
     label: 'Barn',

@@ -23,6 +23,7 @@ import history from './routerHistory'
 const Home = lazy(() => import('./views/Home'))
 const Farms = lazy(() => import('./views/Farms'))
 const Gardens = lazy(() => import('./views/Gardens'))
+const VerticalGarden = lazy(() => import('./views/VerticalGarden'))
 const BarnsBeta = lazy(() => import('./views/BarnsBeta'))
 const BarnPlantswap = lazy(() => import('./views/BarnPlantswap'))
 const BarnPancakeswap = lazy(() => import('./views/BarnPancakeswap'))
@@ -75,6 +76,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/gardens">
               <Gardens tokenMode/>
+            </Route>
+            <Route path="/verticalGarden">
+              <VerticalGarden />
             </Route>
             <Route path="/gardensv1">
               <GardenV1 />
