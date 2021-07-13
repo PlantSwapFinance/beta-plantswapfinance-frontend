@@ -15,6 +15,7 @@ import { getAddress } from 'utils/addressHelpers'
 import { useVerticalGardenHarvest } from 'hooks/useHarvest'
 import Balance from 'components/Balance'
 import { VerticalGarden } from 'state/types'
+import { usePricePlantBusd, usePriceCakeBusd } from 'state/hooks'
 import DepositModal from './DepositModal'
 import WithdrawModal from './WithdrawModal'
 import CompoundModal from './CompoundModal'
@@ -61,6 +62,9 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
 
   const [requestedApproval, setRequestedApproval] = useState(false)
   const [pendingTx, setPendingTx] = useState(false)
+  
+  const plantPrice = usePricePlantBusd()
+  const cakePrice = usePriceCakeBusd()
 
   const allowance = new BigNumber(userData?.allowance || 0)
   const allowanceReward = new BigNumber(userData?.allowanceReward || 0)
@@ -69,6 +73,13 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
   const stakedBalance = new BigNumber(userData?.stakedBalance || 0)
   const earnings = new BigNumber(userData?.pendingReward || 0)
   const earningsPlant = new BigNumber(userData?.pendingPlantReward || 0)
+
+  
+  const earningsBalance = getBalanceNumber(earnings)
+  const earningsPlantBalance = getBalanceNumber(earningsPlant)
+  const earningsBusd = new BigNumber(earningsBalance).multipliedBy(cakePrice).toFixed(4)
+  const earningsPlantBusd = new BigNumber(earningsPlantBalance).multipliedBy(plantPrice).toFixed(4)
+  const earningsTotalBusd = new BigNumber(earningsBusd).plus(earningsPlantBusd).toNumber()
 
   const accountHasStakedBalance = stakedBalance?.toNumber() > 0
   const needsApproval = !accountHasStakedBalance && !allowance.toNumber()
@@ -171,7 +182,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
             />
           )}
           </BalanceAndCompound>
-        <Label isFinished={isFinished && vgId !== 0} text={TranslateString(330, `${verticalEarningToken.symbol} earned`)} />
+        <Label isFinished={isFinished && vgId !== 0} text={TranslateString(330, `${verticalEarningToken.symbol} earned ${earningsBusd} USD`)} />
         <BalanceAndCompound>
           <Balance value={getBalanceNumber(earnings)} isDisabled={isFinished} decimals={9} />
           {account && harvest && (
@@ -182,7 +193,14 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
             />
             )}
           </BalanceAndCompound>
-        <Label isFinished={isFinished && vgId !== 0} text={TranslateString(330, `${stakingRewardToken.symbol} earned`)} />
+        <Label isFinished={isFinished && vgId !== 0} text={TranslateString(330, `${stakingRewardToken.symbol} earned ${earningsPlantBusd} USD`)} />
+
+        
+        <BalanceAndCompound>
+          <Text>Total reward pending in USD</Text>
+          <Balance value={earningsTotalBusd} isDisabled={isFinished} decimals={3} />
+        </BalanceAndCompound>
+
         <StyledCardActions>
           {!account && <UnlockButton />}
           {account &&
@@ -206,7 +224,6 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
                   </IconButton>
               </>
             ))}
-
           {account && stakingToken !== stakingRewardToken && 
             (needsApprovalReward ? (
               <div style={{ flex: 1 }}>
