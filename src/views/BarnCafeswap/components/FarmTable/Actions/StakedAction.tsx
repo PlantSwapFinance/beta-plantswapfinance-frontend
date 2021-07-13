@@ -6,13 +6,13 @@ import { useWeb3React } from '@web3-react/core'
 import { useCafeswapFarmUser } from 'state/hooks'
 import { FarmWithStakedValue } from 'views/BarnCafeswap/components/FarmCard/FarmCard'
 import useI18n from 'hooks/useI18n'
-import { useApprove } from 'hooks/useApprove'
+import { useApproveCafeswap } from 'hooks/barns/useApproveExternalFarms'
 import { getBep20Contract } from 'utils/contractHelpers'
 import { BASE_ADD_LIQUIDITY_URL } from 'config'
 import getLiquidityUrlPathParts from 'utils/getLiquidityUrlPathParts'
 import { getBalanceNumber } from 'utils/formatBalance'
-import useStake from 'hooks/useStake'
-import useUnstake from 'hooks/useUnstake'
+import useStakeCafeswap from 'hooks/barns/useStakeCafeswap'
+import useUnstakeCafeswap from 'hooks/barns/useUnstakeCafeswap'
 import useWeb3 from 'hooks/useWeb3'
 
 import DepositModal from '../../DepositModal'
@@ -28,8 +28,8 @@ const Staked: React.FunctionComponent<FarmWithStakedValue> = ({ pid, lpSymbol, l
   const { account } = useWeb3React()
   const [requestedApproval, setRequestedApproval] = useState(false)
   const { allowance, tokenBalance, stakedBalance } = useCafeswapFarmUser(pid)
-  const { onStake } = useStake(pid)
-  const { onUnstake } = useUnstake(pid)
+  const { onStake } = useStakeCafeswap(pid)
+  const { onUnstake } = useUnstakeCafeswap(pid)
   const web3 = useWeb3()
 
   const isApproved = account && allowance && allowance.isGreaterThan(0)
@@ -50,7 +50,7 @@ const Staked: React.FunctionComponent<FarmWithStakedValue> = ({ pid, lpSymbol, l
 
   const lpContract = getBep20Contract(lpAddress, web3)
 
-  const { onApprove } = useApprove(lpContract)
+  const { onApprove } = useApproveCafeswap(lpContract)
 
   const handleApprove = useCallback(async () => {
     try {

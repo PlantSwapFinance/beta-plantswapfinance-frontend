@@ -35,6 +35,28 @@ const farms: FarmConfig[] = [
     token: tokens.plant,
     quoteToken: tokens.busd,
   },
+  {
+    pid: 11,
+    risk: 5,
+    lpSymbol: 'PLANT-USDC LP V2',
+    lpAddresses: {
+      97: '',
+      56: '0xb8b41534d152fd1c22102925b3e213d91840c277',
+    },
+    token: tokens.plant,
+    quoteToken: tokens.usdc,
+  },
+  {
+    pid: 12,
+    risk: 5,
+    lpSymbol: 'PLANT-CAKE LP V2',
+    lpAddresses: {
+      97: '',
+      56: '0x6280DcC6d8aD8ed0c046f2d65ee22377398f5Fa7',
+    },
+    token: tokens.plant,
+    quoteToken: tokens.cake,
+  },
   // V1 (Not to use anymore)
   {
     pid: 1,

@@ -7,6 +7,8 @@ import PlantStats from 'views/Home/components/PlantStats'
 import QuickDescriptionCard from 'views/Home/components/QuickDescriptionCard'
 import NewsCard from 'views/Home/components/NewsCard'
 import FarmStakingCard from 'views/Home/components/FarmStakingCard'
+import TotalContributionCard from 'views/Home/components/TotalContributionCard'
+import TotalValueLockedCard from 'views/Home/components/TotalValueLockedCard'
 import Divider from './components/Divider'
 
 const Hero = styled.div`
@@ -83,6 +85,10 @@ const Home: React.FC = () => {
         <Cards>
           <FarmStakingCard />
           <NewsCard />
+        </Cards>
+        <Cards>
+          <TotalContributionCard />
+          <TotalValueLockedCard />
         </Cards>
         <Cards>
           <QuickDescriptionCard />

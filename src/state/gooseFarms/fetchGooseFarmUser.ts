@@ -6,11 +6,11 @@ import gooseFarmsConfig from 'config/constants/gooseFarms'
 import { getAddress, getMasterChefGooseAddress } from 'utils/addressHelpers'
 
 export const fetchGooseFarmUserAllowances = async (account: string) => {
-  const masterChefPCSAdress = getMasterChefGooseAddress()
+  const masterChefGooseAdress = getMasterChefGooseAddress()
 
   const calls = gooseFarmsConfig.map((gooseFarm) => {
     const lpContractAddress = getAddress(gooseFarm.lpAddresses)
-    return { address: lpContractAddress, name: 'allowance', params: [account, masterChefPCSAdress] }
+    return { address: lpContractAddress, name: 'allowance', params: [account, masterChefGooseAdress] }
   })
 
   const rawLpAllowances = await multicall(erc20ABI, calls)
@@ -38,11 +38,11 @@ export const fetchGooseFarmUserTokenBalances = async (account: string) => {
 }
 
 export const fetchGooseFarmUserStakedBalances = async (account: string) => {
-  const masterChefPCSAdress = getMasterChefGooseAddress()
+  const masterChefGooseAdress = getMasterChefGooseAddress()
 
   const calls = gooseFarmsConfig.map((gooseFarm) => {
     return {
-      address: masterChefPCSAdress,
+      address: masterChefGooseAdress,
       name: 'userInfo',
       params: [gooseFarm.pid, account],
     }
@@ -56,11 +56,11 @@ export const fetchGooseFarmUserStakedBalances = async (account: string) => {
 }
 
 export const fetchGooseFarmUserEarnings = async (account: string) => {
-  const masterChefPCSAdress = getMasterChefGooseAddress()
+  const masterChefGooseAdress = getMasterChefGooseAddress()
 
   const calls = gooseFarmsConfig.map((gooseFarm) => {
     return {
-      address: masterChefPCSAdress,
+      address: masterChefGooseAdress,
       name: 'pendingEgg',
       params: [gooseFarm.pid, account],
     }

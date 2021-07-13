@@ -21,7 +21,7 @@ const BinanceTag = (props) => (
 
 const PancakeSwapTag = (props) => (
   <Tag variant="binance" outline startIcon={<BinanceIcon color="secondary" />} {...props}>
-    PancakeSwa
+    PancakeSwap
   </Tag>
 )
 

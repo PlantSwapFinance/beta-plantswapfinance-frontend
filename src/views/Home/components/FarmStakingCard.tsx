@@ -6,6 +6,7 @@ import useI18n from 'hooks/useI18n'
 import { useAllHarvest } from 'hooks/useHarvest'
 import useFarmsWithBalance from 'hooks/useFarmsWithBalance'
 import UnlockButton from 'components/UnlockButton'
+import Plant from 'components/PLANT'
 import PlantHarvestBalance from './PlantHarvestBalance'
 import PlantWalletBalance from './PlantWalletBalance'
 
@@ -17,10 +18,6 @@ const StyledFarmStakingCard = styled(Card)`
 `
 
 const Block = styled.div`
-  margin-bottom: 16px;
-`
-
-const CardImage = styled.img`
   margin-bottom: 16px;
 `
 
@@ -59,7 +56,7 @@ const FarmedStakingCard = () => {
         <Heading size="xl" mb="24px">
           {TranslateString(542, 'Farms & Staking')}
         </Heading>
-        <CardImage src="/images/plant.svg" alt="plant logo" width={64} height={64} />
+        <Plant />
         <Block>
           <Label>{TranslateString(544, 'PLANT to Harvest')}:</Label>
           <PlantHarvestBalance />

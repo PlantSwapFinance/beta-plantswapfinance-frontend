@@ -7,8 +7,11 @@ import { Image, Heading, RowType, Toggle, Text, useModal } from '@plantswap-libs
 import styled  from 'styled-components'
 import FlexLayout from 'components/layout/Flex'
 import Page from 'components/layout/Page'
+import tokens from 'config/constants/tokens'
 import usePersistState from 'hooks/usePersistState'
-import { usePancakeSwapFarms, usePriceCakeBusd, useGetApiPrices } from 'state/hooks'
+import { usePancakeSwapFarms, usePriceCakeBusd, 
+  usePriceBnbBusd, usePriceQsdBusd, usePriceUstBusd, 
+  usePricePbtcBusd, usePriceBtcbBusd, usePriceEthBusd } from 'state/hooks'
 import useRefresh from 'hooks/useRefresh'
 import { fetchPancakeSwapFarmUserDataAsync } from 'state/actions'
 import { PancakeSwapFarm } from 'state/types'
@@ -133,15 +136,20 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
   const TranslateString = useI18n()
   const farmsLP = usePancakeSwapFarms()
   const cakePrice = usePriceCakeBusd()
+  const bnbPrice = usePriceBnbBusd()
+  const qsdPrice = usePriceQsdBusd()
+  const ustPrice = usePriceUstBusd()
+  const pbtcPrice = usePricePbtcBusd()
+  const btcbPrice = usePriceBtcbBusd()
+  const ethPrice = usePriceEthBusd()
   const [query, setQuery] = useState('')
   const [viewMode, setViewMode] = useState(ViewMode.TABLE)
   const { account } = useWeb3React()
   const [sortOption, setSortOption] = useState('hot')
-  const prices = useGetApiPrices()
   const handleAcceptRiskSuccess = () => setHasAcceptedRisk(true)
   const [onPresentRiskDisclaimer] = useModal(<RiskDisclaimer onSuccess={handleAcceptRiskSuccess} />, false)
   const {tokenMode} = farmsProps;
-
+  const allTokens = tokens
   // TODO: memoize modal's handlers
   const onPresentRiskDisclaimerRef = useRef(onPresentRiskDisclaimer)
 
@@ -195,12 +203,39 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
   const farmsList = useCallback(
     (farmsToDisplay: PancakeSwapFarm[]): FarmWithStakedValue[] => {
       let farmsToDisplayWithAPY: FarmWithStakedValue[] = farmsToDisplay.map((pancakeSwapFarm) => {
-        if (!pancakeSwapFarm.lpTotalInQuoteToken || !prices) {
+        if (!pancakeSwapFarm.lpTotalInQuoteToken) {
           return pancakeSwapFarm
         }
-
-        const quoteTokenPriceUsd = prices[pancakeSwapFarm.quoteToken.symbol.toLowerCase()]
-        const totalLiquidity = new BigNumber(pancakeSwapFarm.lpTotalInQuoteToken).times(quoteTokenPriceUsd)
+        
+        let quoteTokenPriceUsd = 1
+        if(pancakeSwapFarm.quoteToken === allTokens.cake) {
+          quoteTokenPriceUsd = cakePrice.toNumber()
+        }
+        if(pancakeSwapFarm.quoteToken === allTokens.bnb || pancakeSwapFarm.quoteToken === allTokens.wbnb) {
+          quoteTokenPriceUsd = bnbPrice.toNumber()
+        }
+        if(pancakeSwapFarm.quoteToken === allTokens.busd || pancakeSwapFarm.quoteToken === allTokens.usdc) {
+          quoteTokenPriceUsd = 1
+        }
+        if(pancakeSwapFarm.quoteToken === allTokens.qsd) {
+          quoteTokenPriceUsd = qsdPrice.toNumber()
+        }
+        if(pancakeSwapFarm.quoteToken === allTokens.ust) {
+          quoteTokenPriceUsd = ustPrice.toNumber()
+        }
+        if(pancakeSwapFarm.quoteToken === allTokens.pbtc) {
+          quoteTokenPriceUsd = pbtcPrice.toNumber()
+        }
+        if(pancakeSwapFarm.quoteToken === allTokens.btcb) {
+          quoteTokenPriceUsd = btcbPrice.toNumber()
+        }
+        if(pancakeSwapFarm.quoteToken === allTokens.eth) {
+          quoteTokenPriceUsd = ethPrice.toNumber()
+        }
+        let totalLiquidity = new BigNumber(pancakeSwapFarm.lpTotalInQuoteToken).times(quoteTokenPriceUsd)
+        if(pancakeSwapFarm.isTokenOnly === true) {
+          totalLiquidity = new BigNumber(pancakeSwapFarm.lpTotalInQuoteToken).times(quoteTokenPriceUsd)
+        }
         const apy = isActive ? getPancakeswapFarmApy(pancakeSwapFarm.poolWeight, cakePrice, totalLiquidity) : 0
 
         return { ...pancakeSwapFarm, apy, liquidity: totalLiquidity }
@@ -214,7 +249,7 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
       }
       return farmsToDisplayWithAPY
     },
-    [cakePrice, prices, query, isActive],
+    [cakePrice, bnbPrice, qsdPrice, ustPrice, pbtcPrice, btcbPrice, ethPrice, allTokens, query, isActive],
   )
 
   const handleChangeQuery = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -344,13 +379,20 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
                 <a href="/barns">
                   <img src="/images/plantswapBarn.svg" alt="PlantSwap Barn" width={28} height={28} style={{marginRight: '15px'}} /></a>
                 <a href="/barnPlantswap">
-                  <img src="/images/platforms/plantswap.svg" alt="PlantSwap" width={28} height={28} style={{marginRight: '15px'}} /></a>
+                  <img src="/images/platforms/plantswap.svg" alt="PlantSwap" width={36} height={36} style={{marginRight: '15px'}} /></a>
                 <a href="/barnPancakeswap">
-                  <img src="/images/platforms/pancakeswap.svg" alt="PancakeSwap" width={36} height={36} style={{marginRight: '15px'}} /></a>
+                  <img src="/images/platforms/pancakeswap.svg" alt="PancakeSwap" width={28} height={28} style={{marginRight: '15px'}} /></a>
                 <a href="/barnGoose">
-                  <img src="/images/platforms/goose.png" alt="GooseFinance" width={22} height={28} style={{marginRight: '15px'}} /></a>
+                  <img src="/images/platforms/goose.png" alt="GooseFinance" width={28} height={36} style={{marginRight: '15px'}} /></a>
                 <a href="/barnCafeswap">
                   <img src="/images/platforms/cafeswap.png" alt="CafeSwap" width={28} height={28} style={{marginRight: '15px'}} /></a>
+              </LabelWrapper>
+              <LabelWrapper>
+                <Text>Filter Type</Text>
+                <a href="/barnPancakeswap">
+                  <img src="/images/platforms/farm.svg" alt="PancakeSwap LP Barn" width={28} height={28} style={{marginRight: '15px'}} /></a>
+                <a href="/barnPancakeswapToken">
+                  <img src="/images/platforms/token.svg" alt="PancakeSwap Token Barn" width={28} height={28} style={{marginRight: '15px'}} /></a>
               </LabelWrapper>
             </FilterContainer1stRowPlatformIcon>
           </FilterContainer1stRow>

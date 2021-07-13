@@ -11,14 +11,14 @@ import useI18n from 'hooks/useI18n'
 import { useSousStake } from 'hooks/useStake'
 import { useSousUnstake } from 'hooks/useUnstake'
 import { getBalanceNumber } from 'utils/formatBalance'
-import { getPoolApy } from 'utils/apy'
+// import { getPoolApy } from 'utils/apy'
 import { getAddress } from 'utils/addressHelpers'
 import { useSousHarvest } from 'hooks/useHarvest'
 import Balance from 'components/Balance'
 import { PoolCategory } from 'config/constants/types'
 import tokens from 'config/constants/tokens'
 import { Pool } from 'state/types'
-import { useGetApiPrice } from 'state/hooks'
+// import { useGetApiPrice } from 'state/hooks'
 import DepositModal from './DepositModal'
 import WithdrawModal from './WithdrawModal'
 import CompoundModal from './CompoundModal'
@@ -58,14 +58,15 @@ const PoolCard: React.FC<HarvestProps> = ({ pool }) => {
   const { onReward } = useSousHarvest(sousId, isBnbPool)
 
   // APY
-  const rewardTokenPrice = useGetApiPrice(earningToken.symbol)
+ /* const rewardTokenPrice = useGetApiPrice(earningToken.symbol)
   const stakingTokenPrice = useGetApiPrice(stakingToken.symbol)
   const apy = getPoolApy(
     stakingTokenPrice,
     rewardTokenPrice,
     getBalanceNumber(pool.totalStaked, stakingToken.decimals),
     parseFloat(pool.tokenPerBlock),
-  )
+  ) */
+  const apy = 0
 
   const [requestedApproval, setRequestedApproval] = useState(false)
   const [pendingTx, setPendingTx] = useState(false)

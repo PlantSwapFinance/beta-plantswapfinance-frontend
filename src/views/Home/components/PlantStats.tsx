@@ -6,14 +6,12 @@ import { usePricePlantBusd } from 'state/hooks'
 import { useTotalSupply, useBurnedBalance } from 'hooks/useTokenBalance'
 import useI18n from 'hooks/useI18n'
 import { getPlantAddress } from 'utils/addressHelpers'
+import Plant from 'components/PLANT'
 import CardValue from './CardValue'
 
 const StyledPlantStats = styled(Card)`
   margin-left: auto;
   margin-right: auto;
-`
-const CardImage = styled.img`
-  margin-bottom: 16px;
 `
 
 const Row = styled.div`
@@ -53,10 +51,10 @@ const PlantStats = () => {
         </Row>
         <Row>
           <Text fontSize="16px">{TranslateString(538, 'Contribution to nonprofits')}</Text>
-          <CardValue fontSize="16px" decimals={2} value={6050} />$
+          <CardValue fontSize="16px" decimals={2} value={10250} />$
         </Row>
         <Row>
-          <CardImage src="/images/plant.svg" alt="plant logo" width={64} height={64} />
+          <Plant />
         </Row>
         <Heading size="xl" mb="24px">
           {TranslateString(534, 'Market cap. & Price')}

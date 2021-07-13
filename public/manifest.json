@@ -1,16 +1,54 @@
 {
   "short_name": "PlantSwap",
-  "name": "PlantSwap",
-  "description": "Swap and farm $PLANT with other's and with our smart contracts on Binance Smart Chain.",
+  "name": "PlantSwap.finance",
+  "description": "Swap and farm $PLANT with other's and with our smart contracts on Binance Smart Chain and help the planet.",
+  "homepage_url": "https://plantswap.finance",
+  "author": "PlantSwapFinance",
+  "categories": ["ecology", "finance", "cryptocurrency", "defi"],
+  "lang": "en-US",
   "icons": [
     {
       "src": "favicon.ico",
       "type": "image/x-icon",
       "sizes": "256x256"
+    },
+    {
+      "src": "favicon.png",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "plantswap.png",
+      "sizes": "196x196",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "screenshots" : [
+    {
+      "src": "plantSwapFinance_screenshot01.jpg",
+      "sizes": "643x1280",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "plantSwapFinance_screenshot02.jpg",
+      "sizes": "641x1280",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "plantSwapFinance_screenshot02.jpg",
+      "sizes": "641x1280",
+      "type": "image/jpeg"
+    },
+  ]
 }

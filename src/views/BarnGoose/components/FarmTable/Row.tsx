@@ -11,8 +11,11 @@ import Details from './Details'
 import Multiplier, { MultiplierProps } from './Multiplier'
 import Liquidity, { LiquidityProps } from './Liquidity'
 import ActionPanel from './Actions/ActionPanel'
+import StatsPanel from './Actions/StatsPanel'
+import HolderStats from './Actions/HolderStats'
 import CellLayout from './CellLayout'
 import { DesktopColumnSchema, MobileColumnSchema } from '../types'
+import Divider from '../Divider'
 
 export interface RowProps {
   apr: AprProps
@@ -167,6 +170,10 @@ const Row: React.FunctionComponent<RowProps> = (props) => {
         <tr>
           <td colSpan={6}>
             <ActionPanel {...props} />
+            <Divider />
+            <StatsPanel {...props} />
+            <Divider />
+            <HolderStats {...props} />
           </td>
         </tr>
       )}

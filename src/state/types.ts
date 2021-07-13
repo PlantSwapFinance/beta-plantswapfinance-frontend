@@ -15,6 +15,23 @@ export type TranslatableText =
 export interface Farm extends FarmConfig {
   tokenAmount?: BigNumber
   quoteTokenAmount?: BigNumber
+  lpTokenBalanceMC?: BigNumber
+  lpTokenRatio?: BigNumber
+  lpTotalSupply?: BigNumber
+  lpTotalInQuoteToken?: BigNumber
+  tokenPriceVsQuote?: BigNumber
+  poolWeight?: BigNumber
+  userData?: {
+    allowance: BigNumber
+    tokenBalance: BigNumber
+    stakedBalance: BigNumber
+    earnings: BigNumber
+  }
+}
+
+export interface Garden extends FarmConfig {
+  tokenAmount?: BigNumber
+  quoteTokenAmount?: BigNumber
   lpTotalInQuoteToken?: BigNumber
   tokenPriceVsQuote?: BigNumber
   poolWeight?: BigNumber
@@ -53,9 +70,30 @@ export interface Pool extends PoolConfig {
 }
 
 
+export interface PlantswapFarm extends FarmConfig {
+  tokenAmount?: BigNumber
+  quoteTokenAmount?: BigNumber
+  lpTokenBalanceMC?: BigNumber
+  lpTokenRatio?: BigNumber
+  lpTotalSupply?: BigNumber
+  lpTotalInQuoteToken?: BigNumber
+  tokenPriceVsQuote?: BigNumber
+  poolWeight?: BigNumber
+  userData?: {
+    allowance: BigNumber
+    tokenBalance: BigNumber
+    stakedBalance: BigNumber
+    earnings: BigNumber
+  }
+}
+
+
 export interface PancakeSwapFarm extends PancakeSwapFarmConfig {
   tokenAmount?: BigNumber
   quoteTokenAmount?: BigNumber
+  lpTokenBalanceMC?: BigNumber
+  lpTokenRatio?: BigNumber
+  lpTotalSupply?: BigNumber
   lpTotalInQuoteToken?: BigNumber
   tokenPriceVsQuote?: BigNumber
   poolWeight?: BigNumber
@@ -71,6 +109,9 @@ export interface PancakeSwapFarm extends PancakeSwapFarmConfig {
 export interface GooseFarm extends GooseFarmConfig {
   tokenAmount?: BigNumber
   quoteTokenAmount?: BigNumber
+  lpTokenBalanceMC?: BigNumber
+  lpTokenRatio?: BigNumber
+  lpTotalSupply?: BigNumber
   lpTotalInQuoteToken?: BigNumber
   tokenPriceVsQuote?: BigNumber
   poolWeight?: BigNumber
@@ -85,6 +126,9 @@ export interface GooseFarm extends GooseFarmConfig {
 export interface CafeswapFarm extends CafeswapFarmConfig {
   tokenAmount?: BigNumber
   quoteTokenAmount?: BigNumber
+  lpTokenBalanceMC?: BigNumber
+  lpTokenRatio?: BigNumber
+  lpTotalSupply?: BigNumber
   lpTotalInQuoteToken?: BigNumber
   tokenPriceVsQuote?: BigNumber
   poolWeight?: BigNumber
@@ -119,12 +163,21 @@ export interface ToastsState {
 export interface FarmsState {
   data: Farm[]
 }
+
+export interface GardensState {
+  data: Garden[]
+}
+
 export interface BarnsBetaState {
   data: BarnBeta[]
 }
 
 export interface PoolsState {
   data: Pool[]
+}
+
+export interface PlantswapFarmsState {
+  data: PlantswapFarm[]
 }
 
 export interface PancakeSwapFarmsState {
@@ -206,6 +259,7 @@ export interface BlockState {
 
 export interface State {
   farms: FarmsState
+  gardens: GardensState
   barnsBeta: BarnsBetaState
   toasts: ToastsState
   prices: PriceState
@@ -214,6 +268,7 @@ export interface State {
   teams: TeamsState
   achievements: AchievementState
   block: BlockState
+  plantswapFarms: PlantswapFarmsState
   pancakeSwapFarms: PancakeSwapFarmsState
   gooseFarms: GooseFarmsState
   cafeswapFarms: CafeswapFarmsState

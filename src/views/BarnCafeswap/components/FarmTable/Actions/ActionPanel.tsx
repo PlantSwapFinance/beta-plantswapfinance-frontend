@@ -112,19 +112,30 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({ details, apr, 
   })
   const lpAddress = cafeswapFarm.lpAddresses[process.env.REACT_APP_CHAIN_ID]
   const bsc = `https://bscscan.com/address/${lpAddress}`
-  const info = `https://cafeswap.info/pair/${lpAddress}`
+  const info = `https://pancakeswap.info/pair/${lpAddress}`
   const isCommunityFarm = cafeswapCommunityFarms.includes(token.symbol)
+
+  const thisIsAToken = cafeswapFarm.isTokenOnly
+  const pcsInfoTokenUrl = `https://pancakeswap.info/token/${lpAddress}`
+
+  let lpOrToken = 'Pair'
+  if(thisIsAToken === true) { lpOrToken = 'Token' }
+
+  let infoFormated = info
+  if(thisIsAToken === true) { infoFormated = pcsInfoTokenUrl }
+ 
+  let lpOrTokenLinkBuy = <StyledLinkExternal href={`https://exchange.pancakeswap.finance/#/add/${liquidityUrlPathParts}`}>{TranslateString(999, `Get ${lpLabel}`, { name: lpLabel })}</StyledLinkExternal>
+  if(thisIsAToken === true) { lpOrTokenLinkBuy = <StyledLinkExternal href={`https://exchange.pancakeswap.finance/#/swap?inputCurrency=BNB&outputCurrency=${lpAddress}`}>{TranslateString(999, `Get ${lpLabel}`, { name: lpLabel })}</StyledLinkExternal> }
+
 
   return (
     <Container>
       <InfoContainer>
         <StakeContainer>
-          <StyledLinkExternal href={`https://exchange.cafeswap.finance/#/add/${liquidityUrlPathParts}`}>
-            {TranslateString(999, `Get ${lpLabel}`, { name: lpLabel })}
-          </StyledLinkExternal>
+          {lpOrTokenLinkBuy}
         </StakeContainer>
         <StyledLinkExternal href={bsc}>{TranslateString(999, 'View Contract')}</StyledLinkExternal>
-        <StyledLinkExternal href={info}>{TranslateString(999, 'See Pair Info')}</StyledLinkExternal>
+        <StyledLinkExternal href={infoFormated}>{TranslateString(999, `See ${lpOrToken} Info`)}</StyledLinkExternal>
         <TagsContainer>
           {isCommunityFarm ? <CommunityTag /> : <CafeswapTag />}
           {dual ? <DualTag /> : null}

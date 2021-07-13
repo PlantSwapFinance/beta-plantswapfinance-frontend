@@ -8,7 +8,7 @@ import { PancakeSwapFarm } from 'state/types'
 import { usePancakeSwapFarmFromSymbol, usePancakeSwapFarmUser } from 'state/hooks'
 import useI18n from 'hooks/useI18n'
 import useWeb3 from 'hooks/useWeb3'
-import { useApprove } from 'hooks/useApprove'
+import { useApprovePancakeSwap } from 'hooks/barns/useApproveExternalFarms'
 import UnlockButton from 'components/UnlockButton'
 import StakeAction from './StakeAction'
 import HarvestAction from './HarvestAction'
@@ -39,7 +39,7 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ pancakeSwapFarm, account,
 
   const lpContract = getBep20Contract(lpAddress, web3)
 
-  const { onApprove } = useApprove(lpContract)
+  const { onApprove } = useApprovePancakeSwap(lpContract)
 
   const handleApprove = useCallback(async () => {
     try {

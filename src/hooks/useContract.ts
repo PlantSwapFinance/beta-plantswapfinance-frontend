@@ -3,9 +3,14 @@ import useWeb3 from 'hooks/useWeb3'
 import {
   getBep20Contract,
   getPlantContract,
+  getCakeContract,
+  getEggContract,
+  getBrewContract,
   getFarmersSchoolContract,
   getFarmerSpecialContract,
   getPlantRabbitContract,
+  getBunnyFactoryContract,
+  getBunnySpecialContract,
   getProfileContract,
   getIfoContract,
   getLotteryContract,
@@ -36,6 +41,21 @@ export const useERC20 = (address: string) => {
 export const usePlant = () => {
   const web3 = useWeb3()
   return useMemo(() => getPlantContract(web3), [web3])
+}
+
+export const useCake = () => {
+  const web3 = useWeb3()
+  return useMemo(() => getCakeContract(web3), [web3])
+}
+
+export const useEgg = () => {
+  const web3 = useWeb3()
+  return useMemo(() => getEggContract(web3), [web3])
+}
+
+export const useBrew = () => {
+  const web3 = useWeb3()
+  return useMemo(() => getBrewContract(web3), [web3])
 }
 
 export const useFarmersSchool = () => {
@@ -101,4 +121,20 @@ export const useFarmerSpecialContract = () => {
 export const useClaimRefundContract = () => {
   const web3 = useWeb3()
   return useMemo(() => getClaimRefundContract(web3), [web3])
+}
+
+
+export const useBunnyFactory = () => {
+  const web3 = useWeb3()
+  return useMemo(() => getBunnyFactoryContract(web3), [web3])
+}
+
+export const useBunnySpecialContract = () => {
+  const web3 = useWeb3()
+  return useMemo(() => getBunnySpecialContract(web3), [web3])
+}
+
+export const usePlantRabbits = () => {
+  const web3 = useWeb3()
+  return useMemo(() => getPlantRabbitContract(web3), [web3])
 }

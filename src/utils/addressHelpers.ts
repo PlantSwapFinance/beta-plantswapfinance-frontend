@@ -8,11 +8,17 @@ export const getAddress = (address: Address): string => {
   return address[chainId] ? address[chainId] : address[mainNetChainId]
 }
 
+export const getPlantAddress = () => {
+  return getAddress(tokens.plant.address)
+}
 export const getCakeAddress = () => {
   return getAddress(tokens.cake.address)
 }
-export const getPlantAddress = () => {
-  return getAddress(tokens.plant.address)
+export const getEggAddress = () => {
+  return getAddress(tokens.egg.address)
+}
+export const getBrewAddress = () => {
+  return getAddress(tokens.brew.address)
 }
 export const getMasterChefAddress = () => {
   return getAddress(addresses.masterChef)
@@ -55,4 +61,14 @@ export const getPointCenterIfoAddress = () => {
 }
 export const getFarmerSpecialAddress = () => {
   return getAddress(addresses.farmerSpecial)
+}
+// For v-1 profile
+export const getPlantRabbitsAddress = () => {
+  return getAddress(addresses.plantRabbits)
+}
+export const getBunnyFactoryAddress = () => {
+  return getAddress(addresses.bunnyFactory)
+}
+export const getBunnySpecialAddress = () => {
+  return getAddress(addresses.bunnySpecial)
 }

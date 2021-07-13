@@ -26,19 +26,18 @@ const config: MenuEntry[] = [
     href: '/farms',
   },
   {
-    label: 'Gardens v2',
+    label: 'Gardens',
     icon: 'PoolIcon',
     href: '/gardens',
   },
   {
-    label: 'Gardens v1',
-    icon: 'PoolIcon',
-    href: '/gardensv1',
-  },
-  {
-    label: 'Barn (beta)',
+    label: 'Barn',
     icon: 'BarnIcon',
     href: '/barns',
+    status: {
+      text: 'BETA',
+      color: 'warning',
+    },
   },
   {
     label: 'Development Fund',
@@ -51,14 +50,18 @@ const config: MenuEntry[] = [
     href: '/tree',
   },
   {
-    label: 'NFTs (soon)',
-    icon: 'TreeIcon',
-    href: '/collectibles',
-  },
-  {
     label: "Project",
     icon: "ProjectIcon",
     href: "/project",
+  },
+  {
+    label: 'Governance',
+    icon: 'VoteIcon',
+    href: '/vote',
+    status: {
+      text: 'NEW',
+      color: 'failure',
+    },
   },
   {
     label: 'Roadmap',

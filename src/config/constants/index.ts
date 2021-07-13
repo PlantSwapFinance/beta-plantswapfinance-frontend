@@ -13,8 +13,8 @@ export { default as poolsConfig } from './pools'
 export { default as ifosConfig } from './ifo'
 
 const pancakeSwapCommunityFarms = pancakeSwapFarmsConfig.filter((farm) => farm.isCommunity).map((farm) => farm.token.symbol)
-const gooseCommunityFarms = gooseFarmsConfig.filter((farm) => farm.isCommunity).map((farm) => farm.token.symbol)
-const cafeswapCommunityFarms = cafeswapFarmsConfig.filter((farm) => farm.isCommunity).map((farm) => farm.token.symbol)
+const gooseCommunityFarms = gooseFarmsConfig.filter((gooseFarm) => gooseFarm.isCommunity).map((gooseFarm) => gooseFarm.token.symbol)
+const cafeswapCommunityFarms = cafeswapFarmsConfig.filter((cafeswapFarm) => cafeswapFarm.isCommunity).map((cafeswapFarm) => cafeswapFarm.token.symbol)
 
 export { pancakeSwapFarmsConfig, pancakeSwapCommunityFarms }
 export { gooseFarmsConfig, gooseCommunityFarms }

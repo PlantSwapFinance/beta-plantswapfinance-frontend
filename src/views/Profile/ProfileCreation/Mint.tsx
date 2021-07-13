@@ -9,7 +9,7 @@ import useHasPlantBalance from 'hooks/useHasPlantBalance'
 import nftList from 'config/constants/nfts'
 import SelectionCard from '../components/SelectionCard'
 import NextStepButton from '../components/NextStepButton'
-import ApproveConfirmButtons from '../components/ApproveConfirmButtons'
+// import ApproveConfirmButtons from '../components/ApproveConfirmButtons'
 import useProfileCreation from './contexts/hook'
 import { MINT_COST, STARTER_FARMERS_IDS } from './config'
 
@@ -27,11 +27,11 @@ const Mint: React.FC = () => {
   const hasMinimumPlantRequired = useHasPlantBalance(minimumPlantBalanceToMint)
   const {
     isApproving,
-    isApproved,
+  //  isApproved,
     isConfirmed,
     isConfirming,
-    handleApprove,
-    handleConfirm,
+  //  handleApprove,
+ //   handleConfirm,
   } = useApproveConfirmTransaction({
     onRequiresApproval: async () => {
       // TODO: Move this to a helper, this check will be probably be used many times
@@ -100,14 +100,7 @@ const Mint: React.FC = () => {
               {TranslateString(1098, `A minimum of ${MINT_COST} PLANT is required`)}
             </Text>
           )}
-          <ApproveConfirmButtons
-            isApproveDisabled={farmerId === null || isConfirmed || isConfirming || isApproved}
-            isApproving={isApproving}
-            isConfirmDisabled={!isApproved || isConfirmed || !hasMinimumPlantRequired}
-            isConfirming={isConfirming}
-            onApprove={handleApprove}
-            onConfirm={handleConfirm}
-          />
+         
         </CardBody>
       </Card>
       <NextStepButton onClick={actions.nextStep} disabled={!isConfirmed}>
@@ -116,5 +109,16 @@ const Mint: React.FC = () => {
     </>
   )
 }
+
+/* 
+ <ApproveConfirmButtons
+            isApproveDisabled={farmerId === null || isConfirmed || isConfirming || isApproved}
+            isApproving={isApproving}
+            isConfirmDisabled={!isApproved || isConfirmed || !hasMinimumPlantRequired}
+            isConfirming={isConfirming}
+            onApprove={handleApprove}
+            onConfirm={handleConfirm}
+          />
+          */
 
 export default Mint

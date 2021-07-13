@@ -6,11 +6,11 @@ import cafeswapFarmsConfig from 'config/constants/cafeswapFarms'
 import { getAddress, getMasterChefCafeswapAddress } from 'utils/addressHelpers'
 
 export const fetchCafeswapFarmUserAllowances = async (account: string) => {
-  const masterChefPCSAdress = getMasterChefCafeswapAddress()
+  const masterChefCSAdress = getMasterChefCafeswapAddress()
 
   const calls = cafeswapFarmsConfig.map((cafeswapFarm) => {
     const lpContractAddress = getAddress(cafeswapFarm.lpAddresses)
-    return { address: lpContractAddress, name: 'allowance', params: [account, masterChefPCSAdress] }
+    return { address: lpContractAddress, name: 'allowance', params: [account, masterChefCSAdress] }
   })
 
   const rawLpAllowances = await multicall(erc20ABI, calls)
@@ -38,11 +38,11 @@ export const fetchCafeswapFarmUserTokenBalances = async (account: string) => {
 }
 
 export const fetchCafeswapFarmUserStakedBalances = async (account: string) => {
-  const masterChefPCSAdress = getMasterChefCafeswapAddress()
+  const masterChefCSAdress = getMasterChefCafeswapAddress()
 
   const calls = cafeswapFarmsConfig.map((cafeswapFarm) => {
     return {
-      address: masterChefPCSAdress,
+      address: masterChefCSAdress,
       name: 'userInfo',
       params: [cafeswapFarm.pid, account],
     }
@@ -56,11 +56,11 @@ export const fetchCafeswapFarmUserStakedBalances = async (account: string) => {
 }
 
 export const fetchCafeswapFarmUserEarnings = async (account: string) => {
-  const masterChefPCSAdress = getMasterChefCafeswapAddress()
+  const masterChefCSAdress = getMasterChefCafeswapAddress()
 
   const calls = cafeswapFarmsConfig.map((cafeswapFarm) => {
     return {
-      address: masterChefPCSAdress,
+      address: masterChefCSAdress,
       name: 'pendingCake',
       params: [cafeswapFarm.pid, account],
     }

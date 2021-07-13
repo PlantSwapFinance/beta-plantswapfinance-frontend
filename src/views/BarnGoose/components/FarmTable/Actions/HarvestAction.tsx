@@ -1,32 +1,34 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useWeb3React } from '@web3-react/core'
-import { Button } from '@plantswap-libs/uikit'
+import { Button, useModal } from '@plantswap-libs/uikit'
 import BigNumber from 'bignumber.js'
 import { FarmWithStakedValue } from 'views/BarnGoose/components/FarmCard/FarmCard'
 import { getBalanceNumber } from 'utils/formatBalance'
-import { useHarvest } from 'hooks/useHarvest'
+import { useHarvestGoose } from 'hooks/barns/useHarvestGoose'
 import useI18n from 'hooks/useI18n'
-import { usePricePlantBusd } from 'state/hooks'
+import { usePriceEggBusd } from 'state/hooks'
 import { useCountUp } from 'react-countup'
+import ShareModal from 'views/BarnGoose/components/ShareModal'
 
 import { ActionContainer, ActionTitles, Title, Subtle, ActionContent, Earned, Staked } from './styles'
 
-const HarvestAction: React.FunctionComponent<FarmWithStakedValue> = ({ pid, userData }) => {
+const HarvestAction: React.FunctionComponent<FarmWithStakedValue> = ({ pid, userData, token, lpSymbol }) => {
   const { account } = useWeb3React()
   const earningsBigNumber = userData && account ? new BigNumber(userData.earnings) : null
-  const eggPrice = usePricePlantBusd()
+  const cakePrice = usePriceEggBusd()
   let earnings = null
   let earningsBusd = 0
   let displayBalance = '?'
 
   if (earningsBigNumber) {
     earnings = getBalanceNumber(earningsBigNumber)
-    earningsBusd = new BigNumber(earnings).multipliedBy(eggPrice).toNumber()
+    earningsBusd = new BigNumber(earnings).multipliedBy(cakePrice).toNumber()
     displayBalance = earnings.toLocaleString()
   }
 
   const [pendingTx, setPendingTx] = useState(false)
-  const { onReward } = useHarvest(pid)
+  const { onReward } = useHarvestGoose(pid)
+  const [onHarvestDone] = useModal(<ShareModal harvested={displayBalance} tokenHarvested={token.symbol} tokenName={lpSymbol} usdHarvested={earningsBusd} />)
   const TranslateString = useI18n()
 
   const { countUp, update } = useCountUp({
@@ -45,7 +47,7 @@ const HarvestAction: React.FunctionComponent<FarmWithStakedValue> = ({ pid, user
   return (
     <ActionContainer>
       <ActionTitles>
-        <Title>EGG </Title>
+        <Title>CAKE </Title>
         <Subtle>{TranslateString(999, 'EARNED')}</Subtle>
       </ActionTitles>
       <ActionContent>
@@ -59,6 +61,7 @@ const HarvestAction: React.FunctionComponent<FarmWithStakedValue> = ({ pid, user
             setPendingTx(true)
             await onReward()
             setPendingTx(false)
+            onHarvestDone()
           }}
           ml="4px"
         >

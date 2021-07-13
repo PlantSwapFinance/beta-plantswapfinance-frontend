@@ -8,7 +8,7 @@ import styled  from 'styled-components'
 import FlexLayout from 'components/layout/Flex'
 import Page from 'components/layout/Page'
 import usePersistState from 'hooks/usePersistState'
-import { useFarms, usePricePlantBusd, useGetApiPrices } from 'state/hooks'
+import { useFarms, usePricePlantBusd, usePriceCakeBusd, usePriceBnbBusd } from 'state/hooks'
 import useRefresh from 'hooks/useRefresh'
 import { fetchFarmUserDataAsync } from 'state/actions'
 import { Farm } from 'state/types'
@@ -133,11 +133,12 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
   const TranslateString = useI18n()
   const farmsLP = useFarms()
   const plantPrice = usePricePlantBusd()
+  const cakePrice = usePriceCakeBusd()
+  const bnbPrice = usePriceBnbBusd()
   const [query, setQuery] = useState('')
   const [viewMode, setViewMode] = useState(ViewMode.TABLE)
   const { account } = useWeb3React()
   const [sortOption, setSortOption] = useState('hot')
-  const prices = useGetApiPrices()
   const handleAcceptRiskSuccess = () => setHasAcceptedRisk(true)
   const [onPresentRiskDisclaimer] = useModal(<RiskDisclaimer onSuccess={handleAcceptRiskSuccess} />, false)
   const {tokenMode} = farmsProps;
@@ -195,12 +196,26 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
   const farmsList = useCallback(
     (farmsToDisplay: Farm[]): FarmWithStakedValue[] => {
       let farmsToDisplayWithAPY: FarmWithStakedValue[] = farmsToDisplay.map((farm) => {
-        if (!farm.lpTotalInQuoteToken || !prices) {
+        if (!farm.lpTotalInQuoteToken) {
           return farm
         }
-
-        const quoteTokenPriceUsd = prices[farm.quoteToken.symbol.toLowerCase()]
-        const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(quoteTokenPriceUsd)
+        let quoteTokenPriceUsd = 1
+        if(farm.pid === 0) {
+          quoteTokenPriceUsd = plantPrice.toNumber()
+        }
+        if(farm.pid === 4 || farm.pid === 1) {
+          quoteTokenPriceUsd = bnbPrice.toNumber()
+        }
+        if(farm.pid === 12) {
+          quoteTokenPriceUsd = cakePrice.toNumber()
+        }
+        if(farm.pid === 5 || farm.pid === 11 || farm.pid === 3) {
+          quoteTokenPriceUsd = 1
+        }
+        let totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(quoteTokenPriceUsd)
+        if(farm.isTokenOnly === true) {
+          totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(quoteTokenPriceUsd)
+        }
         const apy = isActive ? getFarmApy(farm.poolWeight, plantPrice, totalLiquidity) : 0
 
         return { ...farm, apy, liquidity: totalLiquidity }
@@ -214,7 +229,7 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
       }
       return farmsToDisplayWithAPY
     },
-    [plantPrice, prices, query, isActive],
+    [plantPrice, cakePrice, bnbPrice, query, isActive],
   )
 
   const handleChangeQuery = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -348,9 +363,16 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
                 <a href="/barnPancakeswap">
                   <img src="/images/platforms/pancakeswap.svg" alt="PancakeSwap" width={28} height={28} style={{marginRight: '15px'}} /></a>
                 <a href="/barnGoose">
-                  <img src="/images/platforms/goose.png" alt="GooseFinance" width={22} height={28} style={{marginRight: '15px'}} /></a>
+                  <img src="/images/platforms/goose.png" alt="GooseFinance" width={28} height={36} style={{marginRight: '15px'}} /></a>
                 <a href="/barnCafeswap">
                   <img src="/images/platforms/cafeswap.png" alt="CafeSwap" width={28} height={28} style={{marginRight: '15px'}} /></a>
+              </LabelWrapper>
+              <LabelWrapper>
+                <Text>Filter Type</Text>
+                <a href="/barnPlantswap">
+                  <img src="/images/platforms/farm.svg" alt="PlantSwap LP Barn" width={28} height={28} style={{marginRight: '15px'}} /></a>
+                <a href="/barnPlantswapToken">
+                  <img src="/images/platforms/token.svg" alt="PlantSwap Token Barn" width={28} height={28} style={{marginRight: '15px'}} /></a>
               </LabelWrapper>
             </FilterContainer1stRowPlatformIcon>
           </FilterContainer1stRow>

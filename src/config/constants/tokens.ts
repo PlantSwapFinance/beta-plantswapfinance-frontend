@@ -35,7 +35,7 @@ const tokens = {
       97: '0xa35062141Fa33BCA92Ce69FeD37D0E8908868AAe',
     },
     decimals: 18,
-    projectLink: 'https://plantswap.finance/',
+    projectLink: 'https://pancakeswap.finance/',
   },
   txl: {
     symbol: 'TXL',
@@ -248,6 +248,15 @@ const tokens = {
     symbol: 'SWGb',
     address: {
       56: '0xe40255c5d7fa7ceec5120408c78c787cecb4cfdb',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://swirgepay.com/',
+  },
+  swg: {
+    symbol: 'SWG',
+    address: {
+      56: '0xe792f64c582698b8572aaf765bdc426ac3aefb6b',
       97: '',
     },
     decimals: 18,
@@ -1234,9 +1243,376 @@ const tokens = {
     decimals: 18,
     projectLink: 'https://winklink.org/',
   },
-
-
-
+  mcoin: {
+    symbol: 'mCOIN',
+    address: {
+      56: '0x49022089e78a8d46ec87a3af86a1db6c189afa6f',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://mirror.finance/',
+  },
+  math: {
+    symbol: 'MATH',
+    address: {
+      56: '0xf218184af829cf2b0019f8e6f0b2423498a36983',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://mathwallet.org/',
+  },
+  kun: {
+    symbol: 'KUN',
+    address: {
+      56: '0x1A2fb0Af670D0234c2857FaD35b789F8Cb725584',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://chemix.io/home',
+  },
+  qsd: {
+    symbol: 'QSD',
+    address: {
+      56: '0x07AaA29E63FFEB2EBf59B33eE61437E1a91A3bb2',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://chemix.io/home',
+  },
+  hyfi: {
+    symbol: 'HYFI',
+    address: {
+      56: '0x9a319b959e33369C5eaA494a770117eE3e585318',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://hyfi.pro/#/',
+  },
+  oin: {
+    symbol: 'OIN',
+    address: {
+      56: '0x658E64FFcF40D240A43D52CA9342140316Ae44fA',
+      97: '',
+    },
+    decimals: 8,
+    projectLink: 'https://oin.finance/',
+  },
+  doge: {
+    symbol: 'DOGE',
+    address: {
+      56: '0xba2ae424d960c26247dd6c32edc70b295c744c43',
+      97: '',
+    },
+    decimals: 8,
+    projectLink: 'https://dogecoin.com/',
+  },
+  fine: {
+    symbol: 'FINE',
+    address: {
+      56: '0x4e6415a5727ea08aae4580057187923aec331227',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://refinable.com/',
+  },
+  one: {
+    symbol: 'ONE',
+    address: {
+      56: '0x04baf95fd4c52fd09a56d840baee0ab8d7357bf0',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://www.bigone.com/',
+  },
+  pmon: {
+    symbol: 'PMON',
+    address: {
+      56: '0x1796ae0b0fa4862485106a0de9b654eFE301D0b2',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://polkamon.com/',
+  },
+  hotcross: {
+    symbol: 'HOTCROSS',
+    address: {
+      56: '0x4FA7163E153419E0E1064e418dd7A99314Ed27b6',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://www.hotcross.com/',
+  },
+  τdoge: {
+    symbol: 'τDOGE',
+    address: {
+      56: '0xe550a593d09fbc8dcd557b5c88cea6946a8b404a',
+      97: '',
+    },
+    decimals: 8,
+    projectLink: 'https://www.btcst.finance/',
+  },
+  btr: {
+    symbol: 'BTR',
+    address: {
+      56: '0x5a16E8cE8cA316407c6E6307095dc9540a8D62B3',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://www.bitrue.com/',
+  },
+  ubxt: {
+    symbol: 'UBXT',
+    address: {
+      56: '0xbbeb90cfb6fafa1f69aa130b7341089abeef5811',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://upbots.com/',
+  },
+  wmass: {
+    symbol: 'WMASS',
+    address: {
+      56: '0x7e396bfc8a2f84748701167c2d622f041a1d7a17',
+      97: '',
+    },
+    decimals: 8,
+    projectLink: 'https://massnet.org/en/',
+  },
+  rfox: {
+    symbol: 'RFOX',
+    address: {
+      56: '0x0a3a21356793b49154fd3bbe91cbc2a16c0457f5',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://www.redfoxlabs.io/',
+  },
+  xend: {
+    symbol: 'XEND',
+    address: {
+      56: '0x4a080377f83D669D7bB83B3184a8A5E61B500608',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://xend.finance/',
+  },
+  cyc: {
+    symbol: 'CYC',
+    address: {
+      56: '0x810ee35443639348adbbc467b33310d2ab43c168',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://cyclone.xyz/',
+  },
+  chr: {
+    symbol: 'CHR',
+    address: {
+      56: '0xf9CeC8d50f6c8ad3Fb6dcCEC577e05aA32B224FE',
+      97: '',
+    },
+    decimals: 6,
+    projectLink: 'https://chromia.com/',
+  },
+  kalm: {
+    symbol: 'KALM',
+    address: {
+      56: '0x4BA0057f784858a48fe351445C672FF2a3d43515',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://kalmar.io/',
+  },
+  deri: {
+    symbol: 'DERI',
+    address: {
+      56: '0xe60eaf5A997DFAe83739e035b005A33AfdCc6df5',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://deri.finance/#/index',
+  },
+  well: {
+    symbol: 'WELL',
+    address: {
+      56: '0xf07a32eb035b786898c00bb1c64d8c6f8e7a46d5',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://www.bitwellex.com/',
+  },
+  popen: {
+    symbol: 'pOPEN',
+    address: {
+      56: '0xabae871b7e3b67aeec6b46ae9fe1a91660aadac5',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://opendao.io/',
+  },
+  ez: {
+    symbol: 'EZ',
+    address: {
+      56: '0x5512014efa6cd57764fa743756f7a6ce3358cc83',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://easyfi.network/',
+  },
+  vrt: {
+    symbol: 'VRT',
+    address: {
+      56: '0x5f84ce30dc3cf7909101c69086c50de191895883',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://venus.io/',
+  },
+  tusd: {
+    symbol: 'TUSD',
+    address: {
+      56: '0x14016e85a25aeb13065688cafb43044c2ef86784',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://www.trueusd.com/',
+  },
+  mtrg: {
+    symbol: 'MTRG',
+    address: {
+      56: '0xbd2949f67dcdc549c6ebe98696449fa79d988a9f',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://www.meter.io/',
+  },
+  ktn: {
+    symbol: 'KTN',
+    address: {
+      56: '0xdae6c2a48bfaa66b43815c5548b10800919c993e',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://kattana.io/',
+  },
+  qkc: {
+    symbol: 'QKC',
+    address: {
+      56: '0xa1434f1fc3f437fa33f7a781e041961c0205b5da',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://quarkchain.io/',
+  },
+  bcfx: {
+    symbol: 'bCFX',
+    address: {
+      56: '0x045c4324039dA91c52C55DF5D785385Aab073DcF',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://www.confluxnetwork.org/',
+  },
+  mx: {
+    symbol: 'MX',
+    address: {
+      56: '0x9f882567a62a5560d147d64871776eea72df41d3',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://www.mxc.com/',
+  },
+  ata: {
+    symbol: 'ATA',
+    address: {
+      56: '0xA2120b9e674d3fC3875f415A7DF52e382F141225',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://www.ata.network/',
+  },
+  mbox: {
+    symbol: 'MBOX',
+    address: {
+      56: '0x3203c9E46cA618C8C1cE5dC67e7e9D75f5da2377',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://www.mobox.io/#/',
+  },
+  boring: {
+    symbol: 'BORING',
+    address: {
+      56: '0xffEecbf8D7267757c2dc3d13D730E97E15BfdF7F',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://www.boringdao.com/',
+  },
+  marsh: {
+    symbol: 'MARSH',
+    address: {
+      56: '0x2FA5dAF6Fe0708fBD63b1A7D1592577284f52256',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://unmarshal.io/',
+  },
+  ampl: {
+    symbol: 'AMPL',
+    address: {
+      56: '0xDB021b1B247fe2F1fa57e0A87C748Cc1E321F07F',
+      97: '',
+    },
+    decimals: 9,
+    projectLink: 'https://www.ampleforth.org/',
+  },
+  o3: {
+    symbol: 'O3',
+    address: {
+      56: '0xEe9801669C6138E84bD50dEB500827b776777d28',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://o3swap.com/',
+  },
+  hai: {
+    symbol: 'HAI',
+    address: {
+      56: '0xaA9E582e5751d703F85912903bacADdFed26484C',
+      97: '',
+    },
+    decimals: 8,
+    projectLink: 'https://hacken.io/',
+  },
+  htb: {
+    symbol: 'HTB',
+    address: {
+      56: '0x4e840AADD28DA189B9906674B4Afcb77C128d9ea',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://www.hotbit.io/',
+  },
+  woo: {
+    symbol: 'WOO',
+    address: {
+      56: '0x4691937a7508860F876c9c0a2a617E7d9E945D4B',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://woo.network/',
+  },
+  $dg: {
+    symbol: '$DG',
+    address: {
+      56: '0x9Fdc3ae5c814b79dcA2556564047C5e7e5449C19',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://decentral.games/',
+  },
+  
   // Goose
   
   egg: {

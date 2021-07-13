@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useWeb3React } from '@web3-react/core'
-import { Button } from '@plantswap-libs/uikit'
+import { Button, useModal } from '@plantswap-libs/uikit'
 import BigNumber from 'bignumber.js'
 import { FarmWithStakedValue } from 'views/Farms/components/FarmCard/FarmCard'
 import { getBalanceNumber } from 'utils/formatBalance'
@@ -8,10 +8,11 @@ import { useHarvest } from 'hooks/useHarvest'
 import useI18n from 'hooks/useI18n'
 import { usePricePlantBusd } from 'state/hooks'
 import { useCountUp } from 'react-countup'
+import ShareModal from 'views/Farms/components/ShareModal'
 
 import { ActionContainer, ActionTitles, Title, Subtle, ActionContent, Earned, Staked } from './styles'
 
-const HarvestAction: React.FunctionComponent<FarmWithStakedValue> = ({ pid, userData }) => {
+const HarvestAction: React.FunctionComponent<FarmWithStakedValue> = ({ pid, userData, token, lpSymbol }) => {
   const { account } = useWeb3React()
   const earningsBigNumber = userData && account ? new BigNumber(userData.earnings) : null
   const plantPrice = usePricePlantBusd()
@@ -27,6 +28,7 @@ const HarvestAction: React.FunctionComponent<FarmWithStakedValue> = ({ pid, user
 
   const [pendingTx, setPendingTx] = useState(false)
   const { onReward } = useHarvest(pid)
+  const [onHarvestDone] = useModal(<ShareModal harvested={displayBalance} tokenHarvested={token.symbol} tokenName={lpSymbol} usdHarvested={earningsBusd} />)
   const TranslateString = useI18n()
 
   const { countUp, update } = useCountUp({
@@ -59,6 +61,7 @@ const HarvestAction: React.FunctionComponent<FarmWithStakedValue> = ({ pid, user
             setPendingTx(true)
             await onReward()
             setPendingTx(false)
+            onHarvestDone()
           }}
           ml="4px"
         >

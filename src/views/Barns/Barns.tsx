@@ -1,8 +1,9 @@
 import React from 'react'
-import { Image, Heading, Text } from '@plantswap-libs/uikit'
+import { Image, Heading } from '@plantswap-libs/uikit'
 import useI18n from 'hooks/useI18n'
 import styled  from 'styled-components'
 import Page from 'components/layout/Page'
+import TheBarn from 'components/TheBarn'
 
 const StyledImage = styled(Image)`
   margin-left: auto;
@@ -17,18 +18,10 @@ const Barns: React.FC = () => {
     <>
     <Page>
       <Hero>
-        <div>
-          <Heading as="h1" size="xxl" mb="16px">
-            {TranslateString(738, 'The Barn')}
-          </Heading>
-          <ul>
-            <li><Text>Manage all your farming operation</Text></li>
-            <li><Text>Add liquidity, see stats, harverst or remove your LP&apos;s</Text></li>
-            <li><Text>Everything under one barn.</Text></li>
-          </ul>
-        </div>
-      <img src="/images/theBarn.svg" alt="Barns" width={760} height={509} />
+        <Heading as="h1" size="xxl" mb="16px">
+          {TranslateString(738, 'The Barn')}</Heading>
       </Hero>
+      <TheBarn />
       <Heading as="h1" size="xl" mb="14px">
             {TranslateString(738, 'View your farming abroad, select a platform ')}
       </Heading>
@@ -37,12 +30,10 @@ const Barns: React.FC = () => {
       <a href="/barnPancakeswap">
         <img src="/images/platforms/pancakeswap.svg" alt="PancakeSwap" width={128} height={128} style={{paddingRight: '36px'}} /></a>
       <a href="/barnGoose">
-        <img src="/images/platforms/goose.png" alt="GooseFinance" width={100} height={128} style={{paddingRight: '36px'}} /></a>
-      <a href="/barnCafeswap">
+        <img src="/images/platforms/goose.png" alt="GooseFinance" width={112} height={128} style={{paddingRight: '36px'}} /></a>
+      <a href="/barncafeswap">
         <img src="/images/platforms/cafeswap.png" alt="CafeSwap" width={128} height={128} style={{paddingRight: '36px'}} /></a>
       <br />
-
-      
         <StyledImage src="/images/endPage.svg" alt="PlantSwap Finance" width={680} height={155} />
       </Page>
     </>

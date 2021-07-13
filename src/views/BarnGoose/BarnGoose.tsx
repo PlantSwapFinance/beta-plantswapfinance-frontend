@@ -8,7 +8,7 @@ import styled  from 'styled-components'
 import FlexLayout from 'components/layout/Flex'
 import Page from 'components/layout/Page'
 import usePersistState from 'hooks/usePersistState'
-import { useGooseFarms, usePriceEggBusd, useGetApiPrices } from 'state/hooks'
+import { useFetchGoosePublicData, useGooseFarms, usePriceEggBusd, useGetApiPrices } from 'state/hooks'
 import useRefresh from 'hooks/useRefresh'
 import { fetchGooseFarmUserDataAsync } from 'state/actions'
 import { GooseFarm } from 'state/types'
@@ -126,7 +126,9 @@ const StyledImage = styled(Image)`
   margin-top: 58px;
 `
 
+
 const Farms: React.FC<FarmsProps> = (farmsProps) => {
+  useFetchGoosePublicData()
   const { path } = useRouteMatch()
   const { pathname } = useLocation()
   const [hasAcceptedRisk, setHasAcceptedRisk] = usePersistState(false, 'plantswap_farm_accepted_risk')
@@ -200,7 +202,10 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
         }
 
         const quoteTokenPriceUsd = prices[gooseFarm.quoteToken.symbol.toLowerCase()]
-        const totalLiquidity = new BigNumber(gooseFarm.lpTotalInQuoteToken).times(quoteTokenPriceUsd)
+        let totalLiquidity = new BigNumber(gooseFarm.lpTotalInQuoteToken).times(quoteTokenPriceUsd)
+        if(gooseFarm.isTokenOnly === true) {
+          totalLiquidity = new BigNumber(gooseFarm.lpTotalInQuoteToken).times(quoteTokenPriceUsd)
+        }
         const apy = isActive ? getGooseFarmApy(gooseFarm.poolWeight, eggPrice, totalLiquidity) : 0
 
         return { ...gooseFarm, apy, liquidity: totalLiquidity }
@@ -344,13 +349,20 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
                 <a href="/barns">
                   <img src="/images/plantswapBarn.svg" alt="PlantSwap Barn" width={28} height={28} style={{marginRight: '15px'}} /></a>
                 <a href="/barnPlantswap">
-                  <img src="/images/platforms/plantswap.svg" alt="PlantSwap" width={28} height={28} style={{marginRight: '15px'}} /></a>
+                  <img src="/images/platforms/plantswap.svg" alt="PlantSwap" width={36} height={36} style={{marginRight: '15px'}} /></a>
                 <a href="/barnPancakeswap">
-                  <img src="/images/platforms/pancakeswap.png" alt="PancakeSwap" width={28} height={28} style={{marginRight: '15px'}} /></a>
+                  <img src="/images/platforms/pancakeswap.svg" alt="PancakeSwap" width={28} height={28} style={{marginRight: '15px'}} /></a>
                 <a href="/barnGoose">
                   <img src="/images/platforms/goose.png" alt="GooseFinance" width={28} height={36} style={{marginRight: '15px'}} /></a>
                 <a href="/barnCafeswap">
                   <img src="/images/platforms/cafeswap.png" alt="CafeSwap" width={28} height={28} style={{marginRight: '15px'}} /></a>
+              </LabelWrapper>
+              <LabelWrapper>
+                <Text>Filter Type</Text>
+                <a href="/barnGoose">
+                  <img src="/images/platforms/farm.svg" alt="PlantSwap LP Barn" width={28} height={28} style={{marginRight: '15px'}} /></a>
+                <a href="/barnGooseToken">
+                  <img src="/images/platforms/token.svg" alt="GooseFinance Token Barn" width={28} height={28} style={{marginRight: '15px'}} /></a>
               </LabelWrapper>
             </FilterContainer1stRowPlatformIcon>
           </FilterContainer1stRow>

@@ -7,11 +7,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Team } from 'config/constants/types'
 import { getWeb3NoAccount } from 'utils/web3'
 import useRefresh from 'hooks/useRefresh'
+import tokens from 'config/constants/tokens'
 import {
   fetchFarmsPublicDataAsync,
+  fetchGardensPublicDataAsync,
   fetchBarnsBetaPublicDataAsync,
   fetchPoolsPublicDataAsync,
   fetchPoolsUserDataAsync,
+  fetchPlantswapFarmsPublicDataAsync,
   fetchPancakeSwapFarmsPublicDataAsync,
   fetchGooseFarmsPublicDataAsync,
   fetchCafeswapFarmsPublicDataAsync,
@@ -20,7 +23,7 @@ import {
   clear as clearToast,
   setBlock,
 } from './actions'
-import { State, Farm, BarnBeta, PancakeSwapFarm, GooseFarm, CafeswapFarm, Pool, ProfileState, TeamsState, AchievementState, PriceState } from './types'
+import { State, Farm, BarnBeta, PlantswapFarm, PancakeSwapFarm, GooseFarm, CafeswapFarm, Pool, ProfileState, TeamsState, AchievementState, PriceState } from './types'
 import { fetchProfile } from './profile'
 import { fetchTeam, fetchTeams } from './teams'
 import { fetchAchievements } from './achievements'
@@ -31,6 +34,26 @@ export const useFetchPublicData = () => {
   const { slowRefresh } = useRefresh()
   useEffect(() => {
     dispatch(fetchFarmsPublicDataAsync())
+    dispatch(fetchGardensPublicDataAsync())
+    dispatch(fetchPoolsPublicDataAsync())
+  }, [dispatch, slowRefresh])
+
+  useEffect(() => {
+    const web3 = getWeb3NoAccount()
+    const interval = setInterval(async () => {
+      const blockNumber = await web3.eth.getBlockNumber()
+      dispatch(setBlock(blockNumber))
+    }, 6000)
+
+    return () => clearInterval(interval)
+  }, [dispatch])
+}
+
+export const useFetchPlantswapPublicData = () => {
+  const dispatch = useDispatch()
+  const { slowRefresh } = useRefresh()
+  useEffect(() => {
+    dispatch(fetchPlantswapFarmsPublicDataAsync())
     dispatch(fetchPoolsPublicDataAsync())
   }, [dispatch, slowRefresh])
 
@@ -150,6 +173,34 @@ export const useFarmUser = (pid) => {
   }
 }
 
+// Gardens
+
+export const useGardens = (): Farm[] => {
+  const gardens = useSelector((state: State) => state.gardens.data)
+  return gardens
+}
+
+export const useGardenFromPid = (pid): Farm => {
+  const garden = useSelector((state: State) => state.gardens.data.find((f) => f.pid === pid))
+  return garden
+}
+
+export const useGardenFromSymbol = (lpSymbol: string): Farm => {
+  const garden = useSelector((state: State) => state.gardens.data.find((f) => f.lpSymbol === lpSymbol))
+  return garden
+}
+
+export const useGardenUser = (pid) => {
+  const garden = useGardenFromPid(pid)
+
+  return {
+    allowance: garden.userData ? new BigNumber(garden.userData.allowance) : new BigNumber(0),
+    tokenBalance: garden.userData ? new BigNumber(garden.userData.tokenBalance) : new BigNumber(0),
+    stakedBalance: garden.userData ? new BigNumber(garden.userData.stakedBalance) : new BigNumber(0),
+    earnings: garden.userData ? new BigNumber(garden.userData.earnings) : new BigNumber(0),
+  }
+}
+
 // BarnsBeta
 
 export const useBarnsBeta = (): BarnBeta[] => {
@@ -178,6 +229,32 @@ export const useBarnBetaUser = (pid) => {
   }
 }
 
+
+export const usePlantswapFarms = (): PlantswapFarm[] => {
+  const plantswapFarms = useSelector((state: State) => state.farms.data)
+  return plantswapFarms
+}
+
+export const usePlantswapFarmFromPid = (pid): PlantswapFarm => {
+  const plantswapFarm = useSelector((state: State) => state.farms.data.find((f) => f.pid === pid))
+  return plantswapFarm
+}
+
+export const usePlantswapFarmFromSymbol = (lpSymbol: string): PlantswapFarm => {
+  const plantswapFarm = useSelector((state: State) => state.farms.data.find((f) => f.lpSymbol === lpSymbol))
+  return plantswapFarm
+}
+
+export const usePlantswapFarmUser = (pid) => {
+  const plantswapFarm = usePlantswapFarmFromPid(pid)
+
+  return {
+    allowance: plantswapFarm.userData ? new BigNumber(plantswapFarm.userData.allowance) : new BigNumber(0),
+    tokenBalance: plantswapFarm.userData ? new BigNumber(plantswapFarm.userData.tokenBalance) : new BigNumber(0),
+    stakedBalance: plantswapFarm.userData ? new BigNumber(plantswapFarm.userData.stakedBalance) : new BigNumber(0),
+    earnings: plantswapFarm.userData ? new BigNumber(plantswapFarm.userData.earnings) : new BigNumber(0),
+  }
+}
 
 // External Farms
 
@@ -390,6 +467,14 @@ export const useGetApiPrice = (token: string) => {
   return prices[token.toLowerCase()]
 }
 
+export const usePriceBnbBusd = (): BigNumber => {
+  const ZERO = new BigNumber(0)
+  const bnbBusdPancakeSwapFarm = usePancakeSwapFarmFromPid(2)
+  const bnbBusdPrice = bnbBusdPancakeSwapFarm.tokenPriceVsQuote ? new BigNumber(1).div(bnbBusdPancakeSwapFarm.tokenPriceVsQuote) : ZERO
+
+  return bnbBusdPrice
+}
+
 export const usePricePlantBusd = (): BigNumber => {
   const ZERO = new BigNumber(0)
 
@@ -406,14 +491,53 @@ export const usePricePlantBusd = (): BigNumber => {
 export const usePriceCakeBusd = (): BigNumber => {
   const ZERO = new BigNumber(0)
 
-  const cakeBnbFarm = usePancakeSwapFarmFromPid(251)
+  const cakeBnbFarm = usePancakeSwapFarmFromPid(139)
   
-  const bnbBusdPancakeSwapFarm = usePancakeSwapFarmFromPid(252)
+  const bnbBusdPancakeSwapFarm = usePancakeSwapFarmFromPid(2)
   
   const bnbBusdPrice = bnbBusdPancakeSwapFarm.tokenPriceVsQuote ? new BigNumber(1).div(bnbBusdPancakeSwapFarm.tokenPriceVsQuote) : ZERO
   const cakeBusdPrice = cakeBnbFarm.tokenPriceVsQuote ? bnbBusdPrice.times(cakeBnbFarm.tokenPriceVsQuote) : ZERO
 
   return cakeBusdPrice
+}
+
+// For PCS Barns
+export const usePriceQsdBusd = (): BigNumber => {
+  const ZERO = new BigNumber(0)
+  const qsdBnbFarm = usePancakeSwapFarmFromPid(251)
+  const bnbBusdPrice = usePriceBnbBusd()
+  const qsdBusdPrice = qsdBnbFarm.tokenPriceVsQuote ? bnbBusdPrice.times(qsdBnbFarm.tokenPriceVsQuote) : ZERO
+  return qsdBusdPrice
+}
+
+export const usePriceUstBusd = (): BigNumber => {
+  const ZERO = new BigNumber(0)
+  const ustBusdFarm = usePancakeSwapFarmFromPid(293)
+  const ustBusdPrice = ustBusdFarm.tokenPriceVsQuote ? new BigNumber(1).div(ustBusdFarm.tokenPriceVsQuote) : ZERO
+  return ustBusdPrice
+}
+
+export const usePricePbtcBusd = (): BigNumber => {
+  const ZERO = new BigNumber(0)
+  const pbtcBnbFarm = usePancakeSwapFarmFromPid(227)
+  const bnbBusdPrice = usePriceBnbBusd()
+  const pbtcBusdPrice = pbtcBnbFarm.tokenPriceVsQuote ? bnbBusdPrice.times(pbtcBnbFarm.tokenPriceVsQuote) : ZERO
+  return pbtcBusdPrice
+}
+
+export const usePriceBtcbBusd = (): BigNumber => {
+  const ZERO = new BigNumber(0)
+  const btcbBusdFarm = usePancakeSwapFarmFromPid(365)
+  const btcbBusdPrice = btcbBusdFarm.tokenPriceVsQuote ? new BigNumber(1).div(btcbBusdFarm.tokenPriceVsQuote) : ZERO
+  return btcbBusdPrice
+}
+
+export const usePriceEthBusd = (): BigNumber => {
+  const ZERO = new BigNumber(0)
+  const ethBnbFarm = usePancakeSwapFarmFromPid(261)
+  const bnbBusdPrice = usePriceBnbBusd()
+  const ethBusdPrice = ethBnbFarm.tokenPriceVsQuote ? bnbBusdPrice.times(ethBnbFarm.tokenPriceVsQuote) : ZERO
+  return ethBusdPrice
 }
 
 
@@ -433,9 +557,9 @@ export const usePriceEggBusd = (): BigNumber => {
 export const usePriceBrewBusd = (): BigNumber => {
   const ZERO = new BigNumber(0)
 
-  const brewBnbFarm = useCafeswapFarmFromPid(1)
+  const brewBnbFarm = useCafeswapFarmFromPid(14)
   
-  const bnbBusdCafeswapFarm = useCafeswapFarmFromPid(0)
+  const bnbBusdCafeswapFarm = useCafeswapFarmFromPid(15)
   
   const bnbBusdPrice = bnbBusdCafeswapFarm.tokenPriceVsQuote ? new BigNumber(1).div(bnbBusdCafeswapFarm.tokenPriceVsQuote) : ZERO
   const brewBusdPrice = brewBnbFarm.tokenPriceVsQuote ? bnbBusdPrice.times(brewBnbFarm.tokenPriceVsQuote) : ZERO
@@ -450,4 +574,29 @@ export const useBlock = () => {
 
 export const useInitialBlock = () => {
   return useSelector((state: State) => state.block.initialBlock)
+}
+
+export const useTotalValue = (): BigNumber => {
+  const farms = useFarms()
+  const bnbPrice = usePriceBnbBusd()
+  const plantPrice = usePricePlantBusd()
+  const cakePrice = usePriceCakeBusd()
+  let value = new BigNumber(0)
+  for (let i = 0; i < farms.length; i++) {
+    const farm = farms[i]
+    if (farm.lpTotalInQuoteToken) {
+      let val
+      if (farm.quoteToken === tokens.bnb) {
+        val = bnbPrice.times(farm.lpTotalInQuoteToken)
+      } else if (farm.quoteToken === tokens.plant) {
+        val = plantPrice.times(farm.lpTotalInQuoteToken)
+      } else if (farm.quoteToken === tokens.cake) {
+        val = cakePrice.times(farm.lpTotalInQuoteToken)
+      } else {
+        val = farm.lpTotalInQuoteToken
+      }
+      value = value.plus(val)
+    }
+  }
+  return value
 }
