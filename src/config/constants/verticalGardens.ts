@@ -13,6 +13,7 @@ const verticalGardens: VerticalGardenConfig[] = [
       97: '',
     },
     verticalGardenMasterGardenerPId: 18,
+    verticalGardenMasterGardenerAllocPt: 60,
     verticalGardenCategory: VerticalGardenCategory.PANCAKE,
     harvest: true,
     sortOrder: 1,
@@ -32,9 +33,10 @@ const verticalGardens: VerticalGardenConfig[] = [
       97: '',
     },
     verticalGardenMasterGardenerPId: 19,
+    verticalGardenMasterGardenerAllocPt: 30,
     verticalGardenCategory: VerticalGardenCategory.PANCAKE,
     harvest: true,
-    sortOrder: 1,
+    sortOrder: 2,
     isFinished: false,
     depositFee: 100, // 1%
     rewardCut: 1500, // 15%

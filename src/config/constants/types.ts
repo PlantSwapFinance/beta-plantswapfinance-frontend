@@ -75,6 +75,7 @@ export interface VerticalGardenConfig {
   verticalEarningToken: Token
   verticalGardenContractAddress: Address
   verticalGardenMasterGardenerPId?: number
+  verticalGardenMasterGardenerAllocPt?: number
   verticalGardenCategory?: VerticalGardenCategory
   harvest?: boolean
   sortOrder?: number
