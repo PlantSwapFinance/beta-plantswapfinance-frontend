@@ -16,7 +16,7 @@ import { useVerticalGardenHarvest } from 'hooks/useHarvest'
 import { useVerticalGardenUpdate } from 'hooks/useUpdate'
 import Balance from 'components/Balance'
 import { VerticalGarden } from 'state/types'
-import { usePricePlantBusd, usePriceCakeBusd, usePriceOddzBusd } from 'state/hooks'
+import { useBlock, usePricePlantBusd, usePriceCakeBusd, usePriceOddzBusd } from 'state/hooks'
 import DepositModal from './DepositModal'
 import WithdrawModal from './WithdrawModal'
 import CompoundModal from './CompoundModal'
@@ -151,6 +151,11 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
     earningPlantDecimal = 5
   }
 
+  const { currentBlock } = useBlock()
+
+  const lastRewardUpdateBlockToNumber = new BigNumber(lastRewardUpdateBlock).toNumber()
+
+  const lastUpdate = currentBlock - lastRewardUpdateBlockToNumber
 
   const plantTokenApy = new BigNumber(lastRewardUpdatePlantGained)
                                         .div(apyBlockCount)
@@ -214,7 +219,6 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
           <div style={{ flex: 1 }}>
             {stakingToken.symbol}
             <Image src={`/images/tokens/${verticalGardenMainImage}`} alt={stakingToken.symbol} width={64} height={64} />
-
             <StyledCardReward>
             <FlexFull><Text>Earn:</Text></FlexFull>
             <FlexFull>&nbsp;</FlexFull>
@@ -399,7 +403,9 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
           <div>
             <Tooltip
               content={
-                <div>{TranslateString(999, 'Usage of the reward cut')}
+                <div>{TranslateString(999, 'The reward cut is already factor in the apy and pending reward.')}
+                  <br />
+                  <br />{TranslateString(999, 'Usage of the reward cut')}
                   <br />
                   <br />{TranslateString(999, '50% is use to buy PLANT token and burn them')}
                   <br />{TranslateString(999, '50% is send to the Development Fund to help ecological non profit')}
@@ -415,6 +421,17 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
             value={rewardCut / 100}
             unit="%"
           />
+        </StyledDetails>
+        <StyledDetails>
+          <FlexFull>{TranslateString(384, 'Block count since last update')}:</FlexFull>
+          <Balance
+            fontSize="14px"
+            decimals={0}
+            isDisabled={isFinished}
+            value={lastUpdate}
+          />
+          &nbsp;
+          <LabelRight> {TranslateString(1212, 'blocks')}</LabelRight>
         </StyledDetails>
         <StyledDetails>
           <div style={{ flex: 1 }}>
