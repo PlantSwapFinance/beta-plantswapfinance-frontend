@@ -14,9 +14,11 @@ export {
   fetchVerticalGardensUserDataAsync,
   vgupdateUserAllowance,
   vgupdateUserBalance,
+  vgupdateUserStakedBalance,
   vgupdateUserPendingReward,
   vgupdateUserPendingPlantReward,
-//  vgupdateUserStakedBalance,
+  vgupdateUserHarvestedReward,
+  vgupdateUserHarvestedPlant,
 } from './verticalGardens'
 export { profileFetchStart, profileFetchSucceeded, profileFetchFailed } from './profile'
 export { fetchStart, teamFetchSucceeded, fetchFailed, teamsFetchSucceeded } from './teams'

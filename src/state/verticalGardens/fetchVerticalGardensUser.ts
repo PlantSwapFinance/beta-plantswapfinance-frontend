@@ -121,3 +121,39 @@ export const fetchUserPendingPlantRewards = async (account) => {
 
   return { ...pendingPlantRewards }
 }
+
+export const fetchUserHarvestedRewards = async (account) => {
+  const calls = listVerticalGardens.map((p) => ({
+    address: getAddress(p.verticalGardenContractAddress),
+    name: 'harvestedReward',
+    params: [account],
+  }))
+  const res = await multicall(verticalGardenABI, calls)
+  const harvestedRewards = listVerticalGardens.reduce(
+    (acc, verticalGarden, index) => ({
+      ...acc,
+      [verticalGarden.vgId]: new BigNumber(res[index][0]._hex).toJSON(),
+    }),
+    {},
+  )
+
+  return { ...harvestedRewards }
+}
+
+export const fetchUserHarvestedPlants = async (account) => {
+  const calls = listVerticalGardens.map((p) => ({
+    address: getAddress(p.verticalGardenContractAddress),
+    name: 'harvestedPlant',
+    params: [account],
+  }))
+  const res = await multicall(verticalGardenABI, calls)
+  const harvestedPlants = listVerticalGardens.reduce(
+    (acc, verticalGarden, index) => ({
+      ...acc,
+      [verticalGarden.vgId]: new BigNumber(res[index][0]._hex).toJSON(),
+    }),
+    {},
+  )
+
+  return { ...harvestedPlants }
+}

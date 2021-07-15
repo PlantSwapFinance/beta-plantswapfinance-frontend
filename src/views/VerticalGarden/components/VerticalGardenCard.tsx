@@ -71,6 +71,8 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
   const plantPrice = usePricePlantBusd()
   const cakePrice = usePriceCakeBusd()
 
+  const totalStakedBusd = new BigNumber(cakePrice).multipliedBy(totalStaked)
+
   const allowance = new BigNumber(userData?.allowance || 0)
   const allowanceReward = new BigNumber(userData?.allowanceReward || 0)
   const allowancePlant = new BigNumber(userData?.allowancePlant || 0)
@@ -85,6 +87,9 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
   const earningsBusd = new BigNumber(earningsBalance).multipliedBy(cakePrice).toFixed(4)
   const earningsPlantBusd = new BigNumber(earningsPlantBalance).multipliedBy(plantPrice).toFixed(4)
   const earningsTotalBusd = new BigNumber(earningsBusd).plus(earningsPlantBusd).toNumber()
+
+  const harvestedReward = new BigNumber(userData?.harvestedReward || 0)
+  const harvestedPlant = new BigNumber(userData?.harvestedPlant || 0)
 
   const accountHasStakedBalance = stakedBalance?.toNumber() > 0
   const needsApproval = !accountHasStakedBalance && !allowance.toNumber()
@@ -122,13 +127,14 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
                                         .div(apyBlockCount)
                                         .multipliedBy(new BigNumber(10512000))
                                         .div(lastRewardUpdateTotalStakedToken)
+                                        .multipliedBy(new BigNumber(100))
 
   const plantTokenApy = new BigNumber(lastRewardUpdatePlantGained)
                                         .div(apyBlockCount)
                                         .multipliedBy(new BigNumber(10512000))
                                         .div(lastRewardUpdateTotalStakedToken)
-
-  const rewardTokenApyFor1Y = new BigNumber(rewardTokenApy)
+                                        .div(new BigNumber(plantPrice).div(new BigNumber(cakePrice)))
+                                        .multipliedBy(new BigNumber(100))
 
   const rewardTokenApyFormated = rewardTokenApy.toNumber().toFixed(2)
   const plantTokenApyFormated = plantTokenApy.toNumber().toFixed(2)
@@ -311,6 +317,9 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
         projectLink={stakingToken.projectLink}
         decimals={stakingToken.decimals}
         totalStaked={totalStaked}
+        totalStakedBusd={totalStakedBusd}
+        harvestedReward={harvestedReward}
+        harvestedPlant={harvestedPlant}
         startBlock={startBlock}
         endBlock={endBlock}
         isFinished={isFinished}

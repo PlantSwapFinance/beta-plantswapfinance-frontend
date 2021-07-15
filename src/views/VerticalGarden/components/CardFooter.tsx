@@ -24,6 +24,9 @@ interface Props {
   projectLink: string
   decimals: number
   totalStaked: BigNumber
+  totalStakedBusd: BigNumber
+  harvestedReward: BigNumber
+  harvestedPlant: BigNumber
   tokenStakedName: string
   tokenStakedAddress: string
   tokenStakedRewardName: string
@@ -79,6 +82,12 @@ const FlexFull = styled.div`
 const Label = styled.div`
   font-size: 14px;
 `
+
+const LabelRight = styled.div`
+font-size: 14px;
+font-weight: bold;
+color: ${(props) => props.theme.colors.text};
+`
 const TokenLink = styled.a`
   font-size: 14px;
   text-decoration: none;
@@ -90,6 +99,9 @@ const CardFooter: React.FC<Props> = ({
   projectLink,
   decimals,
   totalStaked,
+  totalStakedBusd,
+  harvestedReward,
+  harvestedPlant,
   tokenStakedName,
   tokenStakedAddress,
   tokenStakedRewardName,
@@ -130,13 +142,20 @@ const CardFooter: React.FC<Props> = ({
           <Row mb="4px">
             <FlexFull>
               <Label>
-                <span role="img" aria-label="syrup">
-                🌱{' '}
-                </span>
-                {TranslateString(408, 'Total')}
+                {TranslateString(408, 'Total Stacked')} {tokenStakedName}
               </Label>
             </FlexFull>
             <Balance fontSize="14px" isDisabled={isFinished} value={getBalanceNumber(totalStaked, decimals)} />
+          </Row>
+          <Row mb="4px">
+            <FlexFull>
+              <Label>
+                {TranslateString(408, 'Total Stacked in BUSD')}
+              </Label>
+            </FlexFull>
+            <Balance fontSize="14px" isDisabled={isFinished} value={getBalanceNumber(totalStakedBusd, decimals)} decimals={2} />
+            &nbsp;
+            <LabelRight> {TranslateString(1212, 'BUSD')}</LabelRight>
           </Row>
           {blocksUntilStart > 0 && (
             <Row mb="4px">
@@ -154,6 +173,36 @@ const CardFooter: React.FC<Props> = ({
               <Balance fontSize="14px" isDisabled={isFinished} value={blocksRemaining} decimals={0} />
             </Row>
           )}
+          <Row mb="4px">
+            <FlexFull>
+              <Label>
+              🌱
+              </Label>
+            </FlexFull>
+          </Row>
+          <Row mb="4px">
+            <FlexFull>
+              <Label>
+                {TranslateString(408, 'You previously harvested')}
+              </Label>
+            </FlexFull>
+          </Row>
+          <Row mb="4px">
+            <FlexFull>
+              &nbsp;
+            </FlexFull>
+            <Balance fontSize="14px" isDisabled={isFinished} value={getBalanceNumber(harvestedPlant, decimals)} decimals={5} />
+            &nbsp;
+            <LabelRight> {TranslateString(1212, 'Plant')}</LabelRight>
+          </Row>
+          <Row mb="4px">
+            <FlexFull>
+              &nbsp;
+            </FlexFull>
+            <Balance fontSize="14px" isDisabled={isFinished} value={getBalanceNumber(harvestedReward, decimals)} decimals={5} />
+            &nbsp;
+            <LabelRight> {TranslateString(1212, 'Cake')}</LabelRight>
+          </Row>
           {tokenStakedAddress && (
             <Flex mb="4px">
               <TokenLink onClick={() => registerToken(tokenStakedAddress, tokenStakedName, tokenDecimals, imageSrc)}>

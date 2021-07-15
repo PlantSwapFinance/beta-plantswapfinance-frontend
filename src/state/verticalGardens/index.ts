@@ -10,6 +10,8 @@ import {
   fetchUserStakeBalances,
   fetchUserPendingRewards,
   fetchUserPendingPlantRewards,
+  fetchUserHarvestedRewards,
+  fetchUserHarvestedPlants,
 } from './fetchVerticalGardensUser'
 import { VerticalGardensState, VerticalGarden } from '../types'
 
@@ -66,6 +68,8 @@ export const fetchVerticalGardensUserDataAsync = (account) => async (dispatch) =
   const stakedBalances = await fetchUserStakeBalances(account)
   const pendingRewards = await fetchUserPendingRewards(account)
   const pendingPlantRewards = await fetchUserPendingPlantRewards(account)
+  const harvestedRewards = await fetchUserHarvestedRewards(account)
+  const harvestedPlants = await fetchUserHarvestedPlants(account)
 
   const userData = verticalGardensConfig.map((verticalGarden) => ({
     vgId: verticalGarden.vgId,
@@ -76,6 +80,8 @@ export const fetchVerticalGardensUserDataAsync = (account) => async (dispatch) =
     stakedBalance: stakedBalances[verticalGarden.vgId],
     pendingReward: pendingRewards[verticalGarden.vgId],
     pendingPlantReward: pendingPlantRewards[verticalGarden.vgId],
+    harvestedReward: harvestedRewards[verticalGarden.vgId],
+    harvestedPlant: harvestedPlants[verticalGarden.vgId],
   }))
 
   dispatch(setVerticalGardensUserData(userData))
@@ -104,6 +110,16 @@ export const vgupdateUserPendingReward = (vgId: string, account: string) => asyn
 export const vgupdateUserPendingPlantReward = (vgId: string, account: string) => async (dispatch) => {
   const pendingPlantRewards = await fetchUserPendingPlantRewards(account)
   dispatch(updateVerticalGardensUserData({ vgId, field: 'pendingPlantReward', value: pendingPlantRewards[vgId] }))
+}
+
+export const vgupdateUserHarvestedReward = (vgId: string, account: string) => async (dispatch) => {
+  const harvestedRewards = await fetchUserHarvestedRewards(account)
+  dispatch(updateVerticalGardensUserData({ vgId, field: 'harvestedReward', value: harvestedRewards[vgId] }))
+}
+
+export const vgupdateUserHarvestedPlant = (vgId: string, account: string) => async (dispatch) => {
+  const harvestedPlants = await fetchUserHarvestedPlants(account)
+  dispatch(updateVerticalGardensUserData({ vgId, field: 'harvestedPlant', value: harvestedPlants[vgId] }))
 }
 
 export default VerticalGardensSlice.reducer
