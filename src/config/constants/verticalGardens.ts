@@ -43,8 +43,8 @@ const verticalGardens: VerticalGardenConfig[] = [
   },
   {
     vgId: 3,
-    stakingToken: tokens.cake,
-    stakingRewardToken: tokens.cakeBnbPcsLp,
+    stakingToken: tokens.cakeBnbPcsLp,
+    stakingRewardToken: tokens.cake,
     verticalEarningToken: tokens.plant,
     verticalGardenContractAddress: {
       56: '0xa7072CE9966f5F6f8589b45E08aE924569Dd8Fa0',

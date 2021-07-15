@@ -30,7 +30,7 @@ const tokens = {
   // LP for Vertical Garden
 
   cakeBnbPcsLp: {
-    symbol: 'CakeBnbLP',
+    symbol: 'CAKE/BNB LP',
     address: {
       56: '0x0eD7e52944161450477ee417DE9Cd3a859b14fD0',
       97: '',
