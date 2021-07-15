@@ -1,7 +1,7 @@
 import BigNumber from 'bignumber.js'
 import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
-import { Button, IconButton, useModal, AddIcon, Image, Text } from '@plantswap-libs/uikit'
+import { Button, IconButton, useModal, AddIcon, Image, Text, HelpIcon } from '@plantswap-libs/uikit'
 import { useWeb3React } from '@web3-react/core'
 import UnlockButton from 'components/UnlockButton'
 import Label from 'components/Label'
@@ -23,6 +23,7 @@ import CardTitle from './CardTitle'
 import Card from './Card'
 import HarvestButton from './HarvestButton'
 import CardFooter from './CardFooter'
+import Tooltip from './Tooltip'
 
 interface HarvestProps {
   verticalGarden: VerticalGarden
@@ -188,10 +189,40 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
           <Text>Stake:</Text> {stakingToken.symbol}<br />
           
           <Image src={`/images/verticalGardens/${verticalGardenMainImage}`} alt={stakingToken.symbol} width={64} height={64} />
-          <Text>Earn:</Text> {verticalEarningToken.symbol} {plantTokenApyFormated}% APY
+          <Text>Earn:</Text> {verticalEarningToken.symbol}
+            <Tooltip
+              content={
+                <div>
+                  {TranslateString(999, 'The PLANT APY is base on this formula')}
+                  <br />
+                  <br />
+                  {TranslateString(
+                    999,
+                    'rewardTokenApy = lastRewardUpdateRewardTokenGained .div((lastRewardUpdateBlock) .minus(lastRewardUpdateBlockPrevious)) .multipliedBy(10512000) .div(lastRewardUpdateTotalStakedToken) .multipliedBy(100)',
+                  )}
+                </div>
+              }
+            > &nbsp;&nbsp;&nbsp;&nbsp;{plantTokenApyFormated}&nbsp;% APY&nbsp;
+              <HelpIcon color="textSubtle" />
+            </Tooltip>
           <Image src={`/images/verticalGardens/${verticalGardenSmallImageTwo}`} alt={stakingRewardToken.symbol} width={32} height={32} />
 
-          <Text>AND</Text> {stakingRewardToken.symbol} {rewardTokenApyFormated}% APY
+          <Text>AND</Text> {stakingRewardToken.symbol}
+            <Tooltip
+              content={
+                <div>
+                  {TranslateString(999, 'The CAKE APY is base on this formula')}
+                  <br />
+                  <br />
+                  {TranslateString(
+                    999,
+                    'rewardTokenApy = lastRewardUpdatePlantGained .div((lastRewardUpdateBlock) .minus(lastRewardUpdateBlockPrevious)) .multipliedBy(10512000) .div(lastRewardUpdateTotalStakedToken) .div(plantPrice.div(cakePrice)) .multipliedBy(100)',
+                  )}
+                </div>
+              }
+            > &nbsp;&nbsp;&nbsp;&nbsp;{rewardTokenApyFormated}&nbsp;% APY&nbsp;
+              <HelpIcon color="textSubtle" />
+            </Tooltip>
           <Image src={`/images/verticalGardens/${verticalGardenSmallImageOne}`} alt={verticalEarningToken.symbol} width={32} height={32} />
           </div>
         </CardTitle>

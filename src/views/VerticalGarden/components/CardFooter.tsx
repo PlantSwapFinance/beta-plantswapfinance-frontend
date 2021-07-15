@@ -180,13 +180,16 @@ const CardFooter: React.FC<Props> = ({
               </Label>
             </FlexFull>
           </Row>
+          {harvestedPlant.toNumber() > 0 || harvestedReward.toNumber() > 0 && (
           <Row mb="4px">
             <FlexFull>
               <Label>
-                {TranslateString(408, 'You previously harvested')}
+                {TranslateString(408, 'You previouslsy harvested')}
               </Label>
             </FlexFull>
           </Row>
+          )}
+          {harvestedPlant.toNumber() > 0 && (
           <Row mb="4px">
             <FlexFull>
               &nbsp;
@@ -195,6 +198,8 @@ const CardFooter: React.FC<Props> = ({
             &nbsp;
             <LabelRight> {TranslateString(1212, 'Plant')}</LabelRight>
           </Row>
+          )}
+          {harvestedReward.toNumber() > 0 && (
           <Row mb="4px">
             <FlexFull>
               &nbsp;
@@ -203,6 +208,7 @@ const CardFooter: React.FC<Props> = ({
             &nbsp;
             <LabelRight> {TranslateString(1212, 'Cake')}</LabelRight>
           </Row>
+          )}
           {tokenStakedAddress && (
             <Flex mb="4px">
               <TokenLink onClick={() => registerToken(tokenStakedAddress, tokenStakedName, tokenDecimals, imageSrc)}>
