@@ -45,12 +45,59 @@ export const fetchVerticalGardenTotalStaked = async () => { // NEW
     }
   })
 
+  const callsFreezeContractTillBlocks = verticalGardensTotalStaked.map((verticalGardenConfig) => {
+    return {
+      address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
+      name: 'freezeContractTillBlock',
+    }
+  })
+  const callsLastRewardUpdateBlock = verticalGardensTotalStaked.map((verticalGardenConfig) => {
+    return {
+      address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
+      name: 'lastRewardUpdateBlock',
+    }
+  })
+
+  const callsLastRewardUpdateBlockPrevious = verticalGardensTotalStaked.map((verticalGardenConfig) => {
+    return {
+      address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
+      name: 'lastRewardUpdateBlockPrevious',
+    }
+  })
+  
+  const callsLastRewardUpdateTotalStakedToken = verticalGardensTotalStaked.map((verticalGardenConfig) => {
+    return {
+      address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
+      name: 'lastRewardUpdateTotalStakedToken',
+    }
+  })
+  
+  const callsLastRewardUpdateRewardTokenGained = verticalGardensTotalStaked.map((verticalGardenConfig) => {
+    return {
+      address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
+      name: 'lastRewardUpdateRewardTokenGained',
+    }
+  })
+  
+  const callsLastRewardUpdatePlantGained = verticalGardensTotalStaked.map((verticalGardenConfig) => {
+    return {
+      address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
+      name: 'lastRewardUpdatePlantGained',
+    }
+  })
+
   const totalStakeds = await multicall(verticalGardenABI, callsTotalStaked)
   const totalStakedEachBlocks = await multicall(verticalGardenABI, callsTotalStakedEachBlock)
   const totalPendingStakedRewardToSplits = await multicall(verticalGardenABI, callsTotalPendingStakedRewardToSplit)
   const totalPendingPlantRewardToSplits = await multicall(verticalGardenABI, callsTotalPendingPlantRewardToSplit)
   const pendingStakedInStakedMasterChefs = await multicall(verticalGardenABI, callsPendingStakedInStakedMasterChef)
   const pendingPlantInPlantMasterGardeners = await multicall(verticalGardenABI, callsPendingPlantInPlantMasterGardener)
+  const freezeContractTillBlocks = await multicall(verticalGardenABI, callsFreezeContractTillBlocks)
+  const lastRewardUpdateBlocks = await multicall(verticalGardenABI, callsLastRewardUpdateBlock)
+  const lastRewardUpdateBlockPreviouss = await multicall(verticalGardenABI, callsLastRewardUpdateBlockPrevious)
+  const lastRewardUpdateTotalStakedTokens = await multicall(verticalGardenABI, callsLastRewardUpdateTotalStakedToken)
+  const lastRewardUpdateRewardTokenGaineds = await multicall(verticalGardenABI, callsLastRewardUpdateRewardTokenGained)
+  const lastRewardUpdatePlantGaineds = await multicall(verticalGardenABI, callsLastRewardUpdatePlantGained)
 
 
   return verticalGardensTotalStaked.map((plantVerticalGardenConfig, index) => {
@@ -60,6 +107,12 @@ export const fetchVerticalGardenTotalStaked = async () => { // NEW
     const totalPendingPlantRewardToSplit = totalPendingPlantRewardToSplits[index]
     const pendingStakedInStakedMasterChef = pendingStakedInStakedMasterChefs[index]
     const pendingPlantInPlantMasterGardener = pendingPlantInPlantMasterGardeners[index]
+    const freezeContractTillBlock = freezeContractTillBlocks[index]
+    const lastRewardUpdateBlock = lastRewardUpdateBlocks[index]
+    const lastRewardUpdateBlockPrevious = lastRewardUpdateBlockPreviouss[index]
+    const lastRewardUpdateTotalStakedToken = lastRewardUpdateTotalStakedTokens[index]
+    const lastRewardUpdateRewardTokenGained = lastRewardUpdateRewardTokenGaineds[index]
+    const lastRewardUpdatePlantGained = lastRewardUpdatePlantGaineds[index]
     return {
       vgId: plantVerticalGardenConfig.vgId,
       totalStaked: new BigNumber(totalStaked).toJSON(),
@@ -68,6 +121,12 @@ export const fetchVerticalGardenTotalStaked = async () => { // NEW
       totalPendingPlantRewardToSplit: new BigNumber(totalPendingPlantRewardToSplit).toJSON(),
       pendingStakedInStakedMasterChef: new BigNumber(pendingStakedInStakedMasterChef).toJSON(),
       pendingPlantInPlantMasterGardener: new BigNumber(pendingPlantInPlantMasterGardener).toJSON(),
+      freezeContractTillBlock: new BigNumber(freezeContractTillBlock).toJSON(),
+      lastRewardUpdateBlock: new BigNumber(lastRewardUpdateBlock).toJSON(), 
+      lastRewardUpdateBlockPrevious: new BigNumber(lastRewardUpdateBlockPrevious).toJSON(),
+      lastRewardUpdateTotalStakedToken: new BigNumber(lastRewardUpdateTotalStakedToken).toJSON(),
+      lastRewardUpdateRewardTokenGained: new BigNumber(lastRewardUpdateRewardTokenGained).toJSON(),
+      lastRewardUpdatePlantGained: new BigNumber(lastRewardUpdatePlantGained).toJSON(),
     }
   })
 }
@@ -99,22 +158,63 @@ export const fetchVerticalGardenInfo = async () => { // NEW
     }
   })
 
+  const callsLastRewardUpdateBlockPrevious = verticalGardensInfo.map((verticalGardenConfig) => {
+    return {
+      address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
+      name: 'lastRewardUpdateBlockPrevious',
+    }
+  })
+  
+  const callsLastRewardUpdateTotalStakedToken = verticalGardensInfo.map((verticalGardenConfig) => {
+    return {
+      address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
+      name: 'lastRewardUpdateTotalStakedToken',
+    }
+  })
+  
+  const callsLastRewardUpdateRewardTokenGained = verticalGardensInfo.map((verticalGardenConfig) => {
+    return {
+      address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
+      name: 'lastRewardUpdateRewardTokenGained',
+    }
+  })
+  
+  const callsLastRewardUpdatePlantGained = verticalGardensInfo.map((verticalGardenConfig) => {
+    return {
+      address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
+      name: 'lastRewardUpdatePlantGained',
+    }
+  })
+
   const depositActives = await multicall(verticalGardenABI, callsDepositActive)
   const freezeContracts = await multicall(verticalGardenABI, callsFreezeContract)
   const freezeContractTillBlocks = await multicall(verticalGardenABI, callsFreezeContractTillBlocks)
   const lastRewardUpdateBlocks = await multicall(verticalGardenABI, callsLastRewardUpdateBlock)
+  const lastRewardUpdateBlockPreviouss = await multicall(verticalGardenABI, callsLastRewardUpdateBlockPrevious)
+  const lastRewardUpdateTotalStakedTokens = await multicall(verticalGardenABI, callsLastRewardUpdateTotalStakedToken)
+  const lastRewardUpdateRewardTokenGaineds = await multicall(verticalGardenABI, callsLastRewardUpdateRewardTokenGained)
+  const lastRewardUpdatePlantGaineds = await multicall(verticalGardenABI, callsLastRewardUpdatePlantGained)
+  
 
   return verticalGardensInfo.map((plantVerticalGardenConfig, index) => {
     const depositActive = depositActives[index]
     const freezeContract = freezeContracts[index]
     const freezeContractTillBlock = freezeContractTillBlocks[index]
     const lastRewardUpdateBlock = lastRewardUpdateBlocks[index]
+    const lastRewardUpdateBlockPrevious = lastRewardUpdateBlockPreviouss[index]
+    const lastRewardUpdateTotalStakedToken = lastRewardUpdateTotalStakedTokens[index]
+    const lastRewardUpdateRewardTokenGained = lastRewardUpdateRewardTokenGaineds[index]
+    const lastRewardUpdatePlantGained = lastRewardUpdatePlantGaineds[index]
     return {
       vgId: plantVerticalGardenConfig.vgId,
       depositActive: depositActive.toJSON(),
       freezeContract: freezeContract.toJSON(),
       freezeContractTillBlock: new BigNumber(freezeContractTillBlock).toJSON(),
-      lastRewardUpdateBlock: new BigNumber(lastRewardUpdateBlock).toJSON(),
+      lastRewardUpdateBlock: new BigNumber(lastRewardUpdateBlock).toJSON(), 
+      lastRewardUpdateBlockPrevious: new BigNumber(lastRewardUpdateBlockPrevious).toJSON(),
+      lastRewardUpdateTotalStakedToken: new BigNumber(lastRewardUpdateTotalStakedToken).toJSON(),
+      lastRewardUpdateRewardTokenGained: new BigNumber(lastRewardUpdateRewardTokenGained).toJSON(),
+      lastRewardUpdatePlantGained: new BigNumber(lastRewardUpdatePlantGained).toJSON(),
     }
   })
 }

@@ -37,6 +37,11 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
     harvest,
     verticalGardenCategory,
     totalStaked,
+    lastRewardUpdateBlock,
+    lastRewardUpdateBlockPrevious,
+    lastRewardUpdateTotalStakedToken,
+    lastRewardUpdateRewardTokenGained,
+    lastRewardUpdatePlantGained,
     startBlock,
     endBlock,
     isFinished,
@@ -84,7 +89,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
   const accountHasStakedBalance = stakedBalance?.toNumber() > 0
   const needsApproval = !accountHasStakedBalance && !allowance.toNumber()
   const needsApprovalReward = !accountHasStakedBalance && !allowanceReward.toNumber()
-  const needsApprovalPlantReward = !accountHasStakedBalance && !allowancePlant.toNumber()
+  const needsApprovalPlantReward = !allowancePlant.toNumber()
   const isCardActive = isFinished && accountHasStakedBalance
 
   const convertedLimit = new BigNumber(stakingLimit).multipliedBy(new BigNumber(10).pow(verticalEarningToken.decimals))
@@ -111,6 +116,22 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
       stakingTokenDecimals={stakingToken.decimals}
     />,
   )
+  const apyBlockCount = new BigNumber(lastRewardUpdateBlock).minus(lastRewardUpdateBlockPrevious)
+  
+  const rewardTokenApy = new BigNumber(lastRewardUpdateRewardTokenGained)
+                                        .div(apyBlockCount)
+                                        .multipliedBy(new BigNumber(10512000))
+                                        .div(lastRewardUpdateTotalStakedToken)
+
+  const plantTokenApy = new BigNumber(lastRewardUpdatePlantGained)
+                                        .div(apyBlockCount)
+                                        .multipliedBy(new BigNumber(10512000))
+                                        .div(lastRewardUpdateTotalStakedToken)
+
+  const rewardTokenApyFor1Y = new BigNumber(rewardTokenApy)
+
+  const rewardTokenApyFormated = rewardTokenApy.toNumber().toFixed(2)
+  const plantTokenApyFormated = plantTokenApy.toNumber().toFixed(2)
 
   const handleApprove = useCallback(async () => {
     try {
@@ -161,10 +182,10 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
           <Text>Stake:</Text> {stakingToken.symbol}<br />
           
           <Image src={`/images/verticalGardens/${verticalGardenMainImage}`} alt={stakingToken.symbol} width={64} height={64} />
-          <Text>Earn:</Text> {verticalEarningToken.symbol}
+          <Text>Earn:</Text> {verticalEarningToken.symbol} {plantTokenApyFormated}% APY
           <Image src={`/images/verticalGardens/${verticalGardenSmallImageTwo}`} alt={stakingRewardToken.symbol} width={32} height={32} />
 
-          <Text>AND</Text> {stakingRewardToken.symbol}
+          <Text>AND</Text> {stakingRewardToken.symbol} {rewardTokenApyFormated}% APY
           <Image src={`/images/verticalGardens/${verticalGardenSmallImageOne}`} alt={verticalEarningToken.symbol} width={32} height={32} />
           </div>
         </CardTitle>
@@ -239,7 +260,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
           {account &&
             (needsApprovalPlantReward ? (
               <div style={{ flex: 1 }}>
-              <Button disabled={isFinished || requestedApproval} onClick={handleApprovePlantReward} width="100%">
+              <Button disabled={isFinished} onClick={handleApprovePlantReward} width="100%">
                 {`Approve ${verticalEarningToken.symbol}`}
               </Button>
             </div>

@@ -45,6 +45,11 @@ export interface Garden extends FarmConfig {
 
 export interface VerticalGarden extends VerticalGardenConfig {
   totalStaked?: BigNumber
+  lastRewardUpdateBlock?: BigNumber
+  lastRewardUpdateBlockPrevious?: BigNumber
+  lastRewardUpdateTotalStakedToken?: BigNumber
+  lastRewardUpdateRewardTokenGained?: BigNumber
+  lastRewardUpdatePlantGained?: BigNumber
   startBlock?: number
   endBlock?: number
   userData?: {
