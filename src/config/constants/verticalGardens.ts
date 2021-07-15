@@ -41,6 +41,26 @@ const verticalGardens: VerticalGardenConfig[] = [
     rewardCutSplitDevelopmentFund: 50, // 50% of 15%
     rewardCutSplitBuyPlantAndBurn: 50, // 50% of 15%
   },
+  {
+    vgId: 3,
+    stakingToken: tokens.cake,
+    stakingRewardToken: tokens.cakeBnbPcsLp,
+    verticalEarningToken: tokens.plant,
+    verticalGardenContractAddress: {
+      56: '0xa7072CE9966f5F6f8589b45E08aE924569Dd8Fa0',
+      97: '',
+    },
+    verticalGardenMasterGardenerPId: 18,
+    verticalGardenCategory: VerticalGardenCategory.PANCAKE,
+    harvest: true,
+    sortOrder: 1,
+    isFinished: false,
+    depositFee: 100, // 1%
+    rewardCut: 1500, // 15%
+    rewardCutSplitDevelopmentFund: 50, // 50% of 15%
+    rewardCutSplitBuyPlantAndBurn: 50, // 50% of 15%
+  },
+   
 ]
 
 export default verticalGardens

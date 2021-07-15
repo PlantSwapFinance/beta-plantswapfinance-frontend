@@ -27,6 +27,18 @@ const tokens = {
     projectLink: 'https://plantswap.finance/',
   },
 
+  // LP for Vertical Garden
+
+  cakeBnbPcsLp: {
+    symbol: 'CakeBnbLP',
+    address: {
+      56: '0x0eD7e52944161450477ee417DE9Cd3a859b14fD0',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://plantswap.finance/',
+  },
+
   // Pancakeswap
   cake: {
     symbol: 'CAKE',

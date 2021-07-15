@@ -98,7 +98,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
 
   const accountHasStakedBalance = stakedBalance?.toNumber() > 0
   const needsApproval = !accountHasStakedBalance && !allowance.toNumber()
-  const needsApprovalReward = !accountHasStakedBalance && !allowanceReward.toNumber()
+  const needsApprovalReward = !allowanceReward.toNumber()
   const needsApprovalPlantReward = !allowancePlant.toNumber()
   const isCardActive = isFinished && accountHasStakedBalance
 
@@ -127,7 +127,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
     />,
   )
   const apyBlockCount = new BigNumber(lastRewardUpdateBlock).minus(lastRewardUpdateBlockPrevious)
-  let rewardTokenApy
+  let rewardTokenApy = new BigNumber(0)
   if(verticalGarden.stakingRewardToken.symbol === 'CAKE') {
     rewardTokenApy = new BigNumber(lastRewardUpdateRewardTokenGained)
                                         .div(apyBlockCount)
@@ -218,10 +218,10 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
           <Text>Earn:</Text>
           
           <StyledCardReward>
-            <FlexFull><Image src={`/images/tokens/${verticalGardenSmallImageTwo}`} alt={verticalEarningToken.symbol} width={32} height={32} /></FlexFull>
+            <FlexFull><Image src={`/images/tokens/${verticalGardenSmallImageTwo}`} alt={verticalEarningToken.symbol} width={42} height={42} /></FlexFull>
             <FlexFull>{verticalEarningToken.symbol}</FlexFull>
             <FlexFull>&nbsp;&nbsp;&nbsp;&nbsp;{TranslateString(999, 'and')}&nbsp;&nbsp;&nbsp;&nbsp;</FlexFull>
-            <FlexFull><Image src={`/images/tokens/${verticalGardenSmallImageOne}`} alt={stakingRewardToken.symbol} width={32} height={32} /></FlexFull>
+            <FlexFull><Image src={`/images/tokens/${verticalGardenSmallImageOne}`} alt={stakingRewardToken.symbol} width={42} height={42} /></FlexFull>
             <FlexFull>{stakingRewardToken.symbol}</FlexFull>
           </StyledCardReward>
 
