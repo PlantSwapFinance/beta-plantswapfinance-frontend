@@ -240,7 +240,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
               <StyledCardAPY>
                 <FlexFull>{verticalEarningToken.symbol}</FlexFull>
                   <Tooltip content={
-                    <div>{TranslateString(999, 'The PLANT APY is base on this formula')}
+                    <div>{verticalEarningToken.symbol}{TranslateString(999, ' APY is base on this formula')}
                       <br />
                       <br />{TranslateString(999, 'rewardTokenApy = lastRewardUpdateRewardTokenGained')}
                       <br />&nbsp;{TranslateString(999, '.div((lastRewardUpdateBlock)')}
@@ -263,7 +263,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
               <StyledCardAPY>
                 <FlexFull>{stakingRewardToken.symbol}</FlexFull>
                 <Tooltip content={
-                  <div>{TranslateString(999, 'The CAKE APY is base on this formula')}
+                  <div>{stakingRewardToken.symbol}{TranslateString(999, ' APY is base on this formula')}
                     <br />
                     <br />{TranslateString(999, 'rewardTokenApy = lastRewardUpdateRewardTokenGained')}
                     <br />&nbsp;{TranslateString(999, '.div((lastRewardUpdateBlock)')}
@@ -280,6 +280,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
             )}
           </div>
         </CardTitle>
+        <Text>{TranslateString(330, `${verticalEarningToken.symbol} earned`)}</Text>
         <BalanceAndCompound>
           <Balance value={getBalanceNumber(earningsPlant)} isDisabled={isFinished} decimals={earningDecimal} />
           {account && harvest && (
@@ -294,10 +295,12 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
             />
           )}
           </BalanceAndCompound>
-        <Label isFinished={isFinished} text={TranslateString(330, `${verticalEarningToken.symbol} earned ${earningsBusd} USD`)} />
+        <Label isFinished={isFinished} text={TranslateString(330, `${earningsBusd} BUSD`)} />
+        <br />
+        <Text>{TranslateString(330, `${stakingRewardToken.symbol} earned`)}</Text>
         <BalanceAndCompound>
           <Balance value={getBalanceNumber(earnings)} isDisabled={isFinished} decimals={earningPlantDecimal} />
-          {account && harvest && (
+          {account && harvest && stakingToken === stakingRewardToken &&(
             <HarvestButton
               disabled={!earnings.toNumber() || pendingTx}
               text={pendingTx ? TranslateString(999, 'Compounding') : TranslateString(704, 'Compound')}
@@ -305,7 +308,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
             />
             )}
           </BalanceAndCompound>
-        <Label isFinished={isFinished} text={TranslateString(330, `${stakingRewardToken.symbol} earned ${earningsPlantBusd} USD`)} />
+        <Label isFinished={isFinished} text={TranslateString(330, `${stakingRewardToken.symbol} earned ${earningsPlantBusd} BUSD`)} />
 
         
         <BalanceAndCompound>

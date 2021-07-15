@@ -146,10 +146,12 @@ const CardFooter: React.FC<Props> = ({
           <Row mb="4px">
             <FlexFull>
               <Label>
-                {TranslateString(408, 'Total Stacked')} {tokenStakedName}
+                {TranslateString(408, 'Total Stacked in ')} {tokenStakedName}
               </Label>
             </FlexFull>
             <Balance fontSize="14px" isDisabled={isFinished} value={getBalanceNumber(totalStaked, decimals)} />
+            &nbsp;
+            <LabelRight> {tokenStakedName}</LabelRight>
           </Row>
           <Row mb="4px">
             <FlexFull>
