@@ -151,3 +151,21 @@ export const fetchUserHarvestedPlants = async (account) => {
 
   return { ...harvestedPlants }
 }
+
+export const fetchUserCompoundedRewards = async (account) => {
+  const calls = listVerticalGardens.map((p) => ({
+    address: getAddress(p.verticalGardenContractAddress),
+    name: 'compoudedReward',
+    params: [account],
+  }))
+  const res = await multicall(verticalGardenABI, calls)
+  const compoudedRewards = listVerticalGardens.reduce(
+    (acc, verticalGarden, index) => ({
+      ...acc,
+      [verticalGarden.vgId]: new BigNumber(res[index][0]._hex).toJSON(),
+    }),
+    {},
+  )
+
+  return { ...compoudedRewards }
+}

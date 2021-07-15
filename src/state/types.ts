@@ -62,6 +62,7 @@ export interface VerticalGarden extends VerticalGardenConfig {
     pendingPlantReward: BigNumber
     harvestedReward: BigNumber
     harvestedPlant: BigNumber
+    compoundedReward: BigNumber
   }
 }
 

@@ -27,6 +27,7 @@ interface Props {
   totalStakedBusd: BigNumber
   harvestedReward: BigNumber
   harvestedPlant: BigNumber
+  compoundedReward: BigNumber
   tokenStakedName: string
   tokenRewardName: string
   tokenStakedAddress: string
@@ -103,6 +104,7 @@ const CardFooter: React.FC<Props> = ({
   totalStakedBusd,
   harvestedReward,
   harvestedPlant,
+  compoundedReward,
   tokenStakedName,
   tokenRewardName,
   tokenStakedAddress,
@@ -182,6 +184,25 @@ const CardFooter: React.FC<Props> = ({
               </Label>
             </FlexFull>
           </Row>
+          {compoundedReward.toNumber() > 0 && (
+          <Row mb="4px">
+            <FlexFull>
+              <Label>
+                {TranslateString(408, 'You previouslsy compounded')}
+              </Label>
+            </FlexFull>
+          </Row>
+          )}
+          {compoundedReward.toNumber() > 0 && (
+          <Row mb="4px">
+            <FlexFull>
+              &nbsp;
+            </FlexFull>
+            <Balance fontSize="14px" isDisabled={isFinished} value={getBalanceNumber(compoundedReward, decimals)} decimals={6} />
+            &nbsp;
+            <LabelRight> {tokenRewardName}</LabelRight>
+          </Row>
+          )}
           {harvestedPlant.toNumber() > 0 && (
           <Row mb="4px">
             <FlexFull>

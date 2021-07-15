@@ -12,6 +12,7 @@ import {
   fetchUserPendingPlantRewards,
   fetchUserHarvestedRewards,
   fetchUserHarvestedPlants,
+  fetchUserCompoundedRewards,
 } from './fetchVerticalGardensUser'
 import { VerticalGardensState, VerticalGarden } from '../types'
 
@@ -70,6 +71,7 @@ export const fetchVerticalGardensUserDataAsync = (account) => async (dispatch) =
   const pendingPlantRewards = await fetchUserPendingPlantRewards(account)
   const harvestedRewards = await fetchUserHarvestedRewards(account)
   const harvestedPlants = await fetchUserHarvestedPlants(account)
+  const compoundedRewards= await fetchUserCompoundedRewards(account)
 
   const userData = verticalGardensConfig.map((verticalGarden) => ({
     vgId: verticalGarden.vgId,
@@ -82,6 +84,7 @@ export const fetchVerticalGardensUserDataAsync = (account) => async (dispatch) =
     pendingPlantReward: pendingPlantRewards[verticalGarden.vgId],
     harvestedReward: harvestedRewards[verticalGarden.vgId],
     harvestedPlant: harvestedPlants[verticalGarden.vgId],
+    compoundedReward: compoundedRewards[verticalGarden.vgId],
   }))
 
   dispatch(setVerticalGardensUserData(userData))
@@ -120,6 +123,11 @@ export const vgupdateUserHarvestedReward = (vgId: string, account: string) => as
 export const vgupdateUserHarvestedPlant = (vgId: string, account: string) => async (dispatch) => {
   const harvestedPlants = await fetchUserHarvestedPlants(account)
   dispatch(updateVerticalGardensUserData({ vgId, field: 'harvestedPlant', value: harvestedPlants[vgId] }))
+}
+
+export const vgupdateUserCompoundedReward = (vgId: string, account: string) => async (dispatch) => {
+  const harvestedPlants = await fetchUserCompoundedRewards(account)
+  dispatch(updateVerticalGardensUserData({ vgId, field: 'compoudedReward', value: harvestedPlants[vgId] }))
 }
 
 export default VerticalGardensSlice.reducer
