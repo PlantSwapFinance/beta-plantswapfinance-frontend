@@ -1624,6 +1624,24 @@ const tokens = {
     decimals: 18,
     projectLink: 'https://decentral.games/',
   },
+  chess: {
+    symbol: 'CHESS',
+    address: {
+      56: '0x20de22029ab63cf9A7Cf5fEB2b737Ca1eE4c82A6',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://tranchess.com/',
+  },
+  titan: {
+    symbol: 'TITAN',
+    address: {
+      56: '0xe898EDc43920F357A93083F1d4460437dE6dAeC2',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://titanswap.org',
+  },
   
   // Goose
   
