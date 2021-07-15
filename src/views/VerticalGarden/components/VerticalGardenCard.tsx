@@ -1,7 +1,7 @@
 import BigNumber from 'bignumber.js'
 import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
-import { Button, IconButton, useModal, AddIcon, Image, Text, HelpIcon } from '@plantswap-libs/uikit'
+import { Button, IconButton, useModal, AddIcon, Image, Tag, Text, HelpIcon } from '@plantswap-libs/uikit'
 import { useWeb3React } from '@web3-react/core'
 import UnlockButton from 'components/UnlockButton'
 import Label from 'components/Label'
@@ -15,6 +15,7 @@ import { getAddress } from 'utils/addressHelpers'
 import { useVerticalGardenHarvest } from 'hooks/useHarvest'
 import { useVerticalGardenUpdate } from 'hooks/useUpdate'
 import Balance from 'components/Balance'
+import { PancakeSwapTag, CoreTag } from 'components/Tags'
 import { VerticalGarden } from 'state/types'
 import { usePricePlantBusd, usePriceCakeBusd, usePriceOddzBusd } from 'state/hooks'
 import DepositModal from './DepositModal'
@@ -208,13 +209,21 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
       <div style={{ padding: '24px' }}>
         <CardTitle isFinished={isFinished}>
           <div style={{ flex: 2 }}>
-            <Text>Stake:</Text> 
+            <Text>Stake:</Text>
+
           </div>
           <div style={{ flex: 1 }}>
             {stakingToken.symbol}
             <Image src={`/images/tokens/${verticalGardenMainImage}`} alt={stakingToken.symbol} width={64} height={64} />
 
-            <Text>Earn:</Text>
+            <StyledCardReward>
+            <FlexFull><Text>Earn:</Text></FlexFull>
+            <FlexFull>&nbsp;</FlexFull>
+            <FlexFull>&nbsp;</FlexFull>
+            <FlexFull>&nbsp;&nbsp;&nbsp;&nbsp;
+              <MultiplierTag variant="secondary">{vgId === 1 ? 0.6 : 0.3}X</MultiplierTag>
+            </FlexFull>
+            </StyledCardReward>
             
             <StyledCardReward>
               <FlexFull><Image src={`/images/tokens/${verticalGardenSmallImageTwo}`} alt={verticalEarningToken.symbol} width={42} height={42} /></FlexFull>
@@ -457,6 +466,11 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
     </Card>
   )
 }
+
+const MultiplierTag = styled(Tag)`
+  margin-left: 4px;
+  align-items: right;
+`
 
 const VerticalGardenFinishedSash = styled.div`
   background-image: url('/images/verticalGarden-finished-sash.svg');
