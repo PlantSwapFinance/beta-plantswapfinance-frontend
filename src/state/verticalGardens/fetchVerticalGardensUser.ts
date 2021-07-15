@@ -1,17 +1,11 @@
-// import { AbiItem } from 'web3-utils'
 import verticalGardensConfig from 'config/constants/verticalGardens'
-// import masterChefABI from 'config/abi/masterchef.json'
 import verticalGardenABI from 'config/abi/verticalGardens.json'
 import erc20ABI from 'config/abi/erc20.json'
 import multicall from 'utils/multicall'
 import { getAddress } from 'utils/addressHelpers'
-// import { getWeb3NoAccount } from 'utils/web3'
 import BigNumber from 'bignumber.js'
 
-// VerticalGarden 0, Plant / Plant is a different kind of contract (master chef)
-// BNB verticalGardens use the native BNB token (wrapping ? unwrapping is done at the contract level)
 const listVerticalGardens = verticalGardensConfig.filter((p) => p.vgId !== 0)
-// const web3 = getWeb3NoAccount()
 
 export const fetchVerticalGardensAllowance = async (account) => {
   const calls = listVerticalGardens.map((p) => ({

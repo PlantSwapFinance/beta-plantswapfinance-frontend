@@ -13,9 +13,10 @@ import { useVerticalGardensUnstake } from 'hooks/useUnstake'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { getAddress } from 'utils/addressHelpers'
 import { useVerticalGardenHarvest } from 'hooks/useHarvest'
+import { useVerticalGardenUpdate } from 'hooks/useUpdate'
 import Balance from 'components/Balance'
 import { VerticalGarden } from 'state/types'
-import { usePricePlantBusd, usePriceCakeBusd } from 'state/hooks'
+import { usePricePlantBusd, usePriceCakeBusd, usePriceOddzBusd } from 'state/hooks'
 import DepositModal from './DepositModal'
 import WithdrawModal from './WithdrawModal'
 import CompoundModal from './CompoundModal'
@@ -63,6 +64,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
   const { onStake } = useVerticalGardenStake(vgId)
   const { onUnstake } = useVerticalGardensUnstake(vgId)
   const { onReward } = useVerticalGardenHarvest(vgId)
+  const { onUpdate } = useVerticalGardenUpdate(vgId)
 
   const apy = 0
 
@@ -71,6 +73,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
   
   const plantPrice = usePricePlantBusd()
   const cakePrice = usePriceCakeBusd()
+  const oddzPrice = usePriceOddzBusd();
 
   const totalStakedBusd = new BigNumber(cakePrice).multipliedBy(totalStaked)
 
@@ -79,6 +82,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
   const allowancePlant = new BigNumber(userData?.allowancePlant || 0)
   const stakingTokenBalance = new BigNumber(userData?.stakingTokenBalance || 0)
   const stakedBalance = new BigNumber(userData?.stakedBalance || 0)
+  const stakedBalanceBusd = new BigNumber(stakedBalance).multipliedBy(new BigNumber(cakePrice)) // Need improvement for flexibility
   const earnings = new BigNumber(userData?.pendingReward || 0)
   const earningsPlant = new BigNumber(userData?.pendingPlantReward || 0)
 
@@ -111,9 +115,9 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
   const [onPresentCompound] = useModal(
     <CompoundModal earnings={earnings} onConfirm={onStake} tokenName={stakingToken.symbol} />,
   )
-  const verticalGardenMainImage = `${verticalGarden.stakingToken.symbol}.svg`.toLocaleLowerCase()
-  const verticalGardenSmallImageOne = `${verticalGarden.stakingRewardToken.symbol}.svg`.toLocaleLowerCase()
-  const verticalGardenSmallImageTwo = `${verticalGarden.verticalEarningToken.symbol}.svg`.toLocaleLowerCase()
+  const verticalGardenMainImage = `${getAddress(verticalGarden.stakingToken.address)}.svg`.toLocaleLowerCase()
+  const verticalGardenSmallImageOne = `${getAddress(verticalGarden.stakingRewardToken.address)}.svg`.toLocaleLowerCase()
+  const verticalGardenSmallImageTwo = `${getAddress(verticalGarden.verticalEarningToken.address)}.svg`.toLocaleLowerCase()
   const [onPresentWithdraw] = useModal(
     <WithdrawModal
       max={stakedBalance}
@@ -123,18 +127,37 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
     />,
   )
   const apyBlockCount = new BigNumber(lastRewardUpdateBlock).minus(lastRewardUpdateBlockPrevious)
-  
-  const rewardTokenApy = new BigNumber(lastRewardUpdateRewardTokenGained)
+  let rewardTokenApy
+  if(verticalGarden.stakingRewardToken.symbol === 'CAKE') {
+    rewardTokenApy = new BigNumber(lastRewardUpdateRewardTokenGained)
                                         .div(apyBlockCount)
                                         .multipliedBy(new BigNumber(10512000))
                                         .div(lastRewardUpdateTotalStakedToken)
                                         .multipliedBy(new BigNumber(100))
+  }
+  if(verticalGarden.stakingRewardToken.symbol === 'ODDZ') {
+    rewardTokenApy = new BigNumber(lastRewardUpdateRewardTokenGained)
+                                        .div(apyBlockCount)
+                                        .multipliedBy(new BigNumber(10512000))
+                                        .div(lastRewardUpdateTotalStakedToken)
+                                        .div(new BigNumber(cakePrice).div(new BigNumber(oddzPrice)))
+                                        .multipliedBy(new BigNumber(100))
+  }
+  let earningDecimal = 7
+  if(earnings > new BigNumber(1000000000000)) {
+    earningDecimal = 4
+  }
+  let earningPlantDecimal = 9
+  if(earningsPlant > new BigNumber(1000000000000)) {
+    earningPlantDecimal = 5
+  }
+
 
   const plantTokenApy = new BigNumber(lastRewardUpdatePlantGained)
                                         .div(apyBlockCount)
                                         .multipliedBy(new BigNumber(10512000))
                                         .div(lastRewardUpdateTotalStakedToken)
-                                        .div(new BigNumber(plantPrice).div(new BigNumber(cakePrice)))
+                                        .div(new BigNumber(cakePrice).div(new BigNumber(plantPrice)))
                                         .multipliedBy(new BigNumber(100))
 
   const rewardTokenApyFormated = rewardTokenApy.toNumber().toFixed(2)
@@ -180,54 +203,72 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
   }, [onApprovePlantReward, setRequestedApproval])
 
   return (
-    <Card isActive={isCardActive} isFinished={isFinished && vgId !== 0}>
-      {isFinished && vgId !== 0 && <VerticalGardenFinishedSash />}
+    <Card isActive={isCardActive} isFinished={isFinished}>
+      {isFinished && <VerticalGardenFinishedSash />}
       <VerticalGardenWindMill />
       <div style={{ padding: '24px' }}>
-        <CardTitle isFinished={isFinished && vgId !== 0}>
+        <CardTitle isFinished={isFinished}>
+          <div style={{ flex: 2 }}>
+            <Text>Stake:</Text> 
+          </div>
           <div style={{ flex: 1 }}>
-          <Text>Stake:</Text> {stakingToken.symbol}<br />
-          
-          <Image src={`/images/verticalGardens/${verticalGardenMainImage}`} alt={stakingToken.symbol} width={64} height={64} />
-          <Text>Earn:</Text> {verticalEarningToken.symbol}
-            <Tooltip
-              content={
-                <div>
-                  {TranslateString(999, 'The PLANT APY is base on this formula')}
-                  <br />
-                  <br />
-                  {TranslateString(
-                    999,
-                    'rewardTokenApy = lastRewardUpdateRewardTokenGained .div((lastRewardUpdateBlock) .minus(lastRewardUpdateBlockPrevious)) .multipliedBy(10512000) .div(lastRewardUpdateTotalStakedToken) .multipliedBy(100)',
-                  )}
-                </div>
-              }
-            > &nbsp;&nbsp;&nbsp;&nbsp;{plantTokenApyFormated}&nbsp;% APY&nbsp;
-              <HelpIcon color="textSubtle" />
-            </Tooltip>
-          <Image src={`/images/verticalGardens/${verticalGardenSmallImageTwo}`} alt={stakingRewardToken.symbol} width={32} height={32} />
+          {stakingToken.symbol}
+          <Image src={`/images/tokens/${verticalGardenMainImage}`} alt={stakingToken.symbol} width={64} height={64} />
 
-          <Text>AND</Text> {stakingRewardToken.symbol}
-            <Tooltip
-              content={
-                <div>
-                  {TranslateString(999, 'The CAKE APY is base on this formula')}
+          <Text>Earn:</Text>
+          
+          <StyledCardReward>
+            <FlexFull><Image src={`/images/tokens/${verticalGardenSmallImageTwo}`} alt={verticalEarningToken.symbol} width={32} height={32} /></FlexFull>
+            <FlexFull>{verticalEarningToken.symbol}</FlexFull>
+            <FlexFull>&nbsp;&nbsp;&nbsp;&nbsp;{TranslateString(999, 'and')}&nbsp;&nbsp;&nbsp;&nbsp;</FlexFull>
+            <FlexFull><Image src={`/images/tokens/${verticalGardenSmallImageOne}`} alt={stakingRewardToken.symbol} width={32} height={32} /></FlexFull>
+            <FlexFull>{stakingRewardToken.symbol}</FlexFull>
+          </StyledCardReward>
+
+          <Text>APY:</Text>
+
+          <StyledCardReward>
+            <FlexFull>{verticalEarningToken.symbol}</FlexFull>
+              <Tooltip content={
+                <div>{TranslateString(999, 'The PLANT APY is base on this formula')}
                   <br />
-                  <br />
-                  {TranslateString(
-                    999,
-                    'rewardTokenApy = lastRewardUpdatePlantGained .div((lastRewardUpdateBlock) .minus(lastRewardUpdateBlockPrevious)) .multipliedBy(10512000) .div(lastRewardUpdateTotalStakedToken) .div(plantPrice.div(cakePrice)) .multipliedBy(100)',
-                  )}
+                  <br />{TranslateString(999, 'rewardTokenApy = lastRewardUpdateRewardTokenGained')}
+                  <br />&nbsp;{TranslateString(999, '.div((lastRewardUpdateBlock)')}
+                  <br />&nbsp;&nbsp;{TranslateString(999, '.minus(lastRewardUpdateBlockPrevious))')}
+                  <br />&nbsp;{TranslateString(999, '.multipliedBy(10512000)')}
+                  <br />&nbsp;{TranslateString(999, '.div(lastRewardUpdateTotalStakedToken)')}
+                  <br />&nbsp;{TranslateString(999, '.div(new BigNumber(cakePrice)')}
+                  <br />&nbsp;&nbsp;{TranslateString(999, '.div(new BigNumber(plantPrice)))')}
+                  <br />&nbsp;{TranslateString(999, '.multipliedBy(100)')}
                 </div>
-              }
-            > &nbsp;&nbsp;&nbsp;&nbsp;{rewardTokenApyFormated}&nbsp;% APY&nbsp;
-              <HelpIcon color="textSubtle" />
+                }>
+              {plantTokenApyFormated}&nbsp;% APY&nbsp;
+                <HelpIcon color="textSubtle" />
             </Tooltip>
-          <Image src={`/images/verticalGardens/${verticalGardenSmallImageOne}`} alt={verticalEarningToken.symbol} width={32} height={32} />
+          </StyledCardReward>
+          
+          <StyledCardAPY>
+            <FlexFull>{stakingRewardToken.symbol}</FlexFull>
+            <Tooltip content={
+              <div>{TranslateString(999, 'The CAKE APY is base on this formula')}
+                <br />
+                <br />{TranslateString(999, 'rewardTokenApy = lastRewardUpdateRewardTokenGained')}
+                <br />&nbsp;{TranslateString(999, '.div((lastRewardUpdateBlock)')}
+                <br />&nbsp;&nbsp;{TranslateString(999, '.minus(lastRewardUpdateBlockPrevious))')}
+                <br />&nbsp;{TranslateString(999, '.multipliedBy(10512000)')}
+                <br />&nbsp;{TranslateString(999, '.div(lastRewardUpdateTotalStakedToken)')}
+                <br />&nbsp;{TranslateString(999, '.multipliedBy(100)')}
+              </div>
+              }>
+            {rewardTokenApyFormated}&nbsp;% APY&nbsp;
+              <HelpIcon color="textSubtle" />
+          </Tooltip>
+        </StyledCardAPY>
+            
           </div>
         </CardTitle>
         <BalanceAndCompound>
-          <Balance value={getBalanceNumber(earningsPlant)} isDisabled={isFinished} decimals={7} />
+          <Balance value={getBalanceNumber(earningsPlant)} isDisabled={isFinished} decimals={earningDecimal} />
           {account && harvest && (
             <HarvestButton
               disabled={!earnings.toNumber() || pendingTx}
@@ -240,9 +281,9 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
             />
           )}
           </BalanceAndCompound>
-        <Label isFinished={isFinished && vgId !== 0} text={TranslateString(330, `${verticalEarningToken.symbol} earned ${earningsBusd} USD`)} />
+        <Label isFinished={isFinished} text={TranslateString(330, `${verticalEarningToken.symbol} earned ${earningsBusd} USD`)} />
         <BalanceAndCompound>
-          <Balance value={getBalanceNumber(earnings)} isDisabled={isFinished} decimals={9} />
+          <Balance value={getBalanceNumber(earnings)} isDisabled={isFinished} decimals={earningPlantDecimal} />
           {account && harvest && (
             <HarvestButton
               disabled={!earnings.toNumber() || pendingTx}
@@ -251,7 +292,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
             />
             )}
           </BalanceAndCompound>
-        <Label isFinished={isFinished && vgId !== 0} text={TranslateString(330, `${stakingRewardToken.symbol} earned ${earningsPlantBusd} USD`)} />
+        <Label isFinished={isFinished} text={TranslateString(330, `${stakingRewardToken.symbol} earned ${earningsPlantBusd} USD`)} />
 
         
         <BalanceAndCompound>
@@ -277,7 +318,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
                   {`Unstake ${stakingToken.symbol}`}
                 </Button>
                 <StyledActionSpacer />
-                  <IconButton disabled={isFinished && vgId !== 0} onClick={onPresentDeposit}>
+                  <IconButton disabled={isFinished} onClick={onPresentDeposit}>
                     <AddIcon color="white" />
                   </IconButton>
               </>
@@ -285,7 +326,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
           {account && stakingToken !== stakingRewardToken && 
             (needsApprovalReward ? (
               <div style={{ flex: 1 }}>
-              <Button disabled={isFinished || requestedApproval} onClick={handleApproveReward} width="100%">
+              <Button disabled={isFinished} onClick={handleApproveReward} width="100%">
                 {`Approve ${stakingRewardToken.symbol}`}
               </Button>
             </div>
@@ -315,13 +356,26 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
           )}
         </StyledDetails>
         <StyledDetails>
-          <div>{TranslateString(384, 'Your Stake')}:</div>
+          <FlexFull>{TranslateString(384, 'Your Stake')}:</FlexFull>
           <Balance
             fontSize="14px"
             decimals={6}
             isDisabled={isFinished}
             value={getBalanceNumber(stakedBalance, stakingToken.decimals)}
           />
+          &nbsp;
+          <LabelRight> {stakingToken.symbol}</LabelRight>
+        </StyledDetails>
+        <StyledDetails>
+          <FlexFull>{TranslateString(384, 'Your Stake in BUSD')}:</FlexFull>
+          <Balance
+            fontSize="14px"
+            decimals={2}
+            isDisabled={isFinished}
+            value={getBalanceNumber(stakedBalanceBusd, stakingToken.decimals)}
+          />
+          &nbsp;
+          <LabelRight> {TranslateString(1212, 'BUSD')}</LabelRight>
         </StyledDetails>
         <StyledDetails>
           <div>{TranslateString(384, 'Deposit fee')}:</div>
@@ -334,7 +388,21 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
           />
         </StyledDetails>
         <StyledDetails>
-          <div>{TranslateString(384, 'Reward cut ')} ({stakingRewardToken.symbol} only):</div>
+          <div>
+            <Tooltip
+              content={
+                <div>
+                  {TranslateString(999, 'Usage of the reward cut')}
+                  <br />
+                  <br />
+                  {TranslateString(999, '50% is use to buy PLANT token and burn them')}
+                  <br />
+                  {TranslateString(999, '50% is send to the Development Fund to help ecological non profit')}
+                </div>
+              }
+            > {TranslateString(384, 'Reward cut ')} ({stakingRewardToken.symbol} only) <HelpIcon color="textSubtle" />:
+            </Tooltip>
+          </div>
           <Balance
             fontSize="14px"
             decimals={2}
@@ -343,9 +411,40 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
             unit="%"
           />
         </StyledDetails>
+        <StyledDetails>
+          <div style={{ flex: 1 }}>
+            <Tooltip
+              content={
+                <div>
+                  {TranslateString(999, 'Updating the contract will claim the pending reward for the contract and make them available for distribution.')}
+                  <br />
+                  {TranslateString(999, 'The total token earn is calculating only token reward that has already been claim.')}
+                  <br />
+                  <br />
+                  {TranslateString(999, 'Deposit, Withdraw, Harvest and Compound trigger automatically the update.')}
+                  <br />
+                  <br />
+                  {TranslateString(999, 'If you experience issue at sending tx. trigger the update, then try again.')}
+                </div>
+              }
+            > {TranslateString(999, 'Update the pending reward')} <HelpIcon color="textSubtle" />:
+            </Tooltip>
+          </div>
+          {account && harvest && (
+            <HarvestButton
+              disabled={!earnings.toNumber() || pendingTx}
+              text={pendingTx ? TranslateString(999, 'Updating') : TranslateString(704, 'Update reward')}
+              onClick={async () => {
+                setPendingTx(true)
+                await onUpdate()
+                setPendingTx(false)
+              }}
+            />
+            )}
+          </StyledDetails>
       </div>
       <CardFooter
-        projectLink={stakingToken.projectLink}
+        projectLink={stakingRewardToken.projectLink}
         decimals={stakingToken.decimals}
         totalStaked={totalStaked}
         totalStakedBusd={totalStakedBusd}
@@ -356,6 +455,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
         isFinished={isFinished}
         verticalGardenCategory={verticalGardenCategory}
         tokenStakedName={stakingToken.symbol}
+        tokenRewardName={stakingRewardToken.symbol}
         tokenStakedAddress={stakingToken.address ? getAddress(stakingToken.address) : ''}
         tokenStakedRewardName={stakingRewardToken.symbol}
         tokenStakedRewardAddress={stakingRewardToken.address ? getAddress(stakingRewardToken.address) : ''}
@@ -397,6 +497,22 @@ const StyledCardActions = styled.div`
   box-sizing: border-box;
 `
 
+const StyledCardReward = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 16px 16px;
+  width: 100%;
+  box-sizing: border-box;
+`
+
+const StyledCardAPY = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 16px 16px;
+  width: 100%;
+  box-sizing: border-box;
+`
+
 const BalanceAndCompound = styled.div`
   display: flex;
   align-items: center;
@@ -414,6 +530,16 @@ const StyledDetails = styled.div`
   justify-content: space-between;
   align-items: center;
   font-size: 14px;
+`
+const LabelRight = styled.div`
+font-size: 14px;
+align-items: right;
+font-weight: bold;
+color: ${(props) => props.theme.colors.text};
+`
+
+const FlexFull = styled.div`
+  flex: 1;
 `
 
 export default VerticalGardenCard

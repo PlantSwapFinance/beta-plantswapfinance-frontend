@@ -28,35 +28,26 @@ const config: MenuEntry[] = [
   {
     label: 'Gardens',
     icon: 'PoolIcon',
-    items: [
-      {
-        label: 'Garden',
-        href: '/gardens',
-      },
-      {
-        label: 'Vertical Garden',
-        href: '/verticalGarden',
-      },
-    ],
+    href: '/gardens',
+  },
+  {
+    label: 'Vertical Garden',
+    icon: 'TreeIcon',
+    href: '/verticalGarden',
+    status: {
+      text: 'NEW',
+      color: 'failure',
+    },
   },
   {
     label: 'Barn',
     icon: 'BarnIcon',
     href: '/barns',
-    status: {
-      text: 'BETA',
-      color: 'warning',
-    },
   },
   {
     label: 'Development Fund',
     icon: 'TreePlantingIcon',
     href: '/developmentFund',
-  },
-  {
-    label: 'Tree (soon)',
-    icon: 'TreeIcon',
-    href: '/tree',
   },
   {
     label: "Project",
@@ -67,10 +58,6 @@ const config: MenuEntry[] = [
     label: 'Governance',
     icon: 'VoteIcon',
     href: '/vote',
-    status: {
-      text: 'NEW',
-      color: 'failure',
-    },
   },
   {
     label: 'Roadmap',

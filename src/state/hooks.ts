@@ -525,6 +525,22 @@ export const usePriceCakeBusd = (): BigNumber => {
   return cakeBusdPrice
 }
 
+// For Vertical Garden
+
+
+export const usePriceOddzBusd = (): BigNumber => {
+  const ZERO = new BigNumber(0)
+
+  const oddzBnbFarm = usePancakeSwapFarmFromPid(343)
+  
+  const bnbBusdPancakeSwapFarm = usePancakeSwapFarmFromPid(2)
+  
+  const bnbBusdPrice = bnbBusdPancakeSwapFarm.tokenPriceVsQuote ? new BigNumber(1).div(bnbBusdPancakeSwapFarm.tokenPriceVsQuote) : ZERO
+  const oddzBusdPrice = oddzBnbFarm.tokenPriceVsQuote ? bnbBusdPrice.times(oddzBnbFarm.tokenPriceVsQuote) : ZERO
+
+  return oddzBusdPrice
+}
+
 // For PCS Barns
 export const usePriceQsdBusd = (): BigNumber => {
   const ZERO = new BigNumber(0)

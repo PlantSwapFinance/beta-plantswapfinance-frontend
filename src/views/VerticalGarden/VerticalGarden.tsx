@@ -62,9 +62,11 @@ const VerticalGarden: React.FC = () => {
             {TranslateString(738, 'Vertical Garden')}
           </Heading>
           <ul>
-            <li>{TranslateString(580, 'Stake CAKE and earn PLANT and CAKE.')}</li>
+            <li>{TranslateString(580, 'Stake CAKE, LPs or other token and earn PLANT and other Token.')}</li>
             <li>{TranslateString(486, 'You can unstake at any time.')}</li>
-            <li>{TranslateString(406, 'Rewards are calculated per block.')}</li>
+            <li>{TranslateString(406, 'Rewards are calculated per block, some of it go')}</li>
+            <li>{TranslateString(406, 'toward buying PLANT token on the market and burning them')}</li>
+            <li>{TranslateString(406, 'and the remaining go toward the PlantSwap Development Fund')}</li>
           </ul>
         </div>
         <img src="/images/verticalGardens.svg" alt="Vertical Gardens" width={600} height={315} />

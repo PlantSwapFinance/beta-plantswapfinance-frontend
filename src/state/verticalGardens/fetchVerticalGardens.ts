@@ -23,7 +23,7 @@ export const fetchVerticalGardenTotalStaked = async () => { // NEW
   const callsTotalPendingStakedRewardToSplit = verticalGardensTotalStaked.map((verticalGardenConfig) => {
     return {
       address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
-      name: 'totalPendingRewardTokenRewardToSplit', // totalPendingCakeRewardToSplit
+      name: 'totalPendingRewardTokenToSplit',
     }
   })
   const callsTotalPendingPlantRewardToSplit = verticalGardensTotalStaked.map((verticalGardenConfig) => {
@@ -35,7 +35,7 @@ export const fetchVerticalGardenTotalStaked = async () => { // NEW
   const callsPendingStakedInStakedMasterChef = verticalGardensTotalStaked.map((verticalGardenConfig) => {
     return {
       address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
-      name: 'pendingStakedTokenInStakedTokenMasterChef', // pendingCakeInCakeMasterChef
+      name: 'pendingStakedTokenInStakedTokenMasterChef',
     }
   })
   const callsPendingPlantInPlantMasterGardener = verticalGardensTotalStaked.map((verticalGardenConfig) => {
@@ -54,35 +54,35 @@ export const fetchVerticalGardenTotalStaked = async () => { // NEW
   const callsLastRewardUpdateBlock = verticalGardensTotalStaked.map((verticalGardenConfig) => {
     return {
       address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
-      name: 'lastRewardUpdateBlock',
+      name: 'lastUpdBlockNumber',
     }
   })
 
   const callsLastRewardUpdateBlockPrevious = verticalGardensTotalStaked.map((verticalGardenConfig) => {
     return {
       address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
-      name: 'lastRewardUpdateBlockPrevious',
+      name: 'lastUpdBlockNumberPrevious',
     }
   })
   
   const callsLastRewardUpdateTotalStakedToken = verticalGardensTotalStaked.map((verticalGardenConfig) => {
     return {
       address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
-      name: 'lastRewardUpdateTotalStakedToken',
+      name: 'lastUpdTotalStakedToken',
     }
   })
   
   const callsLastRewardUpdateRewardTokenGained = verticalGardensTotalStaked.map((verticalGardenConfig) => {
     return {
       address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
-      name: 'lastRewardUpdateRewardTokenGained',
+      name: 'lastUpdRewardTokenGained',
     }
   })
   
   const callsLastRewardUpdatePlantGained = verticalGardensTotalStaked.map((verticalGardenConfig) => {
     return {
       address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
-      name: 'lastRewardUpdatePlantGained',
+      name: 'lastUpdPlantGained',
     }
   })
 
@@ -154,35 +154,35 @@ export const fetchVerticalGardenInfo = async () => { // NEW
   const callsLastRewardUpdateBlock = verticalGardensInfo.map((verticalGardenConfig) => {
     return {
       address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
-      name: 'lastRewardUpdateBlock',
+      name: 'lastUpdBlockNumber',
     }
   })
 
   const callsLastRewardUpdateBlockPrevious = verticalGardensInfo.map((verticalGardenConfig) => {
     return {
       address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
-      name: 'lastRewardUpdateBlockPrevious',
+      name: 'lastUpdBlockNumberPrevious',
     }
   })
   
   const callsLastRewardUpdateTotalStakedToken = verticalGardensInfo.map((verticalGardenConfig) => {
     return {
       address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
-      name: 'lastRewardUpdateTotalStakedToken',
+      name: 'lastUpdTotalStakedToken',
     }
   })
   
   const callsLastRewardUpdateRewardTokenGained = verticalGardensInfo.map((verticalGardenConfig) => {
     return {
       address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
-      name: 'lastRewardUpdateRewardTokenGained',
+      name: 'lastUpdRewardTokenGained',
     }
   })
   
   const callsLastRewardUpdatePlantGained = verticalGardensInfo.map((verticalGardenConfig) => {
     return {
       address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
-      name: 'lastRewardUpdatePlantGained',
+      name: 'lastUpdPlantGained',
     }
   })
 

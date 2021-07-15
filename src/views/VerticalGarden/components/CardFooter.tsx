@@ -28,6 +28,7 @@ interface Props {
   harvestedReward: BigNumber
   harvestedPlant: BigNumber
   tokenStakedName: string
+  tokenRewardName: string
   tokenStakedAddress: string
   tokenStakedRewardName: string
   tokenStakedRewardAddress: string
@@ -103,6 +104,7 @@ const CardFooter: React.FC<Props> = ({
   harvestedReward,
   harvestedPlant,
   tokenStakedName,
+  tokenRewardName,
   tokenStakedAddress,
   tokenStakedRewardName,
   tokenStakedRewardAddress,
@@ -180,7 +182,7 @@ const CardFooter: React.FC<Props> = ({
               </Label>
             </FlexFull>
           </Row>
-          {harvestedPlant.toNumber() > 0 || harvestedReward.toNumber() > 0 && (
+          {harvestedPlant.toNumber() > 0 && (
           <Row mb="4px">
             <FlexFull>
               <Label>
@@ -194,9 +196,9 @@ const CardFooter: React.FC<Props> = ({
             <FlexFull>
               &nbsp;
             </FlexFull>
-            <Balance fontSize="14px" isDisabled={isFinished} value={getBalanceNumber(harvestedPlant, decimals)} decimals={5} />
+            <Balance fontSize="14px" isDisabled={isFinished} value={getBalanceNumber(harvestedPlant, decimals)} decimals={6} />
             &nbsp;
-            <LabelRight> {TranslateString(1212, 'Plant')}</LabelRight>
+            <LabelRight> {tokenEarnName}</LabelRight>
           </Row>
           )}
           {harvestedReward.toNumber() > 0 && (
@@ -204,9 +206,9 @@ const CardFooter: React.FC<Props> = ({
             <FlexFull>
               &nbsp;
             </FlexFull>
-            <Balance fontSize="14px" isDisabled={isFinished} value={getBalanceNumber(harvestedReward, decimals)} decimals={5} />
+            <Balance fontSize="14px" isDisabled={isFinished} value={getBalanceNumber(harvestedReward, decimals)} decimals={6} />
             &nbsp;
-            <LabelRight> {TranslateString(1212, 'Cake')}</LabelRight>
+            <LabelRight> {tokenRewardName}</LabelRight>
           </Row>
           )}
           {tokenStakedAddress && (
@@ -234,7 +236,7 @@ const CardFooter: React.FC<Props> = ({
             </Flex>
           )}
           <TokenLink href={projectLink} target="_blank">
-            View {tokenStakedName} project site
+            View {tokenRewardName} project site
           </TokenLink>
         </Details>
       )}

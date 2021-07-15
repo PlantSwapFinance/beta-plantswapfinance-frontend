@@ -132,6 +132,15 @@ export const verticalCompound = async (verticalGardenContract, account) => {
     })
 }
 
+export const verticalUpdate = async (verticalGardenContract, account) => {
+  return verticalGardenContract.methods
+    .updateGarden()
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
 export const soushHarvest = async (sousChefContract, account) => {
   return sousChefContract.methods
     .deposit('0')
