@@ -40,6 +40,7 @@ interface Props {
   startBlock: number
   endBlock: number
   isFinished: boolean
+  stakedTokenPrice: number
   verticalGardenMasterGardenerAllocPt: number
   verticalGardenCategory: VerticalGardenCategory
 }
@@ -116,6 +117,7 @@ const CardFooter: React.FC<Props> = ({
   tokenEarnAddress,
   tokenDecimals,
   isFinished,
+  stakedTokenPrice,
   verticalGardenMasterGardenerAllocPt,
   startBlock,
   endBlock,
@@ -156,6 +158,7 @@ const CardFooter: React.FC<Props> = ({
             &nbsp;
             <LabelRight> {tokenStakedName}</LabelRight>
           </Row>
+          {stakedTokenPrice > 0 && (
           <Row mb="4px">
             <FlexFull>
               <Label>
@@ -166,6 +169,7 @@ const CardFooter: React.FC<Props> = ({
             &nbsp;
             <LabelRight> {TranslateString(1212, 'BUSD')}</LabelRight>
           </Row>
+          )}
           {blocksUntilStart > 0 && (
             <Row mb="4px">
               <FlexFull>
@@ -208,7 +212,7 @@ const CardFooter: React.FC<Props> = ({
             <LabelRight> {tokenRewardName}</LabelRight>
           </Row>
           )}
-          {harvestedPlant.toNumber() > 0 || harvestedReward.toNumber() > 0 && (
+          {(harvestedPlant.toNumber() > 0 || harvestedReward.toNumber() > 0) && (
           <Row mb="4px">
             <FlexFull>
               <Label>

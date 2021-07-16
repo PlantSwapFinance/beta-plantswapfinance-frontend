@@ -370,14 +370,15 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
             />
             )}
           </BalanceAndCompound>
-        <Label isFinished={isFinished} text={TranslateString(330, `${stakingRewardToken.symbol} earned ${earningsPlantBusd} BUSD`)} />
-
-        
-        <BalanceAndCompound>
-          <Text>Total reward pending in USD</Text>
-          <Balance value={earningsTotalBusd} isDisabled={isFinished} decimals={3} />
-        </BalanceAndCompound>
-
+        {stakedRewardTokenPrice > 0 && (
+          <Label isFinished={isFinished} text={TranslateString(330, `${stakingRewardToken.symbol} earned ${earningsPlantBusd} BUSD`)} />
+        )}
+        {stakedRewardTokenPrice > 0 && (
+          <BalanceAndCompound>
+            <Text>Total reward pending in USD</Text>
+            <Balance value={earningsTotalBusd} isDisabled={isFinished} decimals={3} />
+          </BalanceAndCompound>
+        )}
         <StyledCardActions>
           {!account && <UnlockButton />}
           {account &&
@@ -436,6 +437,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
           &nbsp;
           <LabelRight> {stakingToken.symbol}</LabelRight>
         </StyledDetails>
+        {stakedTokenPrice > 0 && (
         <StyledDetails>
           <FlexFull>{TranslateString(384, 'Your Stake in BUSD')}:</FlexFull>
           <Balance
@@ -447,6 +449,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
           &nbsp;
           <LabelRight> {TranslateString(1212, 'BUSD')}</LabelRight>
         </StyledDetails>
+        )}
         <StyledDetails>
           <div>{TranslateString(384, 'Deposit fee')}:</div>
           <Balance
@@ -530,6 +533,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
         startBlock={startBlock}
         endBlock={endBlock}
         isFinished={isFinished}
+        stakedTokenPrice={stakedTokenPrice}
         verticalGardenMasterGardenerAllocPt={verticalGardenMasterGardenerAllocPt}
         verticalGardenCategory={verticalGardenCategory}
         tokenStakedName={stakingToken.symbol}
