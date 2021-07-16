@@ -7,7 +7,7 @@ import { getAddress, getWbnbAddress } from 'utils/addressHelpers'
 import BigNumber from 'bignumber.js'
 
 export const fetchVerticalGardenTotalStaked = async () => { // NEW
-  const verticalGardensTotalStaked = verticalGardensConfig.filter((p) => p.vgId !== 0)
+  const verticalGardensTotalStaked = verticalGardensConfig.filter((v) => v.vgId !== 0)
   const callsTotalStaked = verticalGardensTotalStaked.map((verticalGardenConfig) => {
     return {
       address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
@@ -132,7 +132,7 @@ export const fetchVerticalGardenTotalStaked = async () => { // NEW
 }
 
 export const fetchVerticalGardenInfo = async () => { // NEW
-  const verticalGardensInfo = verticalGardensConfig.filter((p) => p.vgId !== 0)
+  const verticalGardensInfo = verticalGardensConfig.filter((v) => v.vgId !== 0)
   const callsDepositActive = verticalGardensInfo.map((verticalGardenConfig) => {
     return {
       address: getAddress(verticalGardenConfig.verticalGardenContractAddress),
@@ -220,8 +220,8 @@ export const fetchVerticalGardenInfo = async () => { // NEW
 }
 
 export const fetchVerticalGardensTotalStatking = async () => { // OLD
-  const nonBnbVerticalGardens = verticalGardensConfig.filter((p) => p.stakingToken.symbol !== 'BNB')
-  const bnbVerticalGarden = verticalGardensConfig.filter((p) => p.stakingToken.symbol === 'BNB')
+  const nonBnbVerticalGardens = verticalGardensConfig.filter((v) => v.stakingToken.symbol !== 'BNB')
+  const bnbVerticalGarden = verticalGardensConfig.filter((v) => v.stakingToken.symbol === 'BNB')
 
   const callsNonBnbVerticalGardens = nonBnbVerticalGardens.map((verticalGardenConfig) => {
     return {
@@ -243,12 +243,12 @@ export const fetchVerticalGardensTotalStatking = async () => { // OLD
   const bnbVerticalGardensTotalStaked = await multicall(wbnbABI, callsBnbVerticalGardens)
 
   return [
-    ...nonBnbVerticalGardens.map((p, index) => ({
-      vgId: p.vgId,
+    ...nonBnbVerticalGardens.map((v, index) => ({
+      vgId: v.vgId,
       totalStaked: new BigNumber(nonBnbVerticalGardensTotalStaked[index]).toJSON(),
     })),
-    ...bnbVerticalGarden.map((p, index) => ({
-      vgId: p.vgId,
+    ...bnbVerticalGarden.map((v, index) => ({
+      vgId: v.vgId,
       totalStaked: new BigNumber(bnbVerticalGardensTotalStaked[index]).toJSON(),
     })),
   ]

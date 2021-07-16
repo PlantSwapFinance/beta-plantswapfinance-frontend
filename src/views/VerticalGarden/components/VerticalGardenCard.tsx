@@ -16,7 +16,7 @@ import { useVerticalGardenHarvest } from 'hooks/useHarvest'
 import { useVerticalGardenUpdate } from 'hooks/useUpdate'
 import Balance from 'components/Balance'
 import { VerticalGarden } from 'state/types'
-import { useBlock, usePricePlantBusd, usePriceCakeBusd, usePriceOddzBusd } from 'state/hooks'
+import { useBlock, usePricePlantBusd, usePriceCakeBusd, usePriceOddzBusd, usePriceChessBusd } from 'state/hooks'
 import DepositModal from './DepositModal'
 import WithdrawModal from './WithdrawModal'
 import CompoundModal from './CompoundModal'
@@ -73,6 +73,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
   const plantPrice = usePricePlantBusd()
   const cakePrice = usePriceCakeBusd()
   const oddzPrice = usePriceOddzBusd();
+  const chessPrice = usePriceChessBusd();
 
   const totalStakedBusd = new BigNumber(cakePrice).multipliedBy(totalStaked)
 
@@ -141,6 +142,14 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
                                         .multipliedBy(new BigNumber(10512000))
                                         .div(lastRewardUpdateTotalStakedToken)
                                         .div(new BigNumber(cakePrice).div(new BigNumber(oddzPrice)))
+                                        .multipliedBy(new BigNumber(100))
+  }
+  if(verticalGarden.stakingRewardToken.symbol === 'CHESS') {
+    rewardTokenApy = new BigNumber(lastRewardUpdateRewardTokenGained)
+                                        .div(apyBlockCount)
+                                        .multipliedBy(new BigNumber(10512000))
+                                        .div(lastRewardUpdateTotalStakedToken)
+                                        .div(new BigNumber(cakePrice).div(new BigNumber(chessPrice)))
                                         .multipliedBy(new BigNumber(100))
   }
 
@@ -376,7 +385,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
             ))}
 
           {account &&
-            (needsApprovalPlantReward ? (
+            (needsApprovalPlantReward && verticalGardenMasterGardenerAllocPt > 0 ? (
               <div style={{ flex: 1 }}>
               <Button disabled={isFinished} onClick={handleApprovePlantReward} width="100%">
                 {`Approve ${verticalEarningToken.symbol}`}

@@ -679,6 +679,16 @@ const pancakeSwapFarms: PancakeSwapFarmConfig[] = [
     quoteToken: tokens.busd,
   },
   {
+    pid: 429,
+    lpSymbol: 'CHESS-USDC LP',
+    lpAddresses: {
+      97: '',
+      56: '0x1472976e0b97f5b2fc93f1fff14e2b5c4447b64f',
+    },
+    token: tokens.chess,
+    quoteToken: tokens.usdc,
+  },
+  {
     pid: 343,
     lpSymbol: 'ODDZ-BNB LP',
     lpAddresses: {

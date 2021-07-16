@@ -38,7 +38,7 @@ export const VerticalGardensSlice = createSlice({
     },
     updateVerticalGardensUserData: (state, action) => {
       const { field, value, vgId } = action.payload
-      const index = state.data.findIndex((p) => p.vgId === vgId)
+      const index = state.data.findIndex((v) => v.vgId === vgId)
       state.data[index] = { ...state.data[index], userData: { ...state.data[index].userData, [field]: value } }
     },
   },

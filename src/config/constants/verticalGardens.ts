@@ -44,7 +44,7 @@ const verticalGardens: VerticalGardenConfig[] = [
     rewardCutSplitBuyPlantAndBurn: 50, // 50% of 15%
   },
   {
-    vgId: 4,
+    vgId: 3,
     stakingToken: tokens.brew,
     stakingRewardToken: tokens.brew,
     verticalEarningToken: tokens.plant,
@@ -56,7 +56,47 @@ const verticalGardens: VerticalGardenConfig[] = [
     verticalGardenMasterGardenerAllocPt: 0,
     verticalGardenCategory: VerticalGardenCategory.CAFE,
     harvest: true,
+    sortOrder: 3,
+    isFinished: false,
+    depositFee: 100, // 1%
+    rewardCut: 1500, // 15%
+    rewardCutSplitDevelopmentFund: 50, // 50% of 15%
+    rewardCutSplitBuyPlantAndBurn: 50, // 50% of 15%
+  },
+  {
+    vgId: 4,
+    stakingToken: tokens.eggp,
+    stakingRewardToken: tokens.eggp,
+    verticalEarningToken: tokens.plant,
+    verticalGardenContractAddress: {
+      56: '0x57BA57DCDd0f8D7620762209B1B118321A7F8Aa0',
+      97: '',
+    },
+    verticalGardenMasterGardenerPId: 24,
+    verticalGardenMasterGardenerAllocPt: 0,
+    verticalGardenCategory: VerticalGardenCategory.COMMUNITY,
+    harvest: true,
     sortOrder: 4,
+    isFinished: false,
+    depositFee: 100, // 1%
+    rewardCut: 1500, // 15%
+    rewardCutSplitDevelopmentFund: 50, // 50% of 15%
+    rewardCutSplitBuyPlantAndBurn: 50, // 50% of 15%
+  },
+  {
+    vgId: 5,
+    stakingToken: tokens.cake,
+    stakingRewardToken: tokens.chess,
+    verticalEarningToken: tokens.plant,
+    verticalGardenContractAddress: {
+      56: '0x81AD11FfF34D49D433596c4b9670fc65F62f65D7',
+      97: '',
+    },
+    verticalGardenMasterGardenerPId: 25,
+    verticalGardenMasterGardenerAllocPt: 0,
+    verticalGardenCategory: VerticalGardenCategory.PANCAKE,
+    harvest: true,
+    sortOrder: 5,
     isFinished: false,
     depositFee: 100, // 1%
     rewardCut: 1500, // 15%

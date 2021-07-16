@@ -1732,6 +1732,18 @@ const tokens = {
     decimals: 18,
     projectLink: 'https://app.cafeswap.finance/',
   },
+
+
+  // Eggplant Finance
+  eggp: {
+    symbol: 'EGGP',
+    address: {
+      56: '0x21adB1c644663069e83059AC3f9d9Ca1133D29e4',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://eggplant.fi/',
+  },
 }
 
 export default tokens

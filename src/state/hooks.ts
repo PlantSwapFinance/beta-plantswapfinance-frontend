@@ -221,7 +221,7 @@ export const useVerticalGardens = (account): VerticalGarden[] => {
 }
 
 export const useVerticalGardenFromPid = (vgId): VerticalGarden => {
-  const verticalGarden = useSelector((state: State) => state.verticalGardens.data.find((p) => p.vgId === vgId))
+  const verticalGarden = useSelector((state: State) => state.verticalGardens.data.find((v) => v.vgId === vgId))
   return verticalGarden
 }
 
@@ -527,6 +527,16 @@ export const usePriceCakeBusd = (): BigNumber => {
 
 // For Vertical Garden
 
+
+export const usePriceChessBusd = (): BigNumber => {
+  const ZERO = new BigNumber(0)
+
+  const chessBnbFarm = usePancakeSwapFarmFromPid(429)
+  
+  const chessBusdPrice = new BigNumber(chessBnbFarm.tokenPriceVsQuote || ZERO)
+
+  return chessBusdPrice
+}
 
 export const usePriceOddzBusd = (): BigNumber => {
   const ZERO = new BigNumber(0)

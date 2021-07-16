@@ -5,13 +5,13 @@ import multicall from 'utils/multicall'
 import { getAddress } from 'utils/addressHelpers'
 import BigNumber from 'bignumber.js'
 
-const listVerticalGardens = verticalGardensConfig.filter((p) => p.vgId !== 0)
+const listVerticalGardens = verticalGardensConfig.filter((v) => v.vgId !== 0)
 
 export const fetchVerticalGardensAllowance = async (account) => {
-  const calls = listVerticalGardens.map((p) => ({
-    address: getAddress(p.stakingToken.address),
+  const calls = listVerticalGardens.map((v) => ({
+    address: getAddress(v.stakingToken.address),
     name: 'allowance',
-    params: [account, getAddress(p.verticalGardenContractAddress)],
+    params: [account, getAddress(v.verticalGardenContractAddress)],
   }))
 
   const allowances = await multicall(erc20ABI, calls)
@@ -22,10 +22,10 @@ export const fetchVerticalGardensAllowance = async (account) => {
 }
 
 export const fetchVerticalGardensRewardAllowance = async (account) => {
-  const calls = listVerticalGardens.map((p) => ({
-    address: getAddress(p.stakingRewardToken.address),
+  const calls = listVerticalGardens.map((v) => ({
+    address: getAddress(v.stakingRewardToken.address),
     name: 'allowance',
-    params: [account, getAddress(p.verticalGardenContractAddress)],
+    params: [account, getAddress(v.verticalGardenContractAddress)],
   }))
 
   const allowancesReward = await multicall(erc20ABI, calls)
@@ -36,10 +36,10 @@ export const fetchVerticalGardensRewardAllowance = async (account) => {
 }
 
 export const fetchVerticalGardensAllowancePlant = async (account) => {
-  const calls = listVerticalGardens.map((p) => ({
-    address: getAddress(p.verticalEarningToken.address),
+  const calls = listVerticalGardens.map((v) => ({
+    address: getAddress(v.verticalEarningToken.address),
     name: 'allowance',
-    params: [account, getAddress(p.verticalGardenContractAddress)],
+    params: [account, getAddress(v.verticalGardenContractAddress)],
   }))
 
   const allowancesPlant = await multicall(erc20ABI, calls)
@@ -51,8 +51,8 @@ export const fetchVerticalGardensAllowancePlant = async (account) => {
 
 export const fetchUserBalances = async (account) => {
   // Non BNB verticalGardens
-  const calls = listVerticalGardens.map((p) => ({
-    address: getAddress(p.stakingToken.address),
+  const calls = listVerticalGardens.map((v) => ({
+    address: getAddress(v.stakingToken.address),
     name: 'balanceOf',
     params: [account],
   }))
@@ -66,8 +66,8 @@ export const fetchUserBalances = async (account) => {
 }
 
 export const fetchUserStakeBalances = async (account) => {
-  const calls = listVerticalGardens.map((p) => ({
-    address: getAddress(p.verticalGardenContractAddress),
+  const calls = listVerticalGardens.map((v) => ({
+    address: getAddress(v.verticalGardenContractAddress),
     name: 'gardeners',
     params: [account],
   }))
@@ -81,8 +81,8 @@ export const fetchUserStakeBalances = async (account) => {
 }
 
 export const fetchUserPendingRewards = async (account) => {
-  const calls = listVerticalGardens.map((p) => ({
-    address: getAddress(p.verticalGardenContractAddress),
+  const calls = listVerticalGardens.map((v) => ({
+    address: getAddress(v.verticalGardenContractAddress),
     name: 'pendingRewardToken',
     params: [account],
   }))
@@ -99,8 +99,8 @@ export const fetchUserPendingRewards = async (account) => {
 }
 
 export const fetchUserPendingPlantRewards = async (account) => {
-  const calls = listVerticalGardens.map((p) => ({
-    address: getAddress(p.verticalGardenContractAddress),
+  const calls = listVerticalGardens.map((v) => ({
+    address: getAddress(v.verticalGardenContractAddress),
     name: 'pendingPlantReward',
     params: [account],
   }))
@@ -117,8 +117,8 @@ export const fetchUserPendingPlantRewards = async (account) => {
 }
 
 export const fetchUserHarvestedRewards = async (account) => {
-  const calls = listVerticalGardens.map((p) => ({
-    address: getAddress(p.verticalGardenContractAddress),
+  const calls = listVerticalGardens.map((v) => ({
+    address: getAddress(v.verticalGardenContractAddress),
     name: 'harvestedReward',
     params: [account],
   }))
@@ -135,8 +135,8 @@ export const fetchUserHarvestedRewards = async (account) => {
 }
 
 export const fetchUserHarvestedPlants = async (account) => {
-  const calls = listVerticalGardens.map((p) => ({
-    address: getAddress(p.verticalGardenContractAddress),
+  const calls = listVerticalGardens.map((v) => ({
+    address: getAddress(v.verticalGardenContractAddress),
     name: 'harvestedPlant',
     params: [account],
   }))
@@ -153,8 +153,8 @@ export const fetchUserHarvestedPlants = async (account) => {
 }
 
 export const fetchUserCompoundedRewards = async (account) => {
-  const calls = listVerticalGardens.map((p) => ({
-    address: getAddress(p.verticalGardenContractAddress),
+  const calls = listVerticalGardens.map((v) => ({
+    address: getAddress(v.verticalGardenContractAddress),
     name: 'compoudedReward',
     params: [account],
   }))
