@@ -107,6 +107,7 @@ const GardenCard: React.FC<GardenCardProps> = ({ farm, removed, plantPrice, acco
 
   const lpLabel = farm.lpSymbol && farm.lpSymbol.toUpperCase().replace('PLANT', 'PLANT')
   const earnLabel = farm.dual ? farm.dual.earnLabel : 'PLANT'
+  const DepositLabel = farm.depositFee || 0
 
   const farmAPY = farm.apy && farm.apy.toLocaleString('en-US', { maximumFractionDigits: 2 })
 
@@ -146,6 +147,12 @@ const GardenCard: React.FC<GardenCardProps> = ({ farm, removed, plantPrice, acco
         <Text bold>{earnLabel}</Text>
       </Flex>
       <CardActionsContainer farm={farm} account={account} addLiquidityUrl={addLiquidityUrl} />
+      {DepositLabel > 0 && (
+      <Flex justifyContent="space-between">
+        <Text>{TranslateString(318, 'Deposit fee')}:</Text>
+        <Text>{DepositLabel/100}%</Text>
+      </Flex>
+      )}
       <Divider />
       <ExpandableSectionButton
         onClick={() => setShowExpandableSection(!showExpandableSection)}
