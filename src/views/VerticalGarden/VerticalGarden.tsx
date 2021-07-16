@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect, useRef  } from 'react'
+// import {Helmet} from "react-helmet";
 import { Route, useRouteMatch } from 'react-router-dom'
 import BigNumber from 'bignumber.js'
 import styled from 'styled-components'
@@ -25,23 +26,6 @@ const StyledImage = styled(Image)`
 `
 
  const VerticalGarden: React.FC = () => {
-
-
-/*  const meta = {
-    title: 'PlantSwap.Finance - Vertical Garden, Earn $PLANT with us and save the planet🌱',
-    description: 'The Vertical Garden allow you to earn $PLANT token and other token by staking multiple type of token.',
-    canonical: '%PUBLIC_URL%',
-    og: '',
-    meta: {
-      charset: 'utf-8',
-      og:title: 'PlantSwap.Finance - Vertical Garden, Earn $PLANT with us and save the planet🌱'
-      name: {
-        keywords: 'DeFi,bsc,plant,plantswap,yieldFarming',
-        og:title: 'PlantSwap.Finance - Vertical Garden, Earn $PLANT with us and save the planet🌱',
-        og:description: 'The Vertical Garden allow you to earn $PLANT token and other token by staking multiple type of token.'
-      }
-    }
-  } */
 // meta name: twitter:image, twitter:description, twitter:title, og:title, og:image, og:description
   const { path } = useRouteMatch()
   const [hasAcceptedRisk, setHasAcceptedRisk] = usePersistState(false, 'plantswap_verticalgarden_accepted_risk')
