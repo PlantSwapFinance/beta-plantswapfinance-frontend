@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect, useRef  } from 'react'
-// import {Helmet} from "react-helmet";
+ import { Helmet } from "react-helmet";
 import { Route, useRouteMatch } from 'react-router-dom'
 import BigNumber from 'bignumber.js'
 import styled from 'styled-components'
@@ -26,7 +26,6 @@ const StyledImage = styled(Image)`
 `
 
  const VerticalGarden: React.FC = () => {
-// meta name: twitter:image, twitter:description, twitter:title, og:title, og:image, og:description
   const { path } = useRouteMatch()
   const [hasAcceptedRisk, setHasAcceptedRisk] = usePersistState(false, 'plantswap_verticalgarden_accepted_risk')
   const TranslateString = useI18n()
@@ -58,6 +57,23 @@ const StyledImage = styled(Image)`
 
   return (
     <Page>
+      <Helmet>
+        <title>PlantSwap.finance - Vertical Garden</title>
+        <meta
+          name="description"
+          content="Stake Token and earn multiple reward tokens in our multiple Vertical Gardens🌱."
+        />
+        <meta name="twitter:image" content="https://plantswap.finance/images/verticalGardens.svg" />
+        <meta name="twitter:domain" content="PlantSwap.finance" />
+        <meta
+          name="twitter:description"
+          content="Stake Token and earn multiple reward tokens in our multiple Vertical Gardens🌱"
+        />
+        <meta name="twitter:title" content="PlantSwap.Finance - Vertical Garden for max rewards 🌱" />
+        <meta property="og:title" content="PlantSwap.Finance - Vertical Garden for max rewards 🌱" />
+        <meta property="og:description" content="Stake Token and earn multiple reward tokens in our multiple Vertical Gardens🌱" />
+        <meta property="og:site_name" content="PlantSwap.finance" />
+      </Helmet>
       <Hero>
         <div>
           <Heading as="h1" size="xxl" mb="16px">
