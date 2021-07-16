@@ -35,6 +35,7 @@ export enum VerticalGardenCategory {
   'COMMUNITY' = 'Community',
   'CORE' = 'Core',
   'PANCAKE' = 'PancakeSwap',
+  'CAFE' = 'CafeSwap',
   'GOOSE' = 'GooseFinance',
   'BINANCE' = 'Binance', // Pools using native BNB behave differently than pools using a token
 }

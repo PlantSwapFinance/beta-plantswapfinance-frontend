@@ -6,7 +6,7 @@ import useI18n from 'hooks/useI18n'
 import { ChevronDown, ChevronUp } from 'react-feather'
 import { Flex, MetamaskIcon } from '@plantswap-libs/uikit'
 import Balance from 'components/Balance'
-import { CommunityTag, CoreTag, BinanceTag, PancakeSwapTag, GooseFinanceTag } from 'components/Tags'
+import { CommunityTag, CoreTag, BinanceTag, PancakeSwapTag, CafeswapTag, GooseFinanceTag } from 'components/Tags'
 import { useBlock } from 'state/hooks'
 import { VerticalGardenCategory } from 'config/constants/types'
 import { registerToken } from 'utils/wallet'
@@ -16,6 +16,7 @@ const tags = {
   [VerticalGardenCategory.BINANCE]: BinanceTag,
   [VerticalGardenCategory.CORE]: CoreTag,
   [VerticalGardenCategory.COMMUNITY]: CommunityTag,
+  [VerticalGardenCategory.CAFE]: CafeswapTag,
   [VerticalGardenCategory.PANCAKE]: PancakeSwapTag,
   [VerticalGardenCategory.GOOSE]: GooseFinanceTag,
 }

@@ -20,19 +20,19 @@ const BinanceTag = (props) => (
 )
 
 const PancakeSwapTag = (props) => (
-  <Tag variant="pancakeswap" outline startIcon={<VerifiedIcon color="secondary" />} {...props}>
+  <Tag variant="pancakeswap" outline startIcon={<CommunityIcon color="secondary" />} {...props}>
     PancakeSwap
   </Tag>
 )
 
 const GooseFinanceTag = (props) => (
-  <Tag variant="binance" outline startIcon={<BinanceIcon color="secondary" />} {...props}>
+  <Tag variant="textSubtle" outline startIcon={<CommunityIcon color="secondary" />} {...props}>
     ĜooseFinance
   </Tag>
 )
 
 const CafeswapTag = (props) => (
-  <Tag variant="binance" outline startIcon={<BinanceIcon color="secondary" />} {...props}>
+  <Tag variant="textSubtle" outline startIcon={<CommunityIcon color="secondary" />} {...props}>
     CafeSwap
   </Tag>
 )
@@ -43,4 +43,4 @@ const DualTag = (props) => (
   </Tag>
 )
 
-export { CoreTag, CommunityTag, BinanceTag, PancakeSwapTag, GooseFinanceTag, CafeswapTag, DualTag }
+export { CoreTag, CommunityTag, BinanceTag, PancakeSwapTag, CafeswapTag, GooseFinanceTag, DualTag }

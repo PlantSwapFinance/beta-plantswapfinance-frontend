@@ -43,6 +43,26 @@ const verticalGardens: VerticalGardenConfig[] = [
     rewardCutSplitDevelopmentFund: 50, // 50% of 15%
     rewardCutSplitBuyPlantAndBurn: 50, // 50% of 15%
   },
+  {
+    vgId: 4,
+    stakingToken: tokens.brew,
+    stakingRewardToken: tokens.brew,
+    verticalEarningToken: tokens.plant,
+    verticalGardenContractAddress: {
+      56: '0xE7F2a4EAaFf2532DA98dC8d987D7C19B6803Fcac',
+      97: '',
+    },
+    verticalGardenMasterGardenerPId: 21,
+    verticalGardenMasterGardenerAllocPt: 0,
+    verticalGardenCategory: VerticalGardenCategory.CAFE,
+    harvest: true,
+    sortOrder: 4,
+    isFinished: false,
+    depositFee: 100, // 1%
+    rewardCut: 1500, // 15%
+    rewardCutSplitDevelopmentFund: 50, // 50% of 15%
+    rewardCutSplitBuyPlantAndBurn: 50, // 50% of 15%
+  },
    
 ]
 

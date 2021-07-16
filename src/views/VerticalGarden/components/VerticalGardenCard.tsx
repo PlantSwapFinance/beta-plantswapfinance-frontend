@@ -46,6 +46,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
     lastRewardUpdatePlantGained,
     startBlock,
     endBlock,
+    verticalGardenMasterGardenerAllocPt,
     isFinished,
     depositFee,
     rewardCut,
@@ -127,7 +128,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
   )
   const apyBlockCount = new BigNumber(lastRewardUpdateBlock).minus(lastRewardUpdateBlockPrevious)
   let rewardTokenApy = new BigNumber(0)
-  if(verticalGarden.stakingRewardToken.symbol === 'CAKE') {
+  if(verticalGarden.stakingRewardToken === verticalGarden.stakingToken) {
     rewardTokenApy = new BigNumber(lastRewardUpdateRewardTokenGained)
                                         .div(apyBlockCount)
                                         .multipliedBy(new BigNumber(10512000))
@@ -142,6 +143,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
                                         .div(new BigNumber(cakePrice).div(new BigNumber(oddzPrice)))
                                         .multipliedBy(new BigNumber(100))
   }
+
   let earningDecimal = 7
   if(earnings > new BigNumber(1000000000000)) {
     earningDecimal = 4
@@ -219,6 +221,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
           <div style={{ flex: 1 }}>
             {stakingToken.symbol}
             <Image src={`/images/tokens/${verticalGardenMainImage}`} alt={stakingToken.symbol} width={64} height={64} />
+
             <StyledCardReward>
             <FlexFull><Text>Earn:</Text></FlexFull>
             <FlexFull>&nbsp;</FlexFull>
@@ -227,19 +230,25 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
               <MultiplierTag variant="secondary">{vgId === 1 ? 0.6 : 0.3}X</MultiplierTag>
             </FlexFull>
             </StyledCardReward>
-            
-            <StyledCardReward>
-              <FlexFull><Image src={`/images/tokens/${verticalGardenSmallImageTwo}`} alt={verticalEarningToken.symbol} width={42} height={42} /></FlexFull>
-              <FlexFull>{verticalEarningToken.symbol}</FlexFull>
-              <FlexFull>&nbsp;&nbsp;&nbsp;&nbsp;{TranslateString(999, 'and')}&nbsp;&nbsp;&nbsp;&nbsp;</FlexFull>
-              <FlexFull><Image src={`/images/tokens/${verticalGardenSmallImageOne}`} alt={stakingRewardToken.symbol} width={42} height={42} /></FlexFull>
-              <FlexFull>{stakingRewardToken.symbol}</FlexFull>
-            </StyledCardReward>
-
+            {verticalGardenMasterGardenerAllocPt > 0 ? (
+              <StyledCardReward>
+                <FlexFull><Image src={`/images/tokens/${verticalGardenSmallImageTwo}`} alt={verticalEarningToken.symbol} width={42} height={42} /></FlexFull>
+                <FlexFull>{verticalEarningToken.symbol}</FlexFull>
+                <FlexFull>&nbsp;&nbsp;&nbsp;&nbsp;{TranslateString(999, 'and')}&nbsp;&nbsp;&nbsp;&nbsp;</FlexFull>
+                <FlexFull><Image src={`/images/tokens/${verticalGardenSmallImageOne}`} alt={stakingRewardToken.symbol} width={42} height={42} /></FlexFull>
+                <FlexFull>{stakingRewardToken.symbol}</FlexFull>
+              </StyledCardReward>
+            ) : (
+              <StyledCardReward>
+                <FlexFull><Image src={`/images/tokens/${verticalGardenSmallImageOne}`} alt={stakingRewardToken.symbol} width={42} height={42} /></FlexFull>
+                <FlexFull>{stakingRewardToken.symbol}</FlexFull>
+                <FlexFull>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FlexFull>
+              </StyledCardReward>
+            )}
             <Text>APY:</Text>
             
-            {isFinished || !plantTokenApyFormated ? (
-              '-'
+            {isFinished || !plantTokenApyFormated || verticalGardenMasterGardenerAllocPt === 0 ? (
+              ''
             ) : (
               <StyledCardAPY>
                 <FlexFull>{verticalEarningToken.symbol}</FlexFull>
@@ -251,8 +260,8 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
                       <br />&nbsp;&nbsp;{TranslateString(999, '.minus(lastRewardUpdateBlockPrevious))')}
                       <br />&nbsp;{TranslateString(999, '.multipliedBy(10512000)')}
                       <br />&nbsp;{TranslateString(999, '.div(lastRewardUpdateTotalStakedToken)')}
-                      <br />&nbsp;{TranslateString(999, '.div(new BigNumber(cakePrice)')}
-                      <br />&nbsp;&nbsp;{TranslateString(999, '.div(new BigNumber(plantPrice)))')}
+                      <br />&nbsp;{TranslateString(999, '.div((stakeTokenPrice)')}
+                      <br />&nbsp;&nbsp;{TranslateString(999, '.div(plantPrice)))')}
                       <br />&nbsp;{TranslateString(999, '.multipliedBy(100)')}
                     </div>
                     }>
@@ -274,6 +283,8 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
                     <br />&nbsp;&nbsp;{TranslateString(999, '.minus(lastRewardUpdateBlockPrevious))')}
                     <br />&nbsp;{TranslateString(999, '.multipliedBy(10512000)')}
                     <br />&nbsp;{TranslateString(999, '.div(lastRewardUpdateTotalStakedToken)')}
+                      <br />&nbsp;{TranslateString(999, '.div((stakedTokenPrice)')}
+                      <br />&nbsp;&nbsp;{TranslateString(999, '.div(rewardTokenPrice)))')}
                     <br />&nbsp;{TranslateString(999, '.multipliedBy(100)')}
                   </div>
                 }>
@@ -284,9 +295,13 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
             )}
           </div>
         </CardTitle>
-        <Text>{TranslateString(330, `${verticalEarningToken.symbol} earned`)}</Text>
+        {verticalGardenMasterGardenerAllocPt > 0 ? (
+          <Text>{TranslateString(330, `${verticalEarningToken.symbol} earned`)}</Text>
+          ) : ('')}
         <BalanceAndCompound>
-          <Balance value={getBalanceNumber(earningsPlant)} isDisabled={isFinished} decimals={earningDecimal} />
+          {verticalGardenMasterGardenerAllocPt > 0 ? (
+            <Balance value={getBalanceNumber(earningsPlant)} isDisabled={isFinished} decimals={earningDecimal} />
+            ) : ('You can vote or propose a PLANT reward for this garden in Gouvernance.')}
           {account && harvest && (
             <HarvestButton
               disabled={!earnings.toNumber() || pendingTx}
@@ -299,7 +314,10 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
             />
           )}
           </BalanceAndCompound>
-        <Label isFinished={isFinished} text={TranslateString(330, `${earningsBusd} BUSD`)} />
+          {verticalGardenMasterGardenerAllocPt > 0 ? (
+            <Label isFinished={isFinished} text={TranslateString(330, `${earningsBusd} BUSD`)} />
+            ) : ('')}
+            
         <br />
         <Text>{TranslateString(330, `${stakingRewardToken.symbol} earned`)}</Text>
         <BalanceAndCompound>
