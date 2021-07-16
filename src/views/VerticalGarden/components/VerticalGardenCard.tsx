@@ -227,7 +227,9 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
             <FlexFull>&nbsp;</FlexFull>
             <FlexFull>&nbsp;</FlexFull>
             <FlexFull>&nbsp;&nbsp;&nbsp;&nbsp;
+            {verticalGardenMasterGardenerAllocPt > 0 ? (
               <MultiplierTag variant="secondary">{vgId === 1 ? 0.6 : 0.3}X</MultiplierTag>
+            ) : ('')}
             </FlexFull>
             </StyledCardReward>
             {verticalGardenMasterGardenerAllocPt > 0 ? (
@@ -301,7 +303,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
         <BalanceAndCompound>
           {verticalGardenMasterGardenerAllocPt > 0 ? (
             <Balance value={getBalanceNumber(earningsPlant)} isDisabled={isFinished} decimals={earningDecimal} />
-            ) : ('You can vote or propose a PLANT reward for this garden in Gouvernance.')}
+            ) : ('You can vote or propose a PLANT reward for this garden in Governance.')}
           {account && harvest && (
             <HarvestButton
               disabled={!earnings.toNumber() || pendingTx}
@@ -490,6 +492,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
         startBlock={startBlock}
         endBlock={endBlock}
         isFinished={isFinished}
+        verticalGardenMasterGardenerAllocPt={verticalGardenMasterGardenerAllocPt}
         verticalGardenCategory={verticalGardenCategory}
         tokenStakedName={stakingToken.symbol}
         tokenRewardName={stakingRewardToken.symbol}

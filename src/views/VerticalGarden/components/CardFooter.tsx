@@ -40,6 +40,7 @@ interface Props {
   startBlock: number
   endBlock: number
   isFinished: boolean
+  verticalGardenMasterGardenerAllocPt: number
   verticalGardenCategory: VerticalGardenCategory
 }
 
@@ -115,6 +116,7 @@ const CardFooter: React.FC<Props> = ({
   tokenEarnAddress,
   tokenDecimals,
   isFinished,
+  verticalGardenMasterGardenerAllocPt,
   startBlock,
   endBlock,
   verticalGardenCategory,
@@ -206,7 +208,7 @@ const CardFooter: React.FC<Props> = ({
             <LabelRight> {tokenRewardName}</LabelRight>
           </Row>
           )}
-          {harvestedPlant.toNumber() > 0 && (
+          {harvestedPlant.toNumber() > 0 || harvestedReward.toNumber() > 0 && (
           <Row mb="4px">
             <FlexFull>
               <Label>
@@ -251,7 +253,7 @@ const CardFooter: React.FC<Props> = ({
               <MetamaskIcon height={15} width={15} ml="4px" />
             </Flex>
           )}
-          {tokenEarnAddress && (
+          {tokenEarnAddress && verticalGardenMasterGardenerAllocPt > 0 && (
             <Flex mb="4px">
               <TokenLink onClick={() => registerToken(tokenEarnAddress, tokenEarnName, tokenDecimals, imageSrc)}>
                 Add {tokenEarnName} to Metamask
