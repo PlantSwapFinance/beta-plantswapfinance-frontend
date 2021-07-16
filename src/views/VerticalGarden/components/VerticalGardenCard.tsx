@@ -16,7 +16,7 @@ import { useVerticalGardenHarvest } from 'hooks/useHarvest'
 import { useVerticalGardenUpdate } from 'hooks/useUpdate'
 import Balance from 'components/Balance'
 import { VerticalGarden } from 'state/types'
-import { useBlock, usePricePlantBusd, usePriceCakeBusd, usePriceOddzBusd, usePriceChessBusd } from 'state/hooks'
+import { useBlock, usePricePlantBusd, usePriceCakeBusd, usePriceBrewBusd, usePriceOddzBusd, usePriceChessBusd } from 'state/hooks'
 import DepositModal from './DepositModal'
 import WithdrawModal from './WithdrawModal'
 import CompoundModal from './CompoundModal'
@@ -72,24 +72,53 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
   
   const plantPrice = usePricePlantBusd()
   const cakePrice = usePriceCakeBusd()
+  const brewPrice = usePriceBrewBusd()
   const oddzPrice = usePriceOddzBusd();
   const chessPrice = usePriceChessBusd();
 
-  const totalStakedBusd = new BigNumber(cakePrice).multipliedBy(totalStaked)
+  let stakedTokenPrice
+  if(stakingToken.symbol === 'CAKE') {
+    stakedTokenPrice = cakePrice
+  }
+  if(stakingToken.symbol === 'BREW') {
+    stakedTokenPrice = brewPrice
+  }
+  if(stakingToken.symbol === 'ODDZ') {
+    stakedTokenPrice = oddzPrice
+  }
+  if(stakingToken.symbol === 'CHESS') {
+    stakedTokenPrice = chessPrice
+  }
+
+  let stakedRewardTokenPrice
+  if(stakingRewardToken.symbol === 'CAKE') {
+    stakedRewardTokenPrice = cakePrice
+  }
+  if(stakingRewardToken.symbol === 'BREW') {
+    stakedRewardTokenPrice = brewPrice
+  }
+  if(stakingRewardToken.symbol === 'ODDZ') {
+    stakedRewardTokenPrice = oddzPrice
+  }
+  if(stakingRewardToken.symbol === 'CHESS') {
+    stakedRewardTokenPrice = chessPrice
+  }
+
+  const totalStakedBusd = new BigNumber(stakedTokenPrice).multipliedBy(totalStaked)
 
   const allowance = new BigNumber(userData?.allowance || 0)
   const allowanceReward = new BigNumber(userData?.allowanceReward || 0)
   const allowancePlant = new BigNumber(userData?.allowancePlant || 0)
   const stakingTokenBalance = new BigNumber(userData?.stakingTokenBalance || 0)
   const stakedBalance = new BigNumber(userData?.stakedBalance || 0)
-  const stakedBalanceBusd = new BigNumber(stakedBalance).multipliedBy(new BigNumber(cakePrice)) // Need improvement for flexibility
+  const stakedBalanceBusd = new BigNumber(stakedBalance).multipliedBy(new BigNumber(stakedTokenPrice)) // Need improvement for flexibility
   const earnings = new BigNumber(userData?.pendingReward || 0)
   const earningsPlant = new BigNumber(userData?.pendingPlantReward || 0)
 
   
   const earningsBalance = getBalanceNumber(earnings)
   const earningsPlantBalance = getBalanceNumber(earningsPlant)
-  const earningsBusd = new BigNumber(earningsBalance).multipliedBy(cakePrice).toFixed(4)
+  const earningsBusd = new BigNumber(earningsBalance).multipliedBy(stakedRewardTokenPrice).toFixed(4)
   const earningsPlantBusd = new BigNumber(earningsPlantBalance).multipliedBy(plantPrice).toFixed(4)
   const earningsTotalBusd = new BigNumber(earningsBusd).plus(earningsPlantBusd).toNumber()
 
