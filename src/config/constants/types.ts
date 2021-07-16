@@ -60,6 +60,7 @@ export interface FarmConfig {
   token: Token
   quoteToken: Token
   multiplier?: string
+  depositFee?: number
   isCommunity?: boolean
   isTokenOnly?: boolean
   dual?: {
