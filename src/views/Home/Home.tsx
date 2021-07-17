@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Image, Heading, Text, BaseLayout } from '@plantswap-libs/uikit'
+import { Image, Heading, Text, useModal, BaseLayout } from '@plantswap-libs/uikit'
+import { useWeb3React } from '@web3-react/core'
 import useI18n from 'hooks/useI18n'
 import Page from 'components/layout/Page'
 import PlantStats from 'views/Home/components/PlantStats'
@@ -10,6 +11,8 @@ import FarmStakingCard from 'views/Home/components/FarmStakingCard'
 import TotalContributionCard from 'views/Home/components/TotalContributionCard'
 import TotalValueLockedCard from 'views/Home/components/TotalValueLockedCard'
 import NewVerticalGardens from './components/NewVerticalGardens'
+import BuyButton from './components/BuyButton'
+import BuyModal from './components/BuyModal'
 import Divider from './components/Divider'
 
 const Hero = styled.div`
@@ -61,7 +64,17 @@ const StyledImage = styled(Image)`
 `
 
 const Home: React.FC = () => {
+  const { account } = useWeb3React()
+  const [pendingTx] = useState(false)
   const TranslateString = useI18n()
+
+  const PlantName = 'PLANT'
+
+  const [onPresentBuyModal] = useModal(
+    <BuyModal
+      tokenName={PlantName}
+    />,
+  )
 
   /*  To finish and add
   
@@ -80,6 +93,14 @@ const Home: React.FC = () => {
         <br />
         <Text>A portion of the reward and collected fees</Text>
         <Text>will be used to support ecological nonprofits.</Text>
+        <br />
+        {account && (
+          <BuyButton
+            disabled={!account || pendingTx}
+            text={TranslateString(704, 'Buy $PLANT')}
+            onClick={onPresentBuyModal}
+          />
+        )}
       </Hero>
       <NewVerticalGardens />
       <div>
