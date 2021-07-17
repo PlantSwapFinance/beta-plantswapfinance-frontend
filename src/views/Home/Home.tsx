@@ -71,7 +71,6 @@ const Home: React.FC = () => {
   */
   return (
     <Page>
-      <NewVerticalGardens />
       <Hero>
         <Heading as="h1" size="xl" mb="24px" color="secondary">
           {TranslateString(576, 'PlantSwap.finance')}
@@ -82,7 +81,7 @@ const Home: React.FC = () => {
         <Text>A portion of the reward and collected fees</Text>
         <Text>will be used to support ecological nonprofits.</Text>
       </Hero>
-      
+      <NewVerticalGardens />
       <div>
         <Cards>
           <FarmStakingCard />
