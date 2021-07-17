@@ -1,4 +1,5 @@
 import React, { useEffect, useCallback, useState, useRef } from 'react'
+import { Helmet } from "react-helmet"
 import { Route, useRouteMatch, useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import BigNumber from 'bignumber.js'
@@ -338,6 +339,19 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
   return (
     <>
     <Page>
+      <Helmet>
+        <title>PlantSwap.finance - Plantswap Barn 🌱</title>
+        <meta name="description" content="View your farming on Plantswap and keep a eye on the value of your LP's🌱" />
+        <meta name="keywords" content="plantswap,defi,plant" />
+        <meta name="twitter:image" content="https://plantswap.finance/images/theBarn.svg" />
+        <meta name="twitter:domain" content="PlantSwap.finance" />
+        <meta name="twitter:description" content="View your farming on Plantswap and keep a eye on the value of your LP's🌱" />
+        <meta name="twitter:title" content="PlantSwap.Finance - Farm $PLANT with us and save the planet🌱" />
+        <meta property="og:title" content="PlantSwap.Finance - Farm $PLANT with us and save the planet🌱" />
+        <meta property="og:url" content="https://plantswap.finance/barnPlantswap" />
+        <meta property="og:image" content="https://plantswap.finance/images/theBarn.svg" />
+        <meta property="og:description" content="View your farming on Plantswap and keep a eye on the value of your LP's🌱" />
+      </Helmet>
       <Hero>
         <div>
           <Heading as="h1" size="xxl" mb="16px">

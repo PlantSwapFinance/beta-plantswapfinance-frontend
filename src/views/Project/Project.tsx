@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from "react-helmet"
 import Page from 'components/layout/Page'
 import { Image, Heading, Text } from '@plantswap-libs/uikit'
 import styled from 'styled-components'
@@ -14,6 +15,19 @@ const Project = () => {
 
   return (
     <Page>
+      <Helmet>
+        <title>PlantSwap.finance - Project 🌱</title>
+        <meta name="description" content="Read the detail of our project and the PlantSwap Development Fund🌱" />
+        <meta name="keywords" content="plantswap,defi,project" />
+        <meta name="twitter:image" content="https://plantswap.finance/images/project.svg" />
+        <meta name="twitter:domain" content="PlantSwap.finance" />
+        <meta name="twitter:description" content="Read the detail of our project and the PlantSwap Development Fund🌱" />
+        <meta name="twitter:title" content="PlantSwap.Finance - Farm $PLANT with us and save the planet🌱" />
+        <meta property="og:title" content="PlantSwap.Finance - Farm $PLANT with us and save the planet🌱" />
+        <meta property="og:url" content="https://plantswap.finance/project" />
+        <meta property="og:image" content="https://plantswap.finance/images/project.svg" />
+        <meta property="og:description" content="Read the detail of our project and the PlantSwap Development Fund🌱" />
+      </Helmet>
       <Hero>
         <div>
           <Heading as="h1" size="xxl" mb="16px">

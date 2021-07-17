@@ -79,7 +79,7 @@ const App: React.FC = () => {
         <meta name="twitter:title" content="PlantSwap.Finance - Farm $PLANT with us and save the planet🌱" />
         <meta property="og:title" content="PlantSwap.Finance - Farm $PLANT with us and save the planet🌱" />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="%PUBLIC_URL%`" />
+        <meta property="og:url" content="https://plantswap.finance/" />
         <meta property="og:image" content="%PUBLIC_URL%/logo192.png" />
         <meta property="og:description" content="Swap and farm $PLANT with other's and with our smart contracts on Binance Smart Chain." />
         <meta property="og:site_name" content="PlantSwap.finance" />

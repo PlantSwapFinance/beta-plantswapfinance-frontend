@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Helmet } from "react-helmet"
 import styled from 'styled-components'
 import { Image, Heading, Text, useModal, BaseLayout } from '@plantswap-libs/uikit'
 import { useWeb3React } from '@web3-react/core'
@@ -84,6 +85,19 @@ const Home: React.FC = () => {
   */
   return (
     <Page>
+      <Helmet>
+        <title>PlantSwap.finance 🌱</title>
+        <meta name="description" content="Stake and Farm $PLANT token in our farms and gardens.🌱" />
+        <meta name="keywords" content="plantswap,defi,plant" />
+        <meta name="twitter:image" content="https://plantswap.finance/images/pan-bg-mobile.svg" />
+        <meta name="twitter:domain" content="PlantSwap.finance" />
+        <meta name="twitter:description" content="Stake and Farm $PLANT token in our farms and gardens.🌱" />
+        <meta name="twitter:title" content="PlantSwap.Finance - Farm $PLANT with us and save the planet🌱" />
+        <meta property="og:title" content="PlantSwap.Finance - Farm $PLANT with us and save the planet🌱" />
+        <meta property="og:url" content="https://plantswap.finance/" />
+        <meta property="og:image" content="https://plantswap.finance/images/pan-bg-mobile.svg" />
+        <meta property="og:description" content="Stake and Farm $PLANT token in our farms and gardens.🌱" />
+      </Helmet>
       <Hero>
         <Heading as="h1" size="xl" mb="24px" color="secondary">
           {TranslateString(576, 'PlantSwap.finance')}

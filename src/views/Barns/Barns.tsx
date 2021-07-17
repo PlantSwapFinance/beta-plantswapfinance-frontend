@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from "react-helmet"
 import { Image, Heading } from '@plantswap-libs/uikit'
 import useI18n from 'hooks/useI18n'
 import styled  from 'styled-components'
@@ -17,6 +18,19 @@ const Barns: React.FC = () => {
   return (
     <>
     <Page>
+      <Helmet>
+        <title>PlantSwap.finance - Barn 🌱</title>
+        <meta name="description" content="View your farming abroad, select a platform🌱" />
+        <meta name="keywords" content="plantswap,defi,pancakeswap,plant,cake,gosedefi,brew,cafeswap,egg" />
+        <meta name="twitter:image" content="https://plantswap.finance/images/barns.svg" />
+        <meta name="twitter:domain" content="PlantSwap.finance" />
+        <meta name="twitter:description" content="View your farming abroad, select a platform🌱" />
+        <meta name="twitter:title" content="PlantSwap.Finance - Farm $PLANT with us and save the planet🌱" />
+        <meta property="og:title" content="PlantSwap.Finance - Farm $PLANT with us and save the planet🌱" />
+        <meta property="og:url" content="https://plantswap.finance/barns" />
+        <meta property="og:image" content="https://plantswap.finance/images/barns.svg" />
+        <meta property="og:description" content="View your farming abroad, select a platform🌱" />
+      </Helmet>
       <Hero>
         <Heading as="h1" size="xxl" mb="16px">
           {TranslateString(738, 'The Barn')}</Heading>

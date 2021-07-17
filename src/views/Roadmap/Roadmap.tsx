@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from "react-helmet"
 import Page from 'components/layout/Page'
 import { Image, Heading, Text } from '@plantswap-libs/uikit'
 import styled from 'styled-components'
@@ -14,6 +15,19 @@ const Roadmap = () => {
 
   return (
     <Page>
+      <Helmet>
+        <title>PlantSwap.finance - Roadmap 🌱</title>
+        <meta name="description" content="Read our roadmap to discover what is next for the future of PlantSwap.finance and the PLANT token🌱" />
+        <meta name="keywords" content="plantswap,defi,roadmap" />
+        <meta name="twitter:image" content="https://plantswap.finance/images/roadmap.svg" />
+        <meta name="twitter:domain" content="PlantSwap.finance" />
+        <meta name="twitter:description" content="Read our roadmap to discover what is next for the future of PlantSwap.finance and the PLANT token🌱" />
+        <meta name="twitter:title" content="PlantSwap.Finance - Farm $PLANT with us and save the planet🌱" />
+        <meta property="og:title" content="PlantSwap.Finance - Farm $PLANT with us and save the planet🌱" />
+        <meta property="og:url" content="https://plantswap.finance/roadmap" />
+        <meta property="og:image" content="https://plantswap.finance/images/roadmap.svg" />
+        <meta property="og:description" content="Read our roadmap to discover what is next for the future of PlantSwap.finance and the PLANT token🌱" />
+      </Helmet>
       <Hero>
         <div>
           <Heading as="h1" size="xxl" mb="16px">
