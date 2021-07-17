@@ -26,6 +26,10 @@ interface Props {
   decimals: number
   totalStaked: BigNumber
   totalStakedBusd: BigNumber
+  totalPendingStakedRewardToSplit?: BigNumber
+  totalPendingPlantRewardToSplit?: BigNumber
+  pendingStakedInStakedMasterChef?: BigNumber
+  pendingPlantInPlantMasterGardener?: BigNumber
   harvestedReward: BigNumber
   harvestedPlant: BigNumber
   compoundedReward: BigNumber
@@ -105,6 +109,10 @@ const CardFooter: React.FC<Props> = ({
   decimals,
   totalStaked,
   totalStakedBusd,
+  totalPendingStakedRewardToSplit,
+  totalPendingPlantRewardToSplit,
+  pendingStakedInStakedMasterChef,
+  pendingPlantInPlantMasterGardener,
   harvestedReward,
   harvestedPlant,
   compoundedReward,
@@ -133,6 +141,13 @@ const CardFooter: React.FC<Props> = ({
 
   const blocksUntilStart = Math.max(startBlock - currentBlock, 0)
   const blocksRemaining = Math.max(endBlock - currentBlock, 0)
+
+  const totalPendingStakedRewardToSplitNum = 
+    getBalanceNumber(totalPendingStakedRewardToSplit, decimals) + 
+    getBalanceNumber(pendingStakedInStakedMasterChef, decimals)
+  const totalPendingPlantRewardToSplitNum = 
+    getBalanceNumber(totalPendingPlantRewardToSplit, decimals) + 
+    getBalanceNumber(pendingPlantInPlantMasterGardener, decimals)
 
   const imageSrc = `${BASE_URL}/images/tokens/${tokenStakedRewardName.toLowerCase()}.png`
 
@@ -169,6 +184,25 @@ const CardFooter: React.FC<Props> = ({
             &nbsp;
             <LabelRight> {TranslateString(1212, 'BUSD')}</LabelRight>
           </Row>
+          )}
+          {!isFinished && totalPendingStakedRewardToSplitNum > 0 && (
+          <Row mb="4px">
+            <FlexFull>
+              <Label>
+                {TranslateString(408, 'Total reward pending distribution')}
+              </Label>
+            </FlexFull>
+            <Balance fontSize="14px" isDisabled={isFinished} value={totalPendingStakedRewardToSplitNum} decimals={2} />
+            &nbsp;<LabelRight> {tokenStakedRewardName}</LabelRight>
+          </Row>
+          )}
+          {!isFinished && totalPendingPlantRewardToSplitNum > 0 && (
+            <Row mb="4px">
+              <FlexFull>&nbsp;
+              </FlexFull>
+              <Balance fontSize="14px" isDisabled={isFinished} value={totalPendingPlantRewardToSplitNum} decimals={2} />
+              &nbsp;<LabelRight> {tokenEarnName}</LabelRight>
+            </Row>
           )}
           {blocksUntilStart > 0 && (
             <Row mb="4px">

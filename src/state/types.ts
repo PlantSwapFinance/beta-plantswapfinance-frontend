@@ -45,6 +45,12 @@ export interface Garden extends FarmConfig {
 
 export interface VerticalGarden extends VerticalGardenConfig {
   totalStaked?: BigNumber
+  totalStakedEachBlock?: BigNumber
+  totalPendingStakedRewardToSplit?: BigNumber
+  totalPendingPlantRewardToSplit?: BigNumber
+  pendingStakedInStakedMasterChef?: BigNumber
+  pendingPlantInPlantMasterGardener?: BigNumber
+  freezeContractTillBloc?: BigNumber
   lastRewardUpdateBlock?: BigNumber
   lastRewardUpdateBlockPrevious?: BigNumber
   lastRewardUpdateTotalStakedToken?: BigNumber

@@ -39,6 +39,11 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
     harvest,
     verticalGardenCategory,
     totalStaked,
+    totalPendingStakedRewardToSplit,
+    totalPendingPlantRewardToSplit,
+    pendingStakedInStakedMasterChef,
+    pendingPlantInPlantMasterGardener,
+  //  freezeContractTillBloc,
     lastRewardUpdateBlock,
     lastRewardUpdateBlockPrevious,
     lastRewardUpdateTotalStakedToken,
@@ -527,6 +532,10 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
         decimals={stakingToken.decimals}
         totalStaked={totalStaked}
         totalStakedBusd={totalStakedBusd}
+        totalPendingStakedRewardToSplit={totalPendingStakedRewardToSplit}
+        totalPendingPlantRewardToSplit={totalPendingPlantRewardToSplit}
+        pendingStakedInStakedMasterChef={pendingStakedInStakedMasterChef}
+        pendingPlantInPlantMasterGardener={pendingPlantInPlantMasterGardener}
         harvestedReward={harvestedReward}
         harvestedPlant={harvestedPlant}
         compoundedReward={compoundedReward}
