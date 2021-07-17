@@ -72,7 +72,7 @@ const StyledDetailsButton = styled.button`
   display: inline-flex;
   font-size: 16px;
   font-weight: 600;
-  height: 32px;
+  height: 24px;
   justify-content: center;
   outline: 0;
   padding: 0;
@@ -86,7 +86,7 @@ const StyledDetailsButton = styled.button`
 `
 
 const Details = styled.div`
-  margin-top: 24px;
+  margin-top: 12px;
 `
 
 const Row = styled(Flex)`

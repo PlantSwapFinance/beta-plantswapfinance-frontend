@@ -367,7 +367,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
               />
               )}</FlexFull>
           </Row>
-          <Row mb="4px">
+          <Row mb="4px">&nbsp;
             {account &&
               (needsApproval ? (
                 <div style={{ flex: 1 }}>
@@ -506,7 +506,7 @@ font-size: 14px;
 const StyledCardActions = styled.div`
   display: flex;
   justify-content: center;
-  margin: 16px 0;
+  margin: 0px 0;
   width: 100%;
   box-sizing: border-box;
 `
@@ -526,7 +526,7 @@ const StyledCardReward = styled.div`
 const StyledCardAPY = styled.div`
   display: flex;
   justify-content: center;
-  margin: 16px 16px;
+  margin: 0px 0px;
   width: 100%;
   box-sizing: border-box;
 `
