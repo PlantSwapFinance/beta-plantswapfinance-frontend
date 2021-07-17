@@ -31,9 +31,9 @@ const config: MenuEntry[] = [
     href: '/gardens',
   },
   {
-    label: 'Vertical Garden',
+    label: 'Vertical Gardens',
     icon: 'TreeIcon',
-    href: '/verticalGarden',
+    href: '/verticalGardens',
     status: {
       text: 'NEW',
       color: 'failure',
