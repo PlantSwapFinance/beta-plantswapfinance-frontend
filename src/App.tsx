@@ -64,26 +64,26 @@ const App: React.FC = () => {
 
   return (
     <Router history={history}>
-    <Helmet>
-      <title>PlantSwap.finance</title>
-      <meta name="description" content="Swap and farm $PLANT with other's and with our smart contracts on Binance Smart Chain." />
-      <meta name="keywords" content="plantswap,defi,yield farming,bsc,binance smart chain" />
-      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
-      <meta name="theme-color" content="#000000" />
-      <meta name="twitter:image" content="https://plantswap.finance/logo192.png" />
-      <meta name="twitter:domain" content="PlantSwap.finance" />
-      <meta name="twitter:description" content="Swap and farm $PLANT with other's and with our smart contracts on Binance Smart Chain." />
-      <meta name="twitter:site" content="@plantswapdefi" />
-      <meta name="twitter:creator" content="@plantswapdefi" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content="PlantSwap.Finance - Farm $PLANT with us and save the planet🌱" />
-      <meta property="og:title" content="PlantSwap.Finance - Farm $PLANT with us and save the planet🌱" />
-      <meta property="og:type" content="article" />
-      <meta property="og:url" content="%PUBLIC_URL%`" />
-      <meta property="og:image" content="%PUBLIC_URL%/logo192.png" />
-      <meta property="og:description" content="Swap and farm $PLANT with other's and with our smart contracts on Binance Smart Chain." />
-      <meta property="og:site_name" content="PlantSwap.finance" />
-    </Helmet>
+      <Helmet>
+        <title>PlantSwap.finance</title>
+        <meta name="description" content="Swap and farm $PLANT with other's and with our smart contracts on Binance Smart Chain." />
+        <meta name="keywords" content="plantswap,defi,yield farming,bsc,binance smart chain" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="twitter:image" content="https://plantswap.finance/logo192.png" />
+        <meta name="twitter:domain" content="PlantSwap.finance" />
+        <meta name="twitter:description" content="Swap and farm $PLANT with other's and with our smart contracts on Binance Smart Chain." />
+        <meta name="twitter:site" content="@plantswapdefi" />
+        <meta name="twitter:creator" content="@plantswapdefi" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="PlantSwap.Finance - Farm $PLANT with us and save the planet🌱" />
+        <meta property="og:title" content="PlantSwap.Finance - Farm $PLANT with us and save the planet🌱" />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="%PUBLIC_URL%`" />
+        <meta property="og:image" content="%PUBLIC_URL%/logo192.png" />
+        <meta property="og:description" content="Swap and farm $PLANT with other's and with our smart contracts on Binance Smart Chain." />
+        <meta property="og:site_name" content="PlantSwap.finance" />
+      </Helmet>
       <ResetCSS />
       <GlobalStyle />
       <Menu>
@@ -92,8 +92,14 @@ const App: React.FC = () => {
             <Route path="/" exact>
               <Home />
             </Route>
+            <Route path="/farm">
+              <Farms />
+            </Route>
             <Route path="/farms">
               <Farms />
+            </Route>
+            <Route path="/garden">
+              <Gardens tokenMode/>
             </Route>
             <Route path="/gardens">
               <Gardens tokenMode/>
@@ -101,8 +107,14 @@ const App: React.FC = () => {
             <Route path="/verticalGarden">
               <VerticalGarden />
             </Route>
+            <Route path="/verticalGardens">
+              <VerticalGarden />
+            </Route>
             <Route path="/gardensv1">
               <GardenV1 />
+            </Route>
+            <Route path="/barn">
+              <Barns />
             </Route>
             <Route path="/barns">
               <Barns />
@@ -139,6 +151,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/developmentFund">
               <DevelopmentFund />
+            </Route>
+            <Route path="/collectible">
+              <Collectibles />
             </Route>
             <Route path="/collectibles">
               <Collectibles />
