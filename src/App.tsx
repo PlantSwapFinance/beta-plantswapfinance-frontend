@@ -1,4 +1,5 @@
 import React, { useEffect, lazy } from 'react'
+import { Helmet } from 'react-helmet'
 import { Router, Redirect, Route, Switch } from 'react-router-dom'
 import { ResetCSS } from '@plantswap-libs/uikit'
 import BigNumber from 'bignumber.js'
@@ -63,6 +64,26 @@ const App: React.FC = () => {
 
   return (
     <Router history={history}>
+    <Helmet>
+      <title>PlantSwap.finance</title>
+      <meta name="description" content="Swap and farm $PLANT with other's and with our smart contracts on Binance Smart Chain." />
+      <meta name="keywords" content="plantswap,defi,yield farming,bsc,binance smart chain" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+      <meta name="theme-color" content="#000000" />
+      <meta name="twitter:image" content="https://plantswap.finance/logo192.png" />
+      <meta name="twitter:domain" content="PlantSwap.finance" />
+      <meta name="twitter:description" content="Swap and farm $PLANT with other's and with our smart contracts on Binance Smart Chain." />
+      <meta name="twitter:site" content="@plantswapdefi" />
+      <meta name="twitter:creator" content="@plantswapdefi" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="PlantSwap.Finance - Farm $PLANT with us and save the planet🌱" />
+      <meta property="og:title" content="PlantSwap.Finance - Farm $PLANT with us and save the planet🌱" />
+      <meta property="og:type" content="article" />
+      <meta property="og:url" content="%PUBLIC_URL%`" />
+      <meta property="og:image" content="%PUBLIC_URL%/logo192.png" />
+      <meta property="og:description" content="Swap and farm $PLANT with other's and with our smart contracts on Binance Smart Chain." />
+      <meta property="og:site_name" content="PlantSwap.finance" />
+    </Helmet>
       <ResetCSS />
       <GlobalStyle />
       <Menu>

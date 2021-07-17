@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect, useRef  } from 'react'
- import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet";
 import { Route, useRouteMatch } from 'react-router-dom'
 import BigNumber from 'bignumber.js'
 import styled from 'styled-components'
@@ -59,20 +59,16 @@ const StyledImage = styled(Image)`
     <Page>
       <Helmet>
         <title>PlantSwap.finance - Vertical Garden</title>
-        <meta
-          name="description"
-          content="Stake Token and earn multiple reward tokens in our multiple Vertical Gardens🌱."
-        />
+        <meta name="description" content="Stake Token and earn multiple reward tokens in our multiple Vertical Gardens🌱" />
+        <meta name="keywords" content="plantswap,defi,vertical garden,plant,cake,eggp,brew,chess,oddz" />
         <meta name="twitter:image" content="https://plantswap.finance/images/verticalGardens.svg" />
         <meta name="twitter:domain" content="PlantSwap.finance" />
-        <meta
-          name="twitter:description"
-          content="Stake Token and earn multiple reward tokens in our multiple Vertical Gardens🌱"
-        />
-        <meta name="twitter:title" content="PlantSwap.Finance - Vertical Garden for max rewards 🌱" />
-        <meta property="og:title" content="PlantSwap.Finance - Vertical Garden for max rewards 🌱" />
+        <meta name="twitter:description" content="Stake Token and earn multiple reward tokens in our multiple Vertical Gardens🌱" />
+        <meta name="twitter:title" content="PlantSwap.Finance - Farm $PLANT with us and save the planet🌱" />
+        <meta property="og:title" content="PlantSwap.Finance - Farm $PLANT with us and save the planet🌱" />
+        <meta property="og:url" content="%PUBLIC_URL%/verticalGardens`" />
+        <meta property="og:image" content="https://plantswap.finance/images/verticalGardens.svg" />
         <meta property="og:description" content="Stake Token and earn multiple reward tokens in our multiple Vertical Gardens🌱" />
-        <meta property="og:site_name" content="PlantSwap.finance" />
       </Helmet>
       <Hero>
         <div>
