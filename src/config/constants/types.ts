@@ -87,6 +87,7 @@ export interface VerticalGardenConfig {
   rewardCut?: number
   rewardCutSplitDevelopmentFund?: number
   rewardCutSplitBuyPlantAndBurn?: number
+  displayOnHomePage?: boolean
 }
 
 export interface BarnBetaConfig {

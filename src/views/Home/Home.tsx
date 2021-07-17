@@ -9,6 +9,7 @@ import NewsCard from 'views/Home/components/NewsCard'
 import FarmStakingCard from 'views/Home/components/FarmStakingCard'
 import TotalContributionCard from 'views/Home/components/TotalContributionCard'
 import TotalValueLockedCard from 'views/Home/components/TotalValueLockedCard'
+import NewVerticalGardens from './components/NewVerticalGardens'
 import Divider from './components/Divider'
 
 const Hero = styled.div`
@@ -25,9 +26,10 @@ const Hero = styled.div`
   text-align: center;
 
   ${({ theme }) => theme.mediaQueries.lg} {
-    background-image: url('/images/pan-bg2.svg'), url('/images/pan-bg.svg');
+  text-align: center;
+    background-image: url('/images/homePlantswapBarnAndFieldLeft.svg'), url('/images/homePlantswapBarnAndFieldRight.svg');
     background-position: left, right;
-    height: 512px;
+    height: 260px;
     padding-top: 0;
   }
 `
@@ -69,16 +71,16 @@ const Home: React.FC = () => {
   */
   return (
     <Page>
+      <NewVerticalGardens />
       <Hero>
         <Heading as="h1" size="xl" mb="24px" color="secondary">
           {TranslateString(576, 'PlantSwap.finance')}
         </Heading>
-        <Text>{TranslateString(578, 'Swap and Farm $PLANT with others and')}</Text>
-        <Text>{TranslateString(578, 'with our smart contracts on Binance Smart Chain.')}</Text>
+        <Text>{TranslateString(578, 'Stake and Farm $PLANT token')}</Text>
+        <Text>{TranslateString(578, 'in our farms and gardens.')}</Text>
         <br />
-        <Text>Fees from these transactions will be used to</Text>
-        <Text>plant trees and support environmental causes.</Text
-        >
+        <Text>A portion of the reward and collected fees</Text>
+        <Text>will be used to support ecological nonprofits.</Text>
       </Hero>
       
       <div>
