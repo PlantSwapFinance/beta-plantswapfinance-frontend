@@ -66,6 +66,8 @@ export interface VerticalGarden extends VerticalGardenConfig {
     stakedBalance: BigNumber
     pendingReward: BigNumber
     pendingPlantReward: BigNumber
+    estimateReward: BigNumber
+    estimatePlantReward: BigNumber
     harvestedReward: BigNumber
     harvestedPlant: BigNumber
     compoundedReward: BigNumber

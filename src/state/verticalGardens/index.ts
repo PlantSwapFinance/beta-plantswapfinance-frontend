@@ -10,6 +10,8 @@ import {
   fetchUserStakeBalances,
   fetchUserPendingRewards,
   fetchUserPendingPlantRewards,
+  fetchUserEstimateRewards,
+  fetchUserEstimatePlantRewards,
   fetchUserHarvestedRewards,
   fetchUserHarvestedPlants,
   fetchUserCompoundedRewards,
@@ -69,6 +71,8 @@ export const fetchVerticalGardensUserDataAsync = (account) => async (dispatch) =
   const stakedBalances = await fetchUserStakeBalances(account)
   const pendingRewards = await fetchUserPendingRewards(account)
   const pendingPlantRewards = await fetchUserPendingPlantRewards(account)
+  const estimateRewards = await fetchUserEstimateRewards(account)
+  const estimatePlantRewards = await fetchUserEstimatePlantRewards(account)
   const harvestedRewards = await fetchUserHarvestedRewards(account)
   const harvestedPlants = await fetchUserHarvestedPlants(account)
   const compoundedRewards= await fetchUserCompoundedRewards(account)
@@ -82,6 +86,8 @@ export const fetchVerticalGardensUserDataAsync = (account) => async (dispatch) =
     stakedBalance: stakedBalances[verticalGarden.vgId],
     pendingReward: pendingRewards[verticalGarden.vgId],
     pendingPlantReward: pendingPlantRewards[verticalGarden.vgId],
+    estimateReward: estimateRewards[verticalGarden.vgId],
+    estimatePlantReward: estimatePlantRewards[verticalGarden.vgId],
     harvestedReward: harvestedRewards[verticalGarden.vgId],
     harvestedPlant: harvestedPlants[verticalGarden.vgId],
     compoundedReward: compoundedRewards[verticalGarden.vgId],
@@ -113,6 +119,16 @@ export const vgupdateUserPendingReward = (vgId: string, account: string) => asyn
 export const vgupdateUserPendingPlantReward = (vgId: string, account: string) => async (dispatch) => {
   const pendingPlantRewards = await fetchUserPendingPlantRewards(account)
   dispatch(updateVerticalGardensUserData({ vgId, field: 'pendingPlantReward', value: pendingPlantRewards[vgId] }))
+}
+
+export const vgupdateUserEstimateRewardToken = (vgId: string, account: string) => async (dispatch) => {
+  const estimateRewards = await fetchUserEstimateRewards(account)
+  dispatch(updateVerticalGardensUserData({ vgId, field: 'estimateReward', value: estimateRewards[vgId] }))
+}
+
+export const vgupdateUserEstimatePlantReward = (vgId: string, account: string) => async (dispatch) => {
+  const estimatePlantRewards = await fetchUserEstimatePlantRewards(account)
+  dispatch(updateVerticalGardensUserData({ vgId, field: 'estimatePlantReward', value: estimatePlantRewards[vgId] }))
 }
 
 export const vgupdateUserHarvestedReward = (vgId: string, account: string) => async (dispatch) => {

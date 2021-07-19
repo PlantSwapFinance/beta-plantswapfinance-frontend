@@ -100,8 +100,8 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
   const stakingTokenBalance = new BigNumber(userData?.stakingTokenBalance || 0)
   const stakedBalance = new BigNumber(userData?.stakedBalance || 0)
   const stakedBalanceBusd = new BigNumber(stakedBalance).multipliedBy(new BigNumber(stakedTokenPrice)) // Need improvement for flexibility
-  const earnings = new BigNumber(userData?.pendingReward || 0)
-  const earningsPlant = new BigNumber(userData?.pendingPlantReward || 0)
+  const earnings = new BigNumber(userData?.estimateReward || 0)
+  const earningsPlant = new BigNumber(userData?.estimatePlantReward || 0)
 
   const compoundedReward = new BigNumber(userData?.compoundedReward || 0)
   const harvestedReward = new BigNumber(userData?.harvestedReward || 0)
