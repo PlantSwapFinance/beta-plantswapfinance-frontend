@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js'
 import React, { useCallback, useMemo, useState } from 'react'
-import { Button, Modal, LinkExternal } from '@plantswap-libs/uikit'
+import { Button, Modal, LinkExternal, Text } from '@plantswap-libs/uikit'
 import ModalActions from 'components/ModalActions'
 import ModalInput from 'components/ModalInput'
 import useI18n from 'hooks/useI18n'
@@ -12,9 +12,10 @@ interface DepositModalProps {
   onDismiss?: () => void
   tokenName?: string
   addLiquidityUrl?: string
+  depositFee?: number
 }
 
-const DepositModal: React.FC<DepositModalProps> = ({ max, onConfirm, onDismiss, tokenName = '', addLiquidityUrl }) => {
+const DepositModal: React.FC<DepositModalProps> = ({ max, onConfirm, onDismiss, tokenName = '', addLiquidityUrl, depositFee }) => {
   const [val, setVal] = useState('')
   const [pendingTx, setPendingTx] = useState(false)
   const TranslateString = useI18n()
@@ -35,6 +36,7 @@ const DepositModal: React.FC<DepositModalProps> = ({ max, onConfirm, onDismiss, 
 
   return (
     <Modal title={TranslateString(1068, 'Stake LP tokens')} onDismiss={onDismiss}>
+    {depositFee > 0 && (<Text>This Garden has a {depositFee/100}% deposit fee!</Text>)}
       <ModalInput
         value={val}
         onSelectMax={handleSelectMax}

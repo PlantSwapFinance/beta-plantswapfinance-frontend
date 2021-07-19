@@ -75,7 +75,7 @@ const verticalGardens: VerticalGardenConfig[] = [
       97: '',
     },
     verticalGardenMasterGardenerPId: 24,
-    verticalGardenMasterGardenerAllocPt: 0,
+    verticalGardenMasterGardenerAllocPt: 5,
     verticalGardenCategory: VerticalGardenCategory.COMMUNITY,
     harvest: true,
     sortOrder: 4,

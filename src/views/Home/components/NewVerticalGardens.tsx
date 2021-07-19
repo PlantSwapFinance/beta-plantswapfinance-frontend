@@ -24,8 +24,15 @@ const NewVerticalGardens = () => {
   )
   return (
       <StyledNewVerticalGardens>
-        <Heading size="xl" mb="24px">&nbsp;&nbsp;
-            {TranslateString(542, 'New Vertical Gardens')}
+        <Heading size="xl" mb="24px">
+            <FlexFull>&nbsp;&nbsp;
+          <a href="/verticalGardens">
+            {TranslateString(542, 'New Vertical Gardens')}</a>
+            </FlexFull>
+            <LabelRight>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="/verticalGardens">See all Vertical Gardens</a>
+            </LabelRight>
         </Heading>
         <FlexLayout>
           {orderBy(finishedVerticalGardens, ['sortOrder']).map((verticalGarden) => (
@@ -35,5 +42,16 @@ const NewVerticalGardens = () => {
       </StyledNewVerticalGardens>
   )
 }
+
+const FlexFull = styled.div`
+  flex: 1;
+`
+
+const LabelRight = styled.div`
+align-items: right;
+font-size: 14px;
+font-weight: bold;
+color: ${(props) => props.theme.colors.text};
+`
 
 export default NewVerticalGardens

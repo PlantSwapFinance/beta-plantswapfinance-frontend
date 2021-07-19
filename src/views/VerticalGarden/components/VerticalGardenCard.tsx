@@ -298,6 +298,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
               <StyledCardAPY>
                 <FlexFull>{verticalEarningToken.symbol}</FlexFull>
                   <Tooltip content={
+                  <SmallerText>
                     <div>{verticalEarningToken.symbol}{TranslateString(999, ' APY is base on this formula')}
                       <br />
                       <br />{TranslateString(999, 'rewardTokenApy = lastRewardUpdateRewardTokenGained')}
@@ -309,6 +310,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
                       <br />&nbsp;&nbsp;{TranslateString(999, '.div(plantPrice)))')}
                       <br />&nbsp;{TranslateString(999, '.multipliedBy(100)')}
                     </div>
+                  </SmallerText>
                     }>
                   {plantTokenApyFormated}&nbsp;% APY&nbsp;
                     <HelpIcon color="textSubtle" />
@@ -321,6 +323,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
               <StyledCardAPY>
                 <FlexFull>{stakingRewardToken.symbol}</FlexFull>
                 <Tooltip content={
+                  <SmallerText>
                   <div>{stakingRewardToken.symbol}{TranslateString(999, ' APY is base on this formula')}
                     <br />
                     <br />{TranslateString(999, 'rewardTokenApy = lastRewardUpdateRewardTokenGained')}
@@ -332,6 +335,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
                       <br />&nbsp;&nbsp;{TranslateString(999, '.div(rewardTokenPrice)))')}
                     <br />&nbsp;{TranslateString(999, '.multipliedBy(100)')}
                   </div>
+                  </SmallerText>
                 }>
                 {rewardTokenApyFormated}&nbsp;% APY&nbsp;
                   <HelpIcon color="textSubtle" />
@@ -619,6 +623,10 @@ const BalanceAndCompound = styled.div`
 const StyledActionSpacer = styled.div`
   height: ${(props) => props.theme.spacing[4]}px;
   width: ${(props) => props.theme.spacing[4]}px;
+`
+
+const SmallerText = styled.div`
+font-size: 14px;
 `
 
 const StyledDetails = styled.div`
