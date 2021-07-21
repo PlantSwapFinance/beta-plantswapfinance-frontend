@@ -51,7 +51,7 @@ const PlantStats = () => {
         </Row>
         <Row>
           <Text fontSize="16px">{TranslateString(538, 'Contribution to nonprofits')}</Text>
-          <CardValue fontSize="16px" decimals={2} value={10250} />$
+          <CardValue fontSize="16px" decimals={2} value={10500} />$
         </Row>
         <Row>
           <Plant />
