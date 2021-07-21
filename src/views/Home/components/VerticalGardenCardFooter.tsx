@@ -318,7 +318,7 @@ const CardFooter: React.FC<Props> = ({
           <Row mb="4px">
             <FlexFull>
               <Label>
-                {TranslateString(408, 'You previouslsy compounded')}
+                {TranslateString(408, 'You previously compounded')}
               </Label>
             </FlexFull>
           </Row>
@@ -337,7 +337,7 @@ const CardFooter: React.FC<Props> = ({
           <Row mb="4px">
             <FlexFull>
               <Label>
-                {TranslateString(408, 'You previouslsy harvested')}
+                {TranslateString(408, 'You previously harvested')}
               </Label>
             </FlexFull>
           </Row>
