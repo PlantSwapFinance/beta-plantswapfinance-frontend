@@ -96,7 +96,7 @@ const verticalGardens: VerticalGardenConfig[] = [
       97: '',
     },
     verticalGardenMasterGardenerPId: 25,
-    verticalGardenMasterGardenerAllocPt: 0,
+    verticalGardenMasterGardenerAllocPt: 15,
     verticalGardenCategory: VerticalGardenCategory.PANCAKE,
     harvest: true,
     sortOrder: 5,
