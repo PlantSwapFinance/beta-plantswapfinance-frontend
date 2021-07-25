@@ -47,9 +47,15 @@ type GLTFResult = GLTF & {
 function Model(props: JSX.IntrinsicElements['group']) {
   const group = useRef<THREE.Group>()
   const { nodes, materials } = useGLTF('/PLANT.glb') as GLTFResult
+  const mesh = useRef<THREE.Mesh>()
+  useFrame(() => {
+    mesh.current.rotation.z += 0.025
+    mesh.current.rotation.x += 0.005
+    mesh.current.rotation.x += 0.005
+  })
   return (
     <group ref={group} {...props} dispose={null}>
-      <mesh geometry={nodes.Cylinder.geometry} scale={4} material={materials['Material.002']} rotation={[Math.PI / 2, 0, 0]} position={[0, 0, 1]}  />
+      <mesh ref={mesh} geometry={nodes.Cylinder.geometry} scale={4} material={materials['Material.002']} rotation={[Math.PI / 2, 0, 0]} position={[0, 0, 1]} />
     </group>
   )
 }
