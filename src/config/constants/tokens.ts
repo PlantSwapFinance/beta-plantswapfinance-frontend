@@ -1665,7 +1665,17 @@ const tokens = {
   },
 
 
-
+  // Apeswap
+  
+  banana: {
+    symbol: 'BANANA',
+    address: {
+      56: '0x603c7f932ED1fc6575303D8Fb018fDCBb0f39a95',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://apeswap.finance/',
+  },
 
   // Cafeswap
   
@@ -1677,15 +1687,6 @@ const tokens = {
     },
     decimals: 18,
     projectLink: 'https://app.cafeswap.finance/',
-  },
-  banana: {
-    symbol: 'BANANA',
-    address: {
-      56: '0x5514E0E1DA40A38E19d58e8B6E16226E16e183fA',
-      97: '',
-    },
-    decimals: 18,
-    projectLink: 'https://apeswap.finance/',
   },
   xditto: {
     symbol: 'DITTO',
