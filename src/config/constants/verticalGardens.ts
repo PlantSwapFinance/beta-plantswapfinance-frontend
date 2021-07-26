@@ -43,7 +43,6 @@ const verticalGardens: VerticalGardenConfig[] = [
     rewardCut: 1500, // 15%
     rewardCutSplitDevelopmentFund: 50, // 50% of 15%
     rewardCutSplitBuyPlantAndBurn: 50, // 50% of 15%
-    displayOnHomePage: true,
   },
   {
     vgId: 3,
@@ -104,6 +103,7 @@ const verticalGardens: VerticalGardenConfig[] = [
     rewardCut: 1500, // 15%
     rewardCutSplitDevelopmentFund: 50, // 50% of 15%
     rewardCutSplitBuyPlantAndBurn: 50, // 50% of 15%
+    displayOnHomePage: true,
   },
   {
     vgId: 6,
