@@ -12,6 +12,9 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Kanit', sans-serif;
   }
   body {
+    
+    cursor: url('cursor.svg'), pointer;
+    cursor: -webkit-image-set(url('cursor.svg') 1x, url('cursor.svg') 2x), pointer;
     background-color: ${({ theme }) => theme.colors.background};
 
     img {
