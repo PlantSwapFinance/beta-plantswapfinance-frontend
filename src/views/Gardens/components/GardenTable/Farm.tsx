@@ -4,6 +4,7 @@ import { useGardenUser } from 'state/hooks'
 import useI18n from 'hooks/useI18n'
 import { Text, Image } from '@plantswap-libs/uikit'
 import { getBalanceNumber } from 'utils/formatBalance'
+import Plant from 'components/PLANTsmall'
 
 export interface FarmProps {
   label: string
@@ -50,7 +51,9 @@ const Farm: React.FunctionComponent<FarmProps> = ({ image, label, pid }) => {
 
   return (
     <Container>
-      <IconImage src={`/images/farms/${image}.svg`} alt="icon" width={40} height={40} mr="8px" />
+    {pid === 0 && (<Plant />)}
+    {pid !== 0 && (<IconImage src={`/images/farms/${image}.svg`} alt="icon" width={40} height={40} mr="8px" />)}
+      
       <div>
         {handleRenderFarming()}
         <Text bold>{label}</Text>

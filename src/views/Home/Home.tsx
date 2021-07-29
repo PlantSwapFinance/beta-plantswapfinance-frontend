@@ -76,13 +76,6 @@ const Home: React.FC = () => {
       tokenName={PlantName}
     />,
   )
-
-  /*  To finish and add
-  
-        <BuyBtn>
-          <BuySellButton width="100%" />
-        </BuyBtn>
-  */
   return (
     <Page>
       <Helmet>

@@ -16,7 +16,7 @@ const DevelopmentFund = () => {
   return (
     <Page>
       <Helmet>
-        <title>PlantSwap.finance - Gardens 🌱</title>
+        <title>PlantSwap.finance - Development Fund 🌱</title>
         <meta name="description" content="Find the details on the PlantSwap Development Fund🌱" />
         <meta name="keywords" content="plantswap,defi,developmentFund" />
         <meta name="twitter:image" content="https://plantswap.finance/images/garden.svg" />
