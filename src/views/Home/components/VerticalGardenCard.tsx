@@ -16,6 +16,7 @@ import { useVerticalGardenHarvest } from 'hooks/useHarvest'
 import Balance from 'components/Balance'
 import { VerticalGarden } from 'state/types'
 import { useBlock, usePricePlantBusd, usePriceCakeBusd, usePriceBrewBusd, usePriceOddzBusd, usePriceChessBusd } from 'state/hooks'
+import VerticalGardenCanvas from './VerticalGardenCanvas'
 import DepositModal from '../../VerticalGarden/components/DepositModal'
 import WithdrawModal from '../../VerticalGarden/components/WithdrawModal'
 import CompoundModal from '../../VerticalGarden/components/CompoundModal'
@@ -126,7 +127,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
   const [onPresentCompound] = useModal(
     <CompoundModal earnings={earnings} onConfirm={onStake} tokenName={stakingToken.symbol} />,
   )
-  const verticalGardenMainImage = `${getAddress(verticalGarden.stakingToken.address)}.svg`.toLocaleLowerCase()
+  // const verticalGardenMainImage = `${getAddress(verticalGarden.stakingToken.address)}.svg`.toLocaleLowerCase()
   const verticalGardenSmallImageOne = `${getAddress(verticalGarden.stakingRewardToken.address)}.svg`.toLocaleLowerCase()
   const verticalGardenSmallImageTwo = `${getAddress(verticalGarden.verticalEarningToken.address)}.svg`.toLocaleLowerCase()
   const [onPresentWithdraw] = useModal(
@@ -230,17 +231,19 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
   return (
     <Card isActive={isCardActive} isFinished={isFinished}>
       {isFinished && <VerticalGardenFinishedSash />}
-      <VerticalGardenWindMill />
-      <div style={{ padding: '16px' }}>
+      <VerticalGardenCanvas
+        vgId={vgId}
+        tokenStakedName={stakingToken.symbol}
+        tokenStakedAddress={stakingToken.address ? getAddress(stakingToken.address) : ''}
+        tokenStakedRewardName={stakingRewardToken.symbol}
+        tokenStakedRewardAddress={stakingRewardToken.address ? getAddress(stakingRewardToken.address) : ''}
+        tokenEarnName={verticalEarningToken.symbol}
+        tokenEarnAddress={verticalEarningToken.address ? getAddress(verticalEarningToken.address) : ''}
+        verticalGardenMasterGardenerAllocPt={verticalGardenMasterGardenerAllocPt}
+        isFinished={isFinished} />
+      <div style={{ padding: '1px' }}>
         <CardTitle isFinished={isFinished}>
-          <div style={{ flex: 2 }}>
-            <Text>Stake:</Text>
-
-          </div>
           <div style={{ flex: 1 }}>
-            {stakingToken.symbol}
-            <Image src={`/images/tokens/${verticalGardenMainImage}`} alt={stakingToken.symbol} width={42} height={42} />
-
             <StyledCardReward>
               <FlexFull><Text>Earn:</Text></FlexFull>
             </StyledCardReward>
@@ -466,7 +469,7 @@ const VerticalGardenFinishedSash = styled.div`
   width: 135px;
 `
 
-const VerticalGardenWindMill = styled.div`
+/* const VerticalGardenWindMill = styled.div`
   background-image: url('/images/verticalGarden-windMill.svg');
   background-position: top right;
   background-repeat: not-repeat;
@@ -475,7 +478,7 @@ const VerticalGardenWindMill = styled.div`
   right: -12px;
   top: -12px;
   width: 180px;
-`
+` */
 
 const StyledDetailsButton = styled.button`
   align-items: center;
