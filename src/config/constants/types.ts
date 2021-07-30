@@ -78,6 +78,7 @@ export interface VerticalGardenConfig {
   verticalGardenContractAddress: Address
   verticalGardenMasterGardenerPId?: number
   verticalGardenMasterGardenerAllocPt?: number
+  stakingTokenPrice?: number
   verticalGardenCategory?: VerticalGardenCategory
   harvest?: boolean
   sortOrder?: number

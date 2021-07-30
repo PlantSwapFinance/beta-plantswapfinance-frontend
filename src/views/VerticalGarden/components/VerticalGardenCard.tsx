@@ -44,7 +44,6 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
     totalPendingPlantRewardToSplit,
     pendingStakedInStakedMasterChef,
     pendingPlantInPlantMasterGardener,
-  //  freezeContractTillBloc,
     lastRewardUpdateBlock,
     lastRewardUpdateBlockPrevious,
     lastRewardUpdateTotalStakedToken,
@@ -53,6 +52,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
     startBlock,
     endBlock,
     verticalGardenMasterGardenerAllocPt,
+    stakingTokenPrice,
     isFinished,
     depositFee,
     rewardCut,
@@ -76,6 +76,7 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
   const [requestedApproval, setRequestedApproval] = useState(false)
   const [pendingTx, setPendingTx] = useState(false)
   
+  const stakingTokenPriceBigNum = new BigNumber(stakingTokenPrice)
   const plantPrice = usePricePlantBusd()
   const cakePrice = usePriceCakeBusd()
   const brewPrice = usePriceBrewBusd()
@@ -94,6 +95,10 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
   }
   if(stakingToken.symbol === 'CHESS') {
     stakedTokenPrice = chessPrice
+  }
+
+  if(!stakedTokenPrice && stakingTokenPrice !== undefined) {
+    stakedTokenPrice = stakingTokenPriceBigNum
   }
 
   let stakedRewardTokenPrice
@@ -203,12 +208,23 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
 
   const lastUpdate = currentBlock - lastRewardUpdateBlockToNumber
 
-  const plantTokenApy = new BigNumber(lastRewardUpdatePlantGained)
-                                        .div(apyBlockCount)
-                                        .multipliedBy(new BigNumber(10512000))
-                                        .div(lastRewardUpdateTotalStakedToken)
-                                        .div(new BigNumber(cakePrice).div(new BigNumber(plantPrice)))
-                                        .multipliedBy(new BigNumber(100))
+  let plantTokenApy = new BigNumber(0)
+  if(verticalGarden.stakingToken.symbol === 'CAKE') {
+    plantTokenApy = new BigNumber(lastRewardUpdatePlantGained)
+                                          .div(apyBlockCount)
+                                          .multipliedBy(new BigNumber(10512000))
+                                          .div(lastRewardUpdateTotalStakedToken)
+                                          .div(new BigNumber(cakePrice).div(new BigNumber(plantPrice)))
+                                          .multipliedBy(new BigNumber(100))
+  }
+  if(verticalGarden.stakingToken.symbol !== 'CAKE' && stakingTokenPrice !== undefined) {
+    plantTokenApy = new BigNumber(lastRewardUpdatePlantGained)
+                                          .div(apyBlockCount)
+                                          .multipliedBy(new BigNumber(10512000))
+                                          .div(lastRewardUpdateTotalStakedToken)
+                                          .div(new BigNumber(stakingTokenPriceBigNum).div(new BigNumber(plantPrice)))
+                                          .multipliedBy(new BigNumber(100))
+  }
 
   const rewardTokenApyFormated = rewardTokenApy.toNumber().toFixed(2)
   const plantTokenApyFormated = plantTokenApy.toNumber().toFixed(2)
