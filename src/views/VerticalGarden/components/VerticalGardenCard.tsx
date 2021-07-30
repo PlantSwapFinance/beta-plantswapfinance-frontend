@@ -289,8 +289,8 @@ const VerticalGardenCard: React.FC<HarvestProps> = ({ verticalGarden }) => {
             <FlexFull>&nbsp;</FlexFull>
             <FlexFull>&nbsp;</FlexFull>
             <FlexFull>&nbsp;&nbsp;&nbsp;&nbsp;
-            {verticalGardenMasterGardenerAllocPt > 0 ? (
-              <MultiplierTag variant="secondary">{vgId === 1 ? 0.6 : 0.3}X</MultiplierTag>
+            {plantTokenApy.toNumber() > 100 ? (
+              <MultiplierTag variant="secondary">HOT</MultiplierTag>
             ) : ('')}
             </FlexFull>
             </StyledCardReward>
