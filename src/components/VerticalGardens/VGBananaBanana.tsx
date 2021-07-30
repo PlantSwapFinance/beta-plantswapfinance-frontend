@@ -3,6 +3,8 @@ import React, { useRef } from 'react'
 import { useFrame  } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei'
 import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
+import Plant from 'components/Assets3D/PLANT'
+import PlantSpin from 'components/Assets3D/PLANTspin'
 import Banana from 'components/Assets3D/BANANA'
 import BananaSpin from 'components/Assets3D/BANANAspin'
 
@@ -31,11 +33,37 @@ function VGBananaBanana(
     <group ref={group} {...props} dispose={null}>
       <mesh geometry={nodes.meGrowBoxBottom.geometry} material={materials.texture2} scale={[1, 0.47, 1]} />
       
+      <group> 
+        <mesh
+          geometry={nodes.meGrowBoxMid.geometry}
+          material={nodes.meGrowBoxMid.material}
+          position={[0, 1.56, 0]}
+          scale={[0.75, 0.27, 0.75]}
+        />
+
+        <mesh
+          geometry={nodes.meSupportBeamBottom.geometry}
+          material={nodes.meSupportBeamBottom.material}
+          position={[0, 0.7, 0]}
+          scale={[0.2, 0.6, 0.2]}
+        />
+      </group>
+
         <group> 
           <Banana position={[0, 0, 1.25]} scale={[0.75, 0.75, 1.5]} />
           <Banana position={[0, 0, -1.25]} scale={[0.75, 0.75, 1.5]} />
           <Banana position={[1.25, 0, 0]} scale={[0.75, 0.75, 1.5]} rotation={[0, Math.PI / 2, 0]} />
           <Banana position={[-1.25, 0, 0]} scale={[0.75, 0.75, 1.5]} rotation={[0, Math.PI / 2, 0]} />
+
+          <Plant position={[0, 1.5, 0.9]} scale={[0.5, 0.5, 1.5]} />
+          <Plant position={[0, 1.5, -0.9]} scale={[0.5, 0.5, 1.5]} />
+          <Plant position={[0.9, 1.5, 0]} scale={[0.5, 0.5, 1.5]} rotation={[0, Math.PI / 2, 0]} />
+          <Plant position={[-0.9, 1.5, 0]} scale={[0.5, 0.5, 1.5]} rotation={[0, Math.PI / 2, 0]} />
+
+          <PlantSpin position={[0.5, 2, 0]} scale={[0.5, 0.5, 1]} />
+          <PlantSpin position={[-0.5, 2, 0]} scale={[0.5, 0.5, 1]} />
+          <PlantSpin position={[0, 2, 0.5]} scale={[0.5, 0.5, 1]} />
+          <PlantSpin position={[0, 2, -0.5]} scale={[0.5, 0.5, 1]} />
 
           <BananaSpin position={[0.5, 0.6, 0]} scale={[0.5, 0.5, 1]} />
           <BananaSpin position={[-0.5, 0.6, 0]} scale={[0.5, 0.5, 1]} rotation={[0, Math.PI / 2, 0]} />
