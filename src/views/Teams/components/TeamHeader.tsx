@@ -1,14 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Helmet } from "react-helmet"
-import { Heading, Text } from '@plantswap-libs/uikit'
+import { Heading } from '@plantswap-libs/uikit'
 import { useProfile } from 'state/hooks'
-import useI18n from 'hooks/useI18n'
 import HeaderWrapper from 'views/Profile/components/HeaderWrapper'
 import NoProfileCard from './NoProfileCard'
 
 const TeamHeader = () => {
-  const TranslateString = useI18n()
   const { isInitialized, profile } = useProfile()
   const showProfileCallout = isInitialized && !profile
 
@@ -43,12 +41,6 @@ const TeamHeader = () => {
         </div>
         <img src="/images/teams.svg" alt="Plantswap Teams" width={400} height={210} />
       </Hero>
-        <Text bold>
-          {TranslateString(
-            999,
-            'Show off your stats and collectibles with your unique profile. Team features will be revealed soon!',
-          )}
-        </Text>
       </HeaderWrapper>
     </>
   )
