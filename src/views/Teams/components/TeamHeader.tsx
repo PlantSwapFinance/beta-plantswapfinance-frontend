@@ -35,8 +35,8 @@ const TeamHeader = () => {
           </Heading>
           <ul>
             <li>Have a look at the different Gardeners Teams</li>
-            <li>Each month we donate fund to ecological fundation with core mission</li>
-            <li>in-line with these teams name & descriptions.</li>
+            <li>Each month we donate funds to ecological</li>
+            <li>foundations in line with these teams names & descriptions.</li>
           </ul>
         </div>
         <img src="/images/teams.svg" alt="Plantswap Teams" width={400} height={210} />
