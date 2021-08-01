@@ -5,7 +5,7 @@ import { ethers } from 'ethers'
 import { useDispatch } from 'react-redux'
 import { updateUserAllowance, fetchFarmUserDataAsync } from 'state/actions'
 import { approve } from 'utils/callHelpers'
-import { useMasterchef, usePlant, useVerticalGarden, useSousChef, useLottery } from './useContract'
+import { useMasterchef, useVerticalGarden, useSousChef } from './useContract'
 
 // Approve a Farm
 export const useApprove = (lpContract: Contract) => {
@@ -97,24 +97,6 @@ export const useSousApprove = (lpContract: Contract, sousId) => {
       return false
     }
   }, [account, dispatch, lpContract, sousChefContract, sousId])
-
-  return { onApprove: handleApprove }
-}
-
-// Approve the lottery
-export const useLotteryApprove = () => {
-  const { account } = useWeb3React()
-  const plantContract = usePlant()
-  const lotteryContract = useLottery()
-
-  const handleApprove = useCallback(async () => {
-    try {
-      const tx = await approve(plantContract, lotteryContract, account)
-      return tx
-    } catch (e) {
-      return false
-    }
-  }, [account, plantContract, lotteryContract])
 
   return { onApprove: handleApprove }
 }

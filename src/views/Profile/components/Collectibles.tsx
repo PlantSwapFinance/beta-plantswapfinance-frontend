@@ -31,8 +31,8 @@ const CollectibleList = styled.div`
 const Collectibles = () => {
   const TranslateString = useI18n()
   const { nfts: tokenIdsInWallet } = useGetWalletNfts()
-  const farmerIds = Object.keys(tokenIdsInWallet).map((nftWalletItem) => Number(nftWalletItem))
-  const nftsInWallet = nfts.filter((nft) => farmerIds.includes(nft.farmerId))
+  const gardenerIds = Object.keys(tokenIdsInWallet).map((nftWalletItem) => Number(nftWalletItem))
+  const nftsInWallet = nfts.filter((nft) => gardenerIds.includes(nft.gardenerId))
 
   return (
     <>
@@ -54,7 +54,7 @@ const Collectibles = () => {
       {nftsInWallet.length > 0 && (
         <CollectibleList>
           {nftsInWallet.map((nftInWallet) => (
-            <CollectibleCard key={nftInWallet.farmerId} nft={nftInWallet} />
+            <CollectibleCard key={nftInWallet.gardenerId} nft={nftInWallet} />
           ))}
         </CollectibleList>
       )}

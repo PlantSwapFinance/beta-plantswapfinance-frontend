@@ -3,7 +3,7 @@ import { useWeb3React } from '@web3-react/core'
 import BigNumber from 'bignumber.js'
 import { Ifo } from 'config/constants/types'
 import { useERC20, useIfoContract } from 'hooks/useContract'
-import { useIfoAllowance } from 'hooks/useAllowance'
+import useIfoAllowance from 'hooks/useAllowance'
 import makeBatchRequest from 'utils/makeBatchRequest'
 
 export interface UserInfo {

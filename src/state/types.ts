@@ -178,6 +178,7 @@ export interface Profile {
   teamId: number
   nftAddress: string
   tokenId: number
+  accountTypeId: number
   isActive: boolean
   username: string
   nft?: Nft

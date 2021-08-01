@@ -4,39 +4,39 @@ import { Card, CardBody, Heading, Text } from '@plantswap-libs/uikit'
 import { useWeb3React } from '@web3-react/core'
 import useI18n from 'hooks/useI18n'
 import useApproveConfirmTransaction from 'hooks/useApproveConfirmTransaction'
-import { usePlant, useFarmersSchool } from 'hooks/useContract'
+import { usePlant, useGardenersSchool } from 'hooks/useContract'
 import useHasPlantBalance from 'hooks/useHasPlantBalance'
 import nftList from 'config/constants/nfts'
 import SelectionCard from '../components/SelectionCard'
 import NextStepButton from '../components/NextStepButton'
-// import ApproveConfirmButtons from '../components/ApproveConfirmButtons'
+import ApproveConfirmButtons from '../components/ApproveConfirmButtons'
 import useProfileCreation from './contexts/hook'
 import { MINT_COST, STARTER_FARMERS_IDS } from './config'
 
-const nfts = nftList.filter((nft) => STARTER_FARMERS_IDS.includes(nft.farmerId))
+const nfts = nftList.filter((nft) => STARTER_FARMERS_IDS.includes(nft.gardenerId))
 const minimumPlantBalanceToMint = new BigNumber(MINT_COST).multipliedBy(new BigNumber(10).pow(18))
 
 const Mint: React.FC = () => {
-  const [farmerId, setFarmersId] = useState(null)
+  const [gardenerId, setGardenersId] = useState(null)
   const { actions, minimumPlantRequired, allowance } = useProfileCreation()
 
   const { account } = useWeb3React()
   const plantContract = usePlant()
-  const farmersSchoolContract = useFarmersSchool()
+  const gardeningSchoolContract = useGardenersSchool()
   const TranslateString = useI18n()
   const hasMinimumPlantRequired = useHasPlantBalance(minimumPlantBalanceToMint)
   const {
     isApproving,
-  //  isApproved,
+    isApproved,
     isConfirmed,
     isConfirming,
-  //  handleApprove,
- //   handleConfirm,
+    handleApprove,
+    handleConfirm,
   } = useApproveConfirmTransaction({
     onRequiresApproval: async () => {
       // TODO: Move this to a helper, this check will be probably be used many times
       try {
-        const response = await plantContract.methods.allowance(account, farmersSchoolContract.options.address).call()
+        const response = await plantContract.methods.allowance(account, gardeningSchoolContract.options.address).call()
         const currentAllowance = new BigNumber(response)
         return currentAllowance.gte(minimumPlantRequired)
       } catch (error) {
@@ -45,11 +45,11 @@ const Mint: React.FC = () => {
     },
     onApprove: () => {
       return plantContract.methods
-        .approve(farmersSchoolContract.options.address, allowance.toJSON())
+        .approve(gardeningSchoolContract.options.address, allowance.toJSON())
         .send({ from: account })
     },
     onConfirm: () => {
-      return farmersSchoolContract.methods.mintNFT(farmerId).send({ from: account })
+      return gardeningSchoolContract.methods.mintGardener(gardenerId).send({ from: account })
     },
     onSuccess: () => actions.nextStep(),
   })
@@ -60,7 +60,7 @@ const Mint: React.FC = () => {
         {TranslateString(999, `Step ${1}`)}
       </Text>
       <Heading as="h3" size="xl" mb="24px">
-        {TranslateString(776, 'Get Starter Collectible')}
+        {TranslateString(776, 'Get Starter Gardener Collectible')}
       </Heading>
       <Text as="p">{TranslateString(786, 'Every profile starts by making a “starter” collectible (NFT).')}</Text>
       <Text as="p">{TranslateString(788, 'This starter will also become your first profile picture.')}</Text>
@@ -79,15 +79,15 @@ const Mint: React.FC = () => {
             {TranslateString(999, `Cost: ${MINT_COST} PLANT`, { num: MINT_COST })}
           </Text>
           {nfts.map((nft) => {
-            const handleChange = (value: string) => setFarmersId(parseInt(value, 10))
+            const handleChange = (value: string) => setGardenersId(parseInt(value, 10))
 
             return (
               <SelectionCard
-                key={nft.farmerId}
+                key={nft.gardenerId}
                 name="mintStarter"
-                value={nft.farmerId}
+                value={nft.gardenerId}
                 image={`/images/nfts/${nft.images.md}`}
-                isChecked={farmerId === nft.farmerId}
+                isChecked={gardenerId === nft.gardenerId}
                 onChange={handleChange}
                 disabled={isApproving || isConfirming || isConfirmed || !hasMinimumPlantRequired}
               >
@@ -100,7 +100,14 @@ const Mint: React.FC = () => {
               {TranslateString(1098, `A minimum of ${MINT_COST} PLANT is required`)}
             </Text>
           )}
-         
+         <ApproveConfirmButtons
+            isApproveDisabled={gardenerId === null || isConfirmed || isConfirming || isApproved}
+            isApproving={isApproving}
+            isConfirmDisabled={!isApproved || isConfirmed || !hasMinimumPlantRequired}
+            isConfirming={isConfirming}
+            onApprove={handleApprove}
+            onConfirm={handleConfirm}
+          />
         </CardBody>
       </Card>
       <NextStepButton onClick={actions.nextStep} disabled={!isConfirmed}>
@@ -109,16 +116,5 @@ const Mint: React.FC = () => {
     </>
   )
 }
-
-/* 
- <ApproveConfirmButtons
-            isApproveDisabled={farmerId === null || isConfirmed || isConfirming || isApproved}
-            isApproving={isApproving}
-            isConfirmDisabled={!isApproved || isConfirmed || !hasMinimumPlantRequired}
-            isConfirming={isConfirming}
-            onApprove={handleApprove}
-            onConfirm={handleConfirm}
-          />
-          */
 
 export default Mint

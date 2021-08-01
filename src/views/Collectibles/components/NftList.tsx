@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import orderBy from 'lodash/orderBy'
 import nfts from 'config/constants/nfts'
 import { useWeb3React } from '@web3-react/core'
-import { getFarmerSpecialContract } from 'utils/contractHelpers'
+import { getGardeningSchoolContract } from 'utils/contractHelpers'
 import useGetWalletNfts from 'hooks/useGetWalletNfts'
 import makeBatchRequest from 'utils/makeBatchRequest'
 import { useToast } from 'state/hooks'
@@ -13,20 +13,20 @@ type State = {
   [key: string]: boolean
 }
 
-const farmerSpecialContract = getFarmerSpecialContract()
+const gardeningSchoolContract = getGardeningSchoolContract()
 
 const NftList = () => {
   const [claimableNfts, setClaimableNfts] = useState<State>({})
   const { nfts: nftTokenIds, refresh } = useGetWalletNfts()
   const { account } = useWeb3React()
   const { toastError } = useToast()
-
+  
   const fetchClaimableStatuses = useCallback(
     async (walletAddress: string) => {
       try {
         const claimStatuses = (await makeBatchRequest(
           nfts.map((nft) => {
-            return farmerSpecialContract.methods.canClaimSingle(walletAddress, nft.farmerId).call
+            return gardeningSchoolContract.methods.canClaimSingle(walletAddress, nft.gardenerId).call
           }),
         )) as boolean[]
 
@@ -34,13 +34,13 @@ const NftList = () => {
           claimStatuses.reduce((accum, claimStatus, index) => {
             return {
               ...accum,
-              [nfts[index].farmerId]: claimStatus,
+              [nfts[index].gardenerId]: claimStatus,
             }
           }, {}),
         )
       } catch (error) {
         console.error(error)
-        toastError('Error checking NFT claimable status')
+        toastError('No claimable NFT') // Error checking NFT claimable status
       }
     },
     [setClaimableNfts, toastError],
@@ -60,11 +60,11 @@ const NftList = () => {
   return (
     <NftGrid>
       {orderBy(nfts, 'sortOrder').map((nft) => {
-        const tokenIds = nftTokenIds[nft.farmerId] ? nftTokenIds[nft.farmerId].tokenIds : []
+        const tokenIds = nftTokenIds[nft.gardenerId] ? nftTokenIds[nft.gardenerId].tokenIds : []
 
         return (
           <div key={nft.name}>
-            <NftCard nft={nft} canClaim={claimableNfts[nft.farmerId]} tokenIds={tokenIds} onSuccess={handleSuccess} />
+            <NftCard nft={nft} canClaim={claimableNfts[nft.gardenerId]} tokenIds={tokenIds} onSuccess={handleSuccess} />
           </div>
         )
       })}

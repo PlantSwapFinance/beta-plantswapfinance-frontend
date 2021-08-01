@@ -19,7 +19,7 @@ const DevelopmentFund = () => {
         <title>PlantSwap.finance - Development Fund 🌱</title>
         <meta name="description" content="Find the details on the PlantSwap Development Fund🌱" />
         <meta name="keywords" content="plantswap,defi,developmentFund" />
-        <meta name="twitter:image" content="https://plantswap.finance/images/garden.svg" />
+        <meta name="twitter:image" content="https://plantswap.finance/images/developmentFund.svg" />
         <meta name="twitter:domain" content="PlantSwap.finance" />
         <meta name="twitter:description" content="Find the details on the PlantSwap Development Fund🌱" />
         <meta name="twitter:title" content="PlantSwap.Finance - Farm $PLANT with us and save the planet🌱" />

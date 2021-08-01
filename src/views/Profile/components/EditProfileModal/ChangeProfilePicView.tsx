@@ -8,8 +8,8 @@ import useI18n from 'hooks/useI18n'
 import { fetchProfile } from 'state/profile'
 import useGetWalletNfts from 'hooks/useGetWalletNfts'
 import useApproveConfirmTransaction from 'hooks/useApproveConfirmTransaction'
-import { usePlantswapFarmers, useProfile as useProfileContract } from 'hooks/useContract'
-import { getPlantProfileAddress, getPlantswapFarmersAddress } from 'utils/addressHelpers'
+import { usePlantswapGardeners, useProfile as useProfileContract } from 'hooks/useContract'
+import { getPlantProfileAddress, getPlantswapGardenersAddress } from 'utils/addressHelpers'
 import SelectionCard from '../SelectionCard'
 import ApproveConfirmButtons from '../ApproveConfirmButtons'
 
@@ -21,7 +21,7 @@ const ChangeProfilePicPage: React.FC<ChangeProfilePicPageProps> = ({ onDismiss }
   const { isLoading, nfts: nftsInWallet } = useGetWalletNfts()
   const dispatch = useDispatch()
   const { profile } = useProfile()
-  const plantswapFarmersContract = usePlantswapFarmers()
+  const plantswapGardenersContract = usePlantswapGardeners()
   const profileContract = useProfileContract()
   const { account } = useWeb3React()
   const { toastSuccess } = useToast()
@@ -34,14 +34,14 @@ const ChangeProfilePicPage: React.FC<ChangeProfilePicPageProps> = ({ onDismiss }
     handleConfirm,
   } = useApproveConfirmTransaction({
     onApprove: () => {
-      return plantswapFarmersContract.methods.approve(getPlantProfileAddress(), tokenId).send({ from: account })
+      return plantswapGardenersContract.methods.approve(getPlantProfileAddress(), tokenId).send({ from: account })
     },
     onConfirm: () => {
       if (!profile.isActive) {
-        return profileContract.methods.reactivateProfile(getPlantswapFarmersAddress(), tokenId).send({ from: account })
+        return profileContract.methods.reactivateProfile(getPlantswapGardenersAddress(), tokenId).send({ from: account })
       }
 
-      return profileContract.methods.updateProfile(getPlantswapFarmersAddress(), tokenId).send({ from: account })
+      return profileContract.methods.updateProfile(getPlantswapGardenersAddress(), tokenId).send({ from: account })
     },
     onSuccess: async () => {
       // Re-fetch profile
@@ -51,8 +51,8 @@ const ChangeProfilePicPage: React.FC<ChangeProfilePicPageProps> = ({ onDismiss }
       onDismiss()
     },
   })
-  const farmerIds = Object.keys(nftsInWallet).map((nftWalletItem) => Number(nftWalletItem))
-  const walletNfts = nftList.filter((nft) => farmerIds.includes(nft.farmerId))
+  const gardenerIds = Object.keys(nftsInWallet).map((nftWalletItem) => Number(nftWalletItem))
+  const walletNfts = nftList.filter((nft) => gardenerIds.includes(nft.gardenerId))
 
   return (
     <>
@@ -63,12 +63,12 @@ const ChangeProfilePicPage: React.FC<ChangeProfilePicPageProps> = ({ onDismiss }
         <Skeleton height="80px" mb="16px" />
       ) : (
         walletNfts.map((walletNft) => {
-          const [firstTokenId] = nftsInWallet[walletNft.farmerId].tokenIds
+          const [firstTokenId] = nftsInWallet[walletNft.gardenerId].tokenIds
 
           return (
             <SelectionCard
               name="profilePicture"
-              key={walletNft.farmerId}
+              key={walletNft.gardenerId}
               value={firstTokenId}
               image={`/images/nfts/${walletNft.images.md}`}
               isChecked={firstTokenId === tokenId}

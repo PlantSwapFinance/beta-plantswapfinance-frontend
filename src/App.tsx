@@ -16,7 +16,6 @@ import GardenV1 from './views/GardenV1'
 import Barns from './views/Barns'
 import Tree from './views/Tree'
 import DevelopmentFund from './views/DevelopmentFund'
-import GlobalCheckBullHiccupClaimStatus from './views/Collectibles/components/GlobalCheckBullHiccupClaimStatus'
 import history from './routerHistory'
 
 // Route-based code splitting
@@ -201,7 +200,6 @@ const App: React.FC = () => {
       </Menu>
       <EasterEgg iterations={2} />
       <ToastListener />
-      <GlobalCheckBullHiccupClaimStatus />
     </Router>
   )
 }

@@ -12,7 +12,7 @@ const tokens = {
     symbol: 'PLANT',
     address: {
       56: '0x58BA5Bd8872ec18BD360a9592149daed2fC57c69',
-      97: '0xFe5Ab583d91fa90549aC61666CF1C4e2CeA5187e',
+      97: '0x58BA5Bd8872ec18BD360a9592149daed2fC57c69',
     },
     decimals: 18,
     projectLink: 'https://plantswap.finance/',

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useWeb3React } from '@web3-react/core'
-import { useFarmerSpecialContract } from 'hooks/useContract'
+import { useGardenersSchool } from 'hooks/useContract'
 import { useToast } from 'state/hooks'
 import { Button, InjectedModalProps, Modal, Text, Flex } from '@plantswap-libs/uikit'
 import { Nft } from 'config/constants/types'
@@ -27,11 +27,11 @@ const ClaimNftModal: React.FC<ClaimNftModalProps> = ({ nft, onSuccess, onDismiss
   const TranslateString = useI18n()
   const { account } = useWeb3React()
   const { toastError, toastSuccess } = useToast()
-  const farmerSpecialContract = useFarmerSpecialContract()
+  const gardeningOGContract = useGardenersSchool()
 
   const handleConfirm = async () => {
-    farmerSpecialContract.methods
-      .mintNFT(nft.farmerId)
+    gardeningOGContract.methods
+      .mintNFT(nft.gardenerId)
       .send({ from: account })
       .on('sending', () => {
         setIsConfirming(true)

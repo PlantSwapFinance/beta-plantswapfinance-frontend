@@ -6,17 +6,19 @@ export type ProfileResponse = {
   2: string
   3: string
   4: string
-  5: boolean
+  5: string
+  6: boolean
 }
 
 export const transformProfileResponse = (profileResponse: ProfileResponse): Partial<Profile> => {
-  const { 0: userId, 1: numberPoints, 2: teamId, 3: nftAddress, 4: tokenId, 5: isActive } = profileResponse
+  const { 0: userId, 1: numberPoints, 2: teamId, 3: nftAddress, 4: tokenId, 5: accountTypeId, 6: isActive } = profileResponse
 
   return {
     userId: Number(userId),
     points: Number(numberPoints),
     teamId: Number(teamId),
     tokenId: Number(tokenId),
+    accountTypeId: Number(accountTypeId),
     nftAddress,
     isActive,
   }

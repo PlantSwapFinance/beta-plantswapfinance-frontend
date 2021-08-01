@@ -8,18 +8,12 @@ import { PoolCategory } from 'config/constants/types'
 import {
   getAddress,
   getPlantProfileAddress,
-  getPlantswapFarmersAddress,
-  getFarmersSchoolAddress,
-  getFarmerSpecialAddress,
-  getPlantRabbitsAddress,
-  getBunnyFactoryAddress,
-  getBunnySpecialAddress,
+  getPlantswapGardenersAddress,
+  getGardeningSchoolAddress,
   getPlantAddress,
   getCakeAddress,
   getEggAddress,
   getBrewAddress,
-  getLotteryAddress,
-  getLotteryTicketAddress,
   getMasterChefAddress,
   getMasterChefPancakeSwapAddress,
   getMasterChefGooseAddress,
@@ -29,13 +23,9 @@ import {
 } from 'utils/addressHelpers'
 
 // ABI
-import profileABI from 'config/abi/plantProfile.json'
-import plantswapFarmersAbi from 'config/abi/plantswapFarmers.json'
-import farmersSchoolAbi from 'config/abi/farmersSchool.json'
-import farmerSpecialAbi from 'config/abi/farmerSpecial.json'
-import plantRabbitsAbi from 'config/abi/plantRabbits.json'
-import bunnyFactoryAbi from 'config/abi/bunnyFactory.json'
-import bunnySpecialAbi from 'config/abi/bunnySpecial.json'
+import profileABI from 'config/abi/plantswapGardenersProfile.json'
+import plantswapGardenersAbi from 'config/abi/plantswapGardeners.json'
+import gardeningSchoolAbi from 'config/abi/gardeningSchool.json'
 import bep20Abi from 'config/abi/erc20.json'
 import lpTokenAbi from 'config/abi/lpToken.json'
 import plantAbi from 'config/abi/plant.json'
@@ -44,8 +34,6 @@ import eggAbi from 'config/abi/egg.json'
 import brewAbi from 'config/abi/brew.json'
 import ifoAbi from 'config/abi/ifo.json'
 import pointCenterIfo from 'config/abi/pointCenterIfo.json'
-import lotteryAbi from 'config/abi/lottery.json'
-import lotteryTicketAbi from 'config/abi/lotteryNft.json'
 import masterChef from 'config/abi/masterchef.json'
 import verticalGardens from 'config/abi/verticalGardens.json'
 import masterchefPancakeSwap from 'config/abi/masterchefPancakeSwap.json'
@@ -89,29 +77,14 @@ export const getEggContract = (web3?: Web3) => {
 export const getBrewContract = (web3?: Web3) => {
   return getContract(brewAbi, getBrewAddress(), web3)
 }
+export const getPlantswapGardenersContract = (web3?: Web3) => {
+  return getContract(plantswapGardenersAbi, getPlantswapGardenersAddress(), web3)
+}
 export const getProfileContract = (web3?: Web3) => {
   return getContract(profileABI, getPlantProfileAddress(), web3)
 }
-export const getPlantRabbitContract = (web3?: Web3) => {
-  return getContract(plantswapFarmersAbi, getPlantswapFarmersAddress(), web3)
-}
-export const getFarmersSchoolContract = (web3?: Web3) => {
-  return getContract(farmersSchoolAbi, getFarmersSchoolAddress(), web3)
-}
-export const getFarmerSpecialContract = (web3?: Web3) => {
-  return getContract(farmerSpecialAbi, getFarmerSpecialAddress(), web3)
-}
-export const getBunnyFactoryContract = (web3?: Web3) => {
-  return getContract(bunnyFactoryAbi, getBunnyFactoryAddress(), web3)
-}
-export const getBunnySpecialContract = (web3?: Web3) => {
-  return getContract(bunnySpecialAbi, getBunnySpecialAddress(), web3)
-}
-export const getLotteryContract = (web3?: Web3) => {
-  return getContract(lotteryAbi, getLotteryAddress(), web3)
-}
-export const getLotteryTicketContract = (web3?: Web3) => {
-  return getContract(lotteryTicketAbi, getLotteryTicketAddress(), web3)
+export const getGardeningSchoolContract = (web3?: Web3) => {
+  return getContract(gardeningSchoolAbi, getGardeningSchoolAddress(), web3)
 }
 export const getMasterchefContract = (web3?: Web3) => {
   return getContract(masterChef, getMasterChefAddress(), web3)
@@ -132,8 +105,4 @@ export const getMasterchefCafeswapContract = (web3?: Web3) => {
 }
 export const getClaimRefundContract = (web3?: Web3) => {
   return getContract(claimRefundAbi, getClaimRefundAddress(), web3)
-}
-
-export const getPlantRabbitContractOld = (web3?: Web3) => {
-  return getContract(plantRabbitsAbi, getPlantRabbitsAddress(), web3)
 }

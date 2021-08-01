@@ -6,7 +6,7 @@ import { Button, Input, Modal, Text } from '@plantswap-libs/uikit'
 import { useToast } from 'state/hooks'
 import { Nft } from 'config/constants/types'
 import useI18n from 'hooks/useI18n'
-import { usePlantswapFarmers } from 'hooks/useContract'
+import { usePlantswapGardeners } from 'hooks/useContract'
 import InfoRow from './InfoRow'
 
 interface TransferNftModalProps {
@@ -43,7 +43,7 @@ const TransferNftModal: React.FC<TransferNftModalProps> = ({ nft, tokenIds, onSu
   const [error, setError] = useState(null)
   const TranslateString = useI18n()
   const { account } = useWeb3React()
-  const pancakeRabbitsContract = usePlantswapFarmers()
+  const pancakeRabbitsContract = usePlantswapGardeners()
   const { toastSuccess } = useToast()
 
   const handleConfirm = async () => {

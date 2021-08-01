@@ -4,7 +4,7 @@ export type Actions =
   | { type: 'next_step' }
   | { type: 'set_team'; teamId: number | null }
   | { type: 'set_tokenid'; tokenId: number | null }
-  | { type: 'set_username'; userName: string | null }
+ // | { type: 'set_username'; userName: string | null }
   | { type: 'initialize'; step: number }
 
 export interface State {
@@ -12,7 +12,7 @@ export interface State {
   currentStep: number
   teamId: number | null
   tokenId: number | null
-  userName: string
+//  userName: string
   minimumPlantRequired: BigNumber
   allowance: BigNumber
 }
@@ -22,6 +22,6 @@ export interface ContextType extends State {
     nextStep: () => void
     setTeamId: (teamId: number) => void
     setTokenId: (tokenId: number) => void
-    setUserName: (userName: string) => void
+  //  setUserName: (userName: string) => void
   }
 }

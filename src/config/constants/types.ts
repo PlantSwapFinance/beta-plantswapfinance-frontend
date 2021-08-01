@@ -206,7 +206,7 @@ export type Nft = {
   description: string
   images: NftImages
   sortOrder: number
-  farmerId: number
+  gardenerId: number
   video?: NftVideo
 }
 

@@ -1,9 +1,8 @@
 import { useWeb3React } from '@web3-react/core'
 import { useEffect, useReducer } from 'react'
-import { getPlantRabbitContract } from 'utils/contractHelpers'
-import makeBatchRequest from 'utils/makeBatchRequest'
+import { getPlantswapGardenersContract } from 'utils/contractHelpers'
 
-const plantswapFarmersContract = getPlantRabbitContract()
+const plantswapGardenersContract = getPlantswapGardenersContract()
 
 export type NftMap = {
   [key: number]: {
@@ -57,18 +56,19 @@ const useGetWalletNfts = () => {
   useEffect(() => {
     const fetchNfts = async () => {
       try {
-        const balanceOf = await plantswapFarmersContract.methods.balanceOf(account).call()
+        const balanceOf = await plantswapGardenersContract.methods.balanceOf(account).call()
 
         if (balanceOf > 0) {
           let nfts: NftMap = {}
 
-          const getTokenIdAndFarmerId = async (index: number) => {
+          const getTokenIdAndGardenersId = async (index: number) => {
             try {
-              const { tokenOfOwnerByIndex, getFarmerId, tokenURI } = plantswapFarmersContract.methods
+              const { tokenOfOwnerByIndex, getGardenerId, tokenURI } = plantswapGardenersContract.methods
               const tokenId = await tokenOfOwnerByIndex(account, index).call()
-              const [farmerId, tokenUri] = await makeBatchRequest([getFarmerId(tokenId).call, tokenURI(tokenId).call])
+              const gardenerId = await getGardenerId(tokenId).call()
+              const tokenUri = await tokenURI(tokenId).call()
 
-              return [Number(farmerId), Number(tokenId), tokenUri]
+              return [Number(gardenerId), Number(tokenId), tokenUri]
             } catch (error) {
               return null
             }
@@ -77,7 +77,7 @@ const useGetWalletNfts = () => {
           const tokenIdPromises = []
 
           for (let i = 0; i < balanceOf; i++) {
-            tokenIdPromises.push(getTokenIdAndFarmerId(i))
+            tokenIdPromises.push(getTokenIdAndGardenersId(i))
           }
 
           const tokenIdsOwnedByWallet = await Promise.all(tokenIdPromises)
@@ -87,13 +87,13 @@ const useGetWalletNfts = () => {
               return accum
             }
 
-            const [farmerId, tokenId, tokenUri] = association
+            const [gardenerId, tokenId, tokenUri] = association
 
             return {
               ...accum,
-              [farmerId]: {
+              [gardenerId]: {
                 tokenUri,
-                tokenIds: accum[farmerId] ? [...accum[farmerId].tokenIds, tokenId] : [tokenId],
+                tokenIds: accum[gardenerId] ? [...accum[gardenerId].tokenIds, tokenId] : [tokenId],
               },
             }
           }, {})

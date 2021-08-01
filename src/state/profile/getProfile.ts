@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie'
-import { getProfileContract, getPlantRabbitContract } from 'utils/contractHelpers'
+import { getProfileContract, getPlantswapGardenersContract } from 'utils/contractHelpers'
 import { Nft } from 'config/constants/types'
 import { Profile } from 'state/types'
 import { getTeam } from 'state/teams/helpers'
@@ -7,8 +7,7 @@ import nfts from 'config/constants/nfts'
 import { transformProfileResponse } from './helpers'
 
 const profileContract = getProfileContract()
-const rabbitContract = getPlantRabbitContract()
-const profileApi = process.env.REACT_APP_API_PROFILE
+const gardenersContract = getPlantswapGardenersContract()
 
 export interface GetProfileResponse {
   hasRegistered: boolean
@@ -16,19 +15,8 @@ export interface GetProfileResponse {
 }
 
 const getUsername = async (address: string): Promise<string> => {
-  try {
-    const response = await fetch(`${profileApi}/api/users/${address}`)
-
-    if (!response.ok) {
-      return ''
-    }
-
-    const { username = '' } = await response.json()
-
-    return username
-  } catch (error) {
-    return ''
-  }
+  const username = address
+  return username
 }
 
 const getProfile = async (address: string): Promise<GetProfileResponse> => {
@@ -40,7 +28,7 @@ const getProfile = async (address: string): Promise<GetProfileResponse> => {
     }
 
     const profileResponse = await profileContract.methods.getUserProfile(address).call()
-    const { userId, points, teamId, tokenId, nftAddress, isActive } = transformProfileResponse(profileResponse)
+    const { userId, points, teamId, tokenId, accountTypeId, nftAddress, isActive } = transformProfileResponse(profileResponse)
     const team = await getTeam(teamId)
     const username = await getUsername(address)
 
@@ -48,8 +36,8 @@ const getProfile = async (address: string): Promise<GetProfileResponse> => {
     // so only fetch the nft data if active
     let nft: Nft
     if (isActive) {
-      const farmerId = await rabbitContract.methods.getFarmerId(tokenId).call()
-      nft = nfts.find((nftItem) => nftItem.farmerId === Number(farmerId))
+      const gardenerId = await gardenersContract.methods.getGardenerId(tokenId).call()
+      nft = nfts.find((nftItem) => nftItem.gardenerId === Number(gardenerId))
 
       // Save the preview image in a cookie so it can be used on the exchange
       Cookies.set(
@@ -67,6 +55,7 @@ const getProfile = async (address: string): Promise<GetProfileResponse> => {
       points,
       teamId,
       tokenId,
+      accountTypeId,
       username,
       nftAddress,
       isActive,

@@ -52,7 +52,7 @@ const NftCard: React.FC<NftCardProps> = ({ nft, onSuccess, canClaim = false, tok
   const [isOpen, setIsOpen] = useState(false)
   const TranslateString = useI18n()
   const { profile } = useProfile()
-  const { farmerId, name, description } = nft
+  const { gardenerId, name, description } = nft
   const walletOwnsNft = tokenIds.length > 0
   const Icon = isOpen ? ChevronUpIcon : ChevronDownIcon
 
@@ -74,7 +74,7 @@ const NftCard: React.FC<NftCardProps> = ({ nft, onSuccess, canClaim = false, tok
               {TranslateString(728, 'In Wallet')}
             </Tag>
           )}
-          {profile?.nft?.farmerId === farmerId && (
+          {profile?.nft?.gardenerId === gardenerId && (
             <Tag outline variant="success">
               {TranslateString(999, 'Profile Pic')}
             </Tag>

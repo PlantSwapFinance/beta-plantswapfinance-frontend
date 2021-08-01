@@ -6,15 +6,10 @@ import {
   getCakeContract,
   getEggContract,
   getBrewContract,
-  getFarmersSchoolContract,
-  getFarmerSpecialContract,
-  getPlantRabbitContract,
-  getBunnyFactoryContract,
-  getBunnySpecialContract,
+  getPlantswapGardenersContract,
+  getGardeningSchoolContract,
   getProfileContract,
   getIfoContract,
-  getLotteryContract,
-  getLotteryTicketContract,
   getMasterchefContract,
   getVerticalGardenContract,
   getMasterchefPancakeSwapContract,
@@ -59,29 +54,19 @@ export const useBrew = () => {
   return useMemo(() => getBrewContract(web3), [web3])
 }
 
-export const useFarmersSchool = () => {
+export const usePlantswapGardeners = () => {
   const web3 = useWeb3()
-  return useMemo(() => getFarmersSchoolContract(web3), [web3])
+  return useMemo(() => getPlantswapGardenersContract(web3), [web3])
 }
 
-export const usePlantswapFarmers = () => {
+export const useGardenersSchool = () => {
   const web3 = useWeb3()
-  return useMemo(() => getPlantRabbitContract(web3), [web3])
+  return useMemo(() => getGardeningSchoolContract(web3), [web3])
 }
 
 export const useProfile = () => {
   const web3 = useWeb3()
   return useMemo(() => getProfileContract(web3), [web3])
-}
-
-export const useLottery = () => {
-  const web3 = useWeb3()
-  return useMemo(() => getLotteryContract(web3), [web3])
-}
-
-export const useLotteryTicket = () => {
-  const web3 = useWeb3()
-  return useMemo(() => getLotteryTicketContract(web3), [web3])
 }
 
 export const useMasterchef = () => {
@@ -119,28 +104,7 @@ export const usePointCenterIfoContract = () => {
   return useMemo(() => getPointCenterIfoContract(web3), [web3])
 }
 
-export const useFarmerSpecialContract = () => {
-  const web3 = useWeb3()
-  return useMemo(() => getFarmerSpecialContract(web3), [web3])
-}
-
 export const useClaimRefundContract = () => {
   const web3 = useWeb3()
   return useMemo(() => getClaimRefundContract(web3), [web3])
-}
-
-
-export const useBunnyFactory = () => {
-  const web3 = useWeb3()
-  return useMemo(() => getBunnyFactoryContract(web3), [web3])
-}
-
-export const useBunnySpecialContract = () => {
-  const web3 = useWeb3()
-  return useMemo(() => getBunnySpecialContract(web3), [web3])
-}
-
-export const usePlantRabbits = () => {
-  const web3 = useWeb3()
-  return useMemo(() => getPlantRabbitContract(web3), [web3])
 }

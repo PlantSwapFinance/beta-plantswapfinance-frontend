@@ -35,40 +35,22 @@ export const getMasterChefCafeswapAddress = () => {
 export const getMulticallAddress = () => {
   return getAddress(addresses.mulltiCall)
 }
+export const getPlantProfileAddress = () => {
+  return getAddress(addresses.plantswapGardenersProfile)
+}
+export const getPlantswapGardenersAddress = () => {
+  return getAddress(addresses.plantswapGardeners)
+}
+export const getGardeningSchoolAddress = () => {
+  return getAddress(addresses.gardeningSchool)
+}
+// Not use
 export const getWbnbAddress = () => {
   return getAddress(tokens.wbnb.address)
-}
-export const getLotteryAddress = () => {
-  return getAddress(addresses.lottery)
-}
-export const getLotteryTicketAddress = () => {
-  return getAddress(addresses.lotteryNFT)
-}
-export const getPlantProfileAddress = () => {
-  return getAddress(addresses.plantProfile)
-}
-export const getPlantswapFarmersAddress = () => {
-  return getAddress(addresses.plantswapFarmers)
-}
-export const getFarmersSchoolAddress = () => {
-  return getAddress(addresses.farmersSchool)
 }
 export const getClaimRefundAddress = () => {
   return getAddress(addresses.claimRefund)
 }
 export const getPointCenterIfoAddress = () => {
   return getAddress(addresses.pointCenterIfo)
-}
-export const getFarmerSpecialAddress = () => {
-  return getAddress(addresses.farmerSpecial)
-}
-// For v-1 profile
-export const getPlantRabbitsAddress = () => {
-  return getAddress(addresses.plantRabbits)
-}
-export const getBunnyFactoryAddress = () => {
-  return getAddress(addresses.bunnyFactory)
-}
-export const getBunnySpecialAddress = () => {
-  return getAddress(addresses.bunnySpecial)
 }

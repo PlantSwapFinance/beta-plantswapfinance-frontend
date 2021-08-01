@@ -5,7 +5,7 @@ import { ProfileCreationContext } from './contexts/ProfileCreationProvider'
 import Mint from './Mint'
 import ProfilePicture from './ProfilePicture'
 import TeamSelection from './TeamSelection'
-import UserName from './UserName'
+// import UserName from './UserName'
 
 const Steps = () => {
   const { isInitialized, currentStep } = useContext(ProfileCreationContext)
@@ -31,9 +31,9 @@ const Steps = () => {
     return <TeamSelection />
   }
 
-  if (currentStep === 3) {
-    return <UserName />
-  }
+//  if (currentStep === 3) {
+//    return <UserName />
+//  }
 
   return null
 }

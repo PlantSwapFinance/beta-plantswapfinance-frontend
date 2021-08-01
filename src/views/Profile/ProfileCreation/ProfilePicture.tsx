@@ -7,7 +7,7 @@ import nftList from 'config/constants/nfts'
 import useI18n from 'hooks/useI18n'
 import { useToast } from 'state/hooks'
 import { getPlantProfileAddress } from 'utils/addressHelpers'
-import { usePlantswapFarmers } from 'hooks/useContract'
+import { usePlantswapGardeners } from 'hooks/useContract'
 import useGetWalletNfts from 'hooks/useGetWalletNfts'
 import SelectionCard from '../components/SelectionCard'
 import NextStepButton from '../components/NextStepButton'
@@ -27,14 +27,14 @@ const ProfilePicture: React.FC = () => {
   const { tokenId, actions } = useContext(ProfileCreationContext)
   const TranslateString = useI18n()
   const { isLoading, nfts: nftsInWallet } = useGetWalletNfts()
-  const plantswapFarmersContract = usePlantswapFarmers()
+  const plantswapGardenersContract = usePlantswapGardeners()
   const { account } = useWeb3React()
   const { toastError } = useToast()
-  const farmerIds = Object.keys(nftsInWallet).map((nftWalletItem) => Number(nftWalletItem))
-  const walletNfts = nftList.filter((nft) => farmerIds.includes(nft.farmerId))
+  const gardenerIds = Object.keys(nftsInWallet).map((nftWalletItem) => Number(nftWalletItem))
+  const walletNfts = nftList.filter((nft) => gardenerIds.includes(nft.gardenerId))
 
   const handleApprove = () => {
-    plantswapFarmersContract.methods
+    plantswapGardenersContract.methods
       .approve(getPlantProfileAddress(), tokenId)
       .send({ from: account })
       .on('sending', () => {
@@ -57,12 +57,12 @@ const ProfilePicture: React.FC = () => {
           {TranslateString(852, 'Oops!')}
         </Heading>
         <Text bold fontSize="20px" mb="24px">
-          {TranslateString(854, 'We couldn’t find any Plant Collectibles in your wallet.')}
+          {TranslateString(854, 'We couldn’t find any Plantswap Gardener Collectibles in your wallet.')}
         </Text>
         <Text as="p">
           {TranslateString(
             856,
-            'You need a Plant Collectible to finish setting up your profile. If you sold or transferred your starter collectible to another wallet, you’ll need to get it back or acquire a new one somehow. You can’t make a new starter with this wallet address.',
+            'You need a Plantswap Gardener Collectible to finish setting up your profile. If you sold or transferred your starter collectible to another wallet, you’ll need to get it back or acquire a new one somehow. You can’t make a new starter with this wallet address.',
           )}
         </Text>
       </>
@@ -85,7 +85,7 @@ const ProfilePicture: React.FC = () => {
           <Text as="p" color="textSubtle">
             {TranslateString(
               814,
-              'Choose a profile picture from the eligible collectibles (NFT) in your wallet, shown below.',
+              'Choose a profile picture from the eligible Gardeners collectibles (NFT) in your wallet, shown below.',
             )}
           </Text>
           <Text as="p" color="textSubtle" mb="24px">
@@ -99,12 +99,12 @@ const ProfilePicture: React.FC = () => {
               <Skeleton height="80px" mb="16px" />
             ) : (
               walletNfts.map((walletNft) => {
-                const [firstTokenId] = nftsInWallet[walletNft.farmerId].tokenIds
+                const [firstTokenId] = nftsInWallet[walletNft.gardenerId].tokenIds
 
                 return (
                   <SelectionCard
                     name="profilePicture"
-                    key={walletNft.farmerId}
+                    key={walletNft.gardenerId}
                     value={firstTokenId}
                     image={`/images/nfts/${walletNft.images.md}`}
                     isChecked={firstTokenId === tokenId}

@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react'
-import { Card, CardBody, CommunityIcon, Flex, Heading, Text } from '@plantswap-libs/uikit'
+import { Button, Card, CardBody, CommunityIcon, useModal, Flex, Heading, Text } from '@plantswap-libs/uikit'
 import shuffle from 'lodash/shuffle'
+import { useWeb3React } from '@web3-react/core'
 import { useTeams } from 'state/hooks'
 import useI18n from 'hooks/useI18n'
 import SelectionCard from '../components/SelectionCard'
-import NextStepButton from '../components/NextStepButton'
+import ConfirmProfileCreationModal from '../components/ConfirmProfileCreationModal'
 import useProfileCreation from './contexts/hook'
 
 interface Team {
@@ -14,11 +15,23 @@ interface Team {
 }
 
 const Team: React.FC = () => {
-  const { teamId: currentTeamId, actions } = useProfileCreation()
+  const { teamId: currentTeamId, tokenId, actions, minimumPlantRequired, allowance } = useProfileCreation()
   const TranslateString = useI18n()
   const { teams } = useTeams()
+  const { account } = useWeb3React()
   const handleTeamSelection = (value: string) => actions.setTeamId(parseInt(value, 10))
   const teamValues = useMemo(() => shuffle(Object.values(teams)), [teams])
+  const [onPresentConfirmProfileCreation] = useModal(
+    <ConfirmProfileCreationModal
+      userName="username"
+      tokenId={tokenId}
+      account={account}
+      teamId={currentTeamId}
+      minimumPlantRequired={minimumPlantRequired}
+      allowance={allowance}
+    />,
+    false,
+  )
 
   return (
     <>
@@ -39,7 +52,7 @@ const Team: React.FC = () => {
           <Text as="p" color="textSubtle" mb="24px">
             {TranslateString(
               830,
-              'There’s currently no big difference between teams, and no benefit of joining one team over another for now. So pick whichever one you like!',
+              'We will do our best to split the donation from the Development fund according to each team points.',
             )}
           </Text>
           {teamValues &&
@@ -64,9 +77,9 @@ const Team: React.FC = () => {
             })}
         </CardBody>
       </Card>
-      <NextStepButton onClick={actions.nextStep} disabled={currentTeamId === null}>
-        {TranslateString(798, 'Next Step')}
-      </NextStepButton>
+      <Button onClick={onPresentConfirmProfileCreation} disabled={currentTeamId === null}>
+        {TranslateString(842, 'Complete Profile')}
+      </Button>
     </>
   )
 }

@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useMemo, useReducer } from 'react'
 import BigNumber from 'bignumber.js'
 import { useWeb3React } from '@web3-react/core'
-import { getFarmersSchoolContract } from 'utils/contractHelpers'
+import { getGardeningSchoolContract } from 'utils/contractHelpers'
 import { MINT_COST, REGISTER_COST, ALLOWANCE_MULTIPLIER } from '../config'
 import { Actions, State, ContextType } from './types'
 
@@ -13,7 +13,7 @@ const initialState: State = {
   currentStep: 0,
   teamId: null,
   tokenId: null,
-  userName: '',
+//  userName: '',
   minimumPlantRequired: new BigNumber(totalCost).multipliedBy(new BigNumber(10).pow(18)),
   allowance: new BigNumber(allowance).multipliedBy(new BigNumber(10).pow(18)),
 }
@@ -41,11 +41,11 @@ const reducer = (state: State, action: Actions): State => {
         ...state,
         tokenId: action.tokenId,
       }
-    case 'set_username':
-      return {
-        ...state,
-        userName: action.userName,
-      }
+ //   case 'set_username':
+ //     return {
+ //       ...state,
+ //       userName: action.userName,
+ //     }
     default:
       return state
   }
@@ -62,8 +62,8 @@ const ProfileCreationProvider: React.FC = ({ children }) => {
     let isSubscribed = true
 
     const fetchData = async () => {
-      const farmersSchoolContract = getFarmersSchoolContract()
-      const canMint = await farmersSchoolContract.methods.canMint(account).call()
+      const gardeningSchoolContract = getGardeningSchoolContract()
+      const canMint = await gardeningSchoolContract.methods.canMint(account).call()
       dispatch({ type: 'initialize', step: canMint ? 0 : 1 })
 
       // When changing wallets quickly unmounting before the hasClaim finished causes a React error
@@ -86,7 +86,6 @@ const ProfileCreationProvider: React.FC = ({ children }) => {
       nextStep: () => dispatch({ type: 'next_step' }),
       setTeamId: (teamId: number) => dispatch({ type: 'set_team', teamId }),
       setTokenId: (tokenId: number) => dispatch({ type: 'set_tokenid', tokenId }),
-      setUserName: (userName: string) => dispatch({ type: 'set_username', userName }),
     }),
     [dispatch],
   )
@@ -95,3 +94,5 @@ const ProfileCreationProvider: React.FC = ({ children }) => {
 }
 
 export default ProfileCreationProvider
+
+// setUserName: (userName: string) => dispatch({ type: 'set_username', userName }),

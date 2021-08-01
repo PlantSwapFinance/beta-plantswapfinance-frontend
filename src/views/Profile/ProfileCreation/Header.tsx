@@ -15,7 +15,7 @@ const steps = [
   { translationId: 776, label: 'Get Starter Collectible' },
   { translationId: 778, label: 'Set Profile Picture' },
   { translationId: 780, label: 'Join Team' },
-  { translationId: 782, label: 'Set Name' },
+ // { translationId: 782, label: 'Set Name' },
 ]
 
 const Header: React.FC = () => {
@@ -31,7 +31,7 @@ const Header: React.FC = () => {
         {TranslateString(772, 'Build yourself a unique profile')}
       </Heading>
       <Text color="textSubtle" mb="24px">
-        {TranslateString(999, 'Total cost: 1 PLANT')}
+        {TranslateString(999, 'Total cost: 2 PLANT')}
       </Text>
       <Breadcrumbs>
         {steps.map(({ translationId, label }, index) => {
