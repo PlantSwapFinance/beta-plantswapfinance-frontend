@@ -100,11 +100,6 @@ const config: MenuEntry[] = [
     href: "/project",
   },
   {
-    label: 'Roadmap',
-    icon: 'RoadmapIcon',
-    href: '/roadmap',
-  },
-  {
     label: 'More',
     icon: 'MoreIcon',
     items: [
@@ -115,6 +110,10 @@ const config: MenuEntry[] = [
       {
         label: "Blog",
         href: "https://plantswapfinance.medium.com",
+      },
+      {
+        label: 'Roadmap',
+        href: '/roadmap',
       },
       {
         label: "dex.guru",
