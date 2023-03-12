@@ -2102,10 +2102,10 @@
     eslint-plugin-react "^7.21.5"
     eslint-plugin-react-hooks "^4.0.0"
 
-"@plantswap-libs/uikit@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.npmjs.org/@plantswap-libs/uikit/-/uikit-0.0.6.tgz"
-  integrity sha512-dzRmvddOBh6Ooyeez8sHOodfASAQVUWefeYnDkJDcFTCC64vZqG+k+VPFH7js7s1i2JwTvKpsnAN9opT0AtHIw==
+"@plantswap-libs/uikit@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.npmjs.org/@plantswap-libs/uikit/-/uikit-0.0.8.tgz"
+  integrity sha512-891zeOGNO2QulZvf/uVhh0mSKh6KB12V3wQfVzNyNzg7rqjI9FK/hm8jJaVDdYSb2CiVhoPzdq5qXeQwpNbrHg==
   dependencies:
     "@types/lodash" "^4.14.162"
     "@types/styled-system" "^5.1.10"

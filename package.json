@@ -35,7 +35,7 @@
     "@binance-chain/bsc-connector": "^1.0.0",
     "@crowdin/crowdin-api-client": "^1.10.4",
     "@ethersproject/abi": "^5.0.7",
-    "@plantswap-libs/uikit": "^0.0.6",
+    "@plantswap-libs/uikit": "^0.0.8",
     "@react-three/drei": "^5.2.1",
     "@react-three/fiber": "^6.2.2",
     "@reduxjs/toolkit": "^1.5.0",
